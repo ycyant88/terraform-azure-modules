@@ -1,0 +1,6 @@
+{% for output in outputs %}
+output "{{ output.name }}" {
+  value = module.{{ module_name }}.{{ output.name }}
+  description = "{{ output.description }}"
+}
+{% endfor %}

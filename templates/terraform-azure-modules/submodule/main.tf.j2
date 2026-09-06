@@ -1,0 +1,7 @@
+module "{{ module_name }}" {
+  source  = "{{ namespace }}/{{ module_name }}/{{ provider }}"
+  version = "{{ version_name }}"
+  {%- for var in inputs %}
+  {{ var.name }} = var.{{ var.name }}
+  {%- endfor %}
+}

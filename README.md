@@ -1,2 +1,3 @@
 # terraform-azure-modules
-A collection of Terraform Azure modules
+
+Collection of Terraform Azure modules
