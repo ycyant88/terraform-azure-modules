@@ -56,8 +56,8 @@ def render_module_inputs(module_env, context, out_dir):
         module_env.get_template("main.tf.j2").render(**context),
     )
     write_file(
-        os.path.join(out_dir, "provider.tfvars"),
-        submodule_env.get_template("provider.tfvars.j2").render(**context),
+        os.path.join(out_dir, "provider.tf"),
+        module_env.get_template("provider.tf.j2").render(**context),
     )
     write_file(
         os.path.join(out_dir, "terraform.tfvars"),
@@ -82,8 +82,8 @@ def render_submodule_inputs(submodule_env, context, out_dir):
         submodule_env.get_template("main.tf.j2").render(**context),
     )
     write_file(
-        os.path.join(out_dir, "provider.tfvars"),
-        submodule_env.get_template("provider.tfvars.j2").render(**context),
+        os.path.join(out_dir, "provider.tf"),
+        submodule_env.get_template("provider.tf.j2").render(**context),
     )
     write_file(
         os.path.join(out_dir, "terraform.tfvars"),
