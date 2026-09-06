@@ -1,0 +1,100 @@
+[
+  {
+    "name": "name",
+    "type": "string",
+    "description": "`name` - (Required): Specifies the name of this Virtual Machine Run Command. Changing this forces a new Virtual Machine Run Command to be created.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "script_source",
+    "type": "object({\n    command_id = optional(string)\n    script     = optional(string)\n    script_uri = optional(string)\n    script_uri_managed_identity = optional(object({\n      client_id = optional(string)\n      object_id = optional(string)\n    }))\n  })",
+    "description": "`script_source` - (Required): A source block as defined below. The source of the run command script.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "virtualmachine_resource_id",
+    "type": "string",
+    "description": "`virtualmachine_resource_id` - (Required): Specifies the resource id of the Virtual Machine to apply the Run Command to.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "error_blob_uri",
+    "type": "string",
+    "description": "`error_blob_uri` - (Optional): Specifies the Azure storage blob where script error stream will be uploaded. It can be basic blob URI with SAS token.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "output_blob_managed_identity",
+    "type": "object({\n    client_id = optional(string)\n    object_id = optional(string)\n  })",
+    "description": "`output_blob_managed_identity` - (Optional): An output_blob_managed_identity block as defined below. User-assigned managed Identity that has access to outputBlobUri storage blob.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "protected_parameters",
+    "type": "list(object({\n    name  = string\n    value = string\n  }))",
+    "description": "`protected_parameters` - (Optional): A list of protected_parameter blocks as defined below. The protected parameters used by the script.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "run_as_password",
+    "type": "string",
+    "description": "`run_as_password` - (Optional): Specifies the user account password on the VM when executing the Virtual Machine Run Command.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "`tags` - (Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "`location` - (Required): The Azure Region where the Virtual Machine Run Command should exist. Changing this forces a new Virtual Machine Run Command to be created.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "error_blob_managed_identity",
+    "type": "object({\n    client_id = optional(string)\n    object_id = optional(string)\n  })",
+    "description": "`error_blob_managed_identity` - (Optional): An error_blob_managed_identity block as defined below. User-assigned managed Identity that has access to errorBlobUri storage blob.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "output_blob_uri",
+    "type": "string",
+    "description": "`output_blob_uri` - (Optional): Specifies the Azure storage blob where script output stream will be uploaded. It can be basic blob URI with SAS token.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "parameters",
+    "type": "list(object({\n    name  = string\n    value = string\n  }))",
+    "description": "`parameters` - (Optional): A list of parameter blocks as defined below. The parameters used by the script.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "run_as_user",
+    "type": "string",
+    "description": "`run_as_user` - (Optional): Specifies the user account on the VM when executing the Virtual Machine Run Command.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    update = optional(string)\n    read   = optional(string)\n  })",
+    "description": "An object of timeouts to apply to the creation and destruction of resources.\n\n- `create` - (Optional) The timeout for creating the resource.\n- `delete` - (Optional) The timeout for deleting the resource.\n- `update` - (Optional) The timeout for updating the resource.\n- `read` - (Optional) The timeout for reading the resource.\n\nEach time duration is parsed using this function: <https://pkg.go.dev/time#ParseDuration>.\n",
+    "default": "{}",
+    "required": false
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resource",
+    "description": "\"This is the full output for the Log Analytics resource. This is the default output for the module following AVM standards. Review the examples below for the correct output to use in your module.\"\nExamples:\n- module.log_analytics.resource.id\n- module.log_analytics.resource.name\n"
+  },
+  {
+    "name": "resource_id",
+    "description": "This is the full output for the Log Analytics resource ID. This is the default output for the module following AVM standards. Review the examples below for the correct output to use in your module."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  }
+]

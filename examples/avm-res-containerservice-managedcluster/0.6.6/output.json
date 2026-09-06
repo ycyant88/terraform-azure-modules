@@ -1,0 +1,94 @@
+[
+  {
+    "name": "private_fqdn",
+    "description": "The FQDN of private cluster."
+  },
+  {
+    "name": "agentpool_resource_ids",
+    "description": "A map of nodepool keys to resource ids."
+  },
+  {
+    "name": "namespace_resource_ids",
+    "description": "A map of namespace keys to resource ids."
+  },
+  {
+    "name": "current_kubernetes_version",
+    "description": "The version of Kubernetes the Managed Cluster is running. If kubernetesVersion was a fully specified version <major.minor.patch>, this field will be exactly equal to it. If kubernetesVersion was <major.minor>, this field will contain the full <major.minor.patch> version being used."
+  },
+  {
+    "name": "max_agent_pools",
+    "description": "The max number of agent pools for the managed cluster."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the created resource."
+  },
+  {
+    "name": "identity_tenant_id",
+    "description": "The tenant id of the assigned identity which is used by master components."
+  },
+  {
+    "name": "ingress_profile_web_app_routing_identity",
+    "description": "Details about a user assigned identity."
+  },
+  {
+    "name": "name",
+    "description": "The name of the created resource."
+  },
+  {
+    "name": "azure_portal_fqdn",
+    "description": "The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients. The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly."
+  },
+  {
+    "name": "identity_principal_id",
+    "description": "The principal id of the assigned identity which is used by master components."
+  },
+  {
+    "name": "key_vault_secrets_provider_identity",
+    "description": "The identity of the Key Vault Secrets Provider addon, including clientId, objectId, and resourceId."
+  },
+  {
+    "name": "kube_admin_config",
+    "description": "Admin kubeconfig raw YAML (sensitive)."
+  },
+  {
+    "name": "kubelet_identity",
+    "description": "The kubelet identity of the managed cluster, including clientId, objectId, and resourceId."
+  },
+  {
+    "name": "network_profile_nat_gateway_profile_effective_outbound_ips",
+    "description": "The effective outbound IP resources of the cluster NAT gateway."
+  },
+  {
+    "name": "node_resource_group_name",
+    "description": "The name of the auto-created node resource group."
+  },
+  {
+    "name": "oidc_issuer_profile_issuer_url",
+    "description": "The OIDC issuer url of the Managed Cluster."
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": "Base64 cluster CA certificate from user kubeconfig."
+  },
+  {
+    "name": "fqdn",
+    "description": "The FQDN of the master pool."
+  },
+  {
+    "name": "ingress_app_object_id",
+    "description": "The object ID of the Ingress Application Gateway add-on identity."
+  },
+  {
+    "name": "kube_config",
+    "description": "User kubeconfig raw YAML (sensitive)."
+  },
+  {
+    "name": "network_profile_load_balancer_profile_effective_outbound_ips",
+    "description": "The effective outbound IP resources of the cluster load balancer."
+  },
+  {
+    "name": "node_resource_group_id",
+    "description": "The resource ID of the auto-created node resource group."
+  }
+]

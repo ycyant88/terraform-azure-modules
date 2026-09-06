@@ -1,0 +1,34 @@
+[
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "This is the resource ID of the resource."
+  },
+  {
+    "name": "service_principal",
+    "description": "The system-assigned service principal details for the SQL Managed Instance. Required for Windows Authentication with Microsoft Entra ID."
+  },
+  {
+    "name": "storage_iops",
+    "description": "The actual storage IOPS allocated to the SQL Managed Instance."
+  },
+  {
+    "name": "identity",
+    "description": "Managed identities for the SQL MI instance.  This is not available from the `resource` output because AzureRM doesn't yet support adding both User and System Assigned identities."
+  },
+  {
+    "name": "is_general_purpose_v2",
+    "description": "Whether the SQL Managed Instance is using the Next-gen General Purpose (GPv2) service tier."
+  },
+  {
+    "name": "memory_size_in_gb",
+    "description": "The actual memory size in GB allocated to the SQL Managed Instance."
+  }
+]

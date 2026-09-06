@@ -1,0 +1,93 @@
+[
+  {
+    "name": "mx_records",
+    "type": "map(object({\n    name                = optional(string, \"@\")\n    resource_group_name = string\n    zone_name           = string\n    ttl                 = number\n    records = map(object({\n      preference = number\n      exchange   = string\n    }))\n    tags = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a MX record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "ptr_records",
+    "type": "map(object({\n    name                = string\n    resource_group_name = string\n    zone_name           = string\n    ttl                 = number\n    records             = list(string)\n    tags                = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a PTR record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "domain_name",
+    "type": "string",
+    "description": "The name of the private dns zone.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "a_records",
+    "type": "map(object({\n    name                = string\n    resource_group_name = string\n    zone_name           = string\n    ttl                 = number\n    records             = list(string)\n    tags                = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a A record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "aaaa_records",
+    "type": "map(object({\n    name                = string\n    resource_group_name = string\n    zone_name           = string\n    ttl                 = number\n    records             = list(string)\n    tags                = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a AAAA record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "cname_records",
+    "type": "map(object({\n    name                = string\n    resource_group_name = string\n    zone_name           = string\n    ttl                 = number\n    record              = string\n    tags                = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a CNAME record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see https://aka.ms/avm/telemetryinfo.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "soa_record",
+    "type": "object({\n    email        = string\n    expire_time  = optional(number, 2419200)\n    minimum_ttl  = optional(number, 10)\n    refresh_time = optional(number, 3600)\n    retry_time   = optional(number, 300)\n    ttl          = optional(number, 3600)\n    tags         = optional(map(string), null)\n  })",
+    "description": "optional soa_record variable, if included only email is required, rest are optional. Email must use username.corp.com and not username@corp.com",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "srv_records",
+    "type": "map(object({\n    name                = string\n    resource_group_name = string\n    zone_name           = string\n    ttl                 = number\n    records = map(object({\n      priority = number\n      weight   = number\n      port     = number\n      target   = string\n    }))\n    tags = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a SRV record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "txt_records",
+    "type": "map(object({\n    name                = string\n    resource_group_name = string\n    zone_name           = string\n    ttl                 = number\n    records = map(object({\n      value = string\n    }))\n    tags = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a TXT record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "virtual_network_links",
+    "type": "map(object({\n    vnetlinkname     = string\n    vnetid           = string\n    autoregistration = optional(bool, false)\n    tags             = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a virtual network link.",
+    "default": "{}",
+    "required": false
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the RAI policy."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the RAI policy."
+  }
+]

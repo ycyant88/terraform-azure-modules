@@ -1,0 +1,46 @@
+[
+  {
+    "name": "local_users",
+    "description": "A map of Storage Account Local Users. The map key matches `var.local_user`.\n\nThe map value contains the following attributes:\n- `id` - The ID of the Storage Account Local User.\n- `name` - The name of the Storage Account Local User.\n- `home_directory` - The home directory of the Storage Account Local User.\n- `sid` - The unique Security Identifier (SID) of the Storage Account Local User.\n- `ssh_key_enabled` - Specifies whether SSH Key authentication is enabled.\n- `ssh_password_enabled` - Specifies whether SSH password authentication is enabled.\n\nNOTE: The local user `password` attribute is no longer exported. The Storage RP\nonly returns the password from the `regeneratePassword` ARM action (the\n`listKeys` action returns an empty body because the password is not persisted\nserver-side). Declare a managed `azapi_resource_action` resource with\n`action = \"regeneratePassword\"` and `response_export_values = [\"sshPassword\"]`\nin the consuming root module; the default `apply_after_create` behavior calls\nthe action exactly once at create so the password is stable. Pipe the result\nthrough `value_wo` on `azurerm_key_vault_secret` to keep it out of state.\n"
+  },
+  {
+    "name": "name",
+    "description": "The name of the storage account."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "A map of private endpoints created by the module. The map key matches `var.private_endpoints`.\n\nEach value is an object with:\n- `id` - The resource ID of the private endpoint.\n- `name` - The name of the private endpoint.\n- `private_dns_zone_group_id` - The resource ID of the managed private DNS zone group, or `null` if not managed by this module.\n- `role_assignments` - Map of role assignments created at the private endpoint scope.\n"
+  },
+  {
+    "name": "containers",
+    "description": "Map of storage containers that are created."
+  },
+  {
+    "name": "data_lake_gen2_filesystems",
+    "description": "Map of Data Lake Gen2 filesystems that are created."
+  },
+  {
+    "name": "queues",
+    "description": "Map of storage queues that are created."
+  },
+  {
+    "name": "resource",
+    "description": "The full Storage Account azapi_resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the Storage Account."
+  },
+  {
+    "name": "shares",
+    "description": "Map of storage file shares that are created."
+  },
+  {
+    "name": "tables",
+    "description": "Map of storage tables that are created."
+  },
+  {
+    "name": "fqdn",
+    "description": "Fqdns for storage services."
+  }
+]

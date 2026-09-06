@@ -1,0 +1,21 @@
+module "avm-res-web-site" {
+  source                         = "Azure/avm-res-web-site/azurerm"
+  version                        = "0.22.0"
+  active_directory               = var.active_directory
+  additional_login_parameters    = var.additional_login_parameters
+  allowed_external_redirect_urls = var.allowed_external_redirect_urls
+  default_provider               = var.default_provider
+  enabled                        = var.enabled
+  facebook                       = var.facebook
+  github                         = var.github
+  google                         = var.google
+  issuer                         = var.issuer
+  microsoft                      = var.microsoft
+  parent_id                      = var.parent_id
+  retry                          = var.retry
+  runtime_version                = var.runtime_version
+  token_refresh_extension_hours  = var.token_refresh_extension_hours
+  token_store_enabled            = var.token_store_enabled
+  twitter                        = var.twitter
+  unauthenticated_client_action  = var.unauthenticated_client_action
+}

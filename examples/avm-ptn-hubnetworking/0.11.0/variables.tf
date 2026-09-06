@@ -1,0 +1,183 @@
+variable "enable_telemetry" {
+  description = "This variable controls whether or not telemetry is enabled for the module.\nFor more information see https://aka.ms/avm/telemetryinfo.\nIf it is set to false, then no telemetry will be collected.\n"
+  type        = bool
+  default     = true
+}
+
+variable "hub_virtual_networks" {
+  description = "A map of the hub virtual networks to create. The map key is an arbitrary value to avoid Terraform's restriction that map keys must be known at plan time.\n\n### Mandatory fields\n\n- name - The name of the Virtual Network.\n- address_space - A list of IPv4 address spaces that are used by this virtual network in CIDR format, e.g. [\"192.168.0.0/24\"].\n- location - The Azure location where the virtual network should be created.\n- resource_group_name - The name of the resource group in which the virtual network should be created.\n\n### Optional fields\n\n- bgp_community - The BGP community associated with the virtual network.\n- ddos_protection_plan_id - The ID of the DDoS protection plan associated with the virtual network.\n- dns_servers - A list of DNS servers IP addresses for the virtual network.\n- flow_timeout_in_minutes - The flow timeout in minutes for the virtual network. Default 4.\n- mesh_peering_enabled - Should the virtual network be peered to other hub networks with this flag enabled? Default true.\n- peering_names - A map of the names of the peering connections to create between this virtual network and other hub networks. The key is the key of the peered hub network, and the value is the name of the peering connection.\n- resource_group_creation_enabled - Should the resource group for this virtual network be created by this module? Default true.\n- resource_group_lock_enabled - Should the resource group for this virtual network be locked? Default true.\n- resource_group_lock_name - The name of the resource group lock.\n- resource_group_tags - A map of tags to apply to the resource group.\n- route_table_name_firewall - The name of the route table to create for the firewall routes. Default route-{vnetname}.\n- route_table_name_user_subnets - The name of the route table to create for the user subnet routes. Default route-{vnetname}.\n- routing_address_space - A list of IPv4 address spaces in CIDR format that are used for routing to this hub, e.g. [\"192.168.0.0\",\"172.16.0.0/12\"].\n- hub_router_ip_address - If not using Azure Firewall, this is the IP address of the hub router. This is used to create route table entries for other hub networks.\n- tags - A map of tags to apply to the virtual network.\n\n#### Route table entries\n\n- route_table_entries_firewall - (Optional) A set of additional route table entries to add to the Firewall route table for this hub network. Default empty []. The value is an object with the following fields:\n  - name - The name of the route table entry.\n  - address_prefix - The address prefix to match for this route table entry.\n  - next_hop_type - The type of the next hop. Possible values include Internet, VirtualAppliance, VirtualNetworkGateway, VnetLocal, None.\n  - has_bgp_override - Should the BGP override be enabled for this route table entry? Default false.\n  - next_hop_ip_address - The IP address of the next hop. Required if next_hop_type is VirtualAppliance.\n\n- route_table_entries_user_subnets - (Optional) A set of additional route table entries to add to the User Subnets route table for this hub network. Default empty []. The value is an object with the following fields:\n  - name - The name of the route table entry.\n  - address_prefix - The address prefix to match for this route table entry.\n  - next_hop_type - The type of the next hop. Possible values include Internet, VirtualAppliance, VirtualNetworkGateway, VnetLocal, None.\n  - has_bgp_override - Should the BGP override be enabled for this route table entry? Default false.\n  - next_hop_ip_address - The IP address of the next hop. Required if next_hop_type is VirtualAppliance.\n\n#### Subnets\n\n- subnets - (Optional) A map of subnets to create in the virtual network. The value is an object with the following fields:\n  - name - The name of the subnet.\n  - address_prefixes - The IPv4 address prefixes to use for the subnet in CIDR format.\n  - nat_gateway - (Optional) An object with the following fields:\n    - id - The ID of the NAT Gateway which should be associated with the Subnet. Changing this forces a new resource to be created.\n  - network_security_group - (Optional) An object with the following fields:\n    - id - The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new association to be created.\n  - private_endpoint_network_policies_enabled - (Optional) Enable or Disable network policies for the private endpoint on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.\n  - private_link_service_network_policies_enabled - (Optional) Enable or Disable network policies for the private link service on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.\n  - route_table - (Optional) An object with the following fields which are mutually exclusive, choose either an external route table or the generated route table:\n    - id - The ID of the Route Table which should be associated with the Subnet. Changing this forces a new association to be created.\n    - assign_generated_route_table - (Optional) Should the Route Table generated by this module be associated with this Subnet? Default true.\n  - service_endpoints - (Optional) The list of Service endpoints to associate with the subnet.\n  - service_endpoint_policy_ids - (Optional) The list of Service Endpoint Policy IDs to associate with the subnet.\n  - service_endpoint_policy_assignment_enabled - (Optional) Should the Service Endpoint Policy be assigned to the subnet? Default true.\n  - delegation - (Optional) An object with the following fields:\n    - name - The name of the delegation.\n    - service_delegation - An object with the following fields:\n      - name - The name of the service delegation.\n      - actions - A list of actions that should be delegated, the list is specific to the service being delegated.\n  - default_outbound_access_enabled - (Optional) Should the default outbound access be enabled for the subnet? Default false.\n\n#### Azure Firewall\n\n- firewall - (Optional) An object with the following fields:\n  - sku_name - The name of the SKU to use for the Azure Firewall. Possible values include AZFW_Hub, AZFW_VNet.\n  - sku_tier - The tier of the SKU to use for the Azure Firewall. Possible values include Basic, Standard, Premium.\n  - subnet_address_prefix - The IPv4 address prefix to use for the Azure Firewall subnet in CIDR format. Needs to be a part of the virtual network's address space.\n  - subnet_default_outbound_access_enabled - (Optional) Should the default outbound access be enabled for the Azure Firewall subnet? Default false.\n  - firewall_policy_id - (Optional) The resource id of the Azure Firewall Policy to associate with the Azure Firewall.\n  - management_ip_enabled - (Optional) Should the Azure Firewall management IP be enabled? Default true.\n  - management_subnet_address_prefix - (Optional) The IPv4 address prefix to use for the Azure Firewall management subnet in CIDR format. Needs to be a part of the virtual network's address space.\n  - management_subnet_default_outbound_access_enabled - (Optional) Should the default outbound access be enabled for the Azure Firewall management subnet? Default false.\n  - name - (Optional) The name of the firewall resource. If not specified will use afw-{vnetname}.\n  - private_ip_ranges - (Optional) A list of private IP ranges to use for the Azure Firewall, to which the firewall will not NAT traffic. If not specified will use RFC1918.\n  - subnet_route_table_id = (Optional) The resource id of the Route Table which should be associated with the Azure Firewall subnet. If not specified the module will assign the generated route table.\n  - tags - (Optional) A map of tags to apply to the Azure Firewall. If not specified\n  - zones - (Optional) A list of availability zones to use for the Azure Firewall. If not specified will be null.\n  - default_ip_configuration - (Optional) An object with the following fields. If not specified the defaults below will be used:\n    - name - (Optional) The name of the default IP configuration. If not specified will use default.\n    - public_ip_config - (Optional) An object with the following fields:\n      - name - (Optional) The name of the public IP configuration. If not specified will use pip-afw-{vnetname}.\n      - zones - (Optional) A list of availability zones to use for the public IP configuration. If not specified will be null.\n      - ip_version - (Optional) The IP version to use for the public IP configuration. Possible values include IPv4, IPv6. If not specified will be IPv4.\n      - sku_tier - (Optional) The SKU tier to use for the public IP configuration. Possible values include Regional, Global. If not specified will be Regional.\n  - management_ip_configuration - (Optional) An object with the following fields. If not specified the defaults below will be used:\n    - name - (Optional) The name of the management IP configuration. If not specified will use defaultMgmt.\n    - public_ip_config - (Optional) An object with the following fields:\n      - name - (Optional) The name of the public IP configuration. If not specified will use pip-afw-mgmt-<Map Key>.\n      - zones - (Optional) A list of availability zones to use for the public IP configuration. If not specified will be null.\n      - ip_version - (Optional) The IP version to use for the public IP configuration. Possible values include IPv4, IPv6. If not specified will be IPv4.\n      - sku_tier - (Optional) The SKU tier to use for the public IP configuration. Possible values include Regional, Global. If not specified will be Regional.\n  - firewall_policy - (Optional) An object with the following fields. Cannot be used with firewall_policy_id. If not specified the defaults below will be used:\n    - name - (Optional) The name of the firewall policy. If not specified will use afw-policy-{vnetname}.\n    - sku - (Optional) The SKU to use for the firewall policy. Possible values include Standard, Premium.\n    - auto_learn_private_ranges_enabled - (Optional) Should the firewall policy automatically learn private ranges? Default false.\n    - base_policy_id - (Optional) The resource id of the base policy to use for the firewall policy.\n    - dns - (Optional) An object with the following fields:\n      - proxy_enabled - (Optional) Should the DNS proxy be enabled for the firewall policy? Default false.\n      - servers - (Optional) A list of DNS server IP addresses for the firewall policy.\n    - threat_intelligence_mode - (Optional) The threat intelligence mode for the firewall policy. Possible values include Alert, Deny, Off.\n    - private_ip_ranges - (Optional) A list of private IP ranges to use for the firewall policy.\n    - threat_intelligence_allowlist - (Optional) An object with the following fields:\n      - fqdns - (Optional) A set of FQDNs to allowlist for threat intelligence.\n      - ip_addresses - (Optional) A set of IP addresses to allowlist for threat intelligence.\n"
+  type = map(object({
+    name                            = string
+    address_space                   = list(string)
+    location                        = string
+    resource_group_name             = string
+    route_table_name_firewall       = optional(string)
+    route_table_name_user_subnets   = optional(string)
+    bgp_community                   = optional(string)
+    ddos_protection_plan_id         = optional(string)
+    dns_servers                     = optional(list(string))
+    flow_timeout_in_minutes         = optional(number, 4)
+    mesh_peering_enabled            = optional(bool, true)
+    peering_names                   = optional(map(string))
+    resource_group_creation_enabled = optional(bool, true)
+    resource_group_lock_enabled     = optional(bool, true)
+    resource_group_lock_name        = optional(string)
+    resource_group_tags             = optional(map(string))
+    routing_address_space           = optional(list(string), [])
+    hub_router_ip_address           = optional(string)
+    tags                            = optional(map(string))
+
+    route_table_entries_firewall = optional(set(object({
+      name           = string
+      address_prefix = string
+      next_hop_type  = string
+
+      has_bgp_override    = optional(bool, false)
+      next_hop_ip_address = optional(string)
+    })), [])
+
+    route_table_entries_user_subnets = optional(set(object({
+      name           = string
+      address_prefix = string
+      next_hop_type  = string
+
+      has_bgp_override    = optional(bool, false)
+      next_hop_ip_address = optional(string)
+    })), [])
+
+    subnets = optional(map(object(
+      {
+        name             = string
+        address_prefixes = list(string)
+        nat_gateway = optional(object({
+          id = string
+        }))
+        network_security_group = optional(object({
+          id = string
+        }))
+        private_endpoint_network_policies_enabled     = optional(bool, true)
+        private_link_service_network_policies_enabled = optional(bool, true)
+        route_table = optional(object({
+          id                           = optional(string)
+          assign_generated_route_table = optional(bool, true)
+        }))
+        service_endpoints           = optional(set(string))
+        service_endpoint_policy_ids = optional(set(string))
+        delegations = optional(list(
+          object(
+            {
+              name = string
+              service_delegation = object({
+                name    = string
+                actions = optional(list(string))
+              })
+            }
+          )
+        ))
+        default_outbound_access_enabled = optional(bool, false)
+      }
+    )), {})
+
+    firewall = optional(object({
+      sku_name                                          = string
+      sku_tier                                          = string
+      subnet_address_prefix                             = string
+      subnet_default_outbound_access_enabled            = optional(bool, false)
+      firewall_policy_id                                = optional(string, null)
+      management_ip_enabled                             = optional(bool, true)
+      management_subnet_address_prefix                  = optional(string, null)
+      management_subnet_default_outbound_access_enabled = optional(bool, false)
+      name                                              = optional(string)
+      private_ip_ranges                                 = optional(list(string))
+      subnet_route_table_id                             = optional(string)
+      tags                                              = optional(map(string))
+      zones                                             = optional(list(string))
+      default_ip_configuration = optional(object({
+        name = optional(string)
+        public_ip_config = optional(object({
+          ip_version = optional(string, "IPv4")
+          name       = optional(string)
+          sku_tier   = optional(string, "Regional")
+          zones      = optional(set(string))
+        }))
+      }))
+      management_ip_configuration = optional(object({
+        name = optional(string)
+        public_ip_config = optional(object({
+          ip_version = optional(string, "IPv4")
+          name       = optional(string)
+          sku_tier   = optional(string, "Regional")
+          zones      = optional(set(string))
+        }))
+      }))
+      firewall_policy = optional(object({
+        name                              = optional(string)
+        sku                               = optional(string, "Standard")
+        auto_learn_private_ranges_enabled = optional(bool)
+        base_policy_id                    = optional(string)
+        dns = optional(object({
+          proxy_enabled = optional(bool, false)
+          servers       = optional(list(string))
+        }))
+        explicit_proxy = optional(object({
+          enable_pac_file = optional(bool)
+          enabled         = optional(bool)
+          http_port       = optional(number)
+          https_port      = optional(number)
+          pac_file        = optional(string)
+          pac_file_port   = optional(number)
+        }))
+        identity = optional(object({
+          type         = string
+          identity_ids = optional(set(string))
+        }))
+        insights = optional(object({
+          default_log_analytics_workspace_id = string
+          enabled                            = bool
+          retention_in_days                  = optional(number)
+          log_analytics_workspace = optional(list(object({
+            firewall_location = string
+            id                = string
+          })))
+        }))
+        intrusion_detection = optional(object({
+          mode           = optional(string)
+          private_ranges = optional(list(string))
+          signature_overrides = optional(list(object({
+            id    = optional(string)
+            state = optional(string)
+          })))
+          traffic_bypass = optional(list(object({
+            description           = optional(string)
+            destination_addresses = optional(set(string))
+            destination_ip_groups = optional(set(string))
+            destination_ports     = optional(set(string))
+            name                  = string
+            protocol              = string
+            source_addresses      = optional(set(string))
+            source_ip_groups      = optional(set(string))
+          })))
+        }))
+        private_ip_ranges        = optional(list(string))
+        sql_redirect_allowed     = optional(bool, false)
+        threat_intelligence_mode = optional(string, "Alert")
+
+        threat_intelligence_allowlist = optional(object({
+          fqdns        = optional(set(string))
+          ip_addresses = optional(set(string))
+        }))
+        tls_certificate = optional(object({
+          key_vault_secret_id = string
+          name                = string
+        }))
+      }))
+    }))
+  }))
+  default = {}
+}
+
+variable "tags" {
+  description = "(Optional) Tags of the resource."
+  type        = map(string)
+  default     = null
+}

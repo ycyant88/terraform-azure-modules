@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resource",
+    "description": "Azure ExpressRoute Gateway resource name"
+  },
+  {
+    "name": "resource_id",
+    "description": "Azure ExpressRoute Gateway resource ID"
+  },
+  {
+    "name": "resource_object",
+    "description": "Azure ExpressRoute Gateway resource object"
+  }
+]

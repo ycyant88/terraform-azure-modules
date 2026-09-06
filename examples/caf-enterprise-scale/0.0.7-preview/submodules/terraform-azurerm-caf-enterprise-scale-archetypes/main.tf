@@ -1,0 +1,12 @@
+module "caf-enterprise-scale" {
+  source                  = "Azure/caf-enterprise-scale/azurerm"
+  version                 = "0.0.7-preview"
+  access_control          = var.access_control
+  archetype_id            = var.archetype_id
+  default_location        = var.default_location
+  library_path            = var.library_path
+  parameters              = var.parameters
+  root_id                 = var.root_id
+  scope_id                = var.scope_id
+  template_file_variables = var.template_file_variables
+}

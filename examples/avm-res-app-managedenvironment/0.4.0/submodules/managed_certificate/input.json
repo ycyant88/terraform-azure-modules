@@ -1,0 +1,51 @@
+[
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region where the managed certificate resource should be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "managed_environment",
+    "type": "object({\n    resource_id = string\n  })",
+    "description": "The managed environment resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the managed certificate resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "subject_name",
+    "type": "string",
+    "description": "The subject name (domain name) for the certificate.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "domain_control_validation",
+    "type": "string",
+    "description": "The domain control validation method. Possible values: 'CNAME', 'HTTP', 'TXT'. Defaults to 'HTTP'.",
+    "default": "\"HTTP\"",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) A mapping of tags to assign to the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": " - `create` - (Defaults to 30 minutes) Used when creating the managed certificate.\n - `delete` - (Defaults to 30 minutes) Used when deleting the managed certificate.\n - `read` - (Defaults to 5 minutes) Used when retrieving the managed certificate.\n - `update` - (Defaults to 30 minutes) Used when updating the managed certificate.\n",
+    "default": "null",
+    "required": false
+  }
+]

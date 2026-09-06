@@ -1,0 +1,30 @@
+[
+  {
+    "name": "virtual_wan_id",
+    "description": "Virtual WAN ID"
+  },
+  {
+    "name": "virtual_hub_id",
+    "description": "Virtual Hub ID"
+  },
+  {
+    "name": "s2s_vpn_gw_id",
+    "description": "S2S VPN Gateway ID"
+  },
+  {
+    "name": "p2s_vpn_gw_id",
+    "description": "P2S VPN Gateway ID"
+  },
+  {
+    "name": "er_gw_id",
+    "description": "ExpressRoute Gateway ID"
+  },
+  {
+    "name": "fw",
+    "description": "Firewall Name"
+  },
+  {
+    "name": "rg",
+    "description": "Resource Group Name"
+  }
+]

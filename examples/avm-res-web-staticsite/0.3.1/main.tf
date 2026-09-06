@@ -1,0 +1,23 @@
+module "avm-res-web-staticsite" {
+  source                                  = "Azure/avm-res-web-staticsite/azurerm"
+  version                                 = "0.3.1"
+  all_child_resources_inherit_lock        = var.all_child_resources_inherit_lock
+  all_child_resources_inherit_tags        = var.all_child_resources_inherit_tags
+  app_settings                            = var.app_settings
+  branch                                  = var.branch
+  custom_domains                          = var.custom_domains
+  enable_telemetry                        = var.enable_telemetry
+  location                                = var.location
+  lock                                    = var.lock
+  managed_identities                      = var.managed_identities
+  name                                    = var.name
+  private_endpoints                       = var.private_endpoints
+  private_endpoints_inherit_lock          = var.private_endpoints_inherit_lock
+  private_endpoints_manage_dns_zone_group = var.private_endpoints_manage_dns_zone_group
+  repository_url                          = var.repository_url
+  resource_group_name                     = var.resource_group_name
+  role_assignments                        = var.role_assignments
+  sku_size                                = var.sku_size
+  sku_tier                                = var.sku_tier
+  tags                                    = var.tags
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource",
+    "description": "this is the resource of the rule collection group"
+  },
+  {
+    "name": "resource_id",
+    "description": "the resource id of the rule_collection_group"
+  }
+]

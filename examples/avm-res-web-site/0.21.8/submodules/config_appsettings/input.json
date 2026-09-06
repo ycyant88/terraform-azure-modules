@@ -1,0 +1,30 @@
+[
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "is_slot",
+    "type": "bool",
+    "description": "Whether the parent resource is a deployment slot. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex = list(string)\n    interval_seconds    = optional(number, 10)\n    max_retries         = optional(number, 3)\n  })",
+    "description": "Retry configuration for azapi resources.",
+    "default": "{\n  \"error_message_regex\": [\n    \"Cannot modify this site because another operation is in progress\"\n  ]\n}",
+    "required": false
+  },
+  {
+    "name": "app_settings",
+    "type": "map(string)",
+    "description": "A map of key-value pairs for App Settings and custom values to assign to the App Service.",
+    "default": "",
+    "required": true
+  }
+]

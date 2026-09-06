@@ -1,0 +1,22 @@
+[
+  {
+    "name": "nodepool_resource_ids",
+    "description": "A map of nodepool keys to resource ids."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "resource_id",
+    "description": "Resource ID of the Kubernetes cluster."
+  },
+  {
+    "name": "kubelet_identity_id",
+    "description": "The identity ID of the kubelet identity."
+  },
+  {
+    "name": "name",
+    "description": "Name of the Kubernetes cluster."
+  }
+]

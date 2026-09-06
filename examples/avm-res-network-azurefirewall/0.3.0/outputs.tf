@@ -1,0 +1,9 @@
+output "resource" {
+  value       = module.avm-res-network-azurefirewall.resource
+  description = "\"This is the full output for the resource. This is the default output for the module following AVM standards. Review the examples below for the correct output to use in your module.\"\nExamples:\n- module.firewall.resource.id\n- module.firewall.resource.name\n- module.firewall.resource.ip_configuration\n- module.firewall.resource.virtual_hub\n"
+}
+
+output "resource_id" {
+  value       = module.avm-res-network-azurefirewall.resource_id
+  description = "This is the resource id for the firewall resource."
+}

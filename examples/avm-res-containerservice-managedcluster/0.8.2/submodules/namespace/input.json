@@ -1,0 +1,100 @@
+[
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The location of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "adoption_policy",
+    "type": "string",
+    "description": "Action if Kubernetes namespace with same name already exists.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_network_policy",
+    "type": "object({\n    egress  = optional(string)\n    ingress = optional(string)\n  })",
+    "description": "Default network policy of the namespace, specifying ingress and egress rules.\n\n- `egress` - Enum representing different network policy rules.\n- `ingress` - Enum representing different network policy rules.\n\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "delete_policy",
+    "type": "string",
+    "description": "Delete options of a namespace.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "A mapping of tags to assign to the resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Timeouts applied to the AzAPI resources in this module.\n\n- `create` - Timeout for create operations.\n- `read` - Timeout for read operations.\n- `update` - Timeout for update operations.\n- `delete` - Timeout for delete operations.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_resource_quota",
+    "type": "object({\n    cpu_limit      = optional(string)\n    cpu_request    = optional(string)\n    memory_limit   = optional(string)\n    memory_request = optional(string)\n  })",
+    "description": "Resource quota for the namespace. This is required by the Azure API even though the API spec marks it as optional.\n\n- `cpu_limit` - CPU limit of the namespace in one-thousandth CPU form. See [CPU resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu) for more details.\n- `cpu_request` - CPU request of the namespace in one-thousandth CPU form. See [CPU resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu) for more details.\n- `memory_limit` - Memory limit of the namespace in the power-of-two equivalents form: Ei, Pi, Ti, Gi, Mi, Ki. See [Memory resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory) for more details.\n- `memory_request` - Memory request of the namespace in the power-of-two equivalents form: Ei, Pi, Ti, Gi, Mi, Ki. See [Memory resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory) for more details.\n\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource ID for this resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "annotations",
+    "type": "map(string)",
+    "description": "The annotations of managed namespace.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    containerservice_managed_clusters_managed_namespaces = optional(list(string), [])\n  })",
+    "description": "Body-relative paths to ignore for each AzAPI resource, in dot notation. Changes take\neffect only after apply, and ignored configuration is not sent to Azure until the\npath is removed.\n\n- `containerservice_managed_clusters_managed_namespaces` - Paths ignored on the managed namespace.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "labels",
+    "type": "map(string)",
+    "description": "The labels of managed namespace.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    containerservice_managed_clusters_managed_namespaces = optional(string, \"Microsoft.ContainerService/managedClusters/managedNamespaces@2026-03-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by this module.\n\n- `containerservice_managed_clusters_managed_namespaces` - Resource type and API version for the managed namespace.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to the AzAPI resources in this module.\n\n- `error_message_regex` - Regular expressions matching error messages that should be retried.\n- `interval_seconds` - Initial delay between retries, in seconds.\n- `max_interval_seconds` - Maximum delay between retries, in seconds.\n",
+    "default": "null",
+    "required": false
+  }
+]

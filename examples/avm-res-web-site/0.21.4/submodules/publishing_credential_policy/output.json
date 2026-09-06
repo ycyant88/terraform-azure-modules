@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the publishing credential policy."
+  },
+  {
+    "name": "name",
+    "description": "The name of the publishing credential policy."
+  },
+  {
+    "name": "resource",
+    "description": "The full resource object."
+  }
+]

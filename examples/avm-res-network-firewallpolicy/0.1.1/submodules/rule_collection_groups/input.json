@@ -1,0 +1,51 @@
+[
+  {
+    "name": "firewall_policy_rule_collection_group_network_rule_collection",
+    "type": "list(object({\n    action   = string\n    name     = string\n    priority = number\n    rule = list(object({\n      description           = optional(string)\n      destination_addresses = optional(list(string))\n      destination_fqdns     = optional(list(string))\n      destination_ip_groups = optional(list(string))\n      destination_ports     = list(string)\n      name                  = string\n      protocols             = list(string)\n      source_addresses      = optional(list(string))\n      source_ip_groups      = optional(list(string))\n    }))\n  }))",
+    "description": "- `action` - (Required) The action to take for the network rules in this collection. Possible values are `Allow` and `Deny`.\n- `name` - (Required) The name which should be used for this network rule collection.\n- `priority` - (Required) The priority of the network rule collection. The range is `100`\n\n---\n`rule` block supports the following:\n- `description` - \n- `destination_addresses` - \n- `destination_fqdns` - \n- `destination_ip_groups` - \n- `destination_ports` - \n- `name` - (Required) The name which should be used for this Firewall Policy Rule Collection Group. Changing this forces a new Firewall Policy Rule Collection Group to be created.\n- `protocols` - \n- `source_addresses` - \n- `source_ip_groups` - \n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "firewall_policy_rule_collection_group_timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": "- `create` - (Defaults to 30 minutes) Used when creating the Firewall Policy Rule Collection Group.\n- `delete` - (Defaults to 30 minutes) Used when deleting the Firewall Policy Rule Collection Group.\n- `read` - (Defaults to 5 minutes) Used when retrieving the Firewall Policy Rule Collection Group.\n- `update` - (Defaults to 30 minutes) Used when updating the Firewall Policy Rule Collection Group.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "firewall_policy_rule_collection_group_firewall_policy_id",
+    "type": "string",
+    "description": "(Required) The ID of the Firewall Policy where the Firewall Policy Rule Collection Group should exist. Changing this forces a new Firewall Policy Rule Collection Group to be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "firewall_policy_rule_collection_group_name",
+    "type": "string",
+    "description": "(Required) The name which should be used for this Firewall Policy Rule Collection Group. Changing this forces a new Firewall Policy Rule Collection Group to be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "firewall_policy_rule_collection_group_priority",
+    "type": "number",
+    "description": "(Required) The priority of the Firewall Policy Rule Collection Group. The range is 100-65000.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "firewall_policy_rule_collection_group_application_rule_collection",
+    "type": "list(object({\n    action   = string\n    name     = string\n    priority = number\n    rule = list(object({\n      description           = optional(string)\n      destination_addresses = optional(list(string))\n      destination_fqdn_tags = optional(list(string))\n      destination_fqdns     = optional(list(string))\n      destination_urls      = optional(list(string))\n      name                  = string\n      source_addresses      = optional(list(string))\n      source_ip_groups      = optional(list(string))\n      terminate_tls         = optional(bool)\n      web_categories        = optional(list(string))\n      http_headers = optional(list(object({\n        name  = string\n        value = string\n      })))\n      protocols = optional(list(object({\n        port = number\n        type = string\n      })))\n    }))\n  }))",
+    "description": "- `action` - (Required) The action to take for the application rules in this collection. Possible values are `Allow` and `Deny`.\n- `name` - (Required) The name which should be used for this application rule collection.\n- `priority` - (Required) The priority of the application rule collection. The range is `100`\n\n---\n`rule` block supports the following:\n- `description` - \n- `destination_addresses` - \n- `destination_fqdn_tags` - \n- `destination_fqdns` - \n- `destination_urls` - \n- `name` - (Required) The name which should be used for this Firewall Policy Rule Collection Group. Changing this forces a new Firewall Policy Rule Collection Group to be created.\n- `source_addresses` - \n- `source_ip_groups` - \n- `terminate_tls` - \n- `web_categories` - \n\n---\n`http_headers` block supports the following:\n- `name` - (Required) Specifies the name of the header.\n- `value` - (Required) Specifies the value of the value.\n\n---\n`protocols` block supports the following:\n- `port` - (Required) Port number of the protocol. Range is 0-64000.\n- `type` - (Required) Protocol type. Possible values are `Http` and `Https`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "firewall_policy_rule_collection_group_nat_rule_collection",
+    "type": "list(object({\n    action   = string\n    name     = string\n    priority = number\n    rule = list(object({\n      description         = optional(string)\n      destination_address = optional(string)\n      destination_ports   = optional(list(string))\n      name                = string\n      protocols           = list(string)\n      source_addresses    = optional(list(string))\n      source_ip_groups    = optional(list(string))\n      translated_address  = optional(string)\n      translated_fqdn     = optional(string)\n      translated_port     = number\n    }))\n  }))",
+    "description": "- `action` - (Required) The action to take for the NAT rules in this collection. Currently, the only possible value is `Dnat`.\n- `name` - (Required) The name which should be used for this NAT rule collection.\n- `priority` - (Required) The priority of the NAT rule collection. The range is `100`\n\n---\n`rule` block supports the following:\n- `description` - \n- `destination_address` - \n- `destination_ports` - \n- `name` - (Required) The name which should be used for this Firewall Policy Rule Collection Group. Changing this forces a new Firewall Policy Rule Collection Group to be created.\n- `protocols` - \n- `source_addresses` - \n- `source_ip_groups` - \n- `translated_address` - \n- `translated_fqdn` - \n- `translated_port` - \n",
+    "default": "null",
+    "required": false
+  }
+]

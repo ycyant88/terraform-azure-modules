@@ -1,0 +1,6 @@
+[
+  {
+    "name": "nsg_resource",
+    "description": "The Azure Network Security Group resource"
+  }
+]

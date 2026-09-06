@@ -1,0 +1,19 @@
+module "caf-enterprise-scale" {
+  source                                          = "Azure/caf-enterprise-scale/azurerm"
+  version                                         = "6.3.1"
+  custom_azure_backup_geo_codes                   = var.custom_azure_backup_geo_codes
+  custom_privatelink_azurestaticapps_partitionids = var.custom_privatelink_azurestaticapps_partitionids
+  custom_settings_by_resource_type                = var.custom_settings_by_resource_type
+  enabled                                         = var.enabled
+  existing_ddos_protection_plan_resource_id       = var.existing_ddos_protection_plan_resource_id
+  existing_virtual_wan_resource_group_name        = var.existing_virtual_wan_resource_group_name
+  existing_virtual_wan_resource_id                = var.existing_virtual_wan_resource_id
+  location                                        = var.location
+  resource_group_per_virtual_hub_location         = var.resource_group_per_virtual_hub_location
+  resource_prefix                                 = var.resource_prefix
+  resource_suffix                                 = var.resource_suffix
+  root_id                                         = var.root_id
+  settings                                        = var.settings
+  subscription_id                                 = var.subscription_id
+  tags                                            = var.tags
+}

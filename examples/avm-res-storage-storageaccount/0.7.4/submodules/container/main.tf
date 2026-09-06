@@ -1,0 +1,19 @@
+module "avm-res-storage-storageaccount" {
+  source                                    = "Azure/avm-res-storage-storageaccount/azurerm"
+  version                                   = "0.7.4"
+  default_encryption_scope                  = var.default_encryption_scope
+  deny_encryption_scope_override            = var.deny_encryption_scope_override
+  enable_nfs_v3_all_squash                  = var.enable_nfs_v3_all_squash
+  enable_nfs_v3_root_squash                 = var.enable_nfs_v3_root_squash
+  immutable_storage_with_versioning         = var.immutable_storage_with_versioning
+  metadata                                  = var.metadata
+  name                                      = var.name
+  public_access                             = var.public_access
+  resource_type                             = var.resource_type
+  retry                                     = var.retry
+  role_assignment_definition_lookup_enabled = var.role_assignment_definition_lookup_enabled
+  role_assignments                          = var.role_assignments
+  storage_account_id                        = var.storage_account_id
+  timeouts                                  = var.timeouts
+  tracing_tags_header                       = var.tracing_tags_header
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "name": "java_container_version",
+    "description": "Java container version."
+  },
+  {
+    "name": "powershell_version",
+    "description": "PowerShell version."
+  },
+  {
+    "name": "scm_ip_security_restrictions",
+    "description": "ARM-format SCM IP security restrictions."
+  },
+  {
+    "name": "python_version",
+    "description": "Python version."
+  },
+  {
+    "name": "auto_heal_rules",
+    "description": "ARM-format auto heal rules."
+  },
+  {
+    "name": "linux_fx_version",
+    "description": "Computed linuxFxVersion string."
+  },
+  {
+    "name": "net_framework_version",
+    "description": "Computed .NET framework version."
+  },
+  {
+    "name": "node_version",
+    "description": "Node.js version."
+  },
+  {
+    "name": "has_identity",
+    "description": "Whether an identity block should be configured."
+  },
+  {
+    "name": "php_version",
+    "description": "PHP version."
+  },
+  {
+    "name": "identity_block",
+    "description": "ARM-format identity block."
+  },
+  {
+    "name": "ip_security_restrictions",
+    "description": "ARM-format IP security restrictions."
+  },
+  {
+    "name": "java_container",
+    "description": "Java container value."
+  },
+  {
+    "name": "java_version",
+    "description": "Java version."
+  },
+  {
+    "name": "site_config_metadata",
+    "description": "ARM-format siteConfig metadata (e.g. CURRENT_STACK)."
+  },
+  {
+    "name": "windows_fx_version",
+    "description": "Computed windowsFxVersion string."
+  }
+]

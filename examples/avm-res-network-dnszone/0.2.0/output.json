@@ -1,0 +1,54 @@
+[
+  {
+    "name": "max_number_of_record_sets",
+    "description": "Maximum number of Records in Zone output"
+  },
+  {
+    "name": "mx_record_outputs",
+    "description": "The mx record output"
+  },
+  {
+    "name": "ns_record_outputs",
+    "description": "The ns record output"
+  },
+  {
+    "name": "ptr_record_outputs",
+    "description": "The ptr record output"
+  },
+  {
+    "name": "txt_record_outputs",
+    "description": "The txt record output"
+  },
+  {
+    "name": "a_record_outputs",
+    "description": "The a record output"
+  },
+  {
+    "name": "aaaa_record_outputs",
+    "description": "The aaaa record output"
+  },
+  {
+    "name": "caa_record_outputs",
+    "description": "The caa record output"
+  },
+  {
+    "name": "cname_record_outputs",
+    "description": "The cname record output"
+  },
+  {
+    "name": "name_servers",
+    "description": "List of values that make up NS Record for Zone"
+  },
+  {
+    "name": "number_of_record_sets",
+    "description": "Number of records in DNS Zone"
+  },
+  {
+    "name": "resource_id",
+    "description": "Id of dns zone"
+  },
+  {
+    "name": "srv_record_outputs",
+    "description": "The srv record output"
+  }
+]

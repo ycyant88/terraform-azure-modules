@@ -1,0 +1,65 @@
+[
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the virtual network link.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string), [\"ReferencedResourceNotProvisioned\", \"CannotDeleteResource\"])\n    interval_seconds     = optional(number, 10)\n    max_interval_seconds = optional(number, 180)\n    multiplier           = optional(number, 1.5)\n    randomization_factor = optional(number, 0.5)\n  })",
+    "description": "Retry configuration for the resource operations",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string, \"10m\")\n    update = optional(string, \"10m\")\n    read   = optional(string, \"10m\")\n    delete = optional(string, \"10m\")\n  })",
+    "description": "Custom timeouts for the virtual network link operations.",
+    "default": "{\n  \"create\": \"10m\",\n  \"delete\": \"10m\",\n  \"read\": \"10m\",\n  \"update\": \"10m\"\n}",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The ID of the parent resource to which this virtual network link belongs.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "virtual_network_id",
+    "type": "string",
+    "description": "The ID of the virtual network to link to the private DNS zone.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "private_dns_zone_supports_private_link",
+    "type": "bool",
+    "description": "Indicates whether the private DNS zone supports private link.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "registration_enabled",
+    "type": "bool",
+    "description": "Indicates whether the virtual network link allows automatic registration of virtual machine DNS records in the private DNS zone.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "resolution_policy",
+    "type": "string",
+    "description": "The Azure private link zone resolution policy for the virtual network link. Possible values are 'Default' or 'NxDomainRedirect'. If the private DNS zone is not an Azure private link zone (e.g. privatelink.blob.core.windows.net), this value is ignored.",
+    "default": "\"Default\"",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  }
+]

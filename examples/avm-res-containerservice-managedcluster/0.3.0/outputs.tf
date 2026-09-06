@@ -1,0 +1,84 @@
+output "aci_connector_object_id" {
+  value       = module.avm-res-containerservice-managedcluster.aci_connector_object_id
+  description = "The object ID of the ACI Connector identity"
+}
+
+output "cluster_ca_certificate" {
+  value       = module.avm-res-containerservice-managedcluster.cluster_ca_certificate
+  description = "The CA certificate of the AKS cluster."
+}
+
+output "host" {
+  value       = module.avm-res-containerservice-managedcluster.host
+  description = "AKS API host \u2014 returns .fqdn when public_fqdn_enabled, otherwise kube_config[0].host"
+}
+
+output "ingress_app_object_id" {
+  value       = module.avm-res-containerservice-managedcluster.ingress_app_object_id
+  description = "The object ID of the Ingress Application identity"
+}
+
+output "key_vault_secrets_provider_object_id" {
+  value       = module.avm-res-containerservice-managedcluster.key_vault_secrets_provider_object_id
+  description = "The object ID of the key vault secrets provider."
+}
+
+output "kube_admin_config" {
+  value       = module.avm-res-containerservice-managedcluster.kube_admin_config
+  description = "The kube_admin_config block of the AKS cluster, only available when Local Accounts & Role-Based Access Control (RBAC) with AAD are enabled."
+}
+
+output "kube_config" {
+  value       = module.avm-res-containerservice-managedcluster.kube_config
+  description = "The kube_config block of the AKS cluster"
+}
+
+output "kubelet_identity_id" {
+  value       = module.avm-res-containerservice-managedcluster.kubelet_identity_id
+  description = "The identity ID of the kubelet identity."
+}
+
+output "name" {
+  value       = module.avm-res-containerservice-managedcluster.name
+  description = "Name of the Kubernetes cluster."
+}
+
+output "node_resource_group_id" {
+  value       = module.avm-res-containerservice-managedcluster.node_resource_group_id
+  description = "The resource group ID of the node resource group."
+}
+
+output "nodepool_resource_ids" {
+  value       = module.avm-res-containerservice-managedcluster.nodepool_resource_ids
+  description = "A map of nodepool keys to resource ids."
+}
+
+output "oidc_issuer_url" {
+  value       = module.avm-res-containerservice-managedcluster.oidc_issuer_url
+  description = "The OIDC issuer URL of the Kubernetes cluster."
+}
+
+output "private_endpoints" {
+  value       = module.avm-res-containerservice-managedcluster.private_endpoints
+  description = "  A map of the private endpoints created.\n"
+}
+
+output "public_fqdn" {
+  value       = module.avm-res-containerservice-managedcluster.public_fqdn
+  description = "Returns .fqdn when both private_cluster_enabled and private_cluster_public_fqdn_enabled are true, otherwise null"
+}
+
+output "resource_id" {
+  value       = module.avm-res-containerservice-managedcluster.resource_id
+  description = "Resource ID of the Kubernetes cluster."
+}
+
+output "web_app_routing_client_id" {
+  value       = module.avm-res-containerservice-managedcluster.web_app_routing_client_id
+  description = "The object ID of the web app routing identity"
+}
+
+output "web_app_routing_object_id" {
+  value       = module.avm-res-containerservice-managedcluster.web_app_routing_object_id
+  description = "The object ID of the web app routing identity"
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "name": "resource_private_endpoints",
+    "description": "A map of private endpoints. The map key is the supplied input to var.private_endpoints. The map value is the entire azurerm_private_endpoint resource."
+  },
+  {
+    "name": "system_assigned_mi_principal_id_slots",
+    "description": "Map or value of system-assigned managed identity principal IDs for resources slots (only for webapp & functionapp)"
+  },
+  {
+    "name": "application_insights",
+    "description": "The application insights resource."
+  },
+  {
+    "name": "function_app_deployment_slots",
+    "description": "The deployment slots."
+  },
+  {
+    "name": "name",
+    "description": "The name of the resource."
+  },
+  {
+    "name": "private_endpoint_locks",
+    "description": "The locks of the deployment slots."
+  },
+  {
+    "name": "resource_lock",
+    "description": "The locks of the resources."
+  },
+  {
+    "name": "web_app_deployment_slots",
+    "description": "The deployment slots."
+  },
+  {
+    "name": "deployment_slot_locks",
+    "description": "The locks of the deployment slots."
+  },
+  {
+    "name": "function_app_active_slot",
+    "description": "The active slot."
+  },
+  {
+    "name": "location",
+    "description": "The location of the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "system_assigned_mi_principal_id",
+    "description": "value"
+  },
+  {
+    "name": "kind",
+    "description": "The kind of app service."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_uri",
+    "description": "The default hostname of the resource."
+  },
+  {
+    "name": "thumbprints",
+    "description": "The thumbprint of the certificate."
+  },
+  {
+    "name": "web_app_active_slot",
+    "description": "The active slot."
+  },
+  {
+    "name": "identity_principal_id",
+    "description": "The object principal id of the resource."
+  },
+  {
+    "name": "os_type",
+    "description": "The operating system type of the resource."
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "id",
+    "description": "The ID of the Kusto Cluster Principal Assignment."
+  },
+  {
+    "name": "principal_name",
+    "description": "The name of the principal."
+  },
+  {
+    "name": "cluster_name",
+    "description": "The name of the cluster."
+  },
+  {
+    "name": "tenant_name",
+    "description": "The name of the tenant."
+  },
+  {
+    "name": "name",
+    "description": "The name of the Kusto cluster principal assignment."
+  }
+]

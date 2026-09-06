@@ -1,0 +1,26 @@
+[
+  {
+    "name": "data_collection_rule_id",
+    "description": "The resource ID of the data collection rule"
+  },
+  {
+    "name": "prometheus_rule_group_node_id",
+    "description": "The resource ID of the node Prometheus rule group"
+  },
+  {
+    "name": "prometheus_rule_group_ux_id",
+    "description": "The resource ID of the UX Prometheus rule group"
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the primary data collection rule created by this module"
+  },
+  {
+    "name": "container_insights_dcr_id",
+    "description": "The resource ID of the Container Insights data collection rule"
+  },
+  {
+    "name": "data_collection_endpoint_id",
+    "description": "The resource ID of the data collection endpoint"
+  }
+]

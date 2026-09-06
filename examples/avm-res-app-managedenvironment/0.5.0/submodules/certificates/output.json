@@ -1,0 +1,46 @@
+[
+  {
+    "name": "deployment_errors",
+    "description": "Any errors that occurred during deployment or deployment validation"
+  },
+  {
+    "name": "expiration_date",
+    "description": "Certificate expiration date."
+  },
+  {
+    "name": "issue_date",
+    "description": "Certificate issue Date."
+  },
+  {
+    "name": "public_key_hash",
+    "description": "Public key hash."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the created resource."
+  },
+  {
+    "name": "subject_name",
+    "description": "Subject name of the certificate."
+  },
+  {
+    "name": "thumbprint",
+    "description": "Certificate thumbprint."
+  },
+  {
+    "name": "issuer",
+    "description": "Certificate issuer."
+  },
+  {
+    "name": "name",
+    "description": "The name of the created resource."
+  },
+  {
+    "name": "subject_alternative_names",
+    "description": "Subject alternative names the certificate applies to."
+  },
+  {
+    "name": "valid",
+    "description": "Is the certificate valid?."
+  }
+]

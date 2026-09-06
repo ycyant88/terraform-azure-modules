@@ -1,0 +1,44 @@
+[
+  {
+    "name": "lock_enabled",
+    "type": "bool",
+    "description": "Whether to enable resource group lock for the resource group",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "lock_name",
+    "type": "string",
+    "description": "The name of the resource group lock for the resource group, if `null` will be set to `lock-<resource_group_name>`",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "Map of tags to be applied to the resource group",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region to deploy resources into. E.g. `eastus`",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The name of the resource group E.g. `rg-test`",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "subscription_id",
+    "type": "string",
+    "description": "The ID of the subscription to deploy resources into. E.g. `00000000-0000-0000-0000-000000000000`",
+    "default": "",
+    "required": true
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the data collection endpoint."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the data collection endpoint."
+  },
+  {
+    "name": "configuration_access_endpoint",
+    "description": "The endpoint used for accessing configuration."
+  },
+  {
+    "name": "logs_ingestion_endpoint",
+    "description": "The endpoint used for ingesting logs."
+  },
+  {
+    "name": "metrics_ingestion_endpoint",
+    "description": "The endpoint used for ingesting metrics."
+  }
+]

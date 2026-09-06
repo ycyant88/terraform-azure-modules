@@ -1,0 +1,14 @@
+[
+  {
+    "name": "private_dns_zone_resource_ids",
+    "description": "The map of private DNS zones to resource ids."
+  },
+  {
+    "name": "private_link_private_dns_zones_map",
+    "description": "The final map of private link private DNS zones to link to virtual networks including the region name replacements as required."
+  },
+  {
+    "name": "resource_group_resource_id",
+    "description": "The resource ID of the resource group that the private link private DNS zones are deployed into."
+  }
+]

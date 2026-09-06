@@ -1,0 +1,190 @@
+[
+  {
+    "name": "analytical_storage",
+    "description": "The analytical storage configuration for the CosmosDB Account."
+  },
+  {
+    "name": "backup",
+    "description": "The backup configuration for the CosmosDB Account."
+  },
+  {
+    "name": "free_tier_enabled",
+    "description": "Whether the free tier is enabled for the CosmosDB Account."
+  },
+  {
+    "name": "location",
+    "description": "The location/region where the CosmosDB Account is created."
+  },
+  {
+    "name": "partition_merge_enabled",
+    "description": "Whether partition merge is enabled for the CosmosDB Account."
+  },
+  {
+    "name": "resource_private_endpoints_application_security_group_association",
+    "description": "The IDs of the private endpoint application security group associations created."
+  },
+  {
+    "name": "resource_role_assignments",
+    "description": "A map of the role assignments created, with the assignment key as the map key and the assignment value as the map value."
+  },
+  {
+    "name": "sql_databases",
+    "description": "A map of the SQL databases created, with the database name as the key and the database ID, containers, functions, stored_procedures and triggers as the value."
+  },
+  {
+    "name": "identity",
+    "description": "The managed identity configuration for the CosmosDB Account."
+  },
+  {
+    "name": "minimal_tls_version",
+    "description": "The minimal TLS version for the CosmosDB Account."
+  },
+  {
+    "name": "mongo_databases",
+    "description": "A map of the MongoDB databases created, with the database name as the key and the database id and collections as the value."
+  },
+  {
+    "name": "mongo_server_version",
+    "description": "The MongoDB server version for the CosmosDB Account."
+  },
+  {
+    "name": "access_key_metadata_writes_enabled",
+    "description": "Whether access key metadata writes are enabled for the CosmosDB Account."
+  },
+  {
+    "name": "cosmosdb_sql_connection_strings",
+    "description": "The SQL connection strings for the CosmosDB Account."
+  },
+  {
+    "name": "read_endpoints",
+    "description": "A list of read endpoints available for this CosmosDB account."
+  },
+  {
+    "name": "resource_private_endpoints",
+    "description": "A map of the management locks created, with the lock name as the key and the lock ID as the value."
+  },
+  {
+    "name": "analytical_storage_enabled",
+    "description": "Whether analytical storage is enabled for the CosmosDB Account."
+  },
+  {
+    "name": "capabilities",
+    "description": "The capabilities enabled for the CosmosDB Account."
+  },
+  {
+    "name": "cosmosdb_mongodb_connection_strings",
+    "description": "The MongoDB connection strings for the CosmosDB Account."
+  },
+  {
+    "name": "key_vault_key_id",
+    "description": "The Key Vault key ID used for encryption."
+  },
+  {
+    "name": "kind",
+    "description": "The kind of the CosmosDB Account (GlobalDocumentDB, MongoDB, Parse)."
+  },
+  {
+    "name": "multiple_write_locations_enabled",
+    "description": "Whether multiple write locations are enabled for the CosmosDB Account."
+  },
+  {
+    "name": "resource_diagnostic_settings",
+    "description": "A map of the diagnostic settings created, with the diagnostic setting name as the key and the diagnostic setting ID as the value."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the cosmos db account created."
+  },
+  {
+    "name": "consistency_policy",
+    "description": "The consistency policy configuration for the CosmosDB Account."
+  },
+  {
+    "name": "local_authentication_disabled",
+    "description": "Whether local authentication is disabled for the CosmosDB Account."
+  },
+  {
+    "name": "name",
+    "description": "The name of the cosmos db account created."
+  },
+  {
+    "name": "public_network_access_enabled",
+    "description": "Whether public network access is enabled for the CosmosDB Account."
+  },
+  {
+    "name": "write_endpoints",
+    "description": "A list of write endpoints available for this CosmosDB account."
+  },
+  {
+    "name": "automatic_failover_enabled",
+    "description": "Whether automatic failover is enabled for the CosmosDB Account."
+  },
+  {
+    "name": "endpoint",
+    "description": "The endpoint for the CosmosDB Account."
+  },
+  {
+    "name": "resource_locks",
+    "description": "A map of the management locks created, with the lock name as the key and the lock ID as the value."
+  },
+  {
+    "name": "virtual_network_rule",
+    "description": "The virtual network rules configured for the CosmosDB Account."
+  },
+  {
+    "name": "cors_rule",
+    "description": "The CORS rule configuration for the CosmosDB Account."
+  },
+  {
+    "name": "default_identity_type",
+    "description": "The default identity type for the CosmosDB Account."
+  },
+  {
+    "name": "ip_range_filter",
+    "description": "The IP range filter for the CosmosDB Account."
+  },
+  {
+    "name": "is_virtual_network_filter_enabled",
+    "description": "Whether virtual network filtering is enabled for the CosmosDB Account."
+  },
+  {
+    "name": "network_acl_bypass_ids",
+    "description": "The list of resource IDs that are allowed to bypass network ACLs."
+  },
+  {
+    "name": "offer_type",
+    "description": "The offer type for the CosmosDB Account."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_group_name",
+    "description": "The name of the resource group in which the CosmosDB Account is created."
+  },
+  {
+    "name": "capacity",
+    "description": "The capacity configuration for the CosmosDB Account."
+  },
+  {
+    "name": "cosmosdb_keys",
+    "description": "The keys for the CosmosDB Account."
+  },
+  {
+    "name": "geo_location",
+    "description": "The geo-location configuration for the CosmosDB Account."
+  },
+  {
+    "name": "network_acl_bypass_for_azure_services",
+    "description": "Whether network ACL bypass is enabled for Azure services."
+  },
+  {
+    "name": "sql_dedicated_gateway",
+    "description": "The IDs of the SQL dedicated gateways created."
+  },
+  {
+    "name": "tags",
+    "description": "The tags assigned to the CosmosDB Account."
+  }
+]

@@ -1,0 +1,23 @@
+module "avm-ptn-aks-production" {
+  source                          = "Azure/avm-ptn-aks-production/azurerm"
+  version                         = "0.2.0"
+  acr                             = var.acr
+  agents_tags                     = var.agents_tags
+  enable_telemetry                = var.enable_telemetry
+  kubernetes_version              = var.kubernetes_version
+  location                        = var.location
+  lock                            = var.lock
+  managed_identities              = var.managed_identities
+  monitor_metrics                 = var.monitor_metrics
+  name                            = var.name
+  network                         = var.network
+  node_labels                     = var.node_labels
+  node_pools                      = var.node_pools
+  orchestrator_version            = var.orchestrator_version
+  os_sku                          = var.os_sku
+  rbac_aad_admin_group_object_ids = var.rbac_aad_admin_group_object_ids
+  rbac_aad_azure_rbac_enabled     = var.rbac_aad_azure_rbac_enabled
+  rbac_aad_tenant_id              = var.rbac_aad_tenant_id
+  resource_group_name             = var.resource_group_name
+  tags                            = var.tags
+}

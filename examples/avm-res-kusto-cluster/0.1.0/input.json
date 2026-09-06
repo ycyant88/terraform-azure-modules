@@ -1,0 +1,212 @@
+[
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "optimized_auto_scale",
+    "type": "object({\n    maximum_instances = number\n    minimum_instances = number\n  })",
+    "description": "A optimized_auto_scale block supports the following:\n\nminimum_instances - (Required) The minimum number of allowed instances. Must between 0 and 1000.\n\nmaximum_instances - (Required) The maximum number of allowed instances. Must between 0 and 1000.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_endpoints",
+    "type": "map(object({\n    name = optional(string, null)\n    role_assignments = optional(map(object({\n      role_definition_id_or_name             = string\n      principal_id                           = string\n      description                            = optional(string, null)\n      skip_service_principal_aad_check       = optional(bool, false)\n      condition                              = optional(string, null)\n      condition_version                      = optional(string, null)\n      delegated_managed_identity_resource_id = optional(string, null)\n    })), {})\n    lock = optional(object({\n      name = optional(string, null)\n      kind = optional(string, \"None\")\n    }), {})\n    tags                                    = optional(map(any), null)\n    subnet_resource_id                      = string\n    private_dns_zone_group_name             = optional(string, \"default\")\n    private_dns_zone_resource_ids           = optional(set(string), [])\n    application_security_group_associations = optional(map(string), {})\n    private_service_connection_name         = optional(string, null)\n    network_interface_name                  = optional(string, null)\n    location                                = optional(string, null)\n    resource_group_name                     = optional(string, null)\n    ip_configurations = optional(map(object({\n      name               = string\n      private_ip_address = string\n    })), {})\n  }))",
+    "description": "A map of private endpoints to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - (Optional) The name of the private endpoint. One will be generated if not set.\n- `role_assignments` - (Optional) A map of role assignments to create on the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. See `var.role_assignments` for more information.\n- `lock` - (Optional) The lock level to apply to the private endpoint. Default is `None`. Possible values are `None`, `CanNotDelete`, and `ReadOnly`.\n- `tags` - (Optional) A mapping of tags to assign to the private endpoint.\n- `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\n- `private_dns_zone_group_name` - (Optional) The name of the private DNS zone group. One will be generated if not set.\n- `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n- `application_security_group_resource_ids` - (Optional) A map of resource IDs of application security groups to associate with the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n- `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\n- `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\n- `location` - (Optional) The Azure location where the resources will be deployed. Defaults to the location of the resource group.\n- `resource_group_name` - (Optional) The resource group where the resources will be deployed. Defaults to the resource group of this resource.\n- `ip_configurations` - (Optional) A map of IP configurations to create on the private endpoint. If not specified the platform will create one. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - `name` - The name of the IP configuration.\n  - `private_ip_address` - The private IP address of the IP configuration.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - The description of the role assignment.\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - The condition which will be used to scope the role assignment.\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "kusto_database_principal_assignment",
+    "type": "map(object({\n    database_name  = string\n    name           = string\n    principal_id   = string\n    principal_type = string\n    role           = string\n    tenant_id      = string\n  }))",
+    "description": "A map that manages a Kusto (also known as Azure Data Explorer) Database Principal Assignment.\n\n- `database_name` (Required) The name of the database in which to create the resource. Changing this forces a new resource to be created.\n- `name` (Required) The name of the Kusto cluster principal assignment. Changing this forces a new resource to be created.\n- `principal_id` (Required) The object id of the principal. Changing this forces a new resource to be created.\n- `principal_type` (Required) The type of the principal. Valid values include App, Group, User. Changing this forces a new resource to be created.\n- `role` (Required) The cluster role assigned to the principal. Valid values include AllDatabasesAdmin and AllDatabasesViewer. Changing this forces a new resource to be created.\n- `tenant_id` (Required) The tenant id in which the principal resides. Changing this forces a new resource to be created.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    type                       = string\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "Managed identities to be created for the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "sku",
+    "type": "object({\n    name     = string\n    capacity = number\n  })",
+    "description": "A sku block supports the following:\n\nname - (Required) The name of the SKU. \n  \nPossible values are:\n- Dev(No SLA)_Standard_D11_v2, \n- Dev(No SLA)_Standard_E2a_v4, \n- Standard_D14_v2, \n- Standard_D11_v2, \n- Standard_D16d_v5, \n- Standard_D13_v2, \n- Standard_D12_v2, \n- Standard_DS14_v2+4TB_PS, \n- Standard_DS14_v2+3TB_PS, \n- Standard_DS13_v2+1TB_PS, \n- Standard_DS13_v2+2TB_PS, \n- Standard_D32d_v5, \n- Standard_D32d_v4, \n- Standard_EC8ads_v5, \n- Standard_EC8as_v5+1TB_PS, \n- Standard_EC8as_v5+2TB_PS, \n- Standard_EC16ads_v5, \n- Standard_EC16as_v5+4TB_PS, \n- Standard_EC16as_v5+3TB_PS, \n- Standard_E80ids_v4, \n- Standard_E8a_v4, \n- Standard_E8ads_v5, \n- Standard_E8as_v5+1TB_PS, \n- Standard_E8as_v5+2TB_PS, \n- Standard_E8as_v4+1TB_PS, \n- Standard_E8as_v4+2TB_PS, \n- Standard_E8d_v5, \n- Standard_E8d_v4, \n- Standard_E8s_v5+1TB_PS, \n- Standard_E8s_v5+2TB_PS, \n- Standard_E8s_v4+1TB_PS, \n- Standard_E8s_v4+2TB_PS, \n- Standard_E4a_v4, \n- Standard_E4ads_v5, \n- Standard_E4d_v5, \n- Standard_E4d_v4, \n- Standard_E16a_v4, \n- Standard_E16ads_v5, \n- Standard_E16as_v5+4TB_PS, \n- Standard_E16as_v5+3TB_PS, \n- Standard_E16as_v4+4TB_PS, \n- Standard_E16as_v4+3TB_PS, \n- Standard_E16d_v5, \n- Standard_E16d_v4, \n- Standard_E16s_v5+4TB_PS, \n- Standard_E16s_v5+3TB_PS, \n- Standard_E16s_v4+4TB_PS, \n- Standard_E16s_v4+3TB_PS, \n- Standard_E64i_v3, \n- Standard_E2a_v4, \n- Standard_E2ads_v5, \n- Standard_E2d_v5, \n- Standard_E2d_v4, \n- Standard_L8as_v3, \n- Standard_L8s, \n- Standard_L8s_v3, \n- Standard_L8s_v2, \n- Standard_L4s, \n- Standard_L16as_v3, \n- Standard_L16s, \n- Standard_L16s_v3, \n- Standard_L16s_v2, \n- Standard_L32as_v3 \n- Standard_L32s_v3\ncapacity - (Optional) Specifies the node count for the cluster. Boundaries depend on the SKU name.\nNOTE:\nIf no optimized_auto_scale block is defined, then the capacity is required. ~> NOTE: If an optimized_auto_scale block is defined and no capacity is set, then the capacity is initially set to the value of minimum_instances.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "customer_managed_key",
+    "type": "object({\n    key_vault_resource_id              = optional(string)\n    key_name                           = optional(string)\n    key_version                        = optional(string, null)\n    user_assigned_identity_resource_id = optional(string, null)\n  })",
+    "description": "Customer managed keys that should be associated with the resource.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "databases",
+    "type": "map(object({\n    name                = string\n    location            = optional(string, null)\n    resource_group_name = optional(string, null)\n    cluster_name        = optional(string, null)\n    hot_cache_period    = optional(string)\n    soft_delete_period  = optional(string)\n  }))",
+    "description": "(Optional) A map of kusto database objects:\n\n- `name` - (Required) The name of the Kusto Database to create. Changing this forces a new resource to be created.\n- `location` - (Optional) The location where the Kusto Database should be created. If not provided, will default to the location of the kusto cluster. Changing this forces a new resource to be created.\n- `resource_group_name` - (Optional) Specifies the Resource Group where the Kusto Database should exist. If not provided, will default to the location of the kusto cluster. Changing this forces a new resource to be created.\n- `cluster_name` - (Optional) Specifies the name of the Kusto Cluster this database will be added to. If not provided, will default to the location of the kusto cluster. Changing this forces a new resource to be created.\n- `hot_cache_period` - (Optional) The time the data that should be kept in cache for fast queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan.\n- `soft_delete_period` - (Optional) The time the data should be kept before it stops being accessible to queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "purge_enabled",
+    "type": "bool",
+    "description": "(Optional) Specifies if the purge operations are enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "virtual_network_configuration",
+    "type": "object({\n    data_management_public_ip_id = string\n    engine_public_ip_id          = string\n    subnet_id                    = string\n  })",
+    "description": "(Optional) A virtual_network_configuration block as defined below. \nChanging this forces a new resource to be created.\n\nA virtual_network_configuration block supports the following:\n\nsubnet_id - (Required) The subnet resource id.\n\nengine_public_ip_id - (Required) Engine service's public IP address resource id.\n\ndata_management_public_ip_id - (Required) Data management's service public IP address resource id.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "double_encryption_enabled",
+    "type": "bool",
+    "description": "(Optional) Is the cluster's double encryption enabled? Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    name = optional(string, null)\n    kind = optional(string, \"None\")\n  })",
+    "description": "The lock level to apply. Default is `None`. Possible values are `None`, `CanNotDelete`, and `ReadOnly`.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "public_ip_type",
+    "type": "string",
+    "description": "(Optional) Indicates what public IP type to create - IPv4 (default), or DualStack (both IPv4 and IPv6). Defaults to IPv4.",
+    "default": "\"IPv4\"",
+    "required": false
+  },
+  {
+    "name": "outbound_network_access_restricted",
+    "type": "bool",
+    "description": "(Optional) Whether to restrict outbound network access. \nValue is optional but if passed in, must be true or false.\n  \nDefault is false.\n",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "streaming_ingestion_enabled",
+    "type": "bool",
+    "description": "(Optional) Specifies if the streaming ingest is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "zones",
+    "type": "set(string)",
+    "description": "(Optional) Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "diagnostic_settings",
+    "type": "map(object({\n    name                                     = optional(string, null)\n    log_categories                           = optional(set(string), [])\n    log_groups                               = optional(set(string), [\"allLogs\"])\n    metric_categories                        = optional(set(string), [\"AllMetrics\"])\n    log_analytics_destination_type           = optional(string, \"Dedicated\")\n    workspace_resource_id                    = optional(string, null)\n    storage_account_resource_id              = optional(string, null)\n    event_hub_authorization_rule_resource_id = optional(string, null)\n    event_hub_name                           = optional(string, null)\n    marketplace_partner_resource_id          = optional(string, null)\n  }))",
+    "description": "A map of diagnostic settings to create on the Key Vault. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `event_hub_authorization_rule_resource_id` - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.\n- `event_hub_name` - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.\n- `log_analytics_destination_type` - (Optional) The destination type for the diagnostic setting. Possible values are `Dedicated` and `AzureDiagnostics`. Defaults to `Dedicated`.\n- `log_categories` - (Optional) A set of log categories to send to the log analytics workspace. Defaults to `[]`.\n- `log_groups` - (Optional) A set of log groups to send to the log analytics workspace. Defaults to `[\"allLogs\"]`.\n- `marketplace_partner_resource_id` - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.\n- `metric_categories` - (Optional) A set of metric categories to send to the log analytics workspace. Defaults to `[\"AllMetrics\"]`.\n- `name` - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\n- `storage_account_resource_id` - (Optional) The resource ID of the storage account to send logs and metrics to.\n- `workspace_resource_id` - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "kusto_cluster_principal_assignments",
+    "type": "map(object({\n    name           = string\n    principal_id   = string\n    principal_type = string\n    role           = string\n    tenant_id      = string\n  }))",
+    "description": "A map that manages a Kusto Cluster Principal Assignment.\n\n- `name` (Required) The name of the Kusto cluster principal assignment. Changing this forces a new resource to be created.\n- `principal_id` (Required) The object id of the principal. Changing this forces a new resource to be created.\n- `principal_type` (Required) The type of the principal. Valid values include App, Group, User. Changing this forces a new resource to be created.\n- `role` (Required) The cluster role assigned to the principal. Valid values include AllDatabasesAdmin and AllDatabasesViewer. Changing this forces a new resource to be created.\n- `tenant_id` (Required) The tenant id in which the principal resides. Changing this forces a new resource to be created.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.  If null, the location will be inferred from the resource group location.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the this resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "language_extensions",
+    "type": "set(string)",
+    "description": "(Optional) An list of language_extensions to enable. \n  \nValid values are: PYTHON, PYTHON_3.10.8 and R. \n  \nPYTHON is used to specify Python 3.6.5 image and PYTHON_3.10.8 is used to specify Python 3.10.8 image.\nNote that PYTHON_3.10.8 is only available in skus which support nested virtualization.\n\nNOTE:\nIn v4.0.0 and later version of the AzureRM Provider, \nlanguage_extensions will be changed to a list of language_extension block. \nIn each block, name and image are required. \nname is the name of the language extension, possible values are PYTHON, R. \nimage is the image of the language extension, possible values are Python3_6_5, Python3_10_8 and R.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "disk_encryption_enabled",
+    "type": "bool",
+    "description": "(Optional) Specifies if the cluster's disks are encrypted.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "public_network_access_enabled",
+    "type": "bool",
+    "description": "(Optional) Is the public network access enabled? Defaults to true.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "trusted_external_tenants",
+    "type": "set(string)",
+    "description": "(Optional) Specifies a list of tenant IDs that are trusted by the cluster. \nNew or updated Kusto Cluster will only allow your own tenant by default. \n\nUse trusted_external_tenants = [\"*\"] to explicitly allow all other tenants, \ntrusted_external_tenants = [] for only your tenant or \ntrusted_external_tenants = [\"<tenantId1>\", \"<tenantIdx>\"] to allow specific other tenants.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "Map of tags to assign to the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "allowed_fqdns",
+    "type": "set(string)",
+    "description": "(Optional) List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "allowed_ip_ranges",
+    "type": "set(string)",
+    "description": "(Optional) The list of ips in the format of CIDR allowed to connect to the cluster.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_stop_enabled",
+    "type": "bool",
+    "description": "(Optional) Specifies if the cluster could be automatically stopped \n(due to lack of data or no activity for many days). \n\nDefaults to true.\n",
+    "default": "true",
+    "required": false
+  }
+]

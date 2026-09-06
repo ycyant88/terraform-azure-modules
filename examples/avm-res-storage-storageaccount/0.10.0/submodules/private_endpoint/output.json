@@ -1,0 +1,22 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the private endpoint."
+  },
+  {
+    "name": "role_assignments",
+    "description": "Map of role assignment resources created at the private endpoint scope, keyed by the input map key."
+  },
+  {
+    "name": "name",
+    "description": "The name of the private endpoint."
+  },
+  {
+    "name": "extended_location",
+    "description": "The extended location sent in the private endpoint request as `{ name, type }`, or `null` when the private endpoint is regional. Consumed by the root module's `private_endpoints` output."
+  },
+  {
+    "name": "private_dns_zone_group_id",
+    "description": "The resource ID of the private DNS zone group (if managed by this module), otherwise `null`."
+  }
+]

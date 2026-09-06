@@ -1,0 +1,44 @@
+[
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "backup_name",
+    "type": "string",
+    "description": "The name of the backup. If not set, a default name will be generated.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Is backup enabled? Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex = list(string)\n    interval_seconds    = optional(number, 10)\n    max_retries         = optional(number, 3)\n  })",
+    "description": "Retry configuration for azapi resources.",
+    "default": "{\n  \"error_message_regex\": [\n    \"Cannot modify this site because another operation is in progress\"\n  ]\n}",
+    "required": false
+  },
+  {
+    "name": "schedule",
+    "type": "object({\n    frequency_interval       = optional(number)\n    frequency_unit           = optional(string)\n    keep_at_least_one_backup = optional(bool)\n    retention_period_days    = optional(number)\n    start_time               = optional(string)\n  })",
+    "description": "The backup schedule configuration.\n\n- `frequency_interval` - (Optional) How often the backup should be executed.\n- `frequency_unit` - (Optional) The unit of time for the backup frequency. Possible values are `Day` and `Hour`.\n- `keep_at_least_one_backup` - (Optional) Should at least one backup always be kept?\n- `retention_period_days` - (Optional) The number of days to retain backups.\n- `start_time` - (Optional) The start time for the backup schedule.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_account_url",
+    "type": "string",
+    "description": "The SAS URL to the Storage Account container for backup.",
+    "default": "null",
+    "required": false
+  }
+]

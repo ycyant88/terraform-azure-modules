@@ -1,0 +1,26 @@
+module "avm-ptn-avd-lza-insights" {
+  source                                                               = "Azure/avm-ptn-avd-lza-insights/azurerm"
+  version                                                              = "0.2.0"
+  diagnostic_settings                                                  = var.diagnostic_settings
+  enable_telemetry                                                     = var.enable_telemetry
+  lock                                                                 = var.lock
+  managed_identities                                                   = var.managed_identities
+  monitor_data_collection_rule_association_data_collection_endpoint_id = var.monitor_data_collection_rule_association_data_collection_endpoint_id
+  monitor_data_collection_rule_association_data_collection_rule_id     = var.monitor_data_collection_rule_association_data_collection_rule_id
+  monitor_data_collection_rule_association_description                 = var.monitor_data_collection_rule_association_description
+  monitor_data_collection_rule_association_name                        = var.monitor_data_collection_rule_association_name
+  monitor_data_collection_rule_data_collection_endpoint_id             = var.monitor_data_collection_rule_data_collection_endpoint_id
+  monitor_data_collection_rule_data_flow                               = var.monitor_data_collection_rule_data_flow
+  monitor_data_collection_rule_data_sources                            = var.monitor_data_collection_rule_data_sources
+  monitor_data_collection_rule_description                             = var.monitor_data_collection_rule_description
+  monitor_data_collection_rule_destinations                            = var.monitor_data_collection_rule_destinations
+  monitor_data_collection_rule_identity                                = var.monitor_data_collection_rule_identity
+  monitor_data_collection_rule_kind                                    = var.monitor_data_collection_rule_kind
+  monitor_data_collection_rule_location                                = var.monitor_data_collection_rule_location
+  monitor_data_collection_rule_name                                    = var.monitor_data_collection_rule_name
+  monitor_data_collection_rule_resource_group_name                     = var.monitor_data_collection_rule_resource_group_name
+  monitor_data_collection_rule_stream_declaration                      = var.monitor_data_collection_rule_stream_declaration
+  monitor_data_collection_rule_tags                                    = var.monitor_data_collection_rule_tags
+  monitor_data_collection_rule_timeouts                                = var.monitor_data_collection_rule_timeouts
+  role_assignments                                                     = var.role_assignments
+}

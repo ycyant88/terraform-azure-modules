@@ -1,0 +1,6 @@
+[
+  {
+    "name": "route_table_resource_id",
+    "description": "The created route table ID."
+  }
+]

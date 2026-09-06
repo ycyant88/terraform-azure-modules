@@ -1,0 +1,25 @@
+module "avm-res-network-expressroutecircuit" {
+  source                               = "Azure/avm-res-network-expressroutecircuit/azurerm"
+  version                              = "0.2.3"
+  allow_classic_operations             = var.allow_classic_operations
+  authorization_key                    = var.authorization_key
+  bandwidth_in_gbps                    = var.bandwidth_in_gbps
+  bandwidth_in_mbps                    = var.bandwidth_in_mbps
+  diagnostic_settings                  = var.diagnostic_settings
+  enable_telemetry                     = var.enable_telemetry
+  er_gw_connections                    = var.er_gw_connections
+  express_route_circuit_authorizations = var.express_route_circuit_authorizations
+  express_route_port_resource_id       = var.express_route_port_resource_id
+  exr_circuit_tags                     = var.exr_circuit_tags
+  location                             = var.location
+  lock                                 = var.lock
+  name                                 = var.name
+  peering_location                     = var.peering_location
+  peerings                             = var.peerings
+  resource_group_name                  = var.resource_group_name
+  role_assignments                     = var.role_assignments
+  service_provider_name                = var.service_provider_name
+  sku                                  = var.sku
+  tags                                 = var.tags
+  vnet_gw_connections                  = var.vnet_gw_connections
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The ID of the container instance"
+  },
+  {
+    "name": "name",
+    "description": "The name of the container instance"
+  },
+  {
+    "name": "resource",
+    "description": "The container instance resource"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "resource",
+    "description": "Deprecated"
+  },
+  {
+    "name": "resource_id",
+    "description": "This is the resource id of the policy assignment."
+  },
+  {
+    "name": "role_assignments",
+    "description": "This is the full output for the role assignments."
+  },
+  {
+    "name": "policy_assignment_id",
+    "description": "This is the id of the policy assignment"
+  },
+  {
+    "name": "policy_assignment_name",
+    "description": "This is the name of the policy assignment"
+  }
+]

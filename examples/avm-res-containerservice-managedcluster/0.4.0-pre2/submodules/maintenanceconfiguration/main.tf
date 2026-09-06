@@ -1,0 +1,19 @@
+module "avm-res-containerservice-managedcluster" {
+  source            = "Azure/avm-res-containerservice-managedcluster/azurerm"
+  version           = "0.4.0-pre2"
+  day_of_month      = var.day_of_month
+  day_of_week       = var.day_of_week
+  duration_hours    = var.duration_hours
+  enable            = var.enable
+  enable_telemetry  = var.enable_telemetry
+  frequency         = var.frequency
+  interval          = var.interval
+  not_allowed_end   = var.not_allowed_end
+  not_allowed_start = var.not_allowed_start
+  parent_id         = var.parent_id
+  start_date        = var.start_date
+  start_time        = var.start_time
+  user_agent_header = var.user_agent_header
+  utc_offset        = var.utc_offset
+  week_index        = var.week_index
+}

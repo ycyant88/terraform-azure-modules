@@ -1,0 +1,114 @@
+[
+  {
+    "name": "google",
+    "type": "object({\n    client_id                  = optional(string)\n    client_secret              = optional(string)\n    client_secret_setting_name = optional(string)\n    oauth_scopes               = optional(list(string))\n  })",
+    "description": "Google authentication configuration.\n\n- `client_id` - (Optional) The Client ID of the Google application.\n- `client_secret` - (Optional) The Client Secret of the Google application.\n- `client_secret_setting_name` - (Optional) The app setting name that contains the client secret.\n- `oauth_scopes` - (Optional) A list of OAuth scopes to request.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "issuer",
+    "type": "string",
+    "description": "The issuer URI.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "twitter",
+    "type": "object({\n    consumer_key                 = optional(string)\n    consumer_secret              = optional(string)\n    consumer_secret_setting_name = optional(string)\n  })",
+    "description": "Twitter authentication configuration.\n\n- `consumer_key` - (Optional) The consumer key of the Twitter application.\n- `consumer_secret` - (Optional) The consumer secret of the Twitter application.\n- `consumer_secret_setting_name` - (Optional) The app setting name that contains the consumer secret.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "allowed_external_redirect_urls",
+    "type": "list(string)",
+    "description": "A list of allowed external redirect URLs.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_provider",
+    "type": "string",
+    "description": "The default authentication provider.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "facebook",
+    "type": "object({\n    app_id                  = optional(string)\n    app_secret              = optional(string)\n    app_secret_setting_name = optional(string)\n    oauth_scopes            = optional(list(string))\n  })",
+    "description": "Facebook authentication configuration.\n\n- `app_id` - (Optional) The App ID of the Facebook application.\n- `app_secret` - (Optional) The App Secret of the Facebook application.\n- `app_secret_setting_name` - (Optional) The app setting name that contains the app secret.\n- `oauth_scopes` - (Optional) A list of OAuth scopes to request.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "additional_login_parameters",
+    "type": "map(string)",
+    "description": "A map of additional login parameters.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Is authentication enabled? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "token_refresh_extension_hours",
+    "type": "number",
+    "description": "Hours before token expiry to refresh. Defaults to `72`.",
+    "default": "72",
+    "required": false
+  },
+  {
+    "name": "token_store_enabled",
+    "type": "bool",
+    "description": "Should the token store be enabled? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "unauthenticated_client_action",
+    "type": "string",
+    "description": "The action to take for unauthenticated requests.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "active_directory",
+    "type": "object({\n    client_id                  = optional(string)\n    allowed_audiences          = optional(list(string))\n    client_secret              = optional(string)\n    client_secret_setting_name = optional(string)\n  })",
+    "description": "Active Directory authentication configuration.\n\n- `client_id` - (Optional) The Client ID of the Azure AD application.\n- `allowed_audiences` - (Optional) A list of allowed audience values.\n- `client_secret` - (Optional) The Client Secret of the Azure AD application.\n- `client_secret_setting_name` - (Optional) The app setting name that contains the client secret.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "github",
+    "type": "object({\n    client_id                  = optional(string)\n    client_secret              = optional(string)\n    client_secret_setting_name = optional(string)\n    oauth_scopes               = optional(list(string))\n  })",
+    "description": "GitHub authentication configuration.\n\n- `client_id` - (Optional) The Client ID of the GitHub application.\n- `client_secret` - (Optional) The Client Secret of the GitHub application.\n- `client_secret_setting_name` - (Optional) The app setting name that contains the client secret.\n- `oauth_scopes` - (Optional) A list of OAuth scopes to request.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "microsoft",
+    "type": "object({\n    client_id                  = optional(string)\n    client_secret              = optional(string)\n    client_secret_setting_name = optional(string)\n    oauth_scopes               = optional(list(string))\n  })",
+    "description": "Microsoft authentication configuration.\n\n- `client_id` - (Optional) The Client ID of the Microsoft application.\n- `client_secret` - (Optional) The Client Secret of the Microsoft application.\n- `client_secret_setting_name` - (Optional) The app setting name that contains the client secret.\n- `oauth_scopes` - (Optional) A list of OAuth scopes to request.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "runtime_version",
+    "type": "string",
+    "description": "The runtime version of the authentication module.",
+    "default": "null",
+    "required": false
+  }
+]

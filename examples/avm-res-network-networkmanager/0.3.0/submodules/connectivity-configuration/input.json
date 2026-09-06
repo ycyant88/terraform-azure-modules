@@ -1,0 +1,65 @@
+[
+  {
+    "name": "delete_existing_peering",
+    "type": "bool",
+    "description": "  (Optional) A boolean value indicating whether to delete existing peering connections. Defaults to false.\n",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "description",
+    "type": "string",
+    "description": "  (Optional) The description of the connectivity configuration.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "hubs",
+    "type": "list(object({\n    resource_id   = string\n    resource_type = string\n  }))",
+    "description": "  (Optional) A list of hubs for the connectivity configuration. This is only applicable if the topology is set to `HubAndSpoke`.\n  - `resource_id` - (Required) The resource ID of the hub.\n  - `resource_type` - (Required) The resource type of the hub. Possible values are `Microsoft.Network/virtualNetworks`.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "is_global",
+    "type": "bool",
+    "description": "  (Optional) A boolean value indicating whether the connectivity configuration applies to all network groups in the Network Manager. Defaults to false.\n",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "connectivity_topology",
+    "type": "string",
+    "description": "  (Required) The connectivity topology of the connectivity configuration. Possible values are `HubAndSpoke` and `Mesh`.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "network_manager_id",
+    "type": "string",
+    "description": "  (Required) The ID of the Network Manager.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "applies_to_groups",
+    "type": "list(object({\n    group_connectivity = string\n    is_global          = optional(bool, false)\n    network_group_id   = string\n    use_hub_gateway    = optional(bool, false)\n  }))",
+    "description": "  (Required) A list of network groups that the connectivity configuration applies to.\n  - `group_connectivity` - (Required) The type of connectivity for the group. `DirectlyConnected` and `None`.\n  - `is_global` - (Optional) A boolean value indicating whether the connectivity configuration applies to all network groups in the Network Manager. If set to true, then the connectivity configuration applies to all network groups and the `network_group_id` property is ignored. Defaults to false.\n  - `network_group_id` - (Required) The resource ID of the network group that the connectivity configuration applies to. This property is required if `is_global` is set to false.\n  - `use_hub_gateway` - (Optional) A boolean value indicating whether or not to use a hub gateway for this connectivity configuration. This is only applicable if the topology is set to `HubAndSpoke`. Defaults to false.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "  (Required) The name of the connectivity configuration.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "connectivity_capabilities",
+    "type": "object({\n    connected_group_address_overlap         = string\n    connected_group_private_endpoints_scale = string\n    peering_enforcement                     = string\n  })",
+    "description": "  (Optional) A set of connectivity capabilities for the connectivity configuration.\n  - `connected_group_address_overlap` - (Optional) The connectivity configuration's capability for connected group address overlap. Possible values are `Allowed` and `Disallowed`.\n  - `connected_group_private_endpoints_scale` - (Optional) The connectivity configuration's capability for connected group private endpoint scale. Possible values are `HighScale` and `Standard`.\n  - `peering_enforcement` - (Optional) The connectivity configuration's capability for peering enforcement. Possible values are `Enforced` and `Unenforced`.\n",
+    "default": "null",
+    "required": false
+  }
+]

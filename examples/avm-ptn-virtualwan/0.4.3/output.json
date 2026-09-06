@@ -1,0 +1,42 @@
+[
+  {
+    "name": "s2s_vpn_gw",
+    "description": "S2S VPN Gateway Objects"
+  },
+  {
+    "name": "s2s_vpn_gw_id",
+    "description": "S2S VPN Gateway ID"
+  },
+  {
+    "name": "resource_group_name",
+    "description": "Resource Group Name"
+  },
+  {
+    "name": "resource_id",
+    "description": "Virtual WAN ID"
+  },
+  {
+    "name": "p2s_vpn_gw_id",
+    "description": "P2S VPN Gateway ID"
+  },
+  {
+    "name": "resource",
+    "description": "The full resource outputs."
+  },
+  {
+    "name": "virtual_hub_id",
+    "description": "Virtual Hub ID"
+  },
+  {
+    "name": "virtual_wan_id",
+    "description": "Virtual WAN ID"
+  },
+  {
+    "name": "er_gw_id",
+    "description": "ExpressRoute Gateway ID"
+  },
+  {
+    "name": "fw",
+    "description": "Firewall Name"
+  }
+]

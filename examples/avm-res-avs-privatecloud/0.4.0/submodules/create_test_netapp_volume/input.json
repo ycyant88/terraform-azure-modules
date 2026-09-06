@@ -1,0 +1,72 @@
+[
+  {
+    "name": "anf_volume_name",
+    "type": "string",
+    "description": "Volume 1 Name",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "anf_subnet_resource_id",
+    "type": "string",
+    "description": "The Azure resource ID Of the subnet enabled for Netapp Files.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "anf_zone_number",
+    "type": "number",
+    "description": "The zone where the ANF volume should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The name of the resource group where the dc will be installed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_location",
+    "type": "string",
+    "description": "The region for the resource group where the dc will be installed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "anf_account_name",
+    "type": "string",
+    "description": "ANF NetApp Account Name",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "anf_pool_name",
+    "type": "string",
+    "description": "ANF Pool Name",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "anf_pool_size",
+    "type": "number",
+    "description": "Pool Size in TiB",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "anf_volume_size",
+    "type": "number",
+    "description": "Volume 1 Size in GiB",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "anf_nfs_allowed_clients",
+    "type": "list(string)",
+    "description": "A list of CIDR ranges that should be allowed to attach to this Netapp volume",
+    "default": "",
+    "required": true
+  }
+]

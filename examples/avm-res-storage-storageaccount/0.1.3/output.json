@@ -1,0 +1,34 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The ID of the Storage Account."
+  },
+  {
+    "name": "tables",
+    "description": "Map of storage tables that are created."
+  },
+  {
+    "name": "containers",
+    "description": "Map of storage containers that are created."
+  },
+  {
+    "name": "fqdn",
+    "description": "Fqdns for storage services."
+  },
+  {
+    "name": "name",
+    "description": "The name of the storage account"
+  },
+  {
+    "name": "private_endpoints",
+    "description": "A map of private endpoints. The map key is the supplied input to var.private_endpoints. The map value is the entire azurerm_private_endpoint resource."
+  },
+  {
+    "name": "queues",
+    "description": "Map of storage queues that are created."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full resource output for the Storage Account resource."
+  }
+]

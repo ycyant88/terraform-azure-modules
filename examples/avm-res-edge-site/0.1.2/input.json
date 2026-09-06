@@ -1,0 +1,170 @@
+[
+  {
+    "name": "city",
+    "type": "string",
+    "description": "The city of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "email_list",
+    "type": "list(string)",
+    "description": "A list of email addresses for the site.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "postal_code",
+    "type": "string",
+    "description": "The postal code of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "zip_extended_code",
+    "type": "string",
+    "description": "The extended ZIP code of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "address_resource_name",
+    "type": "string",
+    "description": "A resource name for the address.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "site_resource_name",
+    "type": "string",
+    "description": "A resource name for the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "resource_group_id",
+    "type": "string",
+    "description": "The resource group id where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "phone",
+    "type": "string",
+    "description": "The phone number of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "customer_managed_key",
+    "type": "object({\n    key_vault_resource_id = string\n    key_name              = string\n    key_version           = optional(string, null)\n    user_assigned_identity = optional(object({\n      resource_id = string\n    }), null)\n  })",
+    "description": "A map describing customer-managed keys to associate with the resource. This includes the following properties:\n- `key_vault_resource_id` - The resource ID of the Key Vault where the key is stored.\n- `key_name` - The name of the key.\n- `key_version` - (Optional) The version of the key. If not specified, the latest version is used.\n- `user_assigned_identity` - (Optional) An object representing a user-assigned identity with the following properties:\n  - `resource_id` - The resource ID of the user-assigned identity.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n- `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "phone_extension",
+    "type": "string",
+    "description": "The phone extension of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - The description of the role assignment.\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - The condition which will be used to scope the role assignment.\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "street_address_2",
+    "type": "string",
+    "description": "The second line of the street address of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "site_display_name",
+    "type": "string",
+    "description": "A display name for the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "contact_name",
+    "type": "string",
+    "description": "The contact name of the site.",
+    "default": "\" \"",
+    "required": false
+  },
+  {
+    "name": "company_name",
+    "type": "string",
+    "description": "The company name of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "mobile",
+    "type": "string",
+    "description": "The mobile phone number of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "state_or_province",
+    "type": "string",
+    "description": "The state or province of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "street_address_1",
+    "type": "string",
+    "description": "The first line of the street address of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "street_address_3",
+    "type": "string",
+    "description": "The third line of the street address of the site.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "country",
+    "type": "string",
+    "description": "The order country of the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  }
+]

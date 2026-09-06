@@ -1,0 +1,21 @@
+module "avm-res-network-networkinterface" {
+  source                                               = "Azure/avm-res-network-networkinterface/azurerm"
+  version                                              = "0.1.0"
+  accelerated_networking_enabled                       = var.accelerated_networking_enabled
+  application_gateway_backend_address_pool_association = var.application_gateway_backend_address_pool_association
+  application_security_group_ids                       = var.application_security_group_ids
+  dns_servers                                          = var.dns_servers
+  edge_zone                                            = var.edge_zone
+  enable_telemetry                                     = var.enable_telemetry
+  internal_dns_name_label                              = var.internal_dns_name_label
+  ip_configurations                                    = var.ip_configurations
+  ip_forwarding_enabled                                = var.ip_forwarding_enabled
+  load_balancer_backend_address_pool_association       = var.load_balancer_backend_address_pool_association
+  location                                             = var.location
+  lock                                                 = var.lock
+  name                                                 = var.name
+  nat_rule_association                                 = var.nat_rule_association
+  network_security_group_ids                           = var.network_security_group_ids
+  resource_group_name                                  = var.resource_group_name
+  tags                                                 = var.tags
+}

@@ -1,0 +1,13 @@
+firewall_policy_rule_collection_group_application_rule_collection = null
+
+firewall_policy_rule_collection_group_firewall_policy_id = ""
+
+firewall_policy_rule_collection_group_name = ""
+
+firewall_policy_rule_collection_group_nat_rule_collection = null
+
+firewall_policy_rule_collection_group_network_rule_collection = null
+
+firewall_policy_rule_collection_group_priority = ""
+
+firewall_policy_rule_collection_group_timeouts = null

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "hostname",
+    "type": "string",
+    "description": "The hostname to bind to the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ssl_state",
+    "type": "string",
+    "description": "The SSL state for the hostname binding. Possible values include `Disabled`, `IpBasedEnabled`, `SniEnabled`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "thumbprint",
+    "type": "string",
+    "description": "The certificate thumbprint associated with the hostname.",
+    "default": "null",
+    "required": false
+  }
+]

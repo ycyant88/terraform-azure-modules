@@ -1,0 +1,19 @@
+module "avm-res-web-staticsite" {
+  source              = "Azure/avm-res-web-staticsite/azurerm"
+  version             = "0.1.0"
+  app_settings        = var.app_settings
+  branch              = var.branch
+  custom_domains      = var.custom_domains
+  enable_telemetry    = var.enable_telemetry
+  identities          = var.identities
+  location            = var.location
+  lock                = var.lock
+  name                = var.name
+  private_endpoints   = var.private_endpoints
+  repository_url      = var.repository_url
+  resource_group_name = var.resource_group_name
+  role_assignments    = var.role_assignments
+  sku_size            = var.sku_size
+  sku_tier            = var.sku_tier
+  tags                = var.tags
+}

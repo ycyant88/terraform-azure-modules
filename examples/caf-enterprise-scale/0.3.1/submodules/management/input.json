@@ -1,0 +1,93 @@
+[
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "Specifies the ID of the Enterprise-scale root Management Group, used as a prefix for resources created by this module.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Sets the default location used for resource deployments where needed.",
+    "default": "\"eastus\"",
+    "required": false
+  },
+  {
+    "name": "settings",
+    "type": "object({\n    log_analytics = object({\n      enabled = bool\n      config = object({\n        retention_in_days                           = number\n        enable_monitoring_for_arc                   = bool\n        enable_monitoring_for_vm                    = bool\n        enable_monitoring_for_vmss                  = bool\n        enable_solution_for_agent_health_assessment = bool\n        enable_solution_for_anti_malware            = bool\n        enable_solution_for_azure_activity          = bool\n        enable_solution_for_change_tracking         = bool\n        enable_solution_for_service_map             = bool\n        enable_solution_for_sql_assessment          = bool\n        enable_solution_for_updates                 = bool\n        enable_solution_for_vm_insights             = bool\n        enable_sentinel                             = bool\n      })\n    })\n    security_center = object({\n      enabled = bool\n      config = object({\n        email_security_contact             = string\n        enable_defender_for_acr            = bool\n        enable_defender_for_app_services   = bool\n        enable_defender_for_arm            = bool\n        enable_defender_for_dns            = bool\n        enable_defender_for_key_vault      = bool\n        enable_defender_for_kubernetes     = bool\n        enable_defender_for_servers        = bool\n        enable_defender_for_sql_servers    = bool\n        enable_defender_for_sql_server_vms = bool\n        enable_defender_for_storage        = bool\n      })\n    })\n  })",
+    "description": "Configuration settings for the \"Management\" landing zone resources.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_suffix",
+    "type": "string",
+    "description": "If specified, will set the resource name suffix for management resources (default value determined from \"var.subscription_id\").",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "existing_resource_group_name",
+    "type": "string",
+    "description": "If specified, module will skip creation of the management Resource Group and use existing.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "existing_log_analytics_workspace_resource_id",
+    "type": "string",
+    "description": "If specified, module will skip creation of Log Analytics workspace and use existing.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "custom_settings_by_resource_type",
+    "type": "any",
+    "description": "If specified, allows full customization of common settings for all resources (by type) deployed by this module.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Controls whether to deploy the management resources into the current Subscription context.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "subscription_id",
+    "type": "string",
+    "description": "Specifies the Subscription ID for the Subscription containing all management resources.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "If specified, will set the default tags for all resources deployed by this module where supported.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_prefix",
+    "type": "string",
+    "description": "If specified, will set the resource name prefix for management resources (default value determined from \"var.root_id\").",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "existing_automation_account_resource_id",
+    "type": "string",
+    "description": "If specified, module will skip creation of Automation Account and use existing.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "link_log_analytics_to_automation_account",
+    "type": "bool",
+    "description": "If set to true, module will link the Log Analytics workspace and Automation Account.",
+    "default": "true",
+    "required": false
+  }
+]

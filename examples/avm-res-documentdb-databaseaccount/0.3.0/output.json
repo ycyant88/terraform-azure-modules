@@ -1,0 +1,74 @@
+[
+  {
+    "name": "mongo_databases",
+    "description": "A map of the MongoDB databases created, with the database name as the key and the database ID as the value."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the cosmos db account created."
+  },
+  {
+    "name": "resource_private_endpoints",
+    "description": "A map of the management locks created, with the lock name as the key and the lock ID as the value."
+  },
+  {
+    "name": "cosmosdb_sql_connection_strings",
+    "description": "The SQL connection strings for the CosmosDB Account."
+  },
+  {
+    "name": "resource_locks",
+    "description": "A map of the management locks created, with the lock name as the key and the lock ID as the value."
+  },
+  {
+    "name": "sql_functions",
+    "description": "A map of the SQL functions created, with the function name as the key and the function ID as the value."
+  },
+  {
+    "name": "cosmosdb_keys",
+    "description": "The keys for the CosmosDB Account."
+  },
+  {
+    "name": "mongo_collections",
+    "description": "A map of the MongoDB collections created, with the collection name as the key and the collection ID as the value."
+  },
+  {
+    "name": "resource_private_endpoints_application_security_group_association",
+    "description": "The IDs of the private endpoint application security group associations created."
+  },
+  {
+    "name": "sql_containers",
+    "description": "A map of the SQL containers created, with the container name as the key and the container ID as the value."
+  },
+  {
+    "name": "sql_triggers",
+    "description": "A map of the SQL triggers created, with the trigger name as the key and the trigger ID as the value."
+  },
+  {
+    "name": "name",
+    "description": "The name of the cosmos db account created."
+  },
+  {
+    "name": "resource_diagnostic_settings",
+    "description": "A map of the diagnostic settings created, with the diagnostic setting name as the key and the diagnostic setting ID as the value."
+  },
+  {
+    "name": "resource_role_assignments",
+    "description": "A map of the role assignments created, with the assignment key as the map key and the assignment value as the map value."
+  },
+  {
+    "name": "sql_databases",
+    "description": "A map of the SQL databases created, with the database name as the key and the database ID as the value."
+  },
+  {
+    "name": "sql_dedicated_gateway",
+    "description": "The IDs of the SQL dedicated gateways created."
+  },
+  {
+    "name": "sql_stored_procedures",
+    "description": "A map of the SQL stored procedures created, with the stored procedure name as the key and the stored procedure ID as the value."
+  },
+  {
+    "name": "cosmosdb_mongodb_connection_strings",
+    "description": "The MongoDB connection strings for the CosmosDB Account."
+  }
+]

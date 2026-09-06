@@ -1,0 +1,42 @@
+[
+  {
+    "name": "default_predefined_ssl_policy",
+    "description": "Ssl predefined policy name enums."
+  },
+  {
+    "name": "identity_principal_id",
+    "description": "The principal id of the system assigned identity. This property will only be provided for a system assigned identity."
+  },
+  {
+    "name": "identity_tenant_id",
+    "description": "The tenant id of the system assigned identity. This property will only be provided for a system assigned identity."
+  },
+  {
+    "name": "operational_state",
+    "description": "Operational state of the application gateway resource."
+  },
+  {
+    "name": "private_endpoint_connections",
+    "description": "Private Endpoint connections on application gateway."
+  },
+  {
+    "name": "provisioning_state",
+    "description": "The current provisioning state."
+  },
+  {
+    "name": "resource_guid",
+    "description": "The resource GUID property of the application gateway resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the created resource."
+  },
+  {
+    "name": "name",
+    "description": "The name of the created resource."
+  },
+  {
+    "name": "type",
+    "description": "Resource type."
+  }
+]

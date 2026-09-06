@@ -1,0 +1,20 @@
+module "avm-res-network-privatednszone" {
+  source                = "Azure/avm-res-network-privatednszone/azurerm"
+  version               = "0.4.1"
+  a_records             = var.a_records
+  aaaa_records          = var.aaaa_records
+  cname_records         = var.cname_records
+  domain_name           = var.domain_name
+  enable_telemetry      = var.enable_telemetry
+  mx_records            = var.mx_records
+  parent_id             = var.parent_id
+  ptr_records           = var.ptr_records
+  retry                 = var.retry
+  role_assignments      = var.role_assignments
+  soa_record            = var.soa_record
+  srv_records           = var.srv_records
+  tags                  = var.tags
+  timeouts              = var.timeouts
+  txt_records           = var.txt_records
+  virtual_network_links = var.virtual_network_links
+}

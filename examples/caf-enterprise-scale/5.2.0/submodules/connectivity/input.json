@@ -1,0 +1,100 @@
+[
+  {
+    "name": "resource_group_per_virtual_hub_location",
+    "type": "bool",
+    "description": "If set to true, module will place each Virtual Hub (and associated resources) in a location-specific Resource Group. Default behaviour is to colocate Virtual Hub resources in the same Resource Group as the Virtual WAN resource.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Sets the default location used for resource deployments where needed.",
+    "default": "\"eastus\"",
+    "required": false
+  },
+  {
+    "name": "existing_ddos_protection_plan_resource_id",
+    "type": "string",
+    "description": "If specified, module will skip creation of DDoS Protection Plan and use existing.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "existing_virtual_wan_resource_id",
+    "type": "string",
+    "description": "If specified, module will skip creation of the Virtual WAN and use existing. All Virtual Hubs created by the module will be associated with the specified Virtual WAN.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "settings",
+    "type": "object({\n    hub_networks = optional(list(\n      object({\n        enabled = optional(bool, true)\n        config = object({\n          address_space                = list(string)\n          location                     = optional(string, \"\")\n          link_to_ddos_protection_plan = optional(bool, false)\n          dns_servers                  = optional(list(string), [])\n          bgp_community                = optional(string, \"\")\n          subnets = optional(list(\n            object({\n              name                      = string\n              address_prefixes          = list(string)\n              network_security_group_id = optional(string, \"\")\n              route_table_id            = optional(string, \"\")\n            })\n          ), [])\n          virtual_network_gateway = optional(object({\n            enabled = optional(bool, false)\n            config = optional(object({\n              address_prefix           = optional(string, \"\")\n              gateway_sku_expressroute = optional(string, \"\")\n              gateway_sku_vpn          = optional(string, \"\")\n              advanced_vpn_settings = optional(object({\n                enable_bgp                       = optional(bool, null)\n                active_active                    = optional(bool, null)\n                private_ip_address_allocation    = optional(string, \"\")\n                default_local_network_gateway_id = optional(string, \"\")\n                vpn_client_configuration = optional(list(\n                  object({\n                    address_space = list(string)\n                    aad_tenant    = optional(string, null)\n                    aad_audience  = optional(string, null)\n                    aad_issuer    = optional(string, null)\n                    root_certificate = optional(list(\n                      object({\n                        name             = string\n                        public_cert_data = string\n                      })\n                    ), [])\n                    revoked_certificate = optional(list(\n                      object({\n                        name       = string\n                        thumbprint = string\n                      })\n                    ), [])\n                    radius_server_address = optional(string, null)\n                    radius_server_secret  = optional(string, null)\n                    vpn_client_protocols  = optional(list(string), null)\n                    vpn_auth_types        = optional(list(string), null)\n                  })\n                ), [])\n                bgp_settings = optional(list(\n                  object({\n                    asn         = optional(number, null)\n                    peer_weight = optional(number, null)\n                    peering_addresses = optional(list(\n                      object({\n                        ip_configuration_name = optional(string, null)\n                        apipa_addresses       = optional(list(string), null)\n                      })\n                    ), [])\n                  })\n                ), [])\n                custom_route = optional(list(\n                  object({\n                    address_prefixes = optional(list(string), [])\n                  })\n                ), [])\n              }), {})\n            }), {})\n          }), {})\n          azure_firewall = optional(object({\n            enabled = optional(bool, false)\n            config = optional(object({\n              address_prefix                = optional(string, \"\")\n              address_management_prefix     = optional(string, \"\")\n              enable_dns_proxy              = optional(bool, true)\n              dns_servers                   = optional(list(string), [])\n              sku_tier                      = optional(string, \"Standard\")\n              base_policy_id                = optional(string, \"\")\n              private_ip_ranges             = optional(list(string), [])\n              threat_intelligence_mode      = optional(string, \"Alert\")\n              threat_intelligence_allowlist = optional(map(list(string)), {})\n              availability_zones = optional(object({\n                zone_1 = optional(bool, true)\n                zone_2 = optional(bool, true)\n                zone_3 = optional(bool, true)\n              }), {})\n            }), {})\n          }), {})\n          spoke_virtual_network_resource_ids      = optional(list(string), [])\n          enable_outbound_virtual_network_peering = optional(bool, false)\n          enable_hub_network_mesh_peering         = optional(bool, false)\n        })\n      })\n    ), [])\n    vwan_hub_networks = optional(list(\n      object({\n        enabled = optional(bool, true)\n        config = object({\n          address_prefix = string\n          location       = string\n          sku            = optional(string, \"\")\n          routes = optional(list(\n            object({\n              address_prefixes    = list(string)\n              next_hop_ip_address = string\n            })\n          ), [])\n          routing_intent = optional(object({\n            enabled = optional(bool, false)\n            config = optional(object({\n              routing_policies = optional(list(object({\n                name         = string\n                destinations = list(string)\n              })), [])\n            }), {})\n          }), {})\n          expressroute_gateway = optional(object({\n            enabled = optional(bool, false)\n            config = optional(object({\n              scale_unit                    = optional(number, 1)\n              allow_non_virtual_wan_traffic = optional(bool, false)\n            }), {})\n          }), {})\n          vpn_gateway = optional(object({\n            enabled = optional(bool, false)\n            config = optional(object({\n              bgp_settings = optional(list(\n                object({\n                  asn         = number\n                  peer_weight = number\n                  instance_0_bgp_peering_address = optional(list(\n                    object({\n                      custom_ips = list(string)\n                    })\n                  ), [])\n                  instance_1_bgp_peering_address = optional(list(\n                    object({\n                      custom_ips = list(string)\n                    })\n                  ), [])\n                })\n              ), [])\n              routing_preference = optional(string, \"Microsoft Network\")\n              scale_unit         = optional(number, 1)\n            }), {})\n          }), {})\n          azure_firewall = optional(object({\n            enabled = optional(bool, false)\n            config = optional(object({\n              enable_dns_proxy              = optional(bool, true)\n              dns_servers                   = optional(list(string), [])\n              sku_tier                      = optional(string, \"Standard\")\n              base_policy_id                = optional(string, \"\")\n              private_ip_ranges             = optional(list(string), [])\n              threat_intelligence_mode      = optional(string, \"Alert\")\n              threat_intelligence_allowlist = optional(map(list(string)), {})\n              availability_zones = optional(object({\n                zone_1 = optional(bool, true)\n                zone_2 = optional(bool, true)\n                zone_3 = optional(bool, true)\n              }), {})\n            }), {})\n          }), {})\n          spoke_virtual_network_resource_ids        = optional(list(string), [])\n          secure_spoke_virtual_network_resource_ids = optional(list(string), [])\n          enable_virtual_hub_connections            = optional(bool, false)\n        })\n      })\n    ), [])\n    ddos_protection_plan = optional(object({\n      enabled = optional(bool, false)\n      config = optional(object({\n        location = optional(string, \"\")\n      }), {})\n    }), {})\n    dns = optional(object({\n      enabled = optional(bool, true)\n      config = optional(object({\n        location = optional(string, \"\")\n        enable_private_link_by_service = optional(object({\n          azure_api_management                 = optional(bool, true)\n          azure_app_configuration_stores       = optional(bool, true)\n          azure_arc                            = optional(bool, true)\n          azure_automation_dscandhybridworker  = optional(bool, true)\n          azure_automation_webhook             = optional(bool, true)\n          azure_backup                         = optional(bool, true)\n          azure_batch_account                  = optional(bool, true)\n          azure_bot_service_bot                = optional(bool, true)\n          azure_bot_service_token              = optional(bool, true)\n          azure_cache_for_redis                = optional(bool, true)\n          azure_cache_for_redis_enterprise     = optional(bool, true)\n          azure_container_registry             = optional(bool, true)\n          azure_cosmos_db_cassandra            = optional(bool, true)\n          azure_cosmos_db_gremlin              = optional(bool, true)\n          azure_cosmos_db_mongodb              = optional(bool, true)\n          azure_cosmos_db_sql                  = optional(bool, true)\n          azure_cosmos_db_table                = optional(bool, true)\n          azure_data_explorer                  = optional(bool, true)\n          azure_data_factory                   = optional(bool, true)\n          azure_data_factory_portal            = optional(bool, true)\n          azure_data_health_data_services      = optional(bool, true)\n          azure_data_lake_file_system_gen2     = optional(bool, true)\n          azure_database_for_mariadb_server    = optional(bool, true)\n          azure_database_for_mysql_server      = optional(bool, true)\n          azure_database_for_postgresql_server = optional(bool, true)\n          azure_digital_twins                  = optional(bool, true)\n          azure_event_grid_domain              = optional(bool, true)\n          azure_event_grid_topic               = optional(bool, true)\n          azure_event_hubs_namespace           = optional(bool, true)\n          azure_file_sync                      = optional(bool, true)\n          azure_hdinsights                     = optional(bool, true)\n          azure_iot_dps                        = optional(bool, true)\n          azure_iot_hub                        = optional(bool, true)\n          azure_key_vault                      = optional(bool, true)\n          azure_key_vault_managed_hsm          = optional(bool, true)\n          azure_kubernetes_service_management  = optional(bool, true)\n          azure_machine_learning_workspace     = optional(bool, true)\n          azure_managed_disks                  = optional(bool, true)\n          azure_media_services                 = optional(bool, true)\n          azure_migrate                        = optional(bool, true)\n          azure_monitor                        = optional(bool, true)\n          azure_purview_account                = optional(bool, true)\n          azure_purview_studio                 = optional(bool, true)\n          azure_relay_namespace                = optional(bool, true)\n          azure_search_service                 = optional(bool, true)\n          azure_service_bus_namespace          = optional(bool, true)\n          azure_site_recovery                  = optional(bool, true)\n          azure_sql_database_sqlserver         = optional(bool, true)\n          azure_synapse_analytics_dev          = optional(bool, true)\n          azure_synapse_analytics_sql          = optional(bool, true)\n          azure_synapse_studio                 = optional(bool, true)\n          azure_web_apps_sites                 = optional(bool, true)\n          azure_web_apps_static_sites          = optional(bool, true)\n          cognitive_services_account           = optional(bool, true)\n          microsoft_power_bi                   = optional(bool, true)\n          signalr                              = optional(bool, true)\n          signalr_webpubsub                    = optional(bool, true)\n          storage_account_blob                 = optional(bool, true)\n          storage_account_file                 = optional(bool, true)\n          storage_account_queue                = optional(bool, true)\n          storage_account_table                = optional(bool, true)\n          storage_account_web                  = optional(bool, true)\n        }), {})\n        private_link_locations                                 = optional(list(string), [])\n        public_dns_zones                                       = optional(list(string), [])\n        private_dns_zones                                      = optional(list(string), [])\n        enable_private_dns_zone_virtual_network_link_on_hubs   = optional(bool, true)\n        enable_private_dns_zone_virtual_network_link_on_spokes = optional(bool, true)\n        virtual_network_resource_ids_to_link                   = optional(list(string), [])\n      }), {})\n    }), {})\n  })",
+    "description": "If specified, will customize the \"Connectivity\" landing zone settings and resources.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_prefix",
+    "type": "string",
+    "description": "If specified, will set the resource name prefix for connectivity resources (default value determined from \"var.root_id\").",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "custom_settings_by_resource_type",
+    "type": "any",
+    "description": "If specified, allows full customization of common settings for all resources (by type) deployed by this module.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_suffix",
+    "type": "string",
+    "description": "If specified, will set the resource name suffix for connectivity resources.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "existing_virtual_wan_resource_group_name",
+    "type": "string",
+    "description": "If specified, module will skip creation of the Virtual WAN resource group and use existing. All Virtual Hubs created by the module will be created in the specified Virtual WAN resource group.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "Specifies the ID of the Enterprise-scale root Management Group, used as a prefix for resources created by this module.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "subscription_id",
+    "type": "string",
+    "description": "Specifies the Subscription ID for the Subscription containing all connectivity resources.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "If specified, will set the default tags for all resources deployed by this module where supported.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Controls whether to manage the connectivity landing zone policies and deploy the connectivity resources into the current Subscription context.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "custom_azure_backup_geo_codes",
+    "type": "map(string)",
+    "description": "If specified, the custom_azure_backup_geo_codes variable will override or append Geo Codes (value) used to generate region-specific DNS zone names for Azure Backup private endpoints.\nFor more information, please refer to: https://learn.microsoft.com/azure/backup/private-endpoints#when-using-custom-dns-server-or-host-files\n",
+    "default": "{}",
+    "required": false
+  }
+]

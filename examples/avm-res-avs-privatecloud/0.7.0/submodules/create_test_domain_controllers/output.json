@@ -1,0 +1,42 @@
+[
+  {
+    "name": "resource",
+    "description": "the full module output for the primary domain controller. Including this to comply with the spec tests."
+  },
+  {
+    "name": "dc_details_secondary",
+    "description": "The secondary domain controller data resource output."
+  },
+  {
+    "name": "domain_distinguished_name",
+    "description": "The distinguished name for the domain deployed on the domain controllers."
+  },
+  {
+    "name": "domain_netbios_name",
+    "description": "The domain short name or netbios name for the domain deployed on the domain controllers."
+  },
+  {
+    "name": "ldap_user_password",
+    "description": "The ldap user password value for use in testing the identity configuration functions of the AVM AVS module."
+  },
+  {
+    "name": "resource_id",
+    "description": "The primary domain controller id.  Included to comply with the spec."
+  },
+  {
+    "name": "dc_details",
+    "description": "The primary domain controller data resource output."
+  },
+  {
+    "name": "domain_fqdn",
+    "description": "The fully qualified domain name for the domain deployed on the domain controllers."
+  },
+  {
+    "name": "ldap_user",
+    "description": "The ldap user name created for use in testing the identity configuration functions of the AVM AVS module."
+  },
+  {
+    "name": "primary_dc_private_ip_address",
+    "description": "The IP address for the primary domain controller."
+  }
+]

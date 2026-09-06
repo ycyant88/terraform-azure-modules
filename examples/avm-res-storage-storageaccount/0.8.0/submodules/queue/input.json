@@ -1,0 +1,65 @@
+[
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "(Optional) Per-operation timeouts applied to AzAPI resources managed by this module. Defaults to `null` (provider defaults). Each value is a Go duration string (e.g. `30m`, `1h`).\n\n- `create` - (Optional) Timeout for create operations. Defaults to `null`.\n- `read` - (Optional) Timeout for read operations. Defaults to `null`.\n- `update` - (Optional) Timeout for update operations. Defaults to `null`.\n- `delete` - (Optional) Timeout for delete operations. Defaults to `null`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_account_id",
+    "type": "string",
+    "description": "(Required) The full resource ID of the parent storage account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "role_assignment_definition_lookup_enabled",
+    "type": "bool",
+    "description": "(Optional) Whether the `role_assignments` submodule should resolve role definition names supplied via `role_definition_id_or_name` by querying the Azure Authorization API. Defaults to `true`. See the `role_assignments` submodule for details.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "tracing_tags_header",
+    "type": "string",
+    "description": "(Optional) User-Agent string injected into AzAPI request headers. Defaults to `null` (no custom header).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "(Required) The name of the queue.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "metadata",
+    "type": "map(string)",
+    "description": "(Optional) A mapping of metadata to assign to this storage queue. Defaults to `null` (no metadata).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "resource_type",
+    "type": "string",
+    "description": "(Optional) Override the AzAPI `<provider>/<resource>@<api-version>` string used to manage the queue. Defaults to the value tested with this module version.",
+    "default": "\"Microsoft.Storage/storageAccounts/queueServices/queues@2025-06-01\"",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "(Optional) Retry configuration applied to AzAPI resources managed by this module. Defaults to `null` (no custom retry).\n\n- `error_message_regex` - (Optional) A list of regex patterns matching error messages that trigger a retry. Defaults to `null`.\n- `interval_seconds` - (Optional) Initial interval between retries in seconds. Defaults to `null` (provider default).\n- `max_interval_seconds` - (Optional) Maximum interval between retries in seconds. Defaults to `null` (provider default).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "(Optional) A map of role assignments to create at the queue scope. Defaults to `{}`. See the `role_assignments` submodule for the attribute schema.",
+    "default": "{}",
+    "required": false
+  }
+]

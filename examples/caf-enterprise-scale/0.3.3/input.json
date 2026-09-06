@@ -1,0 +1,142 @@
+[
+  {
+    "name": "default_location",
+    "type": "string",
+    "description": "If specified, will use set the default location used for resource deployments where needed.",
+    "default": "\"eastus\"",
+    "required": false
+  },
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "If specified, will set a custom Name (ID) value for the Enterprise-scale \"root\" Management Group, and append this to the ID for all core Enterprise-scale Management Groups.",
+    "default": "\"es\"",
+    "required": false
+  },
+  {
+    "name": "library_path",
+    "type": "string",
+    "description": "If specified, sets the path to a custom library folder for archetype artefacts.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "subscription_id_identity",
+    "type": "string",
+    "description": "If specified, identifies the Platform subscription for \"Identity\" for resource deployment and correct placement in the Management Group hierarchy.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "custom_landing_zones",
+    "type": "any",
+    "description": "If specified, will deploy additional Management Groups alongside Enterprise-scale core Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "create_duration_delay",
+    "type": "map(string)",
+    "description": "Used to tune terraform apply when faced with errors caused by API caching or eventual consistency. Sets a custom delay period after creation of the specified resource type.",
+    "default": "{\n  \"azurerm_management_group\": \"30s\",\n  \"azurerm_policy_assignment\": \"30s\",\n  \"azurerm_policy_definition\": \"30s\",\n  \"azurerm_policy_set_definition\": \"30s\",\n  \"azurerm_role_assignment\": \"0s\",\n  \"azurerm_role_definition\": \"60s\"\n}",
+    "required": false
+  },
+  {
+    "name": "root_name",
+    "type": "string",
+    "description": "If specified, will set a custom Display Name value for the Enterprise-scale \"root\" Management Group.",
+    "default": "\"Enterprise-Scale\"",
+    "required": false
+  },
+  {
+    "name": "deploy_core_landing_zones",
+    "type": "bool",
+    "description": "If set to true, module will deploy the core Enterprise-scale Management Group hierarchy, including \"out of the box\" policies and roles.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "subscription_id_overrides",
+    "type": "map(list(string))",
+    "description": "If specified, will be used to assign subscription_ids to the default Enterprise-scale Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "subscription_id_management",
+    "type": "string",
+    "description": "If specified, identifies the Platform subscription for \"Management\" for resource deployment and correct placement in the Management Group hierarchy.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "template_file_variables",
+    "type": "map(any)",
+    "description": "If specified, provides the ability to define custom template variables used when reading in template files from the built-in and custom library_path.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "destroy_duration_delay",
+    "type": "map(string)",
+    "description": "Used to tune terraform deploy when faced with errors caused by API caching or eventual consistency. Sets a custom delay period after destruction of the specified resource type.",
+    "default": "{\n  \"azurerm_management_group\": \"0s\",\n  \"azurerm_policy_assignment\": \"0s\",\n  \"azurerm_policy_definition\": \"0s\",\n  \"azurerm_policy_set_definition\": \"0s\",\n  \"azurerm_role_assignment\": \"0s\",\n  \"azurerm_role_definition\": \"0s\"\n}",
+    "required": false
+  },
+  {
+    "name": "custom_policy_roles",
+    "type": "map(list(string))",
+    "description": "If specified, the custom_policy_roles variable overrides which Role Definition ID(s) (value) to assign for Policy Assignments with a Managed Identity, if the assigned \"policyDefinitionId\" (key) is included in this variable.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "root_parent_id",
+    "type": "string",
+    "description": "The root_parent_id is used to specify where to set the root for all Landing Zone deployments. Usually the Tenant ID when deploying the core Enterprise-scale Landing Zones.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "configure_management_resources",
+    "type": "object({\n    settings = object({\n      log_analytics = object({\n        enabled = bool\n        config = object({\n          retention_in_days                           = number\n          enable_monitoring_for_arc                   = bool\n          enable_monitoring_for_vm                    = bool\n          enable_monitoring_for_vmss                  = bool\n          enable_solution_for_agent_health_assessment = bool\n          enable_solution_for_anti_malware            = bool\n          enable_solution_for_azure_activity          = bool\n          enable_solution_for_change_tracking         = bool\n          enable_solution_for_service_map             = bool\n          enable_solution_for_sql_assessment          = bool\n          enable_solution_for_updates                 = bool\n          enable_solution_for_vm_insights             = bool\n          enable_sentinel                             = bool\n        })\n      })\n      security_center = object({\n        enabled = bool\n        config = object({\n          email_security_contact             = string\n          enable_defender_for_acr            = bool\n          enable_defender_for_app_services   = bool\n          enable_defender_for_arm            = bool\n          enable_defender_for_dns            = bool\n          enable_defender_for_key_vault      = bool\n          enable_defender_for_kubernetes     = bool\n          enable_defender_for_servers        = bool\n          enable_defender_for_sql_servers    = bool\n          enable_defender_for_sql_server_vms = bool\n          enable_defender_for_storage        = bool\n        })\n      })\n    })\n    location = any\n    tags     = any\n    advanced = any\n  })",
+    "description": "If specified, will customize the \"Management\" landing zone resources.",
+    "default": "{\n  \"advanced\": null,\n  \"location\": null,\n  \"settings\": {\n    \"log_analytics\": {\n      \"config\": {\n        \"enable_monitoring_for_arc\": true,\n        \"enable_monitoring_for_vm\": true,\n        \"enable_monitoring_for_vmss\": true,\n        \"enable_sentinel\": true,\n        \"enable_solution_for_agent_health_assessment\": true,\n        \"enable_solution_for_anti_malware\": true,\n        \"enable_solution_for_azure_activity\": true,\n        \"enable_solution_for_change_tracking\": true,\n        \"enable_solution_for_service_map\": true,\n        \"enable_solution_for_sql_assessment\": true,\n        \"enable_solution_for_updates\": true,\n        \"enable_solution_for_vm_insights\": true,\n        \"retention_in_days\": 30\n      },\n      \"enabled\": true\n    },\n    \"security_center\": {\n      \"config\": {\n        \"email_security_contact\": \"security_contact@replace_me\",\n        \"enable_defender_for_acr\": true,\n        \"enable_defender_for_app_services\": true,\n        \"enable_defender_for_arm\": true,\n        \"enable_defender_for_dns\": true,\n        \"enable_defender_for_key_vault\": true,\n        \"enable_defender_for_kubernetes\": true,\n        \"enable_defender_for_servers\": true,\n        \"enable_defender_for_sql_server_vms\": true,\n        \"enable_defender_for_sql_servers\": true,\n        \"enable_defender_for_storage\": true\n      },\n      \"enabled\": true\n    }\n  },\n  \"tags\": null\n}",
+    "required": false
+  },
+  {
+    "name": "archetype_config_overrides",
+    "type": "any",
+    "description": "If specified, will set custom Archetype configurations to the default Enterprise-scale Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "subscription_id_connectivity",
+    "type": "string",
+    "description": "If specified, identifies the Platform subscription for \"Connectivity\" for resource deployment and correct placement in the Management Group hierarchy.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "default_tags",
+    "type": "map(string)",
+    "description": "If specified, will set the default tags for all resources deployed by this module where supported.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "deploy_demo_landing_zones",
+    "type": "bool",
+    "description": "If set to true, module will deploy the demo \"Landing Zone\" Management Groups (\"Corp\", \"Online\", and \"SAP\") into the core Enterprise-scale Management Group hierarchy.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "deploy_management_resources",
+    "type": "bool",
+    "description": "If set to true, will deploy the \"Management\" landing zone resources into the current Subscription context.",
+    "default": "false",
+    "required": false
+  }
+]

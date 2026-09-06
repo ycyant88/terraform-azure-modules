@@ -1,0 +1,94 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Virtual WAN ID"
+  },
+  {
+    "name": "name",
+    "description": "Virtual WAN Name"
+  },
+  {
+    "name": "firewall_private_ip_addresses",
+    "description": "A map of Azure Firewall private IP addresses with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "firewall_ip_addresses",
+    "description": "Azure Firewall IP addresses."
+  },
+  {
+    "name": "resource_group_name",
+    "description": "Resource Group Name"
+  },
+  {
+    "name": "s2s_vpn_gw",
+    "description": "S2S VPN Gateway Objects"
+  },
+  {
+    "name": "vpn_gateway_resource_ids",
+    "description": "A map of Azure VPN Gateway resource IDs with the map keys of the `vpn_gateways` variable."
+  },
+  {
+    "name": "firewall_resource_names_by_hub_key",
+    "description": "A map of Azure Firewall resource names with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "firewall_public_ip_addresses",
+    "description": "A map of Azure Firewall public IP addresses with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "firewall_resource_ids_by_hub_key",
+    "description": "A map of Azure Firewall resource IDs with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "firewall_private_ip_addresses_by_hub_key",
+    "description": "A map of Azure Firewall private IP addresses with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "virtual_hub_resource_names",
+    "description": "A map of Azure Virtual Hub resource names with the map keys of the `virtual_hubs` variable."
+  },
+  {
+    "name": "p2s_vpn_gw_resource_ids",
+    "description": "A map of point to site VPN gateway names with the map keys of the `p2s_gateways` variable."
+  },
+  {
+    "name": "p2s_vpn_gw_resource_names",
+    "description": "A map of point to site VPN gateway names with the map keys of the `p2s_gateways` variable."
+  },
+  {
+    "name": "s2s_vpn_gw_id",
+    "description": "S2S VPN Gateway ID"
+  },
+  {
+    "name": "vpn_gateway_resource_names",
+    "description": "A map of Azure VPN Gateway resource names with the map keys of the `vpn_gateways` variable."
+  },
+  {
+    "name": "firewall_resource_ids",
+    "description": "A map of Azure Firewall resource IDs with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "firewall_resource_names",
+    "description": "A map of Azure Firewall resource names with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "firewall_public_ip_addresses_by_hub_key",
+    "description": "A map of Azure Firewall public IP addresses with the map keys of the `firewalls` variable."
+  },
+  {
+    "name": "virtual_hub_resource_ids",
+    "description": "A map of Azure Virtual Hub resource IDs with the map keys of the `virtual_hubs` variable."
+  },
+  {
+    "name": "p2s_vpn_gw_id",
+    "description": "P2S VPN Gateway ID"
+  },
+  {
+    "name": "resource",
+    "description": "The full resource outputs."
+  },
+  {
+    "name": "virtual_wan_id",
+    "description": "Virtual WAN ID"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "deployment_region",
+    "description": ""
+  },
+  {
+    "name": "regions_with_quota",
+    "description": ""
+  }
+]

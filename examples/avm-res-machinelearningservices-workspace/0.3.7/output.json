@@ -1,0 +1,46 @@
+[
+  {
+    "name": "resource",
+    "description": "The machine learning workspace."
+  },
+  {
+    "name": "ai_services",
+    "description": "The AI Services resource, if created."
+  },
+  {
+    "name": "application_insights",
+    "description": "The application insights resource, if created."
+  },
+  {
+    "name": "container_registry",
+    "description": "The container registry resource, if created."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the machine learning workspace."
+  },
+  {
+    "name": "storage_account",
+    "description": "The storage account resource, if created."
+  },
+  {
+    "name": "workspace",
+    "description": "The machine learning workspace created."
+  },
+  {
+    "name": "workspace_identity",
+    "description": "The identity for the created workspace."
+  },
+  {
+    "name": "ai_services_service_connection",
+    "description": "The service connection between the AIServices and the workspace, if created."
+  },
+  {
+    "name": "key_vault",
+    "description": "The key vault resource, if created."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "A map of the private endpoints created."
+  }
+]

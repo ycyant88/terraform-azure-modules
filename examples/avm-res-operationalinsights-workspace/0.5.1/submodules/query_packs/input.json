@@ -1,0 +1,37 @@
+[
+  {
+    "name": "location",
+    "type": "string",
+    "description": "(Required) The Azure region where the resources should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_id",
+    "type": "string",
+    "description": "(Required) The Resource ID of the Resource Group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "monitor_queries",
+    "type": "map(object({\n    name           = optional(string)\n    query_pack_key = string\n    body           = string\n    display_name   = string\n    description    = optional(string)\n    tags           = optional(map(string))\n    related = optional(object({\n      categories     = optional(list(string))\n      resource_types = optional(list(string))\n      solutions      = optional(list(string))\n    }))\n  }))",
+    "description": "(Optional) A map of Queries to create. The key is the name of the Query. The value is an object containing the configuration.\n- `name` - (Optional) The name of the Query. This must be a GUID. If not provided, a UUID will be generated.\n- `query_pack_key` - (Required) The key of the Query Pack to associate this Query with.\n- `body` - (Required) The KQL query body.\n- `display_name` - (Required) The display name of the query.\n- `description` - (Optional) The description of the query.\n- `tags` - (Optional) A map of tags to assign to the query.\n- `related` - (Optional) A map of related items.\n  - `categories` - (Optional) A list of categories for the query. Supported values: `security`, `network`, `management`, `virtualmachines`, `container`, `audit`, `desktopanalytics`, `workloads`, `resources`, `applications`, `monitor`, `databases`, `windowsvirtualdesktop`.\n  - `resource_types` - (Optional) A list of resource types the query applies to. Example: `[\"Microsoft.Compute/virtualMachines\"]`.\n  - `solutions` - (Optional) A list of solutions the query is related to. Example: `[\"LogManagement\"]`.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "monitor_query_packs",
+    "type": "map(object({\n    name = string\n    tags = optional(map(string))\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }))\n  }))",
+    "description": "(Optional) A map of Query Packs to create. The key is the name of the Query Pack. The value is an object containing the configuration.\n- `name` - (Required) The name of the Query Pack.\n- `tags` - (Optional) A map of tags to assign to the Query Pack.\n- `lock` - (Optional) Controls the Resource Lock configuration for this resource. The following properties can be specified:\n  - `kind` - (Required) The type of lock. Possible values are `CanNotDelete` and `ReadOnly`.\n  - `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) A mapping of tags to assign to the resources.",
+    "default": "null",
+    "required": false
+  }
+]

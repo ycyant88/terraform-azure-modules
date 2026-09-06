@@ -1,0 +1,14 @@
+[
+  {
+    "name": "public_ip_resource",
+    "description": "The public IP resource."
+  },
+  {
+    "name": "resource",
+    "description": "The NAT Gateway resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the NAT Gateway."
+  }
+]

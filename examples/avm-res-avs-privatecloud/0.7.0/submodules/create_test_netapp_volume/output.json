@@ -1,0 +1,14 @@
+[
+  {
+    "name": "volume_id",
+    "description": "The Azure resource ID of the netapp volume being created."
+  },
+  {
+    "name": "resource",
+    "description": "the full ANF volume resource being created."
+  },
+  {
+    "name": "resource_id",
+    "description": "The Azure resource ID of the netapp volume being created."
+  }
+]

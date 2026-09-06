@@ -1,0 +1,25 @@
+module "avm-res-network-bastionhost" {
+  source                    = "Azure/avm-res-network-bastionhost/azurerm"
+  version                   = "0.8.0"
+  copy_paste_enabled        = var.copy_paste_enabled
+  diagnostic_settings       = var.diagnostic_settings
+  enable_telemetry          = var.enable_telemetry
+  file_copy_enabled         = var.file_copy_enabled
+  ip_configuration          = var.ip_configuration
+  ip_connect_enabled        = var.ip_connect_enabled
+  kerberos_enabled          = var.kerberos_enabled
+  location                  = var.location
+  lock                      = var.lock
+  name                      = var.name
+  private_only_enabled      = var.private_only_enabled
+  resource_group_name       = var.resource_group_name
+  role_assignments          = var.role_assignments
+  scale_units               = var.scale_units
+  session_recording_enabled = var.session_recording_enabled
+  shareable_link_enabled    = var.shareable_link_enabled
+  sku                       = var.sku
+  tags                      = var.tags
+  tunneling_enabled         = var.tunneling_enabled
+  virtual_network_id        = var.virtual_network_id
+  zones                     = var.zones
+}

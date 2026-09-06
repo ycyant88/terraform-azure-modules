@@ -1,0 +1,22 @@
+module "avm-res-logic-workflow" {
+  source                             = "Azure/avm-res-logic-workflow/azurerm"
+  version                            = "0.1.2"
+  access_control                     = var.access_control
+  customer_managed_key               = var.customer_managed_key
+  diagnostic_settings                = var.diagnostic_settings
+  enable_telemetry                   = var.enable_telemetry
+  endpoints_configuration            = var.endpoints_configuration
+  integration_account_id             = var.integration_account_id
+  integration_service_environment_id = var.integration_service_environment_id
+  location                           = var.location
+  lock                               = var.lock
+  logic_app_definition               = var.logic_app_definition
+  managed_identities                 = var.managed_identities
+  name                               = var.name
+  resource_group_id                  = var.resource_group_id
+  resource_group_name                = var.resource_group_name
+  role_assignments                   = var.role_assignments
+  state                              = var.state
+  tags                               = var.tags
+  workflow_parameters                = var.workflow_parameters
+}

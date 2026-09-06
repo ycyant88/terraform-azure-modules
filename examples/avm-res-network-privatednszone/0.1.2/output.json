@@ -1,0 +1,46 @@
+[
+  {
+    "name": "mx_record_outputs",
+    "description": "The mx record output"
+  },
+  {
+    "name": "name",
+    "description": "The name of private DNS zone"
+  },
+  {
+    "name": "ptr_record_outputs",
+    "description": "The ptr record output"
+  },
+  {
+    "name": "srv_record_outputs",
+    "description": "The srv record output"
+  },
+  {
+    "name": "txt_record_outputs",
+    "description": "The txt record output"
+  },
+  {
+    "name": "virtual_network_link_outputs",
+    "description": "The virtual network link output"
+  },
+  {
+    "name": "a_record_outputs",
+    "description": "The a record output"
+  },
+  {
+    "name": "aaaa_record_outputs",
+    "description": "The aaaa record output"
+  },
+  {
+    "name": "cname_record_outputs",
+    "description": "The cname record output"
+  },
+  {
+    "name": "resource",
+    "description": "The private dns zone output"
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource id of private DNS zone"
+  }
+]

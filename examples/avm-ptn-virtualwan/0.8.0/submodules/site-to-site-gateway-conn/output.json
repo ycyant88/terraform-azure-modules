@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resource_object",
+    "description": "Azure VPN Connection resource object"
+  },
+  {
+    "name": "resource_id",
+    "description": "Azure VPN Connection resource ID"
+  },
+  {
+    "name": "resource",
+    "description": "Azure VPN Connection resource"
+  }
+]

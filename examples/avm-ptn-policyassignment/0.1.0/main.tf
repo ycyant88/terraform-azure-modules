@@ -1,0 +1,23 @@
+module "avm-ptn-policyassignment" {
+  source                    = "Azure/avm-ptn-policyassignment/azurerm"
+  version                   = "0.1.0"
+  delays                    = var.delays
+  description               = var.description
+  display_name              = var.display_name
+  enable_telemetry          = var.enable_telemetry
+  enforce                   = var.enforce
+  exemptions                = var.exemptions
+  identity                  = var.identity
+  location                  = var.location
+  metadata                  = var.metadata
+  name                      = var.name
+  non_compliance_messages   = var.non_compliance_messages
+  not_scopes                = var.not_scopes
+  overrides                 = var.overrides
+  parameters                = var.parameters
+  policy_definition_id      = var.policy_definition_id
+  resource_selectors        = var.resource_selectors
+  role_assignments          = var.role_assignments
+  schema_validation_enabled = var.schema_validation_enabled
+  scope                     = var.scope
+}

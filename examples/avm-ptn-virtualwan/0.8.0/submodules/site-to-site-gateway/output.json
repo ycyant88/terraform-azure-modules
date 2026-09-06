@@ -1,0 +1,30 @@
+[
+  {
+    "name": "bgp_settings",
+    "description": "Azure VPN Gateway object"
+  },
+  {
+    "name": "id",
+    "description": "Azure VPN Gateway ID"
+  },
+  {
+    "name": "resource_id",
+    "description": "Azure VPN Gateway ID"
+  },
+  {
+    "name": "resource",
+    "description": "Azure VPN Gateway"
+  },
+  {
+    "name": "resource_object",
+    "description": "Azure VPN Gateway object"
+  },
+  {
+    "name": "vpn_gateway_id",
+    "description": "Azure VPN Gateway resource ID"
+  },
+  {
+    "name": "vpn_gateway_name",
+    "description": "Azure VPN Gateway resource name"
+  }
+]

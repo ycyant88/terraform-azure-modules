@@ -1,0 +1,72 @@
+[
+  {
+    "name": "resource_group_location",
+    "type": "string",
+    "description": "The region for the resource group where the dc will be installed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "bastion_name",
+    "type": "string",
+    "description": "The name to use for the bastion resource",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "bastion_pip_name",
+    "type": "string",
+    "description": "The name to use for the bastion public IP resource",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vm_subnet_resource_id",
+    "type": "string",
+    "description": "",
+    "default": "\"The Azure Resource ID for the subnet where the DC will be connected.\"",
+    "required": false
+  },
+  {
+    "name": "key_vault_resource_id",
+    "type": "string",
+    "description": "The Azure Resource ID for the key vault where the DSC key and VM passwords will be stored.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "vm_sku",
+    "type": "string",
+    "description": "The virtual machine sku size to use for the domain controller.  Defaults to Standard_D2_v4",
+    "default": "\"Standard_D2_v4\"",
+    "required": false
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The name of the resource group where the dc will be installed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "vm_name",
+    "type": "string",
+    "description": "The name of the domain controller virtual machine.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "bastion_subnet_resource_id",
+    "type": "string",
+    "description": "The Azure Resource ID for the subnet where the bastion will be connected.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "create_bastion",
+    "type": "bool",
+    "description": "Create a bastion resource to use for logging into the domain controller?  Defaults to false.",
+    "default": "false",
+    "required": false
+  }
+]

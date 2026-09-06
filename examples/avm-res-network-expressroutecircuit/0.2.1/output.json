@@ -1,0 +1,30 @@
+[
+  {
+    "name": "express_route_gateway_connections",
+    "description": "ExpressRoute gateway connections."
+  },
+  {
+    "name": "name",
+    "description": "The resource name of the ExpressRoute circuit."
+  },
+  {
+    "name": "peerings",
+    "description": "ExpressRoute Circuit peering configurations."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the ExpressRoute circuit."
+  },
+  {
+    "name": "virtual_network_gateway_connections",
+    "description": "Virtual network gateway connections."
+  },
+  {
+    "name": "authorization_keys",
+    "description": "Authorization keys for the ExpressRoute circuit."
+  },
+  {
+    "name": "authorization_used_status",
+    "description": "Authorization used status."
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "resource",
+    "description": "This output returns the full private cloud resource object properties."
+  },
+  {
+    "name": "vcsa_endpoint_https",
+    "description": "The full https endpoint for vcsa."
+  },
+  {
+    "name": "credentials",
+    "description": "This value returns the vcenter and nsxt cloudadmin credential values."
+  },
+  {
+    "name": "nsxt_manager_endpoint_hostname",
+    "description": "The nsxt endpoint's hostname"
+  },
+  {
+    "name": "resource_id",
+    "description": "The azure resource if of the private cloud."
+  },
+  {
+    "name": "system_assigned_mi_principal_id",
+    "description": "The principal id of the system managed identity assigned to the virtual machine"
+  },
+  {
+    "name": "vcsa_endpoint_hostname",
+    "description": "The vcsa endpoint's hostname"
+  },
+  {
+    "name": "hcx_cloud_manager_endpoint_hostname",
+    "description": "The hcx cloud manager's hostname"
+  },
+  {
+    "name": "hcx_cloud_manager_endpoint_https",
+    "description": "The full https endpoint for hcx cloud manager"
+  },
+  {
+    "name": "identity",
+    "description": "This output returns the managed identity values if the managed identity has been enabled on the module."
+  },
+  {
+    "name": "nsxt_manager_endpoint_https",
+    "description": "The full https endpoint for nsxt manager."
+  },
+  {
+    "name": "public_ip",
+    "description": "The public IP prefixes when a public ip config is configured for the private cloud."
+  }
+]

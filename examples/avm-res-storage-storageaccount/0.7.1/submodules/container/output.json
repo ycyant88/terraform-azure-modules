@@ -1,0 +1,18 @@
+[
+  {
+    "name": "role_assignments",
+    "description": "Map of role assignment resources created at the container scope, keyed by the input map key."
+  },
+  {
+    "name": "name",
+    "description": "The name of the container."
+  },
+  {
+    "name": "resource",
+    "description": "The full container azapi_resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the container."
+  }
+]

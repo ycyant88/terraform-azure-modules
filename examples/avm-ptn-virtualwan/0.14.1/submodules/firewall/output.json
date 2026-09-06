@@ -1,0 +1,38 @@
+[
+  {
+    "name": "azure_firewall_resource_names",
+    "description": "Azure Firewall resource name"
+  },
+  {
+    "name": "private_ip_address",
+    "description": "Azure Firewall IP addresses"
+  },
+  {
+    "name": "public_ip_addresses",
+    "description": "Azure Firewall IP addresses"
+  },
+  {
+    "name": "resource_id",
+    "description": "Azure Firewall resource ID"
+  },
+  {
+    "name": "resource_ids",
+    "description": "Azure Firewall resource IDs"
+  },
+  {
+    "name": "resource_names",
+    "description": "Azure Firewall resource names"
+  },
+  {
+    "name": "diagnostic_settings_resource_ids",
+    "description": "Value of the diagnostic settings resource ID for Azure Firewall"
+  },
+  {
+    "name": "resource",
+    "description": "Azure Firewall resource"
+  },
+  {
+    "name": "resource_object",
+    "description": "Azure Firewall resource object"
+  }
+]

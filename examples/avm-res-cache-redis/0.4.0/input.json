@@ -1,0 +1,219 @@
+[
+  {
+    "name": "private_static_ip_address",
+    "type": "string",
+    "description": "(Optional) - The static IP Address to assign to the Redis Cache when hosted inside a virtual network. Configuring this value implies that the `subnet_resource_id` value has been set.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_non_ssl_port",
+    "type": "bool",
+    "description": "(Optional) - Enable the non-ssl port 6379.  Disabled by default",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "tenant_settings",
+    "type": "map(string)",
+    "description": "(Optional) A mapping of tenant settings to assign to the resource.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the this resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "capacity",
+    "type": "number",
+    "description": "(Required) - The size of the Redis Cache to deploy.  Valid values for Basic and Standard skus are 0-6, and for the premium sku is 1-5",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "linked_redis_caches",
+    "type": "map(object({\n    linked_redis_cache_resource_id = string\n    linked_redis_cache_location    = string\n    server_role                    = string\n  }))",
+    "description": "A map of objects defining one or linked Redis Cache instances to use as secondaries.\n- `<map key>` - The map key is deliberately arbitrary to avoid issues where map keys may be unknown at plan time.\n  - `linked_redis_cache_resource_id` = (Required) - The Azure resource ID of the Redis Cache that is being linked. Changing this forces a new Redis to be created.\n  - `linked_redis_cache_location` = (Required) - The location value for the Redis Cache that is being linked. Changing this forces a new Redis to be created.\n  - `server_role` - (Required) - The role of the linked Redis Cache.  Possible values are `Primary` and `Secondary`. Changing this forces a new Redis to be created.\n\nExample Input:\n\n```hcl\nlinked_redis_caches = {\n  linked_cache_1 = {\n    linked_redis_cache_resource_id = azurerm_redis_cache.example_secondary.id\n    linked_redis_cache_location = azurerm_redis_cache.example_secondary.location\n    server_role = \"Secondary\"\n  }\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "redis_version",
+    "type": "number",
+    "description": "(Optional) Redis version.  Only major version needed.  Valid values are: `4` and `6`",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on the <RESOURCE>. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - (Optional) The description of the role assignment.\n- `skip_service_principal_aad_check` - (Optional) If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - (Optional) The condition which will be used to scope the role assignment.\n- `condition_version` - (Optional) The version of the condition syntax. Leave as `null` if you are not using a condition, if you are then valid values are '2.0'.\n- `delegated_managed_identity_resource_id` - (Optional) The delegated Azure Resource Id which contains a Managed Identity. Changing this forces a new resource to be created. This field is only used in cross-tenant scenario.\n- `principal_type` - (Optional) The type of the `principal_id`. Possible values are `User`, `Group` and `ServicePrincipal`. It is necessary to explicitly set this attribute when creating role assignments if the principal creating the assignment is constrained by ABAC rules that filters on the PrincipalType attribute.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n\nExample Input:\n\n```hcl\nrole_assignments = {\n  deployment_user_contributor = {\n    role_definition_id_or_name = \"Contributor\"\n    principal_id               = data.azurerm_client_config.current.client_id\n  }\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "sku_name",
+    "type": "string",
+    "description": "(Required) - The Redis SKU to use.  Possible values are `Basic`, `Standard`, and `Premium`. Note: Downgrading the sku will force new resource creation.",
+    "default": "\"Premium\"",
+    "required": false
+  },
+  {
+    "name": "subnet_resource_id",
+    "type": "string",
+    "description": "(Optional) - Only available when using the `Premium` SKU. The ID of the Subnet within which the Redis Cache should be deployed. This Subnet must only contain Azure Cache for Redis instances without any other type of resources.  Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    system_assigned            = optional(bool, false)\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "Controls the Managed Identity configuration on this resource. The following properties can be specified:\n\n- `system_assigned` - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\n- `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n\nExample Input:\n\n```hcl\nmanaged_identities = {\n  system_assigned = true\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "cache_access_policies",
+    "type": "map(object({\n    name        = string\n    permissions = string\n  }))",
+    "description": "A map of objects describing one or more Redis cache access policies.\n- `<map key>` - The map key is deliberately arbitrary to avoid issues where map keys may be unknown at plan time.\n  - `name` - (Required) - The name string of the Redis Cache Access Policy. Changing this forces a new policy to be created.\n  - `permissions` - (Required) - A string describing the permissions to be assigned to this Redis Cache Access Policy. Changing this forces a new policy to be created.\n\nExample Input:\n\n```hcl\ncache_access_policies = {\n  example_policy = {\n    name = \"example policy\"\n    permissions = \"+@read +@connection +cluster|info\"\n  }\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "cache_firewall_rules",
+    "type": "map(object({\n    name     = string\n    start_ip = string\n    end_ip   = string\n  }))",
+    "description": "A map of objects defining one or more Redis Cache firewall rules.\n- `<map key>` - The map key is deliberately arbitrary to avoid issues where map keys may be unknown at plan time.\n  - `name` - (Required) - The name for the firewall rule\n  - `start_ip` - (Required) - The starting IP Address for clients that are allowed to access the Redis Cache.\n  - `end_ip` - (Required) - The ending IP Address for clients that are allowed to access the Redis Cache.\n\nExample Input:\n\n```hcl\ncache_firewall_rules = {\n  rule_1 = {\n    name = \"thisRule\"\n    start_ip = \"10.0.0.1\"\n    end_ip = \"10.0.0.5\"\n  }\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n- `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n\nExample Input:\n```hcl\nlock = {\n  kind = \"CanNotDelete\"\n  name = \"Delete\"\n}\n```\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "public_network_access_enabled",
+    "type": "bool",
+    "description": "(Optional) - Identifies whether the public network access is allowed for the Redis Cache. `True` means that both public and private endpoint access is allowed. `False` limits access to the private endpoint only. Defaults to `True`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "minimum_tls_version",
+    "type": "string",
+    "description": "(Optional) - The minimum TLS version.  Possible values are `1.0`, `1.1`, and `1.2`.  Defaults to `1.2`",
+    "default": "\"1.2\"",
+    "required": false
+  },
+  {
+    "name": "patch_schedule",
+    "type": "set(object({\n    day_of_week        = optional(string, \"Saturday\")\n    maintenance_window = optional(string, \"PT5H\")\n    start_hour_utc     = optional(number, 0)\n  }))",
+    "description": "A set of objects describing the following patch schedule attributes. If no value is configured defaults to an empty set.\n- `day_of_week` - (Optional) - A string value for the day of week to start the patch schedule.  Valid values are `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, and `Sunday`.\n- `maintenance_window` - (Optional) - A string value following the ISO 8601 timespan system which specifies the length of time the Redis Cache can be updated from the start hour. Defaults to `PT5H`.\n- `start_hour_utc` - (Optional) - The start hour for maintenance in UTC. Possible values range from 0-23.  Defaults to 0.\n\nExample Input:\n\n```hcl\npatch_schedule = [\n  {\n    day_of_week = \"Friday\"\n    maintenance_window = \"PT5H\"\n    start_hour_utc = 23\n  }\n]\n```\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "redis_configuration",
+    "type": "object({\n    aof_backup_enabled                       = optional(bool)\n    aof_storage_connection_string_0          = optional(string)\n    aof_storage_connection_string_1          = optional(string)\n    enable_authentication                    = optional(bool)\n    active_directory_authentication_enabled  = optional(bool)\n    maxmemory_reserved                       = optional(number)\n    maxmemory_delta                          = optional(number)\n    maxfragmentationmemory_reserved          = optional(number)\n    maxmemory_policy                         = optional(string)\n    data_persistence_authentication_method   = optional(string) #TODO: research the managed identity vs. SAS key and determine level of effort required to default to ManagedIdentity as the more secure option, and review what happens if data persistence is not enabled.\n    rdb_backup_enabled                       = optional(bool)   #TODO: Research if we want backups to be true. Given this is cache, probably not required.\n    rdb_backup_frequency                     = optional(number)\n    rdb_backup_max_snapshot_count            = optional(number)\n    rdb_storage_connection_string            = optional(string)\n    storage_account_subscription_resource_id = optional(string)\n    notify_keyspace_events                   = optional(string)\n  })",
+    "description": "Describes redis configuration block.\n- `aof_backup_enabled`                       = (Optional) Enable or disable AOF persistence for this Redis Cache. Defaults to false. Note: `aof_backup_enabled` can only be set when SKU is Premium.\n- `aof_storage_connection_string_0`          = (Optional) First Storage Account connection string for AOF persistence.\n- `aof_storage_connection_string_1`          = (Optional) Second Storage Account connection string for AOF persistence.\n- `enable_authentication`                    = (Optional) If set to false, the Redis instance will be accessible without authentication. Defaults to true.\n- `active_directory_authentication_enabled`  = (Optional) Enable Microsoft Entra (AAD) authentication. Defaults to false.\n- `maxmemory_reserved`                       = (Optional) Value in megabytes reserved for non-cache usage e.g. failover. Defaults are shown below.\n- `maxmemory_delta`                          = (Optional) The max-memory delta for this Redis instance. Defaults are shown below.\n- `maxmemory_policy`                         = (Optional) How Redis will select what to remove when maxmemory is reached. Defaults to volatile-lru.\n- `data_persistence_authentication_method`   = (Optional) Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.\n- `maxfragmentationmemory_reserved`          = (Optional) Value in megabytes reserved to accommodate for memory fragmentation. Defaults are shown below.\n- `rdb_backup_enabled`                       = (Optional) Is Backup Enabled? Only supported on Premium SKUs. Defaults to false. Note - If rdb_backup_enabled set to true, rdb_storage_connection_string must also be set.\n- `rdb_backup_frequency`                     = (Optional) The Backup Frequency in Minutes. Only supported on Premium SKUs. Possible values are: 15, 30, 60, 360, 720 and 1440.\n- `rdb_backup_max_snapshot_count`            = (Optional) The maximum number of snapshots to create as a backup. Only supported for Premium SKUs.\n- `rdb_storage_connection_string`            = (Optional) The Connection String to the Storage Account. Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=\\$\\{azurerm_storage_account.example.primary_blob_endpoint\\};AccountName=\\$\\{azurerm_storage_account.example.name\\};AccountKey=\\$\\{azurerm_storage_account.example.primary_access_key\\}.\n- `storage_account_subscription_resource_id` = (Optional) The ID of the Subscription containing the Storage Account.\n- `notify_keyspace_events`                   = (Optional) Keyspace notifications allows clients to subscribe to Pub/Sub channels in order to receive events affecting the Redis data set in some way.\n\nExample Input:\n\n```hcl\nredis_configuration = {\n  maxmemory_reserved = 10\n  maxmemory_delta    = 2\n  maxmemory_policy   = \"allkeys-lru\"\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "replicas_per_master",
+    "type": "number",
+    "description": "(Optional) - The quantity of replicas to create per master for this Redis Cache.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region where this and supporting resources should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "diagnostic_settings",
+    "type": "map(object({\n    name                                     = optional(string, null)\n    log_categories                           = optional(set(string), [])\n    log_groups                               = optional(set(string), [\"allLogs\"])\n    metric_categories                        = optional(set(string), [\"AllMetrics\"])\n    log_analytics_destination_type           = optional(string, \"Dedicated\")\n    workspace_resource_id                    = optional(string, null)\n    storage_account_resource_id              = optional(string, null)\n    event_hub_authorization_rule_resource_id = optional(string, null)\n    event_hub_name                           = optional(string, null)\n    marketplace_partner_resource_id          = optional(string, null)\n  }))",
+    "description": "A map of diagnostic settings to create on the Key Vault. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\n- `log_categories` - (Optional) A set of log categories to send to the log analytics workspace. Defaults to `[]`.\n- `log_groups` - (Optional) A set of log groups to send to the log analytics workspace. Defaults to `[\"allLogs\"]`.\n- `metric_categories` - (Optional) A set of metric categories to send to the log analytics workspace. Defaults to `[\"AllMetrics\"]`.\n- `log_analytics_destination_type` - (Optional) The destination type for the diagnostic setting. Possible values are `Dedicated` and `AzureDiagnostics`. Defaults to `Dedicated`.\n- `workspace_resource_id` - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.\n- `storage_account_resource_id` - (Optional) The resource ID of the storage account to send logs and metrics to.\n- `event_hub_authorization_rule_resource_id` - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.\n- `event_hub_name` - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.\n- `marketplace_partner_resource_id` - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.\n\nExample Input:\n\n```hcl\ndiagnostic_settings = {\n  diag_setting_1 = {\n    name                           = \"diagSetting1\"\n    log_groups                     = [\"allLogs\"]\n    metric_categories              = [\"AllMetrics\"]\n    log_analytics_destination_type = null\n    workspace_resource_id          = azurerm_log_analytics_workspace.this_workspace.id\n  }\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "private_endpoints_manage_dns_zone_group",
+    "type": "bool",
+    "description": "Default to true. Whether to manage private DNS zone groups with this module. If set to false, you must manage private DNS zone groups externally, e.g. using Azure Policy.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "zones",
+    "type": "list(string)",
+    "description": "(Optional) - Specifies a list of Availability Zones in which this Redis Cache should be located.  Changing this forces a new Redis Cache to be created.",
+    "default": "[\n  \"1\",\n  \"2\",\n  \"3\"\n]",
+    "required": false
+  },
+  {
+    "name": "cache_access_policy_assignments",
+    "type": "map(object({\n    name               = string\n    access_policy_name = string\n    object_id          = string\n    object_id_alias    = string\n  }))",
+    "description": "A map of objects defining one or more Redis Cache access policy assignments.\n- `<map key>` - The map key is deliberately arbitrary to avoid issues where map keys may be unknown at plan time.\n  - `name` - (Required) - The name of the Redis Cache Access Policy Assignment.  Changing this forces a new policy assignment to be created.\n  - `access_policy_name` - (Required) - The name of the Access Policy to be assigned. Changing this forces a new policy assignment to be created.\n  - `object_id` - (Required) - The principal ID to be assigned to the Access Policy. Changing this forces a new policy assignment to be created.\n  - `object_id_alias` - (Required) - The alias of the principal ID. User-Friendly name for object ID.  Also represents the username for token-based authentication. Changing this forces a new policy assignment to be created.\n\nExample Input:\n\n```hcl\ncache_access_policy_assignments = {\n  example_policy_assignment = {\n    name = \"example_assignment\"\n    access_policy_name = \"Data Contributor\"\n    object_id = data.azurerm_client_config.test.object_id\n    object_policy_alias = \"ServicePrincipal\"\n  }\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "replicas_per_primary",
+    "type": "number",
+    "description": "(Optional) Quantity of replicas to create per primary for this Redis Cache.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "shard_count",
+    "type": "number",
+    "description": "(Optional) - Only available when using the `Premium` SKU. The number of shards to create on the Redis Cluster.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_endpoints",
+    "type": "map(object({\n    name = optional(string, null)\n    role_assignments = optional(map(object({\n      role_definition_id_or_name             = string\n      principal_id                           = string\n      description                            = optional(string, null)\n      skip_service_principal_aad_check       = optional(bool, false)\n      condition                              = optional(string, null)\n      condition_version                      = optional(string, null)\n      delegated_managed_identity_resource_id = optional(string, null)\n      principal_type                         = optional(string, null)\n    })), {})\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }), null)\n    tags                                    = optional(map(string), null)\n    subnet_resource_id                      = string\n    private_dns_zone_group_name             = optional(string, \"default\")\n    private_dns_zone_resource_ids           = optional(set(string), [])\n    application_security_group_associations = optional(map(string), {})\n    private_service_connection_name         = optional(string, null)\n    network_interface_name                  = optional(string, null)\n    location                                = optional(string, null)\n    resource_group_name                     = optional(string, null)\n    ip_configurations = optional(map(object({\n      name               = string\n      private_ip_address = string\n    })), {})\n  }))",
+    "description": "A map of private endpoints to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - (Optional) The name of the private endpoint. One will be generated if not set.\n- `role_assignments` - (Optional) A map of role assignments to create on the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. See `var.role_assignments` for more information.\n- `lock` - (Optional) The lock level to apply to the private endpoint. Default is `None`. Possible values are `None`, `CanNotDelete`, and `ReadOnly`.\n- `tags` - (Optional) A mapping of tags to assign to the private endpoint.\n- `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\n- `private_dns_zone_group_name` - (Optional) The name of the private DNS zone group. One will be generated if not set.\n- `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n- `application_security_group_resource_ids` - (Optional) A map of resource IDs of application security groups to associate with the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n- `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\n- `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\n- `location` - (Optional) The Azure location where the resources will be deployed. Defaults to the location of the resource group.\n- `resource_group_name` - (Optional) The resource group where the resources will be deployed. Defaults to the resource group of this resource.\n- `ip_configurations` - (Optional) A map of IP configurations to create on the private endpoint. If not specified the platform will create one. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - `name` - The name of the IP configuration.\n  - `private_ip_address` - The private IP address of the IP configuration.\n\nExample Input:\n\n```hcl\nprivate_endpoints = {\n  endpoint1 = {\n    subnet_resource_id            = azurerm_subnet.endpoint.id\n    private_dns_zone_group_name   = \"private-dns-zone-group\"\n    private_dns_zone_resource_ids = [azurerm_private_dns_zone.this.id]\n  }\n}\n```\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "access_keys_authentication_enabled",
+    "type": "bool",
+    "description": "(Optional) - Whether access key authentication is enabled? Defaults to `true`. `active_directory_authentication_enabled` must be set to `true` to disable access key authentication.",
+    "default": "null",
+    "required": false
+  }
+]

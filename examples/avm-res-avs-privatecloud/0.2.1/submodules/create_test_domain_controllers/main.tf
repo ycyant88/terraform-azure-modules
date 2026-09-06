@@ -1,0 +1,25 @@
+module "avm-res-avs-privatecloud" {
+  source                      = "Azure/avm-res-avs-privatecloud/azurerm"
+  version                     = "0.2.1"
+  admin_group_name            = var.admin_group_name
+  bastion_name                = var.bastion_name
+  bastion_pip_name            = var.bastion_pip_name
+  bastion_subnet_resource_id  = var.bastion_subnet_resource_id
+  create_bastion              = var.create_bastion
+  dc_dsc_script_url           = var.dc_dsc_script_url
+  dc_dsc_script_url_secondary = var.dc_dsc_script_url_secondary
+  dc_subnet_resource_id       = var.dc_subnet_resource_id
+  dc_vm_name                  = var.dc_vm_name
+  dc_vm_name_secondary        = var.dc_vm_name_secondary
+  dc_vm_sku                   = var.dc_vm_sku
+  domain_distinguished_name   = var.domain_distinguished_name
+  domain_fqdn                 = var.domain_fqdn
+  domain_netbios_name         = var.domain_netbios_name
+  key_vault_resource_id       = var.key_vault_resource_id
+  ldap_user                   = var.ldap_user
+  private_ip_address          = var.private_ip_address
+  resource_group_location     = var.resource_group_location
+  resource_group_name         = var.resource_group_name
+  test_admin_user             = var.test_admin_user
+  virtual_network_resource_id = var.virtual_network_resource_id
+}

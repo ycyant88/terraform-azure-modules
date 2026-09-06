@@ -1,0 +1,34 @@
+output "admin_password" {
+  value       = module.avm-res-compute-virtualmachine.admin_password
+  description = "Returns the admin password if installation is configured to use the password.  Otherwise returns null"
+}
+
+output "admin_ssh_keys" {
+  value       = module.avm-res-compute-virtualmachine.admin_ssh_keys
+  description = "Returns a list containing all of the provided or generated ssh keys. This is a single key if the generation option is selected and no additional keys are provided."
+}
+
+output "data_disks" {
+  value       = module.avm-res-compute-virtualmachine.data_disks
+  description = "The full ARM object map associated with any deployed data disk(s). Exporting this in the event that a disk property not exposed as part of the azurerm vm export is required."
+}
+
+output "network_interfaces" {
+  value       = module.avm-res-compute-virtualmachine.network_interfaces
+  description = "The full ARM object map associated with the deployed network interface(s). Exporting this in the event that a nic property not exposed as part of the azurerm vm export is required."
+}
+
+output "public_ips" {
+  value       = module.avm-res-compute-virtualmachine.public_ips
+  description = "The full ARM object map associated with any deployed public ip(s). Exporting this in the event that a public ip property not exposed as part of the azurerm vm export is required."
+}
+
+output "virtual_machine" {
+  value       = module.avm-res-compute-virtualmachine.virtual_machine
+  description = "The full object for the deployed virtual machine.  This is marked sensitive as it contains specific sensitive values"
+}
+
+output "virtual_machine_azurerm" {
+  value       = module.avm-res-compute-virtualmachine.virtual_machine_azurerm
+  description = "    The default attributes exported by the azurerm provider.  These are defined as a map containing the following attributes\n    id                   = The Azure resource ID of the deployed virtual machine\n    identity             = { #An identity map with the following attributes        \n        principal_id     = The Principal ID associated with the virtual machine's system assigned managed identity\n        tenant_id        = The Tenant ID associated with the virtual machine's system assigned managed identity\n    }\n    private_ip_address   = The primary private IP address of the deployed virtual machine\n    private_ip_addresses = A list of Private IP Addresses assigned to this Virtual Machine.\n    public_ip_address    = The Primary Public IP Address assigned to this Virtual Machine.\n    public_ip_addresses  = A list of the Public IP Addresses assigned to this Virtual Machine.\n    virtual_machine_id   = A 128-bit identifier which uniquely identifies this Virtual Machine.\n"
+}

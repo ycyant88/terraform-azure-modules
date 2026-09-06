@@ -1,0 +1,30 @@
+[
+  {
+    "name": "site_config",
+    "type": "any",
+    "description": "The site configuration object to transform. Uses `any` type as this is an internal helper; callers validate types.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "os_type",
+    "type": "string",
+    "description": "The OS type. Must be `Linux` or `Windows`.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "is_logic_app",
+    "type": "bool",
+    "description": "Whether the parent app is a Logic App.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    system_assigned            = optional(bool, false)\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "Managed identity configuration.",
+    "default": "{}",
+    "required": false
+  }
+]

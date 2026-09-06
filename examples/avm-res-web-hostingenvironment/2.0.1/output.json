@@ -1,0 +1,34 @@
+[
+  {
+    "name": "dns_suffix",
+    "description": "The DNS suffix of the App Service Environment (ASE)."
+  },
+  {
+    "name": "external_inbound_ip_addresses",
+    "description": "The external inbound IP addresses of the App Service Environment (ASE)."
+  },
+  {
+    "name": "internal_inbound_ip_addresses",
+    "description": "The internal inbound IP addresses of the App Service Environment (ASE)."
+  },
+  {
+    "name": "linux_outbound_ip_addresses",
+    "description": "The Linux outbound IP addresses of the App Service Environment (ASE)."
+  },
+  {
+    "name": "name",
+    "description": "The name of the App Service Environment (ASE)."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the App Service Environment (ASE)."
+  },
+  {
+    "name": "system_assigned_managed_identity_principal_id",
+    "description": "The principal ID of the system-assigned managed identity."
+  },
+  {
+    "name": "windows_outbound_ip_addresses",
+    "description": "The Windows outbound IP addresses of the App Service Environment (ASE)."
+  }
+]

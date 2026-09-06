@@ -1,0 +1,34 @@
+[
+  {
+    "name": "node_resource_group",
+    "description": ""
+  },
+  {
+    "name": "host",
+    "description": ""
+  },
+  {
+    "name": "username",
+    "description": ""
+  },
+  {
+    "name": "password",
+    "description": ""
+  },
+  {
+    "name": "location",
+    "description": ""
+  },
+  {
+    "name": "client_key",
+    "description": ""
+  },
+  {
+    "name": "client_certificate",
+    "description": ""
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": ""
+  }
+]

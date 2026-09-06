@@ -1,0 +1,23 @@
+[
+  {
+    "name": "app_settings",
+    "type": "map(string)",
+    "description": "A map of key-value pairs for App Settings and custom values to assign to the App Service.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "is_slot",
+    "type": "bool",
+    "description": "Whether the parent resource is a deployment slot. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  }
+]

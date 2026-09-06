@@ -1,0 +1,23 @@
+[
+  {
+    "name": "subscription_id",
+    "type": "string",
+    "description": "The subscription id to register the resource providers in.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "features",
+    "type": "set(string)",
+    "description": "The resource provider features to register, e.g. [`MyFeature`]\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "resource_provider",
+    "type": "string",
+    "description": "The resource provider namespace, e.g. `Microsoft.Compute`.\n",
+    "default": "",
+    "required": true
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource ID for this resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "bulk_subscribe",
+    "type": "object({\n    enabled               = optional(bool)\n    max_await_duration_ms = optional(number)\n    max_messages_count    = optional(number)\n  })",
+    "description": "Bulk subscription options\n\n- `enabled` - Enable bulk subscription\n- `max_await_duration_ms` - Maximum duration in milliseconds to wait before a bulk message is sent to the app.\n- `max_messages_count` - Maximum number of messages to deliver in a bulk message.\n\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "metadata",
+    "type": "map(string)",
+    "description": "Subscription metadata\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "pubsub_name",
+    "type": "string",
+    "description": "Dapr PubSub component name\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "routes",
+    "type": "object({\n    default = optional(string)\n    rules = optional(list(object({\n      match = optional(string)\n      path  = optional(string)\n    })))\n  })",
+    "description": "Subscription routes\n\n- `default` - The default path to deliver events that do not match any of the rules.\n- `rules` - The list of Dapr PubSub Event Subscription Route Rules.\n\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "scopes",
+    "type": "list(string)",
+    "description": "Application scopes to restrict the subscription to specific apps.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "topic",
+    "type": "string",
+    "description": "Topic name\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dead_letter_topic",
+    "type": "string",
+    "description": "Deadletter topic name\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module. For more information see https://aka.ms/avm/telemetryinfo.\n",
+    "default": "true",
+    "required": false
+  }
+]

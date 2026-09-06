@@ -1,0 +1,51 @@
+[
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the dashboard.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "template_file_path",
+    "type": "string",
+    "description": "Dashboard template file path. For example, ./templates/defaultDashboard.tpl.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "template_file_variables",
+    "type": "map(string)",
+    "description": "List of variables values mapping for variables defined in the dashboard template file.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  }
+]

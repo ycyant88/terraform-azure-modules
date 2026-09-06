@@ -1,0 +1,30 @@
+[
+  {
+    "name": "app_setting_names",
+    "type": "list(string)",
+    "description": "A list of app setting names that should be sticky (not swapped during slot swaps).",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "connection_string_names",
+    "type": "list(string)",
+    "description": "A list of connection string names that should be sticky (not swapped during slot swaps).",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex = list(string)\n    interval_seconds    = optional(number, 10)\n    max_retries         = optional(number, 3)\n  })",
+    "description": "Retry configuration for azapi resources.",
+    "default": "{\n  \"error_message_regex\": [\n    \"Cannot modify this site because another operation is in progress\"\n  ]\n}",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site.",
+    "default": "",
+    "required": true
+  }
+]

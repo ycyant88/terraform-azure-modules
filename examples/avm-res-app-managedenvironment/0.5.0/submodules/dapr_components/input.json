@@ -1,0 +1,93 @@
+[
+  {
+    "name": "service_component_bind",
+    "type": "list(object({\n    metadata = optional(object({\n      name  = optional(string)\n      value = optional(string)\n    }))\n    name       = optional(string)\n    service_id = optional(string)\n  }))",
+    "description": "List of container app services that are bound to the Dapr component.\n\n- `metadata` - Optional. Metadata for the service bind.\n  - `name` - Optional. Name of the metadata item.\n  - `value` - Optional. Value of the metadata item.\n- `name` - Optional. Name of the service bind.\n- `service_id` - Optional. Service ID to bind to.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "component_type",
+    "type": "string",
+    "description": "Component type\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "dapr_components_version",
+    "type": "string",
+    "description": "Component version\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ignore_errors",
+    "type": "bool",
+    "description": "Boolean describing if the component errors are ignores\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "metadata",
+    "type": "list(object({\n    name       = optional(string)\n    secret_ref = optional(string)\n    value      = optional(string)\n  }))",
+    "description": "Component metadata\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "scopes",
+    "type": "list(string)",
+    "description": "Names of container apps that can use this Dapr component\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "secret_store_component",
+    "type": "string",
+    "description": "Name of a Dapr component to retrieve component secrets from\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "secrets_version",
+    "type": "number",
+    "description": "Version tracker for secrets. Must be set when secrets is provided.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource ID for this resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module. For more information see https://aka.ms/avm/telemetryinfo.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "init_timeout",
+    "type": "string",
+    "description": "Initialization timeout\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "secrets",
+    "type": "list(object({\n    identity      = optional(string)\n    key_vault_url = optional(string)\n    name          = optional(string)\n    value         = optional(string)\n  }))",
+    "description": "Collection of secrets used by a Dapr component\n",
+    "default": "null",
+    "required": false
+  }
+]

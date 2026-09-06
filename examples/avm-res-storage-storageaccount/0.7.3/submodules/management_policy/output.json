@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the management policy."
+  },
+  {
+    "name": "resource",
+    "description": "The full management policy azapi_resource."
+  }
+]

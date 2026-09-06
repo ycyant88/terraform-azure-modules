@@ -1,0 +1,27 @@
+module "avm-ptn-virtualwan" {
+  source                                = "Azure/avm-ptn-virtualwan/azurerm"
+  version                               = "0.9.0"
+  allow_branch_to_branch_traffic        = var.allow_branch_to_branch_traffic
+  create_resource_group                 = var.create_resource_group
+  disable_vpn_encryption                = var.disable_vpn_encryption
+  enable_telemetry                      = var.enable_telemetry
+  er_circuit_connections                = var.er_circuit_connections
+  expressroute_gateways                 = var.expressroute_gateways
+  firewalls                             = var.firewalls
+  location                              = var.location
+  office365_local_breakout_category     = var.office365_local_breakout_category
+  p2s_gateway_vpn_server_configurations = var.p2s_gateway_vpn_server_configurations
+  p2s_gateways                          = var.p2s_gateways
+  resource_group_name                   = var.resource_group_name
+  resource_group_tags                   = var.resource_group_tags
+  routing_intents                       = var.routing_intents
+  tags                                  = var.tags
+  type                                  = var.type
+  virtual_hubs                          = var.virtual_hubs
+  virtual_network_connections           = var.virtual_network_connections
+  virtual_wan_name                      = var.virtual_wan_name
+  virtual_wan_tags                      = var.virtual_wan_tags
+  vpn_gateways                          = var.vpn_gateways
+  vpn_site_connections                  = var.vpn_site_connections
+  vpn_sites                             = var.vpn_sites
+}

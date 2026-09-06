@@ -1,0 +1,44 @@
+[
+  {
+    "name": "budget_time_grain",
+    "type": "string",
+    "description": "The time grain of the budget.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "budget_time_period",
+    "type": "object({\n    start_date = string\n    end_date   = string\n  })",
+    "description": "The time period of the budget.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "budget_notifications",
+    "type": "map(object({\n    enabled        = bool\n    operator       = string\n    threshold      = number\n    threshold_type = optional(string, \"Actual\")\n    contact_emails = optional(list(string), [])\n    contact_roles  = optional(list(string), [])\n    contact_groups = optional(list(string), [])\n    locale         = optional(string, \"en-us\")\n  }))",
+    "description": "The notifications for the budget.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "budget_amount",
+    "type": "number",
+    "description": "The total amount of cost to track with the budget.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "budget_name",
+    "type": "string",
+    "description": "The name of the budget.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "budget_scope",
+    "type": "string",
+    "description": "The scope of the budget.",
+    "default": "",
+    "required": true
+  }
+]

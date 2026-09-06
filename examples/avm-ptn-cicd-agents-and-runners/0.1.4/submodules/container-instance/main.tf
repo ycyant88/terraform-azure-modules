@@ -1,0 +1,23 @@
+module "avm-ptn-cicd-agents-and-runners" {
+  source                            = "Azure/avm-ptn-cicd-agents-and-runners/azurerm"
+  version                           = "0.1.4"
+  availability_zones                = var.availability_zones
+  container_cpu                     = var.container_cpu
+  container_cpu_limit               = var.container_cpu_limit
+  container_image                   = var.container_image
+  container_instance_name           = var.container_instance_name
+  container_memory                  = var.container_memory
+  container_memory_limit            = var.container_memory_limit
+  container_name                    = var.container_name
+  container_registry_login_server   = var.container_registry_login_server
+  container_registry_password       = var.container_registry_password
+  container_registry_username       = var.container_registry_username
+  environment_variables             = var.environment_variables
+  location                          = var.location
+  resource_group_name               = var.resource_group_name
+  sensitive_environment_variables   = var.sensitive_environment_variables
+  subnet_id                         = var.subnet_id
+  tags                              = var.tags
+  use_private_networking            = var.use_private_networking
+  user_assigned_managed_identity_id = var.user_assigned_managed_identity_id
+}

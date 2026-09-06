@@ -1,0 +1,170 @@
+[
+  {
+    "name": "liveness_probe",
+    "type": "object({\n    exec = object({\n      command = list(string)\n    })\n    period_seconds        = number\n    failure_threshold     = number\n    success_threshold     = number\n    timeout_seconds       = number\n    initial_delay_seconds = number\n    http_get = object({\n      path         = string\n      port         = number\n      http_headers = map(string)\n    })\n    tcp_socket = object({\n      port = number\n    })\n  })",
+    "description": "The liveness probe configuration for the container group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "subnet_ids",
+    "type": "list(string)",
+    "description": "The subnet IDs for the container group.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "zones",
+    "type": "list(string)",
+    "description": "A list of availability zones in which the resource should be created.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dns_name_servers",
+    "type": "list(string)",
+    "description": "A list of DNS name servers to use for the container group.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "key_vault_user_assigned_identity_id",
+    "type": "string",
+    "description": "The Key Vault user-assigned identity ID for the container group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    system_assigned            = optional(bool, false)\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "  Controls the Managed Identity configuration on this resource. The following properties can be specified:\n  \n  - `system_assigned` - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\n  - `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "private_endpoints",
+    "type": "map(object({\n    name = optional(string, null)\n    role_assignments = optional(map(object({\n      role_definition_id_or_name             = string\n      principal_id                           = string\n      description                            = optional(string, null)\n      skip_service_principal_aad_check       = optional(bool, false)\n      condition                              = optional(string, null)\n      condition_version                      = optional(string, null)\n      delegated_managed_identity_resource_id = optional(string, null)\n      principal_type                         = optional(string, null)\n    })), {})\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }), null)\n    tags                                    = optional(map(string), null)\n    subnet_resource_id                      = string\n    subresource_name                        = string # NOTE: `subresource_name` can be excluded if the resource does not support multiple sub resource types (e.g. storage account supports blob, queue, etc)\n    private_dns_zone_group_name             = optional(string, \"default\")\n    private_dns_zone_resource_ids           = optional(set(string), [])\n    application_security_group_associations = optional(map(string), {})\n    private_service_connection_name         = optional(string, null)\n    network_interface_name                  = optional(string, null)\n    location                                = optional(string, null)\n    resource_group_name                     = optional(string, null)\n    ip_configurations = optional(map(object({\n      name               = string\n      private_ip_address = string\n    })), {})\n  }))",
+    "description": "Private Endpoints Configuration",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "readiness_probe",
+    "type": "object({\n    exec = object({\n      command = list(string)\n    })\n    period_seconds        = number\n    failure_threshold     = number\n    success_threshold     = number\n    timeout_seconds       = number\n    initial_delay_seconds = number\n    http_get = object({\n      path         = string\n      port         = number\n      http_headers = map(string)\n    })\n    tcp_socket = object({\n      port = number\n    })\n  })",
+    "description": "The readiness probe configuration for the container group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The name of the resource group in which to create the resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "restart_policy",
+    "type": "string",
+    "description": "The restart policy for the container group.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "containers",
+    "type": "map(object({\n    image  = string\n    cpu    = number\n    memory = number\n    ports = list(object({\n      port     = number\n      protocol = string\n    }))\n    volumes = map(object({\n      mount_path           = string\n      name                 = string\n      read_only            = optional(bool, false)\n      empty_dir            = optional(bool, false)\n      secret               = optional(map(string), null)\n      storage_account_name = optional(string, null)\n      storage_account_key  = optional(string, null)\n      share_name           = optional(string, null)\n      git_repo = optional(object({\n        url       = optional(string, null)\n        directory = optional(string, null)\n        revision  = optional(string, null)\n      }))\n    }))\n    environment_variables        = optional(map(string), {})\n    secure_environment_variables = optional(map(string), {})\n    commands                     = optional(list(string), null)\n  }))",
+    "description": "A map of containers to run in the container group.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "diagnostics_log_analytics",
+    "type": "object({\n    workspace_id  = string\n    workspace_key = string\n  })",
+    "description": "The Log Analytics workspace configuration for diagnostics.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "dns_name_label",
+    "type": "string",
+    "description": "The DNS name label for the container group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "image_registry_credential",
+    "type": "map(object({\n    user_assigned_identity_id = optional(string)\n    server                    = string\n    username                  = optional(string)\n    password                  = optional(string)\n  }))",
+    "description": "The credentials for the image registry.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "key_vault_key_id",
+    "type": "string",
+    "description": "The Key Vault key ID for the container group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "The role assignments for the container group.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "os_type",
+    "type": "string",
+    "description": "The operating system type for the container group.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dns_name_label_reuse_policy",
+    "type": "string",
+    "description": "The DNS name label reuse policy for the container group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "priority",
+    "type": "string",
+    "description": "The Priority for the container group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "exposed_ports",
+    "type": "list(object({\n    port     = number\n    protocol = string\n  }))",
+    "description": "A list of ports to expose on the container group.",
+    "default": "[]",
+    "required": false
+  }
+]

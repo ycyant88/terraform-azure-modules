@@ -1,0 +1,22 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Resource ID of Container Group Instance"
+  },
+  {
+    "name": "fqdn",
+    "description": "The FQDN of the container group derived from `dns_name_label"
+  },
+  {
+    "name": "ip_address",
+    "description": "The IP address allocated to the container group"
+  },
+  {
+    "name": "name",
+    "description": "Name of the container group"
+  },
+  {
+    "name": "resource_group_name",
+    "description": "Name of the container group resource group"
+  }
+]

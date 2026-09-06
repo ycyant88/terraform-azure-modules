@@ -1,0 +1,30 @@
+[
+  {
+    "name": "ftp_enabled",
+    "type": "bool",
+    "description": "Enable FTP on the App Service Environment (ASE). Defaults to false.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "remote_debug_enabled",
+    "type": "bool",
+    "description": "Enable Remote Debug on the App Service Environment (ASE).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "hosting_environment_resource_id",
+    "type": "string",
+    "description": "The resource ID of the App Service Environment (ASE) to configure networking for.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "allow_new_private_endpoint_connections",
+    "type": "bool",
+    "description": "Enable new private endpoint connection creation on the App Service Environment (ASE). Defaults to true.",
+    "default": "true",
+    "required": false
+  }
+]

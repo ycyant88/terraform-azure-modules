@@ -1,0 +1,26 @@
+[
+  {
+    "name": "lock",
+    "description": "The lock resource for this slot."
+  },
+  {
+    "name": "name",
+    "description": "The name of the deployment slot."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "The private endpoints created for this slot."
+  },
+  {
+    "name": "resource",
+    "description": "The full slot resource object."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the deployment slot."
+  },
+  {
+    "name": "identity_principal_id",
+    "description": "The principal ID of the system-assigned managed identity (if enabled)."
+  }
+]

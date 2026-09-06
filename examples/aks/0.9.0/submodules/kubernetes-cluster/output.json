@@ -1,0 +1,34 @@
+[
+  {
+    "name": "host",
+    "description": ""
+  },
+  {
+    "name": "username",
+    "description": ""
+  },
+  {
+    "name": "password",
+    "description": ""
+  },
+  {
+    "name": "raw_kube_config",
+    "description": ""
+  },
+  {
+    "name": "cluster_id",
+    "description": ""
+  },
+  {
+    "name": "client_key",
+    "description": ""
+  },
+  {
+    "name": "client_certificate",
+    "description": ""
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": ""
+  }
+]

@@ -1,0 +1,6 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Resource ID of the maintenance configuration."
+  }
+]

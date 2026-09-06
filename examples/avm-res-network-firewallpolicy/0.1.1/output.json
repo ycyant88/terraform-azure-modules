@@ -1,0 +1,14 @@
+[
+  {
+    "name": "id",
+    "description": "The ID of the Firewall Policy."
+  },
+  {
+    "name": "name",
+    "description": "The name of the Firewall Policy."
+  },
+  {
+    "name": "resource",
+    "description": "The Firewall Policy resource."
+  }
+]

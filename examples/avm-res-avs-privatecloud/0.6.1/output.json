@@ -1,0 +1,22 @@
+[
+  {
+    "name": "resource",
+    "description": "This output returns the full private cloud resource object properties."
+  },
+  {
+    "name": "resource_id",
+    "description": "The azure resource if of the private cloud."
+  },
+  {
+    "name": "system_assigned_mi_principal_id",
+    "description": "The principal id of the system managed identity assigned to the virtual machine"
+  },
+  {
+    "name": "credentials",
+    "description": "This value returns the vcenter and nsxt cloudadmin credential values."
+  },
+  {
+    "name": "identity",
+    "description": "This output returns the managed identity values if the managed identity has been enabled on the module."
+  }
+]

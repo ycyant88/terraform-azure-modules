@@ -1,0 +1,26 @@
+[
+  {
+    "name": "virtual_network_gateway",
+    "description": "A curated output of the Virtual Network Gateway created by this module."
+  },
+  {
+    "name": "virtual_network_gateway_connections",
+    "description": "A curated output of the Virtual Network Gateway Connections created by this module."
+  },
+  {
+    "name": "local_network_gateways",
+    "description": "A curated output of the Local Network Gateways created by this module."
+  },
+  {
+    "name": "public_ip_addresses",
+    "description": "A curated output of the Public IP Addresses created by this module."
+  },
+  {
+    "name": "route_table",
+    "description": "A curated output of the Route Table created by this module."
+  },
+  {
+    "name": "subnet",
+    "description": "A curated output of the GatewaySubnet created by this module."
+  }
+]

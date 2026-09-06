@@ -1,0 +1,310 @@
+[
+  {
+    "name": "entra_jwt_validation_configs",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      audiences                    = optional(list(string))\n      client_id                    = optional(string)\n      tenant_id                    = optional(string)\n      un_authorized_request_action = optional(string)\n    }))\n  }))",
+    "description": "Entra JWT validation configurations for the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n- `kind` - (Required) The type of lock. Possible values are `\"CanNotDelete\"` and `\"ReadOnly\"`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    system_assigned            = optional(bool, false)\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "Controls the Managed Identity configuration on this resource. The following properties can be specified:\n\n- `system_assigned` - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\n- `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "authentication_certificates",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      data = optional(string)\n    }))\n  }))",
+    "description": "Authentication certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "backend_address_pools",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      backend_addresses = optional(list(object({\n        fqdn       = optional(string)\n        ip_address = optional(string)\n      })))\n    }))\n  }))",
+    "description": "Backend address pool of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_fips",
+    "type": "bool",
+    "description": "Whether FIPS is enabled on the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "probes",
+    "type": "list(object({\n    id   = optional(string)\n    name = optional(string)\n    properties = optional(object({\n      enable_probe_proxy_protocol_header = optional(bool)\n      host                               = optional(string)\n      interval                           = optional(number)\n      match = optional(object({\n        body         = optional(string)\n        status_codes = optional(list(string))\n      }))\n      min_servers                               = optional(number)\n      path                                      = optional(string)\n      pick_host_name_from_backend_http_settings = optional(bool)\n      pick_host_name_from_backend_settings      = optional(bool)\n      port                                      = optional(number)\n      protocol                                  = optional(string)\n      timeout                                   = optional(number)\n      unhealthy_threshold                       = optional(number)\n    }))\n  }))",
+    "description": "Probes of the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "rewrite_rule_sets",
+    "type": "list(object({\n    id   = optional(string)\n    name = optional(string)\n    properties = optional(object({\n      rewrite_rules = optional(list(object({\n        action_set = optional(object({\n          request_header_configurations = optional(list(object({\n            header_name  = optional(string)\n            header_value = optional(string)\n            header_value_matcher = optional(object({\n              ignore_case = optional(bool)\n              negate      = optional(bool)\n              pattern     = optional(string)\n            }))\n          })))\n          response_header_configurations = optional(list(object({\n            header_name  = optional(string)\n            header_value = optional(string)\n            header_value_matcher = optional(object({\n              ignore_case = optional(bool)\n              negate      = optional(bool)\n              pattern     = optional(string)\n            }))\n          })))\n          url_configuration = optional(object({\n            modified_path         = optional(string)\n            modified_query_string = optional(string)\n            reroute               = optional(bool)\n          }))\n        }))\n        conditions = optional(list(object({\n          ignore_case = optional(bool)\n          negate      = optional(bool)\n          pattern     = optional(string)\n          variable    = optional(string)\n        })))\n        name          = optional(string)\n        rule_sequence = optional(number)\n      })))\n    }))\n  }))",
+    "description": "Rewrite rules for the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "trusted_root_certificates",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      data                = optional(string)\n      key_vault_secret_id = optional(string)\n    }))\n  }))",
+    "description": "Trusted Root certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "firewall_policy",
+    "type": "object({\n    id = optional(string)\n  })",
+    "description": "Reference to another subresource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "gateway_ip_configurations",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      subnet = optional(object({\n        id = optional(string)\n      }))\n    }))\n  }))",
+    "description": "Subnets of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "diagnostic_settings",
+    "type": "map(object({\n    name                                     = optional(string, null)\n    log_categories                           = optional(set(string), [])\n    log_groups                               = optional(set(string), [\"allLogs\"])\n    metric_categories                        = optional(set(string), [\"AllMetrics\"])\n    log_analytics_destination_type           = optional(string, \"Dedicated\")\n    workspace_resource_id                    = optional(string, null)\n    storage_account_resource_id              = optional(string, null)\n    event_hub_authorization_rule_resource_id = optional(string, null)\n    event_hub_name                           = optional(string, null)\n    marketplace_partner_resource_id          = optional(string, null)\n  }))",
+    "description": "A map of diagnostic settings to create on the Key Vault. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\n- `log_categories` - (Optional) A set of log categories to send to the log analytics workspace. Defaults to `[]`.\n- `log_groups` - (Optional) A set of log groups to send to the log analytics workspace. Defaults to `[\"allLogs\"]`.\n- `metric_categories` - (Optional) A set of metric categories to send to the log analytics workspace. Defaults to `[\"AllMetrics\"]`.\n- `log_analytics_destination_type` - (Optional) The destination type for the diagnostic setting. Possible values are `Dedicated` and `AzureDiagnostics`. Defaults to `Dedicated`.\n- `workspace_resource_id` - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.\n- `storage_account_resource_id` - (Optional) The resource ID of the storage account to send logs and metrics to.\n- `event_hub_authorization_rule_resource_id` - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.\n- `event_hub_name` - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.\n- `marketplace_partner_resource_id` - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enable_http2",
+    "type": "bool",
+    "description": "Whether HTTP2 is enabled on the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "frontend_ip_configurations",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      private_ip_address           = optional(string)\n      private_ip_allocation_method = optional(string)\n      private_link_configuration = optional(object({\n        id = optional(string)\n      }))\n      public_ip_address = optional(object({\n        id = optional(string)\n      }))\n      subnet = optional(object({\n        id = optional(string)\n      }))\n    }))\n  }))",
+    "description": "Frontend IP addresses of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "global_configuration",
+    "type": "object({\n    enable_request_buffering  = optional(bool)\n    enable_response_buffering = optional(bool)\n  })",
+    "description": "Application Gateway global configuration.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "redirect_configurations",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      include_path         = optional(bool)\n      include_query_string = optional(bool)\n      path_rules = optional(list(object({\n        id = optional(string)\n      })))\n      redirect_type = optional(string)\n      request_routing_rules = optional(list(object({\n        id = optional(string)\n      })))\n      target_listener = optional(object({\n        id = optional(string)\n      }))\n      target_url = optional(string)\n      url_path_maps = optional(list(object({\n        id = optional(string)\n      })))\n    }))\n  }))",
+    "description": "Redirect configurations of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "web_application_firewall_configuration",
+    "type": "object({\n    disabled_rule_groups = optional(list(object({\n      rule_group_name = string\n      rules           = optional(list(number))\n    })))\n    enabled = bool\n    exclusions = optional(list(object({\n      match_variable          = string\n      selector                = string\n      selector_match_operator = string\n    })))\n    file_upload_limit_in_mb     = optional(number)\n    firewall_mode               = string\n    max_request_body_size       = optional(number)\n    max_request_body_size_in_kb = optional(number)\n    request_body_check          = optional(bool)\n    rule_set_type               = string\n    rule_set_version            = string\n  })",
+    "description": "Application gateway web application firewall configuration.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the this resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "private_endpoints",
+    "type": "map(object({\n    name = optional(string, null)\n    role_assignments = optional(map(object({\n      role_definition_id_or_name             = string\n      principal_id                           = string\n      description                            = optional(string, null)\n      skip_service_principal_aad_check       = optional(bool, false)\n      condition                              = optional(string, null)\n      condition_version                      = optional(string, null)\n      delegated_managed_identity_resource_id = optional(string, null)\n      principal_type                         = optional(string, null)\n    })), {})\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }), null)\n    tags                                    = optional(map(string), null)\n    subnet_resource_id                      = string\n    private_dns_zone_group_name             = optional(string, \"default\")\n    private_dns_zone_resource_ids           = optional(set(string), [])\n    application_security_group_associations = optional(map(string), {})\n    private_service_connection_name         = optional(string, null)\n    network_interface_name                  = optional(string, null)\n    location                                = optional(string, null)\n    resource_group_name                     = optional(string, null)\n    ip_configurations = optional(map(object({\n      name               = string\n      private_ip_address = string\n    })), {})\n  }))",
+    "description": "A map of private endpoints to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - (Optional) The name of the private endpoint. One will be generated if not set.\n- `role_assignments` - (Optional) A map of role assignments to create on the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. See `var.role_assignments` for more information.\n- `lock` - (Optional) The lock level to apply to the private endpoint. Default is `None`. Possible values are `None`, `CanNotDelete`, and `ReadOnly`.\n- `tags` - (Optional) A mapping of tags to assign to the private endpoint.\n- `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\n- `private_dns_zone_group_name` - (Optional) The name of the private DNS zone group. One will be generated if not set.\n- `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n- `application_security_group_resource_ids` - (Optional) A map of resource IDs of application security groups to associate with the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n- `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\n- `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\n- `location` - (Optional) The Azure location where the resources will be deployed. Defaults to the location of the resource group.\n- `resource_group_name` - (Optional) The resource group where the resources will be deployed. Defaults to the resource group of this resource.\n- `ip_configurations` - (Optional) A map of IP configurations to create on the private endpoint. If not specified the platform will create one. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - `name` - The name of the IP configuration.\n  - `private_ip_address` - The private IP address of the IP configuration.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "custom_error_configurations",
+    "type": "list(object({\n    custom_error_page_url = optional(string)\n    status_code           = optional(string)\n  }))",
+    "description": "Custom error configurations of the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "frontend_ports",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      port = optional(number)\n    }))\n  }))",
+    "description": "Frontend ports of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "listeners",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      frontend_ip_configuration = optional(object({\n        id = optional(string)\n      }))\n      frontend_port = optional(object({\n        id = optional(string)\n      }))\n      host_names = optional(list(string))\n      protocol   = optional(string)\n      ssl_certificate = optional(object({\n        id = optional(string)\n      }))\n      ssl_profile = optional(object({\n        id = optional(string)\n      }))\n    }))\n  }))",
+    "description": "Listeners of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "load_distribution_policies",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      load_distribution_algorithm = optional(string)\n      load_distribution_targets = optional(list(object({\n        id   = optional(string)\n        name = optional(string)\n        properties = optional(object({\n          backend_address_pool = optional(object({\n            id = optional(string)\n          }))\n          weight_per_server = optional(number)\n        }))\n      })))\n    }))\n  }))",
+    "description": "Load distribution policies of the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_link_configurations",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      ip_configurations = optional(list(object({\n        id   = optional(string)\n        name = optional(string)\n        properties = optional(object({\n          primary                      = optional(bool)\n          private_ip_address           = optional(string)\n          private_ip_allocation_method = optional(string)\n          subnet = optional(object({\n            id = optional(string)\n          }))\n        }))\n      })))\n    }))\n  }))",
+    "description": "PrivateLink configurations on application gateway.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "sku",
+    "type": "object({\n    capacity = optional(number)\n    family   = optional(string)\n    name     = optional(string)\n    tier     = optional(string)\n  })",
+    "description": "SKU of an application gateway.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "autoscale_configuration",
+    "type": "object({\n    max_capacity = optional(number)\n    min_capacity = number\n  })",
+    "description": "Application Gateway autoscale configuration.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "http_listeners",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      custom_error_configurations = optional(list(object({\n        custom_error_page_url = optional(string)\n        status_code           = optional(string)\n      })))\n      firewall_policy = optional(object({\n        id = optional(string)\n      }))\n      frontend_ip_configuration = optional(object({\n        id = optional(string)\n      }))\n      frontend_port = optional(object({\n        id = optional(string)\n      }))\n      host_name                      = optional(string)\n      host_names                     = optional(list(string))\n      protocol                       = optional(string)\n      require_server_name_indication = optional(bool)\n      ssl_certificate = optional(object({\n        id = optional(string)\n      }))\n      ssl_profile = optional(object({\n        id = optional(string)\n      }))\n    }))\n  }))",
+    "description": "Http listeners of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ssl_certificates",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      data                = optional(string)\n      key_vault_secret_id = optional(string)\n      password            = optional(string)\n    }))\n  }))",
+    "description": "SSL certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ssl_policy",
+    "type": "object({\n    cipher_suites          = optional(list(string))\n    disabled_ssl_protocols = optional(list(string))\n    min_protocol_version   = optional(string)\n    policy_name            = optional(string)\n    policy_type            = optional(string)\n  })",
+    "description": "Application Gateway Ssl policy.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "url_path_maps",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      default_backend_address_pool = optional(object({\n        id = optional(string)\n      }))\n      default_backend_http_settings = optional(object({\n        id = optional(string)\n      }))\n      default_load_distribution_policy = optional(object({\n        id = optional(string)\n      }))\n      default_redirect_configuration = optional(object({\n        id = optional(string)\n      }))\n      default_rewrite_rule_set = optional(object({\n        id = optional(string)\n      }))\n      path_rules = optional(list(object({\n        id   = optional(string)\n        name = optional(string)\n        properties = optional(object({\n          backend_address_pool = optional(object({\n            id = optional(string)\n          }))\n          backend_http_settings = optional(object({\n            id = optional(string)\n          }))\n          firewall_policy = optional(object({\n            id = optional(string)\n          }))\n          load_distribution_policy = optional(object({\n            id = optional(string)\n          }))\n          paths = optional(list(string))\n          redirect_configuration = optional(object({\n            id = optional(string)\n          }))\n          rewrite_rule_set = optional(object({\n            id = optional(string)\n          }))\n        }))\n      })))\n    }))\n  }))",
+    "description": "URL path map of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - The description of the role assignment.\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - The condition which will be used to scope the role assignment.\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\n- `delegated_managed_identity_resource_id` - The delegated Azure Resource Id which contains a Managed Identity. Changing this forces a new resource to be created.\n- `principal_type` - The type of the principal_id. Possible values are `User`, `Group` and `ServicePrincipal`. Changing this forces a new resource to be created. It is necessary to explicitly set this attribute when creating role assignments if the principal creating the assignment is constrained by ABAC rules that filters on the PrincipalType attribute.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "force_firewall_policy_association",
+    "type": "bool",
+    "description": "If true, associates a firewall policy with an application gateway regardless whether the policy differs from the WAF Config.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "routing_rules",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      backend_address_pool = optional(object({\n        id = optional(string)\n      }))\n      backend_settings = optional(object({\n        id = optional(string)\n      }))\n      listener = optional(object({\n        id = optional(string)\n      }))\n      priority  = number\n      rule_type = optional(string)\n    }))\n  }))",
+    "description": "Routing rules of the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ssl_profiles",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      client_auth_configuration = optional(object({\n        verify_client_auth_mode      = optional(string)\n        verify_client_cert_issuer_dn = optional(bool)\n        verify_client_revocation     = optional(string)\n      }))\n      ssl_policy = optional(object({\n        cipher_suites          = optional(list(string))\n        disabled_ssl_protocols = optional(list(string))\n        min_protocol_version   = optional(string)\n        policy_name            = optional(string)\n        policy_type            = optional(string)\n      }))\n      trusted_client_certificates = optional(list(object({\n        id = optional(string)\n      })))\n    }))\n  }))",
+    "description": "SSL profiles of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "customer_managed_key",
+    "type": "object({\n    key_vault_resource_id = string\n    key_name              = string\n    key_version           = optional(string, null)\n    user_assigned_identity = optional(object({\n      resource_id = string\n    }), null)\n  })",
+    "description": "A map describing customer-managed keys to associate with the resource. This includes the following properties:\n- `key_vault_resource_id` - The resource ID of the Key Vault where the key is stored.\n- `key_name` - The name of the key.\n- `key_version` - (Optional) The version of the key. If not specified, the latest version is used.\n- `user_assigned_identity` - (Optional) An object representing a user-assigned identity with the following properties:\n  - `resource_id` - The resource ID of the user-assigned identity.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource ID for this resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "backend_http_settings_collection",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      affinity_cookie_name = optional(string)\n      authentication_certificates = optional(list(object({\n        id = optional(string)\n      })))\n      connection_draining = optional(object({\n        drain_timeout_in_sec = number\n        enabled              = bool\n      }))\n      cookie_based_affinity               = optional(string)\n      dedicated_backend_connection        = optional(bool)\n      host_name                           = optional(string)\n      path                                = optional(string)\n      pick_host_name_from_backend_address = optional(bool)\n      port                                = optional(number)\n      probe = optional(object({\n        id = optional(string)\n      }))\n      probe_enabled   = optional(bool)\n      protocol        = optional(string)\n      request_timeout = optional(number)\n      sni_name        = optional(string)\n      trusted_root_certificates = optional(list(object({\n        id = optional(string)\n      })))\n      validate_cert_chain_and_expiry = optional(bool)\n      validate_sni                   = optional(bool)\n    }))\n  }))",
+    "description": "Backend http settings of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "backend_settings_collection",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      enable_l4_client_ip_preservation    = optional(bool)\n      host_name                           = optional(string)\n      pick_host_name_from_backend_address = optional(bool)\n      port                                = optional(number)\n      probe = optional(object({\n        id = optional(string)\n      }))\n      protocol = optional(string)\n      timeout  = optional(number)\n      trusted_root_certificates = optional(list(object({\n        id = optional(string)\n      })))\n    }))\n  }))",
+    "description": "Backend settings of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "request_routing_rules",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      backend_address_pool = optional(object({\n        id = optional(string)\n      }))\n      backend_http_settings = optional(object({\n        id = optional(string)\n      }))\n      entra_jwt_validation_config = optional(object({\n        id = optional(string)\n      }))\n      http_listener = optional(object({\n        id = optional(string)\n      }))\n      load_distribution_policy = optional(object({\n        id = optional(string)\n      }))\n      priority = optional(number)\n      redirect_configuration = optional(object({\n        id = optional(string)\n      }))\n      rewrite_rule_set = optional(object({\n        id = optional(string)\n      }))\n      rule_type = optional(string)\n      url_path_map = optional(object({\n        id = optional(string)\n      }))\n    }))\n  }))",
+    "description": "Request routing rules of the application gateway resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "trusted_client_certificates",
+    "type": "list(object({\n    name = optional(string)\n    properties = optional(object({\n      data = optional(string)\n    }))\n  }))",
+    "description": "Trusted client certificates of the application gateway resource. For default limits, see [Application Gateway limits](https://docs.microsoft.com/azure/azure-subscription-service-limits#application-gateway-limits).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "zones",
+    "type": "list(string)",
+    "description": "A list of availability zones denoting where the resource needs to come from.\n",
+    "default": "null",
+    "required": false
+  }
+]

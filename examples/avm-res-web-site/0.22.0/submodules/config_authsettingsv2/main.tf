@@ -1,0 +1,20 @@
+module "avm-res-web-site" {
+  source                                 = "Azure/avm-res-web-site/azurerm"
+  version                                = "0.22.0"
+  auth_enabled                           = var.auth_enabled
+  config_file_path                       = var.config_file_path
+  excluded_paths                         = var.excluded_paths
+  forward_proxy_convention               = var.forward_proxy_convention
+  forward_proxy_custom_host_header_name  = var.forward_proxy_custom_host_header_name
+  forward_proxy_custom_proto_header_name = var.forward_proxy_custom_proto_header_name
+  http_route_api_prefix                  = var.http_route_api_prefix
+  identity_providers                     = var.identity_providers
+  login                                  = var.login
+  parent_id                              = var.parent_id
+  redirect_to_provider                   = var.redirect_to_provider
+  require_authentication                 = var.require_authentication
+  require_https                          = var.require_https
+  retry                                  = var.retry
+  runtime_version                        = var.runtime_version
+  unauthenticated_client_action          = var.unauthenticated_client_action
+}

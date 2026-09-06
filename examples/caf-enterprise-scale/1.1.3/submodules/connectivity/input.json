@@ -1,0 +1,72 @@
+[
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Controls whether to manage the connectivity landing zone policies and deploy the connectivity resources into the current Subscription context.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_prefix",
+    "type": "string",
+    "description": "If specified, will set the resource name prefix for connectivity resources (default value determined from \"var.root_id\").",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "resource_suffix",
+    "type": "string",
+    "description": "If specified, will set the resource name suffix for connectivity resources.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "Specifies the ID of the Enterprise-scale root Management Group, used as a prefix for resources created by this module.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "subscription_id",
+    "type": "string",
+    "description": "Specifies the Subscription ID for the Subscription containing all connectivity resources.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Sets the default location used for resource deployments where needed.",
+    "default": "\"eastus\"",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "If specified, will set the default tags for all resources deployed by this module where supported.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "settings",
+    "type": "object({\n    hub_networks = list(\n      object({\n        enabled = bool\n        config = object({\n          address_space                = list(string)\n          location                     = string\n          link_to_ddos_protection_plan = bool\n          dns_servers                  = list(string)\n          bgp_community                = string\n          subnets = list(\n            object({\n              name                      = string\n              address_prefixes          = list(string)\n              network_security_group_id = string\n              route_table_id            = string\n            })\n          )\n          virtual_network_gateway = object({\n            enabled = bool\n            config = object({\n              address_prefix           = string\n              gateway_sku_expressroute = string\n              gateway_sku_vpn          = string\n            })\n          })\n          azure_firewall = object({\n            enabled = bool\n            config = object({\n              address_prefix   = string\n              enable_dns_proxy = bool\n              availability_zones = object({\n                zone_1 = bool\n                zone_2 = bool\n                zone_3 = bool\n              })\n            })\n          })\n          spoke_virtual_network_resource_ids      = list(string)\n          enable_outbound_virtual_network_peering = bool\n        })\n      })\n    )\n    vwan_hub_networks = list(object({}))\n    ddos_protection_plan = object({\n      enabled = bool\n      config = object({\n        location = string\n      })\n    })\n    dns = object({\n      enabled = bool\n      config = object({\n        location = string\n        enable_private_link_by_service = object({\n          azure_automation_webhook             = bool\n          azure_automation_dscandhybridworker  = bool\n          azure_sql_database_sqlserver         = bool\n          azure_synapse_analytics_sqlserver    = bool\n          azure_synapse_analytics_sql          = bool\n          storage_account_blob                 = bool\n          storage_account_table                = bool\n          storage_account_queue                = bool\n          storage_account_file                 = bool\n          storage_account_web                  = bool\n          azure_data_lake_file_system_gen2     = bool\n          azure_cosmos_db_sql                  = bool\n          azure_cosmos_db_mongodb              = bool\n          azure_cosmos_db_cassandra            = bool\n          azure_cosmos_db_gremlin              = bool\n          azure_cosmos_db_table                = bool\n          azure_database_for_postgresql_server = bool\n          azure_database_for_mysql_server      = bool\n          azure_database_for_mariadb_server    = bool\n          azure_key_vault                      = bool\n          azure_kubernetes_service_management  = bool\n          azure_search_service                 = bool\n          azure_container_registry             = bool\n          azure_app_configuration_stores       = bool\n          azure_backup                         = bool\n          azure_site_recovery                  = bool\n          azure_event_hubs_namespace           = bool\n          azure_service_bus_namespace          = bool\n          azure_iot_hub                        = bool\n          azure_relay_namespace                = bool\n          azure_event_grid_topic               = bool\n          azure_event_grid_domain              = bool\n          azure_web_apps_sites                 = bool\n          azure_machine_learning_workspace     = bool\n          signalr                              = bool\n          azure_monitor                        = bool\n          cognitive_services_account           = bool\n          azure_file_sync                      = bool\n          azure_data_factory                   = bool\n          azure_data_factory_portal            = bool\n          azure_cache_for_redis                = bool\n        })\n        private_link_locations                                 = list(string)\n        public_dns_zones                                       = list(string)\n        private_dns_zones                                      = list(string)\n        enable_private_dns_zone_virtual_network_link_on_hubs   = bool\n        enable_private_dns_zone_virtual_network_link_on_spokes = bool\n      })\n    })\n  })",
+    "description": "",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "existing_ddos_protection_plan_resource_id",
+    "type": "string",
+    "description": "If specified, module will skip creation of DDoS Protection Plan and use existing.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "custom_settings_by_resource_type",
+    "type": "any",
+    "description": "If specified, allows full customization of common settings for all resources (by type) deployed by this module.",
+    "default": "{}",
+    "required": false
+  }
+]

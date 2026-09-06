@@ -1,0 +1,27 @@
+module "avm-res-containerregistry-registry" {
+  source                        = "Azure/avm-res-containerregistry-registry/azurerm"
+  version                       = "0.2.0"
+  admin_enabled                 = var.admin_enabled
+  anonymous_pull_enabled        = var.anonymous_pull_enabled
+  data_endpoint_enabled         = var.data_endpoint_enabled
+  diagnostic_settings           = var.diagnostic_settings
+  enable_telemetry              = var.enable_telemetry
+  enable_trust_policy           = var.enable_trust_policy
+  export_policy_enabled         = var.export_policy_enabled
+  georeplications               = var.georeplications
+  location                      = var.location
+  lock                          = var.lock
+  managed_identities            = var.managed_identities
+  name                          = var.name
+  network_rule_bypass_option    = var.network_rule_bypass_option
+  network_rule_set              = var.network_rule_set
+  private_endpoints             = var.private_endpoints
+  public_network_access_enabled = var.public_network_access_enabled
+  quarantine_policy_enabled     = var.quarantine_policy_enabled
+  resource_group_name           = var.resource_group_name
+  retention_policy              = var.retention_policy
+  role_assignments              = var.role_assignments
+  sku                           = var.sku
+  tags                          = var.tags
+  zone_redundancy_enabled       = var.zone_redundancy_enabled
+}

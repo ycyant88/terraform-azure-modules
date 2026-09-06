@@ -1,0 +1,51 @@
+[
+  {
+    "name": "account_name",
+    "type": "string",
+    "description": "The account name for the Azure file storage.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "managed_environment",
+    "type": "object({\n    resource_id = string\n  })",
+    "description": "The storage component resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the storage resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "share_name",
+    "type": "string",
+    "description": "The share name for the Azure file storage.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "access_mode",
+    "type": "string",
+    "description": "The access mode for the Azure file storage.",
+    "default": "\"ReadOnly\"",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": " - `create` - (Defaults to 30 minutes) Used when creating the storage component.\n - `delete` - (Defaults to 30 minutes) Used when deleting the storage component.\n - `read` - (Defaults to 5 minutes) Used when retrieving the storage component.\n - `update` - (Defaults to 30 minutes) Used when updating the storage component.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "access_key",
+    "type": "string",
+    "description": "The access key for the Azure file storage.",
+    "default": "",
+    "required": true
+  }
+]

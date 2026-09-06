@@ -1,0 +1,9 @@
+[
+  {
+    "name": "expressroute_gateways",
+    "type": "map(object({\n    name                          = string\n    virtual_hub_id                = string\n    location                      = string\n    resource_group_name           = string\n    tags                          = optional(map(string))\n    allow_non_virtual_wan_traffic = optional(bool, false)\n    scale_units                   = optional(number, 1)\n  }))",
+    "description": "\nMap of objects for Express Route Gateways to deploy into the Virtual WAN Virtual Hubs that have been defined in the variable `virtual_hubs`.\n\nThe key is deliberately arbitrary to avoid issues with known after apply values. The value is an object, of which there can be multiple in the map:\n\n- `name`: Name for the ExpressRoute Gateway to deploy in the Virtual WAN Virtual Hub.\n- `virtual_hub_id`: The object ID of the virtual hub.\n- `tags`: Optional tags to apply to the ExpressRoute Gateway resource.\n- `allow_non_virtual_wan_traffic`: Optional boolean to configures this gateway to accept traffic from non Virtual WAN networks. Defaults to `false`.\n- `scale_units`: Optional number of scale units for the ExpressRoute Gateway. Defaults to `1`. See: https://learn.microsoft.com/azure/virtual-wan/virtual-wan-expressroute-about#expressroute-gateway-performance for more information on scale units.\n\n> Note: There can be multiple objects in this map, one for each ExpressRoute Gateway you wish to deploy into the Virtual WAN Virtual Hubs that have been defined in the variable `virtual_hubs`.\n\n",
+    "default": "{}",
+    "required": false
+  }
+]

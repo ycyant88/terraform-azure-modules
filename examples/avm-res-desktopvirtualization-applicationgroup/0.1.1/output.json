@@ -1,0 +1,10 @@
+[
+  {
+    "name": "azurerm_virtual_desktop_application_group",
+    "description": "Name of the Azure Virtual Desktop DAG"
+  },
+  {
+    "name": "azurerm_virtual_desktop_application_group_id",
+    "description": "ID of the Azure Virtual Desktop DAG"
+  }
+]

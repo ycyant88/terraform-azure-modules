@@ -1,0 +1,51 @@
+[
+  {
+    "name": "log_analytics_workspace_sku",
+    "type": "string",
+    "description": "The SKU (pricing level) of the Log Analytics workspace",
+    "default": "\"PerGB2018\"",
+    "required": false
+  },
+  {
+    "name": "log_retention_in_days",
+    "type": "string",
+    "description": "The retention period for the logs in days",
+    "default": "30",
+    "required": false
+  },
+  {
+    "name": "prefix",
+    "type": "string",
+    "description": "The prefix for the resources created in the specified Azure Resource Group.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The name of the Resource Group in which the Virtual Network",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure Region in which to create the Virtual Network",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "sku",
+    "type": "string",
+    "description": "The SKU (pricing level) of the Log Analytics workspace",
+    "default": "\"PerGB2018\"",
+    "required": false
+  },
+  {
+    "name": "retention_in_days",
+    "type": "string",
+    "description": "The retention period for the logs in days",
+    "default": "30",
+    "required": false
+  }
+]

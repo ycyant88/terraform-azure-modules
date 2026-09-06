@@ -1,0 +1,26 @@
+module "avm-ptn-aks-enterprise" {
+  source                                      = "Azure/avm-ptn-aks-enterprise/azurerm"
+  version                                     = "0.1.0"
+  agents_tags                                 = var.agents_tags
+  container_registry_name                     = var.container_registry_name
+  enable_telemetry                            = var.enable_telemetry
+  firewall_cidr                               = var.firewall_cidr
+  kubernetes_version                          = var.kubernetes_version
+  location                                    = var.location
+  lock                                        = var.lock
+  managed_identities                          = var.managed_identities
+  monitor_metrics                             = var.monitor_metrics
+  name                                        = var.name
+  node_cidr                                   = var.node_cidr
+  node_pools                                  = var.node_pools
+  orchestrator_version                        = var.orchestrator_version
+  pod_cidr                                    = var.pod_cidr
+  rbac_aad_admin_group_object_ids             = var.rbac_aad_admin_group_object_ids
+  rbac_aad_azure_rbac_enabled                 = var.rbac_aad_azure_rbac_enabled
+  rbac_aad_tenant_id                          = var.rbac_aad_tenant_id
+  resource_group_name                         = var.resource_group_name
+  tags                                        = var.tags
+  user_assigned_identity_name                 = var.user_assigned_identity_name
+  user_assigned_managed_identity_resource_ids = var.user_assigned_managed_identity_resource_ids
+  virtual_network_address_space               = var.virtual_network_address_space
+}

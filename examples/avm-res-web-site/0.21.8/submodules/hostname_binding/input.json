@@ -1,0 +1,37 @@
+[
+  {
+    "name": "hostname",
+    "type": "string",
+    "description": "The hostname to bind to the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex = list(string)\n    interval_seconds    = optional(number, 10)\n    max_retries         = optional(number, 3)\n  })",
+    "description": "Retry configuration for azapi resources.",
+    "default": "{\n  \"error_message_regex\": [\n    \"Cannot modify this site because another operation is in progress\"\n  ]\n}",
+    "required": false
+  },
+  {
+    "name": "ssl_state",
+    "type": "string",
+    "description": "The SSL state for the hostname binding. Possible values include `Disabled`, `IpBasedEnabled`, `SniEnabled`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "thumbprint",
+    "type": "string",
+    "description": "The certificate thumbprint associated with the hostname.",
+    "default": "null",
+    "required": false
+  }
+]

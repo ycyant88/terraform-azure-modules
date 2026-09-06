@@ -1,0 +1,27 @@
+module "avm-res-sql-server" {
+  source                                       = "Azure/avm-res-sql-server/azurerm"
+  version                                      = "0.1.3"
+  administrator_login                          = var.administrator_login
+  administrator_login_password                 = var.administrator_login_password
+  azuread_administrator                        = var.azuread_administrator
+  connection_policy                            = var.connection_policy
+  databases                                    = var.databases
+  diagnostic_settings                          = var.diagnostic_settings
+  elastic_pools                                = var.elastic_pools
+  enable_telemetry                             = var.enable_telemetry
+  firewall_rules                               = var.firewall_rules
+  location                                     = var.location
+  lock                                         = var.lock
+  managed_identities                           = var.managed_identities
+  name                                         = var.name
+  outbound_network_restriction_enabled         = var.outbound_network_restriction_enabled
+  primary_user_assigned_identity_id            = var.primary_user_assigned_identity_id
+  private_endpoints                            = var.private_endpoints
+  private_endpoints_manage_dns_zone_group      = var.private_endpoints_manage_dns_zone_group
+  public_network_access_enabled                = var.public_network_access_enabled
+  resource_group_name                          = var.resource_group_name
+  role_assignments                             = var.role_assignments
+  server_version                               = var.server_version
+  tags                                         = var.tags
+  transparent_data_encryption_key_vault_key_id = var.transparent_data_encryption_key_vault_key_id
+}

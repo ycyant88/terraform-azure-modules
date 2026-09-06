@@ -1,0 +1,26 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the container app job."
+  },
+  {
+    "name": "placeholder_job_name",
+    "description": "The name of the placeholder job."
+  },
+  {
+    "name": "placeholder_job_resource",
+    "description": "The placeholder job resource."
+  },
+  {
+    "name": "placeholder_job_resource_id",
+    "description": "The resource id of the placeholder job."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource id of the container app job."
+  },
+  {
+    "name": "runner_job_resource",
+    "description": "The job resource."
+  }
+]

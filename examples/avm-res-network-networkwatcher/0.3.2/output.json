@@ -1,0 +1,18 @@
+[
+  {
+    "name": "resource",
+    "description": "The network watcher resource"
+  },
+  {
+    "name": "resource_connection_monitor",
+    "description": "This is the full output for the connection monitor resources."
+  },
+  {
+    "name": "resource_flow_log",
+    "description": "This is the full output for the flow log resources."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource id of the Network Watcher"
+  }
+]

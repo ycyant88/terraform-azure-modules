@@ -1,0 +1,226 @@
+[
+  {
+    "name": "deployment_user_password",
+    "type": "string",
+    "description": "The password for the domain administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "rdma_enabled",
+    "type": "bool",
+    "description": "Indicates whether RDMA is enabled.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n- `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "custom_location_name",
+    "type": "string",
+    "description": "The name of the custom location.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "random_suffix",
+    "type": "bool",
+    "description": "Indicate whether to add random suffix",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - The description of the role assignment.\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - The condition which will be used to scope the role assignment.\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "storage_networks",
+    "type": "list(object({\n    name               = string\n    networkAdapterName = string\n    vlanId             = string\n  }))",
+    "description": "A list of storage networks.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "default_gateway",
+    "type": "string",
+    "description": "The default gateway for the network.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "deployment_user",
+    "type": "string",
+    "description": "The username for the domain administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "keyvault_name",
+    "type": "string",
+    "description": "The name of the key vault.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "storage_connectivity_switchless",
+    "type": "bool",
+    "description": "Indicates whether storage connectivity is switchless.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "witness_storage_account_name",
+    "type": "string",
+    "description": "The name of the witness storage account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the HCI cluster. Must be the same as the name when preparing AD.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "service_principal_secret",
+    "type": "string",
+    "description": "The service principal secret for the Azure account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "site_id",
+    "type": "string",
+    "description": "A unique identifier for the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dns_servers",
+    "type": "list(string)",
+    "description": "A list of DNS server IP addresses.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "subnet_mask",
+    "type": "string",
+    "description": "The subnet mask for the network.",
+    "default": "\"255.255.255.0\"",
+    "required": false
+  },
+  {
+    "name": "servers",
+    "type": "list(object({\n    name        = string\n    ipv4Address = string\n  }))",
+    "description": "A list of servers with their names and IPv4 addresses.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "starting_address",
+    "type": "string",
+    "description": "The starting IP address of the IP address range.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "is_exported",
+    "type": "bool",
+    "description": "Indicate whether the resource is exported",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ending_address",
+    "type": "string",
+    "description": "The ending IP address of the IP address range.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "local_admin_password",
+    "type": "string",
+    "description": "The password for the local administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "local_admin_user",
+    "type": "string",
+    "description": "The username for the local administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "management_adapters",
+    "type": "list(string)",
+    "description": "A list of management adapters.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "service_principal_id",
+    "type": "string",
+    "description": "The service principal ID for the Azure account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "rp_service_principal_object_id",
+    "type": "string",
+    "description": "The object ID of the HCI resource provider service principal.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "adou_path",
+    "type": "string",
+    "description": "The Active Directory OU path.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "domain_fqdn",
+    "type": "string",
+    "description": "The domain FQDN.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  }
+]

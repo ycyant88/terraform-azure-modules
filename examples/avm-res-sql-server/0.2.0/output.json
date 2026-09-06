@@ -1,0 +1,34 @@
+[
+  {
+    "name": "administrator_login_password_key_vault_secret",
+    "description": "The Key Vault secret resource that stores the administrator login password. Only populated when `administrator_login_password_key_vault_configuration` is set."
+  },
+  {
+    "name": "generated_administrator_login_password",
+    "description": "The auto-generated administrator login password. Only populated when `generate_administrator_login_password = true`; null in all other cases (including when the password was supplied via `administrator_login_password` or `administrator_login_password_wo`). Sensitive."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_databases",
+    "description": "A map of databases. The map key is the supplied input to var.databases. The map value is the entire azurerm_mssql_database resource."
+  },
+  {
+    "name": "resource_elasticpools",
+    "description": "A map of elastic pools. The map key is the supplied input to var.elastic_pools. The map value is the entire azurerm_mssql_elasticpool resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "This is the id of the resource."
+  },
+  {
+    "name": "resource_name",
+    "description": "This is the name of the resource."
+  }
+]

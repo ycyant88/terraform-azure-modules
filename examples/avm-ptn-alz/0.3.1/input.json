@@ -1,0 +1,114 @@
+[
+  {
+    "name": "base_archetype",
+    "type": "string",
+    "description": "The archetype of the management group.\nThis should be one of the built in archetypes, or a custom one defined in one of the `lib_dirs`.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "default_location",
+    "type": "string",
+    "description": "The default location for resources in this management group. Used for policy managed identities.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "policy_assignments_to_remove",
+    "type": "set(string)",
+    "description": "A set of policy assignment names to remove from the `base_archetype`.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "policy_set_definitions_to_add",
+    "type": "set(string)",
+    "description": "A set of policy set definition names to add to the `base_archetype`.\nThe definition must exist in one of the loaded lib directories.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "role_definitions_to_remove",
+    "type": "set(string)",
+    "description": "A set of role definition names to remove from the `base_archetype`.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "default_log_analytics_workspace_id",
+    "type": "string",
+    "description": "",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "policy_definitions_to_add",
+    "type": "set(string)",
+    "description": "A set of policy definition names to add to the `base_archetype`.\nThe definition must exist in one of the loaded lib directories.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "role_definitions_to_add",
+    "type": "set(string)",
+    "description": "A set of role definition names to add to the `base_archetype`.\nThe definition must exist in one of the loaded lib directories.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "id",
+    "type": "string",
+    "description": "The id of the management group. This must be unique and cannot be changed after creation.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "display_name",
+    "type": "string",
+    "description": "The display name of the management group.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The id of the parent management group. Use the tenant id to create a child of the tenant root group.\nThe `azurerm_client_config` data source from the AzureRM provider is useful to get the tenant id.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id   = optional(string, \"\")\n    role_definition_name = optional(string, \"\")\n    principal_id         = string\n    description          = optional(string, null)\n  }))",
+    "description": "",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "policy_definitions_to_remove",
+    "type": "set(string)",
+    "description": "A set of policy definition names to remove from the `base_archetype`.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "policy_set_definitions_to_remove",
+    "type": "set(string)",
+    "description": "A set of policy set definition names to remove from the `base_archetype`.\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "policy_assignments_to_add",
+    "type": "map(object({}))",
+    "description": "Not implemented yet.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "delays",
+    "type": "object({\n    before_management_group = optional(object({\n      create  = optional(string, \"30s\")\n      destroy = optional(string, \"0s\")\n    }), {})\n    before_policy_assignments = optional(object({\n      create  = optional(string, \"30s\")\n      destroy = optional(string, \"0s\")\n    }), {})\n    before_policy_role_assignments = optional(object({\n      create  = optional(string, \"60s\")\n      destroy = optional(string, \"0s\")\n    }), {})\n  })",
+    "description": "A map of delays to apply to the creation and destruction of resources.\nIncluded to work around some race conditions in Azure.\n",
+    "default": "{}",
+    "required": false
+  }
+]

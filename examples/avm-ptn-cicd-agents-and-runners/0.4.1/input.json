@@ -1,0 +1,702 @@
+[
+  {
+    "name": "container_registry_subnet_cidr_size",
+    "type": "number",
+    "description": "The CIDR size for the container registry subnet.",
+    "default": "29",
+    "required": false
+  },
+  {
+    "name": "nat_gateway_name",
+    "type": "string",
+    "description": "The name of the NAT Gateway.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "public_ip_zones",
+    "type": "set(string)",
+    "description": "The availability zones for the public IP. Only required if `public_ip_creation_enabled` is `true`.",
+    "default": "[\n  \"1\",\n  \"2\",\n  \"3\"\n]",
+    "required": false
+  },
+  {
+    "name": "virtual_network_address_space",
+    "type": "string",
+    "description": "The address space for the virtual network. Must be specified if `virtual_network_creation_enabled` is `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_container_memory",
+    "type": "string",
+    "description": "Required memory, e.g. '250Mb'",
+    "default": "\"2Gi\"",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a log analytics workspace.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_sku",
+    "type": "string",
+    "description": "The SKU of the Log Analytics Workspace.",
+    "default": "\"PerGB2018\"",
+    "required": false
+  },
+  {
+    "name": "container_instance_subnet_cidr_size",
+    "type": "number",
+    "description": "The CIDR size for the container instance subnet.",
+    "default": "28",
+    "required": false
+  },
+  {
+    "name": "version_control_system_github_application_key",
+    "type": "string",
+    "description": "The application key for the GitHub App authentication method.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_registry_private_endpoint_subnet_name",
+    "type": "string",
+    "description": "The name of the subnet. Must be specified if `virtual_network_creation_enabled == false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_placeholder_replica_timeout",
+    "type": "number",
+    "description": "The timeout in seconds for the placeholder Container Apps job.",
+    "default": "300",
+    "required": false
+  },
+  {
+    "name": "container_app_replica_retry_limit",
+    "type": "number",
+    "description": "The number of times to retry the runner Container Apps job.",
+    "default": "3",
+    "required": false
+  },
+  {
+    "name": "container_registry_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a container registry.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_retention_in_days",
+    "type": "number",
+    "description": "The retention period for the Log Analytics Workspace.",
+    "default": "30",
+    "required": false
+  },
+  {
+    "name": "version_control_system_type",
+    "type": "string",
+    "description": "The type of the version control system to deploy the agents too. Allowed values are 'azuredevops' or 'github'",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "version_control_system_agent_name_prefix",
+    "type": "string",
+    "description": "The version control system agent name prefix.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_registry_private_endpoint_subnet_id",
+    "type": "string",
+    "description": "The ID of a pre-existing subnet to use. Required if `virtual_network_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_job_container_name",
+    "type": "string",
+    "description": "The name of the container for the runner Container Apps job.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_instance_container_cpu",
+    "type": "number",
+    "description": "The CPU value for the container instance",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "custom_container_registry_password",
+    "type": "string",
+    "description": "The password of the container registry to use if `container_registry_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "use_private_networking",
+    "type": "bool",
+    "description": "Whether or not to use private networking for the container registry.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "user_assigned_managed_identity_principal_id",
+    "type": "string",
+    "description": "The principal id of the user assigned managed identity. Only required if `user_assigned_managed_identity_creation_enabled == false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_authentication_method",
+    "type": "string",
+    "description": "GitHub authentication method. Possible values: pat or github_app",
+    "default": "\"pat\"",
+    "required": false
+  },
+  {
+    "name": "version_control_system_repository",
+    "type": "string",
+    "description": "The version control system repository to deploy the agents too.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "virtual_network_name",
+    "type": "string",
+    "description": "The name of the virtual network. Must be specified if `virtual_network_creation_enabled` is `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_sensitive_environment_variables",
+    "type": "set(object({\n    name                      = string\n    value                     = string\n    container_app_secret_name = string\n    keda_auth_name            = optional(string)\n  }))",
+    "description": "List of additional sensitive environment variables to pass to the container.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "container_instance_name_prefix",
+    "type": "string",
+    "description": "The name prefix of the container instance",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_image_repository_commit",
+    "type": "string",
+    "description": "The default image repository commit to use if no custom image is provided.",
+    "default": "\"bc4087f\"",
+    "required": false
+  },
+  {
+    "name": "container_app_subnet_cidr_size",
+    "type": "number",
+    "description": "The CIDR size for the container instance subnet.",
+    "default": "27",
+    "required": false
+  },
+  {
+    "name": "container_instance_subnet_id",
+    "type": "string",
+    "description": "The ID of a pre-existing subnet to use. Required if `virtual_network_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_placeholder_replica_retry_limit",
+    "type": "number",
+    "description": "The number of times to retry the placeholder Container Apps job.",
+    "default": "0",
+    "required": false
+  },
+  {
+    "name": "container_instance_sensitive_environment_variables",
+    "type": "set(object({\n    name  = string\n    value = string\n  }))",
+    "description": "List of additional sensitive environment variables to pass to the container.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "container_instance_subnet_name",
+    "type": "string",
+    "description": "The name of the subnet. Must be specified if `virtual_network_creation_enabled == false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "public_ip_id",
+    "type": "string",
+    "description": "The ID of the public IP. Only required if `public_ip_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_environment_variables",
+    "type": "set(object({\n    name  = string\n    value = string\n  }))",
+    "description": "List of additional environment variables to pass to the container.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "container_app_infrastructure_resource_group_name",
+    "type": "string",
+    "description": "The name of the resource group where the Container Apps infrastructure is deployed.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_instance_container_memory",
+    "type": "number",
+    "description": "The memory value for the container instance",
+    "default": "4",
+    "required": false
+  },
+  {
+    "name": "container_instance_count",
+    "type": "number",
+    "description": "The number of container instances to create",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "use_default_container_image",
+    "type": "bool",
+    "description": "Whether or not to use the default container image provided by the module.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "virtual_network_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a virtual network.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "virtual_network_id",
+    "type": "string",
+    "description": "The ID of the virtual network. Only required if `virtual_network_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_environment_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a Container App Environment.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "container_app_placeholder_container_name",
+    "type": "string",
+    "description": "The name of the container for the placeholder Container Apps job.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_instance_environment_variables",
+    "type": "set(object({\n    name  = string\n    value = string\n  }))",
+    "description": "List of additional environment variables to pass to the container.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "version_control_system_github_application_id",
+    "type": "string",
+    "description": "The application ID for the GitHub App authentication method.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "container_registry_private_dns_zone_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a private DNS zone for the container registry.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "nat_gateway_id",
+    "type": "string",
+    "description": "The ID of the NAT Gateway. Only required if `nat_gateway_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "public_ip_name",
+    "type": "string",
+    "description": "The name of the public IP.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_environment_name",
+    "type": "string",
+    "description": "The name of the Container App Environment. Only required if `container_app_environment_creation_enabled` is `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_image_registry_dockerfile_path",
+    "type": "string",
+    "description": "The default image registry Dockerfile path to use if no custom image is provided.",
+    "default": "\"dockerfile\"",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "resource_group_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a resource group.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed. Must be specified if `resource_group_creation_enabled == false`",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_enterprise",
+    "type": "string",
+    "description": "The enterprise name for the version control system.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_registry_private_endpoint_subnet_address_prefix",
+    "type": "string",
+    "description": "The address prefix for the Container App Environment. Either subnet_id or subnet_name and subnet_address_prefix must be specified.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_container_cpu",
+    "type": "number",
+    "description": "Required CPU in cores, e.g. 0.5",
+    "default": "1",
+    "required": false
+  },
+  {
+    "name": "container_app_job_name",
+    "type": "string",
+    "description": "The name of the Container App runner job.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_instance_container_cpu_limit",
+    "type": "number",
+    "description": "The CPU limit value for the container instance",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "container_registry_name",
+    "type": "string",
+    "description": "The name of the container registry. Only required if `container_registry_creation_enabled` is `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "custom_container_registry_username",
+    "type": "string",
+    "description": "The username of the container registry to use if `container_registry_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "postfix",
+    "type": "string",
+    "description": "A postfix used to build default names if no name has been supplied for a specific resource type.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "user_assigned_managed_identity_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a user assigned managed identity.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "version_control_system_github_application_installation_id",
+    "type": "string",
+    "description": "The installation ID for the GitHub App authentication method.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "container_instance_container_memory_limit",
+    "type": "number",
+    "description": "The memory limit value for the container instance",
+    "default": "4",
+    "required": false
+  },
+  {
+    "name": "container_instance_use_availability_zones",
+    "type": "bool",
+    "description": "Whether to use availability zones for the container instance",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "delays",
+    "type": "object({\n    delay_after_container_image_build              = optional(number, 60)\n    delay_after_container_app_environment_creation = optional(number, 120)\n  })",
+    "description": "Delays (in seconds) to apply to the module operations.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "version_control_system_placeholder_agent_name",
+    "type": "string",
+    "description": "The version control system placeholder agent name.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_replica_timeout",
+    "type": "number",
+    "description": "The timeout in seconds for the runner Container Apps job.",
+    "default": "1800",
+    "required": false
+  },
+  {
+    "name": "container_instance_container_name",
+    "type": "string",
+    "description": "The name of the container instance",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_organization",
+    "type": "string",
+    "description": "The version control system organization to deploy the agents too.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "custom_container_registry_images",
+    "type": "map(object({\n    task_name            = string\n    dockerfile_path      = string\n    context_path         = string\n    context_access_token = optional(string, \"a\") # This `a` is a dummy value because the context_access_token should not be required in the provider\n    image_names          = list(string)\n  }))",
+    "description": "The images to build and push to the container registry. This is only relevant if `container_registry_creation_enabled` is `true` and `use_default_container_image` is set to `false`.\n\n- task_name: The name of the task to create for building the image (e.g. `image-build-task`)\n- dockerfile_path: The path to the Dockerfile to use for building the image (e.g. `dockerfile`)\n- context_path: The path to the context of the Dockerfile in three sections `<repository-url>#<repository-commit>:<repository-folder-path>` (e.g. https://github.com/Azure/avm-container-images-cicd-agents-and-runners#bc4087f:azure-devops-agent)\n- context_access_token: The access token to use for accessing the context. Supply a PAT if targetting a private repository.\n- image_names: A list of the names of the images to build (e.g. `[\"image-name:tag\"]`)\n\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_personal_access_token",
+    "type": "string",
+    "description": "The personal access token for the version control system.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_subnet_id",
+    "type": "string",
+    "description": "The ID of a pre-existing subnet to use. Required if `virtual_network_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_subnet_name",
+    "type": "string",
+    "description": "The name of the subnet. Must be specified if `virtual_network_creation_enabled` is `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_instance_subnet_address_prefix",
+    "type": "string",
+    "description": "The address prefix for the Container App Environment. Either subnet_id or subnet_name and subnet_address_prefix must be specified.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "public_ip_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a public IP.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "container_app_min_execution_count",
+    "type": "number",
+    "description": "The minimum number of executions (ADO jobs) to spawn per polling interval.",
+    "default": "0",
+    "required": false
+  },
+  {
+    "name": "custom_container_registry_login_server",
+    "type": "string",
+    "description": "The login server of the container registry to use if `container_registry_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_id",
+    "type": "string",
+    "description": "The resource Id of the Log Analytics Workspace.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "user_assigned_managed_identity_name",
+    "type": "string",
+    "description": "The name of the user assigned managed identity. Must be specified if `user_assigned_managed_identity_creation_enabled == true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_pool_name",
+    "type": "string",
+    "description": "The name of the agent pool in the version control system.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_runner_group",
+    "type": "string",
+    "description": "The runner group to add the runner to.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_runner_scope",
+    "type": "string",
+    "description": "The scope of the runner. Must be `ent`, `org`, or `repo`. This is ignored for Azure DevOps.",
+    "default": "\"repo\"",
+    "required": false
+  },
+  {
+    "name": "container_app_environment_id",
+    "type": "string",
+    "description": "The resource id of the Container App Environment. Only required if `container_app_environment_creation_enabled` is `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_placeholder_job_name",
+    "type": "string",
+    "description": "The name of the Container App placeholder job.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_image_repository_folder_paths",
+    "type": "map(string)",
+    "description": "The default image repository folder path to use if no custom image is provided.",
+    "default": "{\n  \"azuredevops-container-app\": \"azure-devops-agent-aca\",\n  \"azuredevops-container-instance\": \"azure-devops-agent-aci\",\n  \"github-container-app\": \"github-runner-aca\",\n  \"github-container-instance\": \"github-runner-aci\"\n}",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "  Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n  - `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\n  - `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_control_system_agent_target_queue_length",
+    "type": "number",
+    "description": "The target value for the amound of pending jobs to scale on.",
+    "default": "1",
+    "required": false
+  },
+  {
+    "name": "container_app_subnet_address_prefix",
+    "type": "string",
+    "description": "The address prefix for the Container App Environment. Either subnet_id or subnet_name and subnet_address_prefix must be specified.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_registry_dns_zone_id",
+    "type": "string",
+    "description": "The ID of the private DNS zone to create for the container registry. Only required if `container_registry_private_dns_zone_creation_enabled` is `false` and you are not using policy to update the DNS zone.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "nat_gateway_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a NAT Gateway.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "container_app_max_execution_count",
+    "type": "number",
+    "description": "The maximum number of executions (ADO jobs) to spawn per polling interval.",
+    "default": "100",
+    "required": false
+  },
+  {
+    "name": "container_app_polling_interval_seconds",
+    "type": "number",
+    "description": "How often should the pipeline queue be checked for new events, in seconds.",
+    "default": "30",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "user_assigned_managed_identity_id",
+    "type": "string",
+    "description": "The resource Id of the user assigned managed identity. Only required if `user_assigned_managed_identity_creation_enabled == false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_image_name",
+    "type": "string",
+    "description": "The default image name to use if no custom image is provided.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_image_repository_url",
+    "type": "string",
+    "description": "The default image repository URL to use if no custom image is provided.",
+    "default": "\"https://github.com/Azure/avm-container-images-cicd-agents-and-runners\"",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_name",
+    "type": "string",
+    "description": "The name of the log analytics workspace. Only required if `log_analytics_workspace_creation_enabled == false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "compute_types",
+    "type": "set(string)",
+    "description": "The types of compute to use. Allowed values are 'azure_container_app' and 'azure_container_instance'.",
+    "default": "[\n  \"azure_container_app\"\n]",
+    "required": false
+  }
+]

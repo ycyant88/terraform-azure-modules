@@ -1,0 +1,65 @@
+[
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region where the certificate resource should be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the certificate resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "certificate_password",
+    "type": "string",
+    "description": "The password for the certificate (WriteOnly). Required when using direct certificate upload.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "key_vault_identity",
+    "type": "string",
+    "description": "Resource ID of a managed identity to authenticate with Azure Key Vault, or 'System' to use a system-assigned identity. Required when using Key Vault reference.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "key_vault_url",
+    "type": "string",
+    "description": "URL pointing to the Azure Key Vault secret that holds the certificate. Required when using Key Vault reference.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) A mapping of tags to assign to the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "managed_environment",
+    "type": "object({\n    resource_id = string\n  })",
+    "description": "The managed environment resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "certificate_value",
+    "type": "string",
+    "description": "The PFX or PEM blob for the certificate (WriteOnly). Required when using direct certificate upload.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": " - `create` - (Defaults to 30 minutes) Used when creating the certificate.\n - `delete` - (Defaults to 30 minutes) Used when deleting the certificate.\n - `read` - (Defaults to 5 minutes) Used when retrieving the certificate.\n - `update` - (Defaults to 30 minutes) Used when updating the certificate.\n",
+    "default": "null",
+    "required": false
+  }
+]

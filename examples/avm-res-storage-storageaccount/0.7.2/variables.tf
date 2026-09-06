@@ -1,0 +1,885 @@
+variable "access_tier" {
+  description = "(Optional) Defines the access tier for BlobStorage, FileStorage and StorageV2 accounts. Valid options are Hot, Cool, Cold and Premium. Defaults to Hot."
+  type        = string
+  default     = "Hot"
+}
+
+variable "account_kind" {
+  description = "(Optional) Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults to StorageV2."
+  type        = string
+  default     = "StorageV2"
+}
+
+variable "account_replication_type" {
+  description = "[DEPRECATED] (Optional) Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS. Defaults to ZRS. This variable is only honoured when account_sku_name is set to null; otherwise account_sku_name wins. Prefer account_sku_name."
+  type        = string
+  default     = "ZRS"
+}
+
+variable "account_sku_name" {
+  description = "(Optional) Explicit storage account SKU name (e.g. Standard_LRS, Premium_ZRS, PremiumV2_LRS, StandardV2_GZRS). When set, this value is sent to Azure verbatim and overrides the SKU derived from account_tier, account_replication_type and provisioned_billing_model_version - those variables are only honoured when account_sku_name is explicitly set to null. Defaults to Standard_ZRS. Note: the *V2_* SKUs (e.g. StandardV2_ZRS, PremiumV2_ZRS) require account_kind = \"FileStorage\"."
+  type        = string
+  default     = "Standard_ZRS"
+}
+
+variable "account_tier" {
+  description = "[DEPRECATED] (Optional) Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created. Defaults to Standard. This variable is only honoured when account_sku_name is set to null; otherwise account_sku_name wins. Prefer account_sku_name."
+  type        = string
+  default     = "Standard"
+}
+
+variable "allow_nested_items_to_be_public" {
+  description = "(Optional) Allow or disallow nested items within this Account to opt into being public. Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "allowed_copy_scope" {
+  description = "(Optional) Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet. Possible values are AAD and PrivateLink. Defaults to null (no restriction)."
+  type        = string
+  default     = null
+}
+
+variable "azure_files_authentication" {
+  description = "Configures Azure Files identity-based authentication on the storage account. Defaults to null (no Files authentication configured).\n\n- directory_type - (Optional) Specifies the directory service used. Possible values are AADDS, AD, and AADKERB. Defaults to AADKERB.\n- default_share_level_permission - (Optional) Specifies the default share-level permission applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None. Defaults to null.\n- active_directory - (Optional) An Active Directory configuration block. Required when directory_type is AD. Defaults to null. Supports:\n  - domain_guid - (Required) Specifies the domain GUID.\n  - domain_name - (Required) Specifies the primary domain that the AD DNS server is authoritative for.\n  - domain_sid - (Optional) Specifies the security identifier (SID). Required when directory_type is AD. Defaults to null.\n  - forest_name - (Optional) Specifies the Active Directory forest. Required when directory_type is AD. Defaults to null.\n  - netbios_domain_name - (Optional) Specifies the NetBIOS domain name. Required when directory_type is AD. Defaults to null.\n  - storage_sid - (Optional) Specifies the security identifier (SID) for Azure Storage. Required when directory_type is AD. Defaults to null.\n"
+  type = object({
+    directory_type                 = optional(string, "AADKERB")
+    default_share_level_permission = optional(string)
+
+    active_directory = optional(object({
+      domain_guid         = string
+      domain_name         = string
+      domain_sid          = optional(string)
+      forest_name         = optional(string)
+      netbios_domain_name = optional(string)
+      storage_sid         = optional(string)
+    }))
+  })
+  default = null
+}
+
+variable "blob_properties" {
+  description = "Blob service-level settings for the storage account. Defaults to null (Azure platform defaults).\n\n- automatic_snapshot_policy_enabled - (Optional) Deprecated; use versioning_enabled instead. Defaults to null.\n- change_feed - (Optional) Blob change feed settings. Defaults to null.\n  - enabled - (Optional) Enable the blob change feed. Defaults to null.\n  - retention_in_days - (Optional) Retention period for the change feed in days (1\u2013146000). null means infinite. Defaults to null.\n- container_delete_retention_policy - (Optional) Container soft-delete retention policy. Defaults to null.\n  - allow_permanent_delete - (Optional) Allow permanent delete of soft-deleted containers. Defaults to null.\n  - days - (Optional) Number of days to retain deleted containers (1\u2013365). Defaults to null.\n  - enabled - (Optional) Enable container soft-delete. Defaults to null.\n- cors_rules - (Optional) A list of CORS rules (maximum 5). Each entry supports:\n  - allowed_headers - (Required) A list of headers allowed in cross-origin requests.\n  - allowed_methods - (Required) A list of HTTP methods allowed. Valid values: DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT, PATCH.\n  - allowed_origins - (Required) A list of origin domains allowed in cross-origin requests.\n  - exposed_headers - (Required) A list of response headers exposed to CORS clients.\n  - max_age_in_seconds - (Required) The number of seconds the browser should cache a preflight response.\n- default_service_version - (Optional) Default Blob service API version for requests without a version. Defaults to null.\n- delete_retention_policy - (Optional) Blob soft-delete retention policy. Defaults to null.\n  - allow_permanent_delete - (Optional) Allow permanent delete of soft-deleted blobs and snapshots. Cannot be used with restore_policy. Defaults to null.\n  - days - (Optional) Number of days to retain deleted blobs (1\u2013365). Defaults to null.\n  - enabled - (Optional) Enable blob soft-delete. Defaults to null.\n- last_access_time_tracking_policy - (Optional) Last access time tracking policy. Defaults to null.\n  - blob_type - (Optional) Blob types to track. Only [\"blockBlob\"] is supported (read-only). Defaults to null.\n  - enable - (Required) Enable last access time tracking.\n  - name - (Optional) Policy name. Must be \"AccessTimeTracking\" (read-only). Defaults to null.\n  - tracking_granularity_in_days - (Optional) Granularity in days (read-only, always 1). Defaults to null.\n- restore_policy - (Optional) Point-in-time restore policy. Requires versioning_enabled, change_feed.enabled, and delete_retention_policy.enabled. Defaults to null.\n  - days - (Optional) Restore retention in days. Must be less than delete_retention_policy.days. Defaults to null.\n  - enabled - (Required) Enable point-in-time restore.\n- versioning_enabled - (Optional) Enable blob versioning. Defaults to null.\n"
+  type = object({
+    automatic_snapshot_policy_enabled = optional(bool)
+    change_feed = optional(object({
+      enabled           = optional(bool)
+      retention_in_days = optional(number)
+    }))
+    container_delete_retention_policy = optional(object({
+      allow_permanent_delete = optional(bool)
+      days                   = optional(number)
+      enabled                = optional(bool)
+    }))
+    cors_rules = optional(list(object({
+      allowed_headers    = list(string)
+      allowed_methods    = list(string)
+      allowed_origins    = list(string)
+      exposed_headers    = list(string)
+      max_age_in_seconds = number
+    })))
+    default_service_version = optional(string)
+    delete_retention_policy = optional(object({
+      allow_permanent_delete = optional(bool)
+      days                   = optional(number)
+      enabled                = optional(bool)
+    }))
+    last_access_time_tracking_policy = optional(object({
+      blob_type                    = optional(list(string))
+      enable                       = bool
+      name                         = optional(string)
+      tracking_granularity_in_days = optional(number)
+    }))
+    restore_policy = optional(object({
+      days    = optional(number)
+      enabled = bool
+    }))
+    versioning_enabled = optional(bool)
+  })
+  default = null
+}
+
+variable "containers" {
+  description = "A map of containers to create on the storage account. The map key is arbitrary; the value supports the following attributes. Defaults to {} (no containers).\n\n- name - (Required) The name of the Container which should be created within the Storage Account. Changing this forces a new resource to be created.\n- public_access - (Optional) Specifies whether data in the container may be accessed publicly and the level of access. Possible values are Container, Blob, and None. Defaults to None. Changing this forces a new resource to be created.\n- metadata - (Optional) A mapping of MetaData for this Container. All metadata keys should be lowercase. Defaults to null.\n- default_encryption_scope - (Optional) The default encryption scope to use for blob operations on this container. Defaults to null.\n- deny_encryption_scope_override - (Optional) When set to true, blocks blob uploads from specifying a different encryption scope. Defaults to null.\n- enable_nfs_v3_all_squash - (Optional) Enable NFSv3 all squash (only valid for NFSv3 enabled accounts). Defaults to null.\n- enable_nfs_v3_root_squash - (Optional) Enable NFSv3 root squash (only valid for NFSv3 enabled accounts). Defaults to null.\n- immutable_storage_with_versioning - (Optional) Configures container-level immutability with version-level WORM. Defaults to null. Supports:\n  - enabled - (Required) Whether immutable storage with versioning is enabled.\n- role_assignments - (Optional) A map of role assignments to create on the container. Defaults to {}. See var.role_assignments for the attribute schema.\n- timeouts - (Optional) Per-operation timeouts for the container resource. Defaults to null (uses provider defaults inherited from var.timeouts). Supports:\n  - create - (Optional) Timeout for create operations.\n  - delete - (Optional) Timeout for delete operations.\n  - read - (Optional) Timeout for read operations.\n  - update - (Optional) Timeout for update operations.\n"
+  type = map(object({
+    public_access                  = optional(string, "None")
+    metadata                       = optional(map(string))
+    name                           = string
+    default_encryption_scope       = optional(string)
+    deny_encryption_scope_override = optional(bool)
+    enable_nfs_v3_all_squash       = optional(bool)
+    enable_nfs_v3_root_squash      = optional(bool)
+    immutable_storage_with_versioning = optional(object({
+      enabled = bool
+    }))
+
+    role_assignments = optional(map(object({
+      role_definition_id_or_name             = string
+      principal_id                           = string
+      principal_type                         = optional(string, null)
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      condition                              = optional(string, null)
+      condition_version                      = optional(string, null)
+      delegated_managed_identity_resource_id = optional(string, null)
+    })), {})
+
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  }))
+  default = {}
+}
+
+variable "cross_tenant_replication_enabled" {
+  description = "(Optional) Should cross Tenant replication be enabled? Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "custom_domain" {
+  description = "Configures a custom domain for the storage account. Defaults to null (no custom domain).\n\n- name - (Required) The Custom Domain Name to use for the Storage Account, which will be validated by Azure.\n- use_subdomain - (Optional) Should the Custom Domain Name be validated by using indirect CNAME validation? Defaults to null.\n"
+  type = object({
+    name          = string
+    use_subdomain = optional(bool)
+  })
+  default = null
+}
+
+variable "customer_managed_key" {
+  description = "Defines a customer managed key to use for encryption. Defaults to null (Microsoft-managed keys).\n\n- key_vault_resource_id - (Required) The full Azure Resource ID of the key vault where the customer managed key will be referenced from.\n- key_name - (Required) The key name for the customer managed key in the key vault.\n- key_version - (Optional) The version of the key to use. If null, the latest version is tracked automatically.\n- user_assigned_identity - (Optional) A user assigned identity used to access the key vault. Defaults to null, in which case the storage account's system-assigned identity is used.\n  - resource_id - (Required) The full Azure Resource ID of the user assigned identity.\n\nExample Inputs:\nterraform\ncustomer_managed_key = {\n  key_vault_resource_id = \"/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/test-resource-group/providers/Microsoft.KeyVault/vaults/example-key-vault\"\n  key_name              = \"sample-customer-key\"\n}\n\n"
+  type = object({
+    key_vault_resource_id = string
+    key_name              = string
+    key_version           = optional(string, null)
+    user_assigned_identity = optional(object({
+      resource_id = string
+    }), null)
+  })
+  default = null
+}
+
+variable "default_to_oauth_authentication" {
+  description = "(Optional) Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. Defaults to null (Azure platform default of false)."
+  type        = bool
+  default     = null
+}
+
+variable "diagnostic_settings_blob" {
+  description = "A map of diagnostic settings to create on the Blob Storage within Storage Account. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\nThis variable uses the v2 diagnostic settings interface from Azure/avm-utl-interfaces/azure, which fully supports all features of the Azure Diagnostic Settings API.\n\n- name - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\n- logs - (Optional) A set of log entries to enable. Each entry has the following attributes:\n  - category - (Optional) The name of an individual log category (e.g. StorageWrite).\n  - category_group - (Optional) The name of a log category group (e.g. allLogs, audit). Mutually exclusive with category.\n  - enabled - (Optional) Whether the log entry is enabled. Defaults to true.\n  - retention_policy - (Optional) Retention policy for the log entry. Object with days (default 0) and enabled (default false).\n- metrics - (Optional) A set of metric entries to enable. Each entry has the following attributes:\n  - category - (Optional) The name of the metric category (e.g. AllMetrics, Transaction).\n  - enabled - (Optional) Whether the metric entry is enabled. Defaults to true.\n  - retention_policy - (Optional) Retention policy for the metric entry. Object with days (default 0) and enabled (default false).\n- log_analytics_destination_type - (Optional) The destination type for the diagnostic setting. Possible values are Dedicated and AzureDiagnostics. Defaults to Dedicated.\n- workspace_resource_id - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.\n- storage_account_resource_id - (Optional) The resource ID of the storage account to send logs and metrics to.\n- event_hub_authorization_rule_resource_id - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.\n- event_hub_name - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.\n- marketplace_partner_resource_id - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic Logs.\n"
+  type = map(object({
+    name = optional(string, null)
+    logs = optional(set(object({
+      category       = optional(string, null)
+      category_group = optional(string, null)
+      enabled        = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    metrics = optional(set(object({
+      category = optional(string, null)
+      enabled  = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    log_analytics_destination_type           = optional(string, "Dedicated")
+    workspace_resource_id                    = optional(string, null)
+    storage_account_resource_id              = optional(string, null)
+    event_hub_authorization_rule_resource_id = optional(string, null)
+    event_hub_name                           = optional(string, null)
+    marketplace_partner_resource_id          = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "diagnostic_settings_file" {
+  description = "A map of diagnostic settings to create on the Azure Files Storage within Storage Account. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\nThis variable uses the v2 diagnostic settings interface from Azure/avm-utl-interfaces/azure, which fully supports all features of the Azure Diagnostic Settings API.\n\nSee var.diagnostic_settings_blob for full attribute documentation; the schema is identical.\n"
+  type = map(object({
+    name = optional(string, null)
+    logs = optional(set(object({
+      category       = optional(string, null)
+      category_group = optional(string, null)
+      enabled        = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    metrics = optional(set(object({
+      category = optional(string, null)
+      enabled  = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    log_analytics_destination_type           = optional(string, "Dedicated")
+    workspace_resource_id                    = optional(string, null)
+    storage_account_resource_id              = optional(string, null)
+    event_hub_authorization_rule_resource_id = optional(string, null)
+    event_hub_name                           = optional(string, null)
+    marketplace_partner_resource_id          = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "diagnostic_settings_queue" {
+  description = "A map of diagnostic settings to create on the Queue Storage within Storage Account. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\nThis variable uses the v2 diagnostic settings interface from Azure/avm-utl-interfaces/azure, which fully supports all features of the Azure Diagnostic Settings API.\n\nSee var.diagnostic_settings_blob for full attribute documentation; the schema is identical.\n"
+  type = map(object({
+    name = optional(string, null)
+    logs = optional(set(object({
+      category       = optional(string, null)
+      category_group = optional(string, null)
+      enabled        = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    metrics = optional(set(object({
+      category = optional(string, null)
+      enabled  = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    log_analytics_destination_type           = optional(string, "Dedicated")
+    workspace_resource_id                    = optional(string, null)
+    storage_account_resource_id              = optional(string, null)
+    event_hub_authorization_rule_resource_id = optional(string, null)
+    event_hub_name                           = optional(string, null)
+    marketplace_partner_resource_id          = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "diagnostic_settings_storage_account" {
+  description = "A map of diagnostic settings to create on the Storage Account itself. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\nThis variable uses the v2 diagnostic settings interface from Azure/avm-utl-interfaces/azure, which fully supports all features of the Azure Diagnostic Settings API.\n\n**Important:** Diagnostic settings on the Storage Account resource itself support only metrics (logs are not supported by the Azure API at this scope). Supplying any logs entries here will be rejected by Azure. Supported metric categories are Transaction and AllMetrics.\n\nSee var.diagnostic_settings_blob for full attribute documentation; the schema is identical.\n"
+  type = map(object({
+    name = optional(string, null)
+    logs = optional(set(object({
+      category       = optional(string, null)
+      category_group = optional(string, null)
+      enabled        = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    metrics = optional(set(object({
+      category = optional(string, null)
+      enabled  = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    log_analytics_destination_type           = optional(string, "Dedicated")
+    workspace_resource_id                    = optional(string, null)
+    storage_account_resource_id              = optional(string, null)
+    event_hub_authorization_rule_resource_id = optional(string, null)
+    event_hub_name                           = optional(string, null)
+    marketplace_partner_resource_id          = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "diagnostic_settings_table" {
+  description = "A map of diagnostic settings to create on the Table Storage within the Storage Account. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\nThis variable uses the v2 diagnostic settings interface from Azure/avm-utl-interfaces/azure, which fully supports all features of the Azure Diagnostic Settings API.\n\nSee var.diagnostic_settings_blob for full attribute documentation; the schema is identical.\n"
+  type = map(object({
+    name = optional(string, null)
+    logs = optional(set(object({
+      category       = optional(string, null)
+      category_group = optional(string, null)
+      enabled        = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    metrics = optional(set(object({
+      category = optional(string, null)
+      enabled  = optional(bool, true)
+      retention_policy = optional(object({
+        days    = optional(number, 0)
+        enabled = optional(bool, false)
+      }), {})
+    })), [])
+    log_analytics_destination_type           = optional(string, "Dedicated")
+    workspace_resource_id                    = optional(string, null)
+    storage_account_resource_id              = optional(string, null)
+    event_hub_authorization_rule_resource_id = optional(string, null)
+    event_hub_name                           = optional(string, null)
+    marketplace_partner_resource_id          = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "edge_zone" {
+  description = "(Optional) Specifies the Edge Zone within the Azure Region where this Storage Account should exist. Defaults to null. Changing this forces a new Storage Account to be created."
+  type        = string
+  default     = null
+}
+
+variable "enable_telemetry" {
+  description = "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n"
+  type        = bool
+  default     = true
+}
+
+variable "file_service_properties" {
+  description = "File service-level settings for the storage account. Defaults to null (Azure platform defaults).\n\n- cors_rules - (Optional) A list of CORS rules for the file service. Defaults to null. Each entry supports:\n  - allowed_headers - (Required) A list of headers allowed in cross-origin requests.\n  - allowed_methods - (Required) A list of HTTP methods allowed.\n  - allowed_origins - (Required) A list of origin domains allowed.\n  - exposed_headers - (Required) A list of response headers exposed to CORS clients.\n  - max_age_in_seconds - (Required) Seconds the browser should cache a preflight response.\n- share_retention_policy - (Optional) File share soft-delete retention policy. Defaults to null.\n  - days - (Optional) Number of days to retain soft-deleted shares. Between 1 and 365. Defaults to 7.\n  - enabled - (Optional) Whether soft-delete is enabled. Defaults to true.\n- smb - (Optional) SMB protocol settings. Defaults to null.\n  - authentication_types - (Optional) Set of authentication types. Valid values: NTLMv2, Kerberos. Defaults to null.\n  - channel_encryption_types - (Optional) Set of SMB channel encryption types. Valid values: AES-128-CCM, AES-128-GCM, AES-256-GCM. Defaults to null.\n  - kerberos_ticket_encryption_type - (Optional) Set of Kerberos ticket encryption types. Valid values: RC4-HMAC, AES-256. Defaults to null.\n  - multichannel_enabled - (Optional) Enable SMB multichannel (Premium file shares only). Defaults to null.\n  - versions - (Optional) Set of SMB protocol versions. Valid values: SMB2.1, SMB3.0, SMB3.1.1. Defaults to null.\n"
+  type = object({
+    cors_rules = optional(list(object({
+      allowed_headers    = list(string)
+      allowed_methods    = list(string)
+      allowed_origins    = list(string)
+      exposed_headers    = list(string)
+      max_age_in_seconds = number
+    })))
+    share_retention_policy = optional(object({
+      days    = optional(number, 7)
+      enabled = optional(bool, true)
+    }))
+    smb = optional(object({
+      authentication_types            = optional(set(string))
+      channel_encryption_types        = optional(set(string))
+      kerberos_ticket_encryption_type = optional(set(string))
+      multichannel_enabled            = optional(bool)
+      versions                        = optional(set(string))
+    }))
+  })
+  default = null
+}
+
+variable "https_traffic_only_enabled" {
+  description = "(Optional) Boolean flag which forces HTTPS if enabled, see [here](https://docs.microsoft.com/azure/storage/storage-require-secure-transfer/) for more information. Defaults to true."
+  type        = bool
+  default     = true
+}
+
+variable "immutability_policy" {
+  description = "Configures the account-level immutability policy. Defaults to null (no policy).\n\n- allow_protected_append_writes - (Required) When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added; any existing blocks cannot be modified or deleted.\n- period_since_creation_in_days - (Required) The immutability period for the blobs in the container since the policy creation, in days.\n- state - (Required) The mode of the policy. Disabled disables the policy; Unlocked allows the immutability retention time to be increased or decreased and toggling allow_protected_append_writes; Locked only allows the immutability retention time to be increased. A policy may only be created in Disabled or Unlocked, may be toggled between those two, and Unlocked may transition to Locked (which cannot be reverted).\n"
+  type = object({
+    allow_protected_append_writes = bool
+    period_since_creation_in_days = number
+    state                         = string
+  })
+  default = null
+}
+
+variable "infrastructure_encryption_enabled" {
+  description = "(Optional) Is infrastructure encryption enabled? Changing this forces a new resource to be created. Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "is_hns_enabled" {
+  description = "(Optional) Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 ([see here for more information](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-quickstart-create-account/)). Defaults to null (Azure platform default of false). Changing this forces a new resource to be created."
+  type        = bool
+  default     = null
+}
+
+variable "large_file_share_enabled" {
+  description = "(Optional) Is large file share enabled? Defaults to null (Azure platform default of false)."
+  type        = bool
+  default     = null
+}
+
+variable "local_user" {
+  description = "A map of Storage Account Local Users to create. The map key is arbitrary; the value supports the following attributes. Defaults to {} (no local users).\n\n- name - (Required) The name which should be used for this Storage Account Local User. Changing this forces a new Storage Account Local User to be created.\n- home_directory - (Optional) The home directory of the Storage Account Local User. Defaults to null.\n- ssh_key_enabled - (Optional) Specifies whether SSH Key Authentication is enabled. Defaults to null (Azure platform default of false).\n- ssh_password_enabled - (Optional) Specifies whether SSH Password Authentication is enabled. Defaults to null (Azure platform default of false).\n- permission_scope - (Optional) A list of permission scopes for the local user. Defaults to null. Each entry supports:\n  - resource_name - (Required) The container name (when service is set to blob) or the file share name (when service is set to file).\n  - service - (Required) The storage service used by this Storage Account Local User. Possible values are blob and file.\n  - permissions - (Required) An object describing the permissions granted at this scope. Supports:\n    - create - (Optional) Whether the local user has the create permission for this scope. Defaults to null (false).\n    - delete - (Optional) Whether the local user has the delete permission for this scope. Defaults to null (false).\n    - list - (Optional) Whether the local user has the list permission for this scope. Defaults to null (false).\n    - read - (Optional) Whether the local user has the read permission for this scope. Defaults to null (false).\n    - write - (Optional) Whether the local user has the write permission for this scope. Defaults to null (false).\n- ssh_authorized_key - (Optional) A list of SSH authorized keys for the local user. Defaults to null. Each entry supports:\n  - key - (Required) The public key value of this SSH authorized key.\n  - description - (Optional) The description of this SSH authorized key. Defaults to null.\n- timeouts - (Optional) Per-operation timeouts for the local user resource. Defaults to null (uses provider defaults inherited from var.timeouts). Supports:\n  - create - (Optional) Timeout for create operations.\n  - delete - (Optional) Timeout for delete operations.\n  - read - (Optional) Timeout for read operations.\n  - update - (Optional) Timeout for update operations.\n"
+  type = map(object({
+    home_directory       = optional(string)
+    name                 = string
+    ssh_key_enabled      = optional(bool)
+    ssh_password_enabled = optional(bool)
+    permission_scope = optional(list(object({
+      resource_name = string
+      service       = string
+      permissions = object({
+        create = optional(bool)
+        delete = optional(bool)
+        list   = optional(bool)
+        read   = optional(bool)
+        write  = optional(bool)
+      })
+    })))
+    ssh_authorized_key = optional(list(object({
+      description = optional(string)
+      key         = string
+    })))
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  }))
+  default = {}
+}
+
+variable "local_user_enabled" {
+  description = "(Optional) Should Storage Account Local Users be enabled? Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "location" {
+  description = "Azure region where the resource should be deployed.\nIf null, the location will be inferred from the resource group location.\n"
+  type        = string
+  default     = ""
+}
+
+variable "lock" {
+  description = "Controls the management lock applied to the storage account. Defaults to null (no lock).\n\n- kind - (Required) The kind of lock to apply. Possible values are CanNotDelete and ReadOnly.\n- name - (Optional) The name of the lock. If not specified, a name will be generated.\n"
+  type = object({
+    name = optional(string, null)
+    kind = string
+  })
+  default = null
+}
+
+variable "managed_identities" {
+  description = "  Controls the Managed Identity configuration on this resource. The following properties can be specified:\n\n  - system_assigned - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\n  - user_assigned_resource_ids - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n"
+  type = object({
+    system_assigned            = optional(bool, false)
+    user_assigned_resource_ids = optional(set(string), [])
+  })
+  default = {}
+}
+
+variable "min_tls_version" {
+  description = "(Optional) The minimum supported TLS version for the storage account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults to TLS1_2 for new storage accounts."
+  type        = string
+  default     = "TLS1_2"
+}
+
+variable "name" {
+  description = "The name of the resource."
+  type        = string
+  default     = ""
+}
+
+variable "network_rules" {
+  description = "Network rules restricting access to the storage account. Defaults to {}, which applies the object's own per-attribute defaults (effectively default_action = \"Deny\" with bypass = [\"AzureServices\"]).\n\n> Note: the default value blocks all public access to the storage account. If you want to disable all network rules, set this value to null.\n\n- bypass - (Optional) Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. Defaults to [\"AzureServices\"].\n- default_action - (Optional) Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow. Defaults to Deny.\n- ip_rules - (Optional) List of public IP or IP ranges in CIDR format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in [RFC 1918](https://tools.ietf.org/html/rfc1918#section-3)) are not allowed. Defaults to [].\n- virtual_network_subnet_ids - (Optional) A set of virtual network subnet IDs to secure the storage account. Defaults to [].\n- private_link_access - (Optional) A list of private link access rules. Defaults to null. Each entry supports:\n  - endpoint_resource_id - (Required) The resource ID of the resource access rule to be granted access.\n  - endpoint_tenant_id - (Optional) The tenant ID of the resource of the resource access rule to be granted access. Defaults to the current tenant ID.\n- timeouts - (Optional) Per-operation timeouts for the network rules resource. Defaults to null (uses provider defaults). Supports:\n  - create - (Optional) Timeout for create operations.\n  - delete - (Optional) Timeout for delete operations.\n  - read - (Optional) Timeout for read operations.\n  - update - (Optional) Timeout for update operations.\n"
+  type = object({
+    bypass                     = optional(set(string), ["AzureServices"])
+    default_action             = optional(string, "Deny")
+    ip_rules                   = optional(set(string), [])
+    virtual_network_subnet_ids = optional(set(string), [])
+    private_link_access = optional(list(object({
+      endpoint_resource_id = string
+      endpoint_tenant_id   = optional(string)
+    })))
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  })
+  default = {}
+}
+
+variable "nfsv3_enabled" {
+  description = "(Optional) Is NFSv3 protocol enabled? Changing this forces a new resource to be created. Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "parent_id" {
+  description = "The Azure resource ID of the parent resource group, in the form /subscriptions/{subscription_id}/resourceGroups/{resource_group_name}."
+  type        = string
+  default     = ""
+}
+
+variable "private_endpoints" {
+  description = "A map of private endpoints to create on the resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. Defaults to {} (no private endpoints).\n\n- subnet_resource_id - (Required) The resource ID of the subnet to deploy the private endpoint in.\n- subresource_name - (Required) The service name of the private endpoint. Possible values are blob, dfs, file, queue, table, and web.\n- name - (Optional) The name of the private endpoint. One will be generated if not set. The name must be set if multiple private endpoints are created to avoid conflicting resources.\n- role_assignments - (Optional) A map of role assignments to create on the private endpoint. Defaults to {}. The map key is deliberately arbitrary to avoid issues where map keys may be unknown at plan time. Each value supports:\n  - role_definition_id_or_name - (Required) The ID or name of the role definition to assign to the principal.\n  - principal_id - (Required) The ID of the principal to assign the role to.\n  - description - (Optional) The description of the role assignment. Defaults to null.\n  - skip_service_principal_aad_check - (Optional) Retained for backwards compatibility with the legacy azurerm schema. Not honoured under AzAPI: the field is accepted but has no effect on the underlying role assignment. Defaults to false.\n  - condition - (Optional) The condition which will be used to scope the role assignment. Defaults to null.\n  - condition_version - (Optional) The version of the condition syntax. Valid value is 2.0. Defaults to null.\n  - delegated_managed_identity_resource_id - (Optional) The resource ID of the delegated managed identity. Defaults to null.\n  - principal_type - (Optional) The type of principal. One of User, Group, ServicePrincipal, ForeignGroup, Device. Defaults to null.\n- lock - (Optional) The management lock to apply to the private endpoint. Defaults to null (no lock). Supports:\n  - kind - (Required) The kind of lock. Possible values are CanNotDelete and ReadOnly.\n  - name - (Optional) The name of the lock. Defaults to null (auto-generated).\n- tags - (Optional) A mapping of tags to assign to the private endpoint. Defaults to null.\n- private_dns_zone_group_name - (Optional) The name of the private DNS zone group. Defaults to default.\n- private_dns_zone_resource_ids - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. Defaults to []. If empty, no zone groups will be created and the private endpoint will not be associated with any private DNS zones; DNS records must be managed external to this module.\n- application_security_group_associations - (Optional) A map of resource IDs of application security groups to associate with the private endpoint. Defaults to {}. The map key is deliberately arbitrary to avoid issues where map keys may be unknown at plan time; the value is the application security group resource ID.\n- private_service_connection_name - (Optional) The name of the private service connection. One will be generated if not set. Defaults to null.\n- network_interface_name - (Optional) The name of the network interface. One will be generated if not set. Defaults to null.\n- location - (Optional) The Azure location where the resources will be deployed. Defaults to the location of the storage account.\n- resource_group_name - (Optional) The resource group where the resources will be deployed. Defaults to the resource group of the storage account.\n- ip_configurations - (Optional) A map of IP configurations to create on the private endpoint. Defaults to {} (the platform allocates IPs). The map key is deliberately arbitrary to avoid issues where map keys may be unknown at plan time. Each value supports:\n  - name - (Required) The name of the IP configuration.\n  - private_ip_address - (Required) The private IP address of the IP configuration.\n"
+  type = map(object({
+    name = optional(string, null)
+    role_assignments = optional(map(object({
+      role_definition_id_or_name             = string
+      principal_id                           = string
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      condition                              = optional(string, null)
+      condition_version                      = optional(string, null)
+      delegated_managed_identity_resource_id = optional(string, null)
+      principal_type                         = optional(string, null)
+    })), {})
+    lock = optional(object({
+      kind = string
+      name = optional(string, null)
+    }), null)
+    tags                                    = optional(map(string), null)
+    subnet_resource_id                      = string
+    subresource_name                        = string
+    private_dns_zone_group_name             = optional(string, "default")
+    private_dns_zone_resource_ids           = optional(set(string), [])
+    application_security_group_associations = optional(map(string), {})
+    private_service_connection_name         = optional(string, null)
+    network_interface_name                  = optional(string, null)
+    location                                = optional(string, null)
+    resource_group_name                     = optional(string, null)
+    ip_configurations = optional(map(object({
+      name               = string
+      private_ip_address = string
+    })), {})
+  }))
+  default = {}
+}
+
+variable "private_endpoints_manage_dns_zone_group" {
+  description = "Whether to manage private DNS zone groups with this module. Defaults to true. If set to false, you must manage private DNS zone groups externally, e.g. using Azure Policy."
+  type        = bool
+  default     = true
+}
+
+variable "provisioned_billing_model_version" {
+  description = "[DEPRECATED] (Optional) Specifies the version of the provisioned billing model (e.g. when account_kind = \"FileStorage\" for Storage File). Possible value is V2. Defaults to null. Changing this forces a new resource to be created. This variable is only honoured when account_sku_name is set to null; otherwise account_sku_name wins. Prefer account_sku_name (use a *V2_* SKU such as StandardV2_ZRS or PremiumV2_ZRS)."
+  type        = string
+  default     = null
+}
+
+variable "public_network_access_enabled" {
+  description = "(Optional) Whether the public network access is enabled? Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "queue_encryption_key_type" {
+  description = "(Optional) The encryption type of the queue service. Possible values are Service and Account. Defaults to null (Azure platform default of Service). Changing this forces a new resource to be created."
+  type        = string
+  default     = null
+}
+
+variable "queue_properties" {
+  description = "Queue service-level settings for the storage account. Defaults to null (Azure platform defaults).\n\n- cors_rules - (Optional) A list of CORS rules for the queue service. Defaults to null. Each entry supports:\n  - allowed_headers - (Required) A list of headers allowed in cross-origin requests.\n  - allowed_methods - (Required) A list of HTTP methods allowed.\n  - allowed_origins - (Required) A list of origin domains allowed.\n  - exposed_headers - (Required) A list of response headers exposed to CORS clients.\n  - max_age_in_seconds - (Required) Seconds the browser should cache a preflight response.\n"
+  type = object({
+    cors_rules = optional(list(object({
+      allowed_headers    = list(string)
+      allowed_methods    = list(string)
+      allowed_origins    = list(string)
+      exposed_headers    = list(string)
+      max_age_in_seconds = number
+    })))
+  })
+  default = null
+}
+
+variable "queues" {
+  description = "A map of queues to create on the storage account. The map key is arbitrary; the value supports the following attributes. Defaults to {} (no queues).\n\n- name - (Required) The name of the Queue which should be created within the Storage Account. Must be unique within the storage account. Changing this forces a new resource to be created.\n- metadata - (Optional) A mapping of MetaData which should be assigned to this Storage Queue. Defaults to null.\n- role_assignments - (Optional) A map of role assignments to create on the queue. Defaults to {}. See var.role_assignments for the attribute schema.\n- timeouts - (Optional) Per-operation timeouts for the queue resource. Defaults to null (uses provider defaults inherited from var.timeouts). Supports:\n  - create - (Optional) Timeout for create operations.\n  - delete - (Optional) Timeout for delete operations.\n  - read - (Optional) Timeout for read operations.\n  - update - (Optional) Timeout for update operations.\n"
+  type = map(object({
+    metadata = optional(map(string))
+    name     = string
+    role_assignments = optional(map(object({
+      role_definition_id_or_name             = string
+      principal_id                           = string
+      principal_type                         = optional(string, null)
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      condition                              = optional(string, null)
+      condition_version                      = optional(string, null)
+      delegated_managed_identity_resource_id = optional(string, null)
+    })), {})
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  }))
+  default = {}
+}
+
+variable "resource_types" {
+  description = "Override the AzAPI <provider>/<resource>@<api-version> strings used by this module. Each key defaults to a tested value; supply only the keys you want to override. Useful when targeting a sovereign cloud with older API versions, or when opting into a newer preview API.\n\n- storage_account            - The storage account itself, used by both the create call and the customer-managed-key patch.\n- customer_managed_key_vault - The Key Vault data source used to look up the vault URI when CMK is enabled.\n- lock                       - Management lock applied to the storage account (and to private endpoints when configured).\n- blob_container             - Blob containers (also used by Data Lake Gen2 filesystems, which are blob containers in ARM).\n- blob_service               - The blobServices/default sub-resource, patched by the static-website and blob-service submodules.\n- file_service               - The fileServices/default sub-resource, patched by the file-service submodule for CORS, soft-delete, and SMB settings.\n- queue                      - Storage queues.\n- table                      - Storage tables.\n- share                      - File shares.\n- local_user                 - SFTP local users.\n- management_policy          - The lifecycle-management policy.\n- queue_service              - The queueServices/default sub-resource, patched by the queue-service-properties submodule.\n- table_service              - The tableServices/default sub-resource, patched by the table-service-properties submodule.\n- private_endpoint           - Private endpoints created for the storage account.\n- private_dns_zone_group     - The private DNS zone group resource attached to a private endpoint.\n"
+  type = object({
+    storage_account            = optional(string, "Microsoft.Storage/storageAccounts@2025-06-01")
+    customer_managed_key_vault = optional(string, "Microsoft.KeyVault/vaults@2024-11-01")
+    lock                       = optional(string, "Microsoft.Authorization/locks@2020-05-01")
+    blob_container             = optional(string, "Microsoft.Storage/storageAccounts/blobServices/containers@2025-06-01")
+    blob_service               = optional(string, "Microsoft.Storage/storageAccounts/blobServices@2025-06-01")
+    file_service               = optional(string, "Microsoft.Storage/storageAccounts/fileServices@2025-06-01")
+    queue                      = optional(string, "Microsoft.Storage/storageAccounts/queueServices/queues@2025-06-01")
+    table                      = optional(string, "Microsoft.Storage/storageAccounts/tableServices/tables@2025-06-01")
+    share                      = optional(string, "Microsoft.Storage/storageAccounts/fileServices/shares@2025-06-01")
+    local_user                 = optional(string, "Microsoft.Storage/storageAccounts/localUsers@2025-06-01")
+    management_policy          = optional(string, "Microsoft.Storage/storageAccounts/managementPolicies@2025-06-01")
+    queue_service              = optional(string, "Microsoft.Storage/storageAccounts/queueServices@2025-06-01")
+    table_service              = optional(string, "Microsoft.Storage/storageAccounts/tableServices@2025-06-01")
+    private_endpoint           = optional(string, "Microsoft.Network/privateEndpoints@2025-05-01")
+    private_dns_zone_group     = optional(string, "Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-05-01")
+  })
+  default = {}
+}
+
+variable "retry" {
+  description = "Retry configuration applied to every azapi resource managed by the module (root storage account and all submodules). Defaults to null (no custom retry).\n\n- error_message_regex  - (Optional) A list of regex patterns matching error messages that trigger a retry.\n- interval_seconds     - (Optional) Initial interval between retries in seconds.\n- max_interval_seconds - (Optional) Maximum interval between retries in seconds.\n\nSee <https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource#retry> for full semantics.\n"
+  type = object({
+    error_message_regex  = optional(list(string))
+    interval_seconds     = optional(number)
+    max_interval_seconds = optional(number)
+  })
+  default = null
+}
+
+variable "role_assignment_definition_lookup_enabled" {
+  description = "Whether the Azure/avm-utl-interfaces/azure module composed by the internal role_assignments submodule should resolve role definition names supplied via role_definition_id_or_name by querying the Azure Authorization API. Applies to every role assignment created by this module: the storage account scope (var.role_assignments), every container/queue/share/table scope and every private endpoint scope. Defaults to true.\n\nSet to false if you only ever supply fully-qualified role definition resource IDs (/subscriptions/.../providers/Microsoft.Authorization/roleDefinitions/<guid>) in role_definition_id_or_name. Disabling the lookup avoids the API call, which is useful in air-gapped or permission-restricted environments where the calling identity lacks Microsoft.Authorization/roleDefinitions/read at the parent scope.\n"
+  type        = bool
+  default     = true
+}
+
+variable "role_assignments" {
+  description = "A map of role assignments to create on the resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. Defaults to {}.\n\n- role_definition_id_or_name - (Required) The ID or name of the role definition to assign to the principal.\n- principal_id - (Required) The ID of the principal to assign the role to.\n- description - (Optional) The description of the role assignment. Defaults to null.\n- skip_service_principal_aad_check - (Optional) Retained for backwards compatibility with the legacy azurerm schema. Not honoured under AzAPI: the field is accepted but has no effect on the underlying role assignment. Defaults to false.\n- condition - (Optional) The condition which will be used to scope the role assignment. Defaults to null.\n- condition_version - (Optional) The version of the condition syntax. Valid value is 2.0. Defaults to null.\n- delegated_managed_identity_resource_id - (Optional) The resource ID of the delegated managed identity. Defaults to null.\n- principal_type - (Optional) The type of principal. One of User, Group, ServicePrincipal, ForeignGroup, Device. Defaults to null.\n"
+  type = map(object({
+    role_definition_id_or_name             = string
+    principal_id                           = string
+    description                            = optional(string, null)
+    skip_service_principal_aad_check       = optional(bool, false)
+    condition                              = optional(string, null)
+    condition_version                      = optional(string, null)
+    delegated_managed_identity_resource_id = optional(string, null)
+    principal_type                         = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "routing" {
+  description = "Configures the storage account routing preference. Defaults to null (Azure platform defaults).\n\n- choice - (Optional) Specifies the kind of network routing opted by the user. Possible values are InternetRouting and MicrosoftRouting. Defaults to MicrosoftRouting.\n- publish_internet_endpoints - (Optional) Should internet routing storage endpoints be published? Defaults to false.\n- publish_microsoft_endpoints - (Optional) Should Microsoft routing storage endpoints be published? Defaults to false.\n"
+  type = object({
+    choice                      = optional(string, "MicrosoftRouting")
+    publish_internet_endpoints  = optional(bool, false)
+    publish_microsoft_endpoints = optional(bool, false)
+  })
+  default = null
+}
+
+variable "sas_policy" {
+  description = "Configures the SAS policy on the storage account. Defaults to null (no SAS policy).\n\n- expiration_period - (Required) The SAS expiration period in the format DD.HH:MM:SS.\n- expiration_action - (Optional) The SAS expiration action. The only possible value is Log at this moment. Defaults to Log.\n"
+  type = object({
+    expiration_action = optional(string, "Log")
+    expiration_period = string
+  })
+  default = null
+}
+
+variable "sftp_enabled" {
+  description = "(Optional) Boolean, enable SFTP for the storage account.  Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "shared_access_key_enabled" {
+  description = "(Optional) Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). Defaults to false."
+  type        = bool
+  default     = false
+}
+
+variable "shares" {
+  description = "A map of file shares to create on the storage account. The map key is arbitrary; the value supports the following attributes. Defaults to {} (no shares).\n\n- name - (Required) The name of the share. Must be unique within the storage account. Changing this forces a new resource to be created.\n- quota - (Required) The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1 GB or higher and at most 5120 GB (5 TB). For Premium FileStorage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).\n- access_tier - (Optional) The access tier of the file share. Possible values are Hot, Cool, TransactionOptimized, Premium. Defaults to null (Azure platform default).\n- enabled_protocol - (Optional) The protocol used for the share. Possible values are SMB and NFS. SMB indicates the share can be accessed by SMBv3.0, SMBv2.1 and REST. NFS indicates the share can be accessed by NFSv4.1. Defaults to null (Azure platform default of SMB). Changing this forces a new resource to be created.\n- metadata - (Optional) A mapping of MetaData for this File Share. Defaults to null.\n- root_squash - (Optional) The root squash behaviour for an NFS share. Possible values are NoRootSquash, RootSquash, AllSquash. Defaults to null.\n- signed_identifiers - (Optional) A list of signed identifiers (stored access policies) to apply to the share. Defaults to null. Each entry supports:\n  - id - (Required) The ID for this signed identifier. Maximum 64 characters.\n  - access_policy - (Optional) The access policy for this identifier. Defaults to null. Supports:\n    - expiry_time - (Required) The [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) UTC time at which this access policy should expire.\n    - permission - (Required) The permissions associated with this signed identifier. A combination of r (read), w (write), d (delete), and l (list).\n    - start_time - (Required) The [ISO8601](https://en.wikipedia.org/wiki/ISO_8601) UTC time at which this access policy becomes valid.\n- role_assignments - (Optional) A map of role assignments to create on the share. Defaults to {}. See var.role_assignments for the attribute schema.\n- timeouts - (Optional) Per-operation timeouts for the share resource. Defaults to null (uses provider defaults inherited from var.timeouts). Supports:\n  - create - (Optional) Timeout for create operations.\n  - delete - (Optional) Timeout for delete operations.\n  - read - (Optional) Timeout for read operations.\n  - update - (Optional) Timeout for update operations.\n"
+  type = map(object({
+    access_tier      = optional(string)
+    enabled_protocol = optional(string)
+    metadata         = optional(map(string))
+    name             = string
+    quota            = number
+    root_squash      = optional(string)
+    signed_identifiers = optional(list(object({
+      id = string
+      access_policy = optional(object({
+        expiry_time = string
+        permission  = string
+        start_time  = string
+      }))
+    })))
+    role_assignments = optional(map(object({
+      role_definition_id_or_name             = string
+      principal_id                           = string
+      principal_type                         = optional(string, null)
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      condition                              = optional(string, null)
+      condition_version                      = optional(string, null)
+      delegated_managed_identity_resource_id = optional(string, null)
+    })), {})
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  }))
+  default = {}
+}
+
+variable "static_website" {
+  description = "A map of static website configurations to apply to the storage account. Defaults to null (static website disabled). The map key is arbitrary; only the first entry is used by the underlying API.\n\n- error_404_document - (Optional) The absolute path to a custom webpage that should be used when a request is made which does not correspond to an existing file. Defaults to null.\n- index_document - (Optional) The webpage that Azure Storage serves for requests to the root of a website or any subfolder. For example, index.html. The value is case-sensitive. Defaults to null.\n"
+  type = map(object({
+    error_404_document = optional(string)
+    index_document     = optional(string)
+  }))
+  default = null
+}
+
+variable "storage_data_lake_gen2_filesystems" {
+  description = "A map of Data Lake Gen2 filesystems to create on the storage account. The map key is arbitrary; the value supports the following attributes. Defaults to {} (no filesystems).\n\n- name - (Required) The name of the Data Lake Gen2 File System which should be created within the Storage Account. Must be unique within the storage account. Changing this forces a new resource to be created.\n- default_encryption_scope - (Optional) The default encryption scope to use for this filesystem. Defaults to null. Changing this forces a new resource to be created.\n- properties - (Optional) A mapping of key/value pairs assigned to this filesystem (passed as ARM container metadata). Defaults to null.\n- timeouts - (Optional) Per-operation timeouts for the filesystem resource. Defaults to null (uses provider defaults inherited from var.timeouts). Supports:\n  - create - (Optional) Timeout for create operations.\n  - delete - (Optional) Timeout for delete operations.\n  - read - (Optional) Timeout for read operations.\n  - update - (Optional) Timeout for update operations.\n\n> **v1.0.0 BREAKING CHANGE**: The owner, group and ace (POSIX ACL) fields, plus the standalone var.storage_data_lake_gen2_paths variable, are no longer supported. Those features required Data Lake DFS data-plane API calls which the AzAPI provider does not exercise. Manage them externally if required (see examples/data_lake_gen2/ for a recipe using azurerm_storage_data_lake_gen2_path alongside this module).\n"
+  type = map(object({
+    default_encryption_scope = optional(string)
+    name                     = string
+    properties               = optional(map(string))
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  }))
+  default = {}
+}
+
+variable "storage_management_policy_rule" {
+  description = "A map of management policy rules to apply to the storage account. The map key is arbitrary; the value supports the following attributes. Defaults to {} (no rules).\n\n- enabled - (Required) Boolean to specify whether the rule is enabled.\n- name - (Required) The name of the rule. Rule name is case-sensitive. It must be unique within a policy.\n- actions - (Required) An object describing the actions taken by the rule. Supports the following nested blocks (each optional, defaults to null):\n\n ---\n base_blob block supports the following:\n - auto_tier_to_hot_from_cool_enabled - (Optional) Whether a blob should automatically be tiered from cool back to hot if it is accessed again after being tiered to cool. Defaults to null (Azure platform default of false).\n - delete_after_days_since_creation_greater_than - (Optional) The age in days after creation to delete the blob. Must be between 0 and 99999. Defaults to null (no policy applied).\n - delete_after_days_since_last_access_time_greater_than - (Optional) The age in days after last access time to delete the blob. Must be between 0 and 99999. Defaults to null (no policy applied).\n - delete_after_days_since_modification_greater_than - (Optional) The age in days after last modification to delete the blob. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_archive_after_days_since_creation_greater_than - (Optional) The age in days after creation to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_archive_after_days_since_last_access_time_greater_than - (Optional) The age in days after last access time to tier blobs to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_archive_after_days_since_last_tier_change_greater_than - (Optional) The age in days after last tier change to skip the blob being re-archived. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_archive_after_days_since_modification_greater_than - (Optional) The age in days after last modification to tier blobs to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cold_after_days_since_creation_greater_than - (Optional) The age in days after creation to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cold_after_days_since_last_access_time_greater_than - (Optional) The age in days after last access time to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cold_after_days_since_modification_greater_than - (Optional) The age in days after last modification to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cool_after_days_since_creation_greater_than - (Optional) The age in days after creation to tier blobs to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cool_after_days_since_last_access_time_greater_than - (Optional) The age in days after last access time to tier blobs to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cool_after_days_since_modification_greater_than - (Optional) The age in days after last modification to tier blobs to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n\n ---\n snapshot block supports the following:\n - change_tier_to_archive_after_days_since_creation - (Optional) The age in days after creation to tier blob snapshot to archive storage. Must be between 0 and 99999. Defaults to null (no policy applied).\n - change_tier_to_cool_after_days_since_creation - (Optional) The age in days after creation to tier blob snapshot to cool storage. Must be between 0 and 99999. Defaults to null (no policy applied).\n - delete_after_days_since_creation_greater_than - (Optional) The age in days after creation to delete the blob snapshot. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_archive_after_days_since_last_tier_change_greater_than - (Optional) The age in days after last tier change to skip the snapshot being re-archived. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cold_after_days_since_creation_greater_than - (Optional) The age in days after creation to tier blob snapshots to cold storage. Supports snapshots currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n\n ---\n version block supports the following:\n - change_tier_to_archive_after_days_since_creation - (Optional) The age in days after creation to tier blob version to archive storage. Must be between 0 and 99999. Defaults to null (no policy applied).\n - change_tier_to_cool_after_days_since_creation - (Optional) The age in days after creation to tier blob version to cool storage. Must be between 0 and 99999. Defaults to null (no policy applied).\n - delete_after_days_since_creation - (Optional) The age in days after creation to delete the blob version. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_archive_after_days_since_last_tier_change_greater_than - (Optional) The age in days after last tier change to skip the blob version being re-archived. Must be between 0 and 99999. Defaults to null (no policy applied).\n - tier_to_cold_after_days_since_creation_greater_than - (Optional) The age in days after creation to tier blob versions to cold storage. Supports versions currently at Hot tier. Must be between 0 and 99999. Defaults to null (no policy applied).\n\n ---\n filters block (Required) supports the following:\n - blob_types - (Required) A set of predefined values. Valid options are blockBlob and appendBlob.\n - prefix_match - (Optional) A set of strings for prefixes to be matched. Defaults to null.\n - match_blob_index_tag - (Optional) A set of blob index tag filters. Defaults to null. Each entry supports the attributes documented in the match_blob_index_tag block below.\n\n ---\n match_blob_index_tag block supports the following:\n - name - (Required) The filter tag name used for tag based filtering for blob objects.\n - value - (Required) The filter tag value used for tag based filtering for blob objects.\n - operation - (Optional) The comparison operator which is used for object comparison and filtering. Possible value is ==. Defaults to null (Azure platform default of ==).\n"
+  type = map(object({
+    enabled = bool
+    name    = string
+    actions = object({
+      base_blob = optional(object({
+        auto_tier_to_hot_from_cool_enabled                             = optional(bool)
+        delete_after_days_since_creation_greater_than                  = optional(number)
+        delete_after_days_since_last_access_time_greater_than          = optional(number)
+        delete_after_days_since_modification_greater_than              = optional(number)
+        tier_to_archive_after_days_since_creation_greater_than         = optional(number)
+        tier_to_archive_after_days_since_last_access_time_greater_than = optional(number)
+        tier_to_archive_after_days_since_last_tier_change_greater_than = optional(number)
+        tier_to_archive_after_days_since_modification_greater_than     = optional(number)
+        tier_to_cold_after_days_since_creation_greater_than            = optional(number)
+        tier_to_cold_after_days_since_last_access_time_greater_than    = optional(number)
+        tier_to_cold_after_days_since_modification_greater_than        = optional(number)
+        tier_to_cool_after_days_since_creation_greater_than            = optional(number)
+        tier_to_cool_after_days_since_last_access_time_greater_than    = optional(number)
+        tier_to_cool_after_days_since_modification_greater_than        = optional(number)
+      }))
+      snapshot = optional(object({
+        change_tier_to_archive_after_days_since_creation               = optional(number)
+        change_tier_to_cool_after_days_since_creation                  = optional(number)
+        delete_after_days_since_creation_greater_than                  = optional(number)
+        tier_to_archive_after_days_since_last_tier_change_greater_than = optional(number)
+        tier_to_cold_after_days_since_creation_greater_than            = optional(number)
+      }))
+      version = optional(object({
+        change_tier_to_archive_after_days_since_creation               = optional(number)
+        change_tier_to_cool_after_days_since_creation                  = optional(number)
+        delete_after_days_since_creation                               = optional(number)
+        tier_to_archive_after_days_since_last_tier_change_greater_than = optional(number)
+        tier_to_cold_after_days_since_creation_greater_than            = optional(number)
+      }))
+    })
+    filters = object({
+      blob_types   = set(string)
+      prefix_match = optional(set(string))
+      match_blob_index_tag = optional(set(object({
+        name      = string
+        operation = optional(string)
+        value     = string
+      })))
+    })
+  }))
+  default = {}
+}
+
+variable "storage_management_policy_timeouts" {
+  description = "Per-operation timeouts for the storage account management policy resource. Defaults to null (uses provider defaults).\n\n- create - (Optional) Timeout for create operations. Defaults to null.\n- delete - (Optional) Timeout for delete operations. Defaults to null.\n- read - (Optional) Timeout for read operations. Defaults to null.\n- update - (Optional) Timeout for update operations. Defaults to null.\n"
+  type = object({
+    create = optional(string)
+    delete = optional(string)
+    read   = optional(string)
+    update = optional(string)
+  })
+  default = null
+}
+
+variable "table_encryption_key_type" {
+  description = "(Optional) The encryption type of the table service. Possible values are Service and Account. Defaults to null (Azure platform default of Service). Changing this forces a new resource to be created."
+  type        = string
+  default     = null
+}
+
+variable "table_properties" {
+  description = "Table service-level settings for the storage account. Defaults to null (Azure platform defaults).\n\n- cors_rules - (Optional) A list of CORS rules for the table service. Defaults to null. Each entry supports:\n  - allowed_headers - (Required) A list of headers allowed in cross-origin requests.\n  - allowed_methods - (Required) A list of HTTP methods allowed.\n  - allowed_origins - (Required) A list of origin domains allowed.\n  - exposed_headers - (Required) A list of response headers exposed to CORS clients.\n  - max_age_in_seconds - (Required) Seconds the browser should cache a preflight response.\n"
+  type = object({
+    cors_rules = optional(list(object({
+      allowed_headers    = list(string)
+      allowed_methods    = list(string)
+      allowed_origins    = list(string)
+      exposed_headers    = list(string)
+      max_age_in_seconds = number
+    })))
+  })
+  default = null
+}
+
+variable "table_service_cors_propagation_wait" {
+  description = "(Optional) Duration to wait after the table service CORS PATCH before allowing dependents to refresh, expressed as a Go duration string (e.g. 2m, 90s). Defaults to \"2m\".\n\nThe ARM GET on tableServices/default is eventually consistent: immediately after a successful PATCH the read can omit the corsRules that were just applied, which causes a follow-up terraform plan (and the post-apply idempotency check) to see false drift. The read-back stabilises after roughly two minutes. Set to \"0s\" to disable the wait entirely (not recommended when table_properties.cors_rules is set).\n"
+  type        = string
+  default     = "2m"
+}
+
+variable "tables" {
+  description = "A map of tables to create on the storage account. The map key is arbitrary; the value supports the following attributes. Defaults to {} (no tables).\n\n- name - (Required) The name of the storage table. Only alphanumeric characters allowed, starting with a letter. Must be unique within the storage account. Changing this forces a new resource to be created.\n- signed_identifiers - (Optional) A list of signed identifiers (stored access policies) to apply to the table. Defaults to null. Each entry supports:\n  - id - (Required) The ID for this signed identifier. Maximum 64 characters.\n  - access_policy - (Optional) The access policy for this identifier. Defaults to null. Supports:\n    - expiry_time - (Required) The ISO8601 UTC time at which this access policy should expire.\n    - permission - (Required) The permissions associated with this signed identifier. A combination of r (read), a (add), u (update), and d (delete).\n    - start_time - (Required) The ISO8601 UTC time at which this access policy becomes valid.\n- role_assignments - (Optional) A map of role assignments to create on the table. Defaults to {}. See var.role_assignments for the attribute schema.\n- timeouts - (Optional) Per-operation timeouts for the table resource. Defaults to null (uses provider defaults inherited from var.timeouts). Supports:\n  - create - (Optional) Timeout for create operations.\n  - delete - (Optional) Timeout for delete operations.\n  - read - (Optional) Timeout for read operations.\n  - update - (Optional) Timeout for update operations.\n"
+  type = map(object({
+    name = string
+    signed_identifiers = optional(list(object({
+      id = string
+      access_policy = optional(object({
+        expiry_time = string
+        permission  = string
+        start_time  = string
+      }))
+    })))
+
+    role_assignments = optional(map(object({
+      role_definition_id_or_name             = string
+      principal_id                           = string
+      principal_type                         = optional(string, null)
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      condition                              = optional(string, null)
+      condition_version                      = optional(string, null)
+      delegated_managed_identity_resource_id = optional(string, null)
+    })), {})
+
+    timeouts = optional(object({
+      create = optional(string)
+      delete = optional(string)
+      read   = optional(string)
+      update = optional(string)
+    }))
+  }))
+  default = {}
+}
+
+variable "tags" {
+  description = "Custom tags to apply to the resource."
+  type        = map(string)
+  default     = null
+}
+
+variable "timeouts" {
+  description = "Default per-operation timeouts applied to every azapi resource managed by the module. Defaults to null (provider defaults). Each value is a Go duration string (e.g. 30m, 1h).\n\n- create - (Optional) Timeout for create operations. Defaults to null.\n- read - (Optional) Timeout for read operations. Defaults to null.\n- update - (Optional) Timeout for update operations. Defaults to null.\n- delete - (Optional) Timeout for delete operations. Defaults to null.\n\nThe root storage account uses these values directly. Submodules (containers, queues, shares, tables, diagnostic settings, private endpoints, management policy, local users, role assignments, Data Lake Gen2 filesystems) use these as a default that can be overridden per-item via the item's own timeouts field.\n"
+  type = object({
+    create = optional(string)
+    read   = optional(string)
+    update = optional(string)
+    delete = optional(string)
+  })
+  default = null
+}

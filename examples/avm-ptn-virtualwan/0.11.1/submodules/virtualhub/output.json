@@ -1,0 +1,30 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Virtual Hub ID"
+  },
+  {
+    "name": "resource",
+    "description": "Virtual Hub"
+  },
+  {
+    "name": "location",
+    "description": "Virtual Hub Location"
+  },
+  {
+    "name": "resource_group_name",
+    "description": "Resource Group Name"
+  },
+  {
+    "name": "resource_object",
+    "description": "Virtual Hub Object"
+  },
+  {
+    "name": "resource_ids",
+    "description": "Virtual Hub IDs"
+  },
+  {
+    "name": "resource_names",
+    "description": "Virtual Hub Names"
+  }
+]

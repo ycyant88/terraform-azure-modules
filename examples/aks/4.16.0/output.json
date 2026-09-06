@@ -1,0 +1,86 @@
+[
+  {
+    "name": "kubelet_identity",
+    "description": ""
+  },
+  {
+    "name": "admin_cluster_ca_certificate",
+    "description": ""
+  },
+  {
+    "name": "addon_profile",
+    "description": ""
+  },
+  {
+    "name": "client_key",
+    "description": ""
+  },
+  {
+    "name": "host",
+    "description": ""
+  },
+  {
+    "name": "username",
+    "description": ""
+  },
+  {
+    "name": "password",
+    "description": ""
+  },
+  {
+    "name": "aks_id",
+    "description": ""
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": ""
+  },
+  {
+    "name": "node_resource_group",
+    "description": ""
+  },
+  {
+    "name": "kube_config_raw",
+    "description": ""
+  },
+  {
+    "name": "admin_client_certificate",
+    "description": ""
+  },
+  {
+    "name": "admin_host",
+    "description": ""
+  },
+  {
+    "name": "client_certificate",
+    "description": ""
+  },
+  {
+    "name": "location",
+    "description": ""
+  },
+  {
+    "name": "http_application_routing_zone_name",
+    "description": ""
+  },
+  {
+    "name": "system_assigned_identity",
+    "description": ""
+  },
+  {
+    "name": "admin_client_key",
+    "description": ""
+  },
+  {
+    "name": "kube_admin_config_raw",
+    "description": ""
+  },
+  {
+    "name": "admin_username",
+    "description": ""
+  },
+  {
+    "name": "admin_password",
+    "description": ""
+  }
+]

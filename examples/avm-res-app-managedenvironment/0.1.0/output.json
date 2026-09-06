@@ -1,0 +1,22 @@
+[
+  {
+    "name": "id",
+    "description": "The ID of the resource."
+  },
+  {
+    "name": "name",
+    "description": "The name of the resource"
+  },
+  {
+    "name": "storages",
+    "description": "A map of storage shares connected to this environment. The map key is the supplied input to var.storages. The map value is the azurerm-formatted version of the entire storage shares resource."
+  },
+  {
+    "name": "dapr_components",
+    "description": "A map of dapr components connected to this environment. The map key is the supplied input to var.storages. The map value is the azurerm-formatted version of the entire dapr_components resource."
+  },
+  {
+    "name": "resource",
+    "description": "The Container Apps Managed Environment resource."
+  }
+]

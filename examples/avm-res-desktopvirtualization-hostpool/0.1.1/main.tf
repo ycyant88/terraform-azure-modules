@@ -1,0 +1,19 @@
+module "avm-res-desktopvirtualization-hostpool" {
+  source               = "Azure/avm-res-desktopvirtualization-hostpool/azurerm"
+  version              = "0.1.1"
+  day_of_week          = var.day_of_week
+  diagnostic_settings  = var.diagnostic_settings
+  enable_telemetry     = var.enable_telemetry
+  hostpool             = var.hostpool
+  hostpooltype         = var.hostpooltype
+  hour_of_day          = var.hour_of_day
+  location             = var.location
+  lock                 = var.lock
+  maxsessions          = var.maxsessions
+  private_endpoints    = var.private_endpoints
+  resource_group_name  = var.resource_group_name
+  role_assignments     = var.role_assignments
+  tags                 = var.tags
+  tracing_tags_enabled = var.tracing_tags_enabled
+  tracing_tags_prefix  = var.tracing_tags_prefix
+}

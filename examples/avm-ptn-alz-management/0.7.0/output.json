@@ -1,0 +1,34 @@
+[
+  {
+    "name": "automation_account",
+    "description": "A curated output of the Azure Automation Account."
+  },
+  {
+    "name": "automation_account_dsc_keys",
+    "description": "Sensitive values for the Azure Automation Account."
+  },
+  {
+    "name": "data_collection_rule_ids",
+    "description": "Data Collection Rule Resource Ids."
+  },
+  {
+    "name": "log_analytics_workspace",
+    "description": "A curated output of the Log Analytics Workspace."
+  },
+  {
+    "name": "log_analytics_workspace_keys",
+    "description": "Sensitive values for the Log Analytics Workspace."
+  },
+  {
+    "name": "resource_group",
+    "description": "A curated output of the Azure Resource Group."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the Log Analytics Workspace."
+  },
+  {
+    "name": "user_assigned_identity_ids",
+    "description": "User assigned identity IDs."
+  }
+]

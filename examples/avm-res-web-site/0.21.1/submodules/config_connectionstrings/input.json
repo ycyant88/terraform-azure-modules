@@ -1,0 +1,23 @@
+[
+  {
+    "name": "connection_strings",
+    "type": "map(object({\n    name  = optional(string)\n    type  = optional(string)\n    value = optional(string)\n  }))",
+    "description": "A map of connection strings to assign to the App Service.\n\n- `name` - (Optional) The name of the connection string. If not set, the map key is used.\n- `type` - (Optional) The type of the connection string.\n- `value` - (Optional) The value of the connection string.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "is_slot",
+    "type": "bool",
+    "description": "Whether the parent resource is a deployment slot. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  }
+]

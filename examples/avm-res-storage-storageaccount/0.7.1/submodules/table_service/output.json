@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the table service."
+  },
+  {
+    "name": "resource",
+    "description": "The full azapi_update_resource object for the table service."
+  }
+]

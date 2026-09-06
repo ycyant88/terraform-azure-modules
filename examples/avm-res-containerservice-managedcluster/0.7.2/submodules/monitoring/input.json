@@ -1,0 +1,44 @@
+[
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "aks_cluster_id",
+    "type": "string",
+    "description": "The resource ID of the AKS cluster",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region where resources will be created",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "log_analytics_workspace_id",
+    "type": "string",
+    "description": "The resource ID of the Log Analytics workspace",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the parent resource group",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "prometheus_workspace_id",
+    "type": "string",
+    "description": "The resource ID of the Azure Monitor workspace for managed Prometheus",
+    "default": "",
+    "required": true
+  }
+]

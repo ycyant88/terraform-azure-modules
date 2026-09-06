@@ -1,0 +1,51 @@
+[
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The location of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource ID for this resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "domain_control_validation",
+    "type": "any",
+    "description": "Selected type of domain control validation for managed certificates.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module. For more information see https://aka.ms/avm/telemetryinfo.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "subject_name",
+    "type": "string",
+    "description": "Subject name of the certificate.\n",
+    "default": "null",
+    "required": false
+  }
+]

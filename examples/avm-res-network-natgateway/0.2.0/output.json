@@ -1,0 +1,14 @@
+[
+  {
+    "name": "public_ip_prefix_value",
+    "description": "The CIDR provisioned for the public IP prefix"
+  },
+  {
+    "name": "resource",
+    "description": "The NAT Gateway resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the NAT Gateway."
+  }
+]

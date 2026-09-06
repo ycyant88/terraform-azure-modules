@@ -1,0 +1,37 @@
+[
+  {
+    "name": "dev_center_catalog_dev_center_id",
+    "type": "string",
+    "description": "(Required) Specifies the Dev Center ID. Changing this forces a new resource to be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dev_center_catalog_name",
+    "type": "string",
+    "description": "(Required) Specifies the name of the Dev Center Catalog. Changing this forces a new resource to be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dev_center_catalog_resource_group_name",
+    "type": "string",
+    "description": "(Required) Specifies the name of the resource group in which the Dev Center Catalog should be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dev_center_catalog_adogit",
+    "type": "object({\n    branch            = string\n    path              = string\n    key_vault_key_url = string\n    uri               = string\n  })",
+    "description": "A map describing the dev center catalog Azure DevOps Git repository.\n- `branch` - (Required) The Git branch of the Dev Center Catalog.\n- `path` - (Required) The folder where the catalog items can be found inside the repository.\n- `key_vault_key_url` - (Required) A reference to the Key Vault secret containing a security token to authenticate to a Git repository.\n- `uri` - (Required) The Git URI of the Dev Center Catalog.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "dev_center_catalog_github",
+    "type": "object({\n    branch            = string\n    path              = string\n    key_vault_key_url = string\n    uri               = string\n  })",
+    "description": "A map describing the dev center catalog GitHub repository.\n- `branch` - (Required) The Git branch of the Dev Center Catalog.\n- `path` - (Required) The folder where the catalog items can be found inside the repository..\n- `key_vault_key_url` - (Required) A reference to the Key Vault secret containing a security token to authenticate to a Git repository.\n- `uri` - (Required) The Git URI of the Dev Center Catalog.\n",
+    "default": "null",
+    "required": false
+  }
+]

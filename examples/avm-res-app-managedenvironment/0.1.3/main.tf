@@ -1,0 +1,27 @@
+module "avm-res-app-managedenvironment" {
+  source                                      = "Azure/avm-res-app-managedenvironment/azurerm"
+  version                                     = "0.1.3"
+  custom_domain_certificate_password          = var.custom_domain_certificate_password
+  custom_domain_dns_suffix                    = var.custom_domain_dns_suffix
+  dapr_application_insights_connection_string = var.dapr_application_insights_connection_string
+  dapr_components                             = var.dapr_components
+  diagnostic_settings                         = var.diagnostic_settings
+  enable_telemetry                            = var.enable_telemetry
+  infrastructure_resource_group_name          = var.infrastructure_resource_group_name
+  infrastructure_subnet_id                    = var.infrastructure_subnet_id
+  internal_load_balancer_enabled              = var.internal_load_balancer_enabled
+  location                                    = var.location
+  lock                                        = var.lock
+  log_analytics_workspace_customer_id         = var.log_analytics_workspace_customer_id
+  log_analytics_workspace_destination         = var.log_analytics_workspace_destination
+  log_analytics_workspace_primary_shared_key  = var.log_analytics_workspace_primary_shared_key
+  name                                        = var.name
+  peer_authentication_enabled                 = var.peer_authentication_enabled
+  resource_group_name                         = var.resource_group_name
+  role_assignments                            = var.role_assignments
+  storages                                    = var.storages
+  tags                                        = var.tags
+  timeouts                                    = var.timeouts
+  workload_profile                            = var.workload_profile
+  zone_redundancy_enabled                     = var.zone_redundancy_enabled
+}

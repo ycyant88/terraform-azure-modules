@@ -1,0 +1,79 @@
+[
+  {
+    "name": "model",
+    "type": "object({\n    format  = string\n    name    = string\n    version = optional(string)\n  })",
+    "description": "- `format`  - (Required) The format of the Cognitive Services Account Deployment model. Possible value is `OpenAI`.\n- `name`    - (Required) The name of the Cognitive Services Account Deployment model.\n- `version` - (Optional) The version of Cognitive Services Account Deployment model.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "scale",
+    "type": "object({\n    capacity = optional(number, 1)\n    family   = optional(string)\n    size     = optional(string)\n    tier     = optional(string)\n    type     = string\n  })",
+    "description": "- `type`     - (Required) The name of the SKU.\n- `capacity` - (Optional) Tokens-per-Minute (TPM). Defaults to `1`.\n- `family`   - (Optional) Hardware generation, for the same SKU.\n- `size`     - (Optional) The SKU size.\n- `tier`     - (Optional) Possible values are `Free`, `Basic`, `Standard`, `Premium`, `Enterprise`.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dynamic_throttling_enabled",
+    "type": "bool",
+    "description": "(Optional) Whether dynamic throttling is enabled. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the submodule.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n    multiplier           = optional(number)\n    randomization_factor = optional(number)\n  })",
+    "description": "Retry configuration applied to the `azapi_resource` managed by this submodule. Defaults to `null` (no custom retry).\n\n- `error_message_regex`  - (Optional) A list of regex patterns matching error messages that trigger a retry.\n- `interval_seconds`     - (Optional) Initial interval between retries in seconds.\n- `max_interval_seconds` - (Optional) Maximum interval between retries in seconds.\n- `multiplier`           - (Optional) The multiplier applied to the retry interval after each attempt.\n- `randomization_factor` - (Optional) The randomization factor applied to the retry interval.\n\nSee <https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource#retry> for full semantics.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "(Required) The name of the Cognitive Services Account Deployment. Changing this forces a new resource to be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "(Required) The resource ID of the parent Cognitive Services Account that owns this deployment.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "lock_id",
+    "type": "string",
+    "description": "(Optional) Resource ID used as a mutex to serialize deployment operations. When set, the parent Cognitive Services Account ID is typically used so AzAPI serializes create/update operations across sibling deployments.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "rai_policy_name",
+    "type": "string",
+    "description": "(Optional) The name of the RAI policy associated with the deployment.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": "Per-operation timeouts for the deployment resource. Defaults to `null` (provider defaults). Each value is a Go duration string (e.g. `30m`, `1h`).\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "version_upgrade_option",
+    "type": "string",
+    "description": "(Optional) Deployment model version upgrade option. Possible values are `OnceNewDefaultVersionAvailable`, `OnceCurrentVersionExpired`, and `NoAutoUpgrade`. Defaults to `OnceNewDefaultVersionAvailable`.",
+    "default": "\"OnceNewDefaultVersionAvailable\"",
+    "required": false
+  }
+]

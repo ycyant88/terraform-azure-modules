@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Resource ID of the first peering resource"
+  },
+  {
+    "name": "vnet_peerings_resource_ids",
+    "description": "Resource IDs of the Virtual network peerings created"
+  }
+]

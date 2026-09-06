@@ -1,0 +1,18 @@
+[
+  {
+    "name": "versionless_id",
+    "description": "The Base ID of the Key Vault Key"
+  },
+  {
+    "name": "id",
+    "description": "The Key Vault Key ID"
+  },
+  {
+    "name": "resource_id",
+    "description": "The Azure resource id of the secret."
+  },
+  {
+    "name": "resource_versionless_id",
+    "description": "The versionless Azure resource id of the secret."
+  }
+]

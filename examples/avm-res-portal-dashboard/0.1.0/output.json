@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The ID of the Azure portal dashboard resource."
+  },
+  {
+    "name": "dashboard",
+    "description": "This is the full output for the resource."
+  }
+]

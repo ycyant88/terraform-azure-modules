@@ -1,0 +1,261 @@
+[
+  {
+    "name": "vpn_private_ip_address_enabled",
+    "type": "bool",
+    "description": "Enable private IP address for the Virtual Network Gateway for Virtual Network Gateway Connections. Only supported for AZ SKUs.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the Virtual Network Gateway.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "local_network_gateways",
+    "type": "map(object({\n    id                  = optional(string, null)\n    name                = optional(string, null)\n    resource_group_name = optional(string, null)\n    address_space       = optional(list(string), null)\n    gateway_fqdn        = optional(string, null)\n    gateway_address     = optional(string, null)\n    tags                = optional(map(string), {})\n    bgp_settings = optional(object({\n      asn                 = number\n      bgp_peering_address = string\n      peer_weight         = optional(number, null)\n    }), null)\n    connection = optional(object({\n      name                               = optional(string, null)\n      resource_group_name                = optional(string, null)\n      type                               = string\n      connection_mode                    = optional(string, null)\n      connection_protocol                = optional(string, null)\n      dpd_timeout_seconds                = optional(number, null)\n      egress_nat_rule_ids                = optional(list(string), null)\n      enable_bgp                         = optional(bool, null)\n      ingress_nat_rule_ids               = optional(list(string), null)\n      local_azure_ip_address_enabled     = optional(bool, null)\n      peer_virtual_network_gateway_id    = optional(string, null)\n      routing_weight                     = optional(number, null)\n      shared_key                         = optional(string, null)\n      tags                               = optional(map(string), null)\n      use_policy_based_traffic_selectors = optional(bool, null)\n      custom_bgp_addresses = optional(object({\n        primary   = string\n        secondary = string\n      }), null)\n      ipsec_policy = optional(object({\n        dh_group         = string\n        ike_encryption   = string\n        ike_integrity    = string\n        ipsec_encryption = string\n        ipsec_integrity  = string\n        pfs_group        = string\n        sa_datasize      = optional(number, null)\n        sa_lifetime      = optional(number, null)\n      }), null)\n      traffic_selector_policy = optional(list(\n        object({\n          local_address_prefixes  = list(string)\n          remote_address_prefixes = list(string)\n        })\n      ), null)\n    }), null)\n  }))",
+    "description": "Map of Local Network Gateways and Virtual Network Gateway Connections to create for the Virtual Network Gateway.\n\n- `id` - (Optional) The ID of the pre-exisitng Local Network Gateway.\n- `name` - (Optional) The name of the Local Network Gateway to create.\n- `address_space` - (Optional) The list of address spaces for the Local Network Gateway.\n- `gateway_fqdn` - (Optional) The gateway FQDN for the Local Network Gateway.\n- `gateway_address` - (Optional) The gateway IP address for the Local Network Gateway.\n- `tags` - (Optional) A mapping of tags to assign to the resource.\n- `bgp_settings` - (Optional) a `bgp_settings` block as defined below. Used to configure the BGP settings for the Local Network Gateway.\n  - `asn` - (Required) The ASN of the Local Network Gateway.\n  - `bgp_peering_address` - (Required) The BGP peering address of the Local Network Gateway.\n  - `peer_weight` - (Optional) The weight added to routes learned from this BGP speaker.\n\n- `connection` - (Optional) a `connection` block as defined below. Used to configure the Virtual Network Gateway Connection for the Local Network Gateway.\n  - `name` - (Optional) The name of the Virtual Network Gateway Connection.\n  - `resource_group_name` - (Optional) The name of the resource group in which to create the Virtual Network Gateway Connection. Defaults to the resource group of the Virtual Network.\n  - `type` - (Required) The type of Virtual Network Gateway Connection. Possible values are IPsec or Vnet2Vnet.\n  - `connection_mode` - (Optional) The connection mode.\n  - `connection_protocol` - (Optional) The connection protocol. Possible values are IKEv2 or IKEv1.\n  - `dpd_timeout_seconds` - (Optional) The dead peer detection timeout in seconds.\n  - `egress_nat_rule_ids` - (Optional) The list of egress NAT rule IDs.\n  - `enable_bgp` - (Optional) Whether or not BGP is enabled for this Virtual Network Gateway Connection.\n  - `ingress_nat_rule_ids` - (Optional) The list of ingress NAT rule IDs.\n  - `local_azure_ip_address_enabled` - (Optional) Whether or not the local Azure IP address is enabled.\n  - `peer_virtual_network_gateway_id` - (Optional) The ID of the peer Virtual Network Gateway.\n  - `routing_weight` - (Optional) The routing weight.\n  - `shared_key` - (Optional) The shared key.\n  - `tags` - (Optional) A mapping of tags to assign to the resource.\n  - `use_policy_based_traffic_selectors` - (Optional) Whether or not to use policy based traffic selectors.\n  - `custom_bgp_addresses` - (Optional) a `custom_bgp_addresses` block as defined below. Used to configure the custom BGP addresses for the Virtual Network Gateway Connection.\n    - `primary` - (Required) The primary custom BGP address.\n    - `secondary` - (Required) The secondary custom BGP address.\n  - `ipsec_policy` - (Optional) a `ipsec_policy` block as defined below. Used to configure the IPsec policy for the Virtual Network Gateway Connection.\n    - `dh_group` - (Required) The DH Group used in IKE Phase 1 for initial SA.\n    - `ike_encryption` - (Required) The IKE encryption algorithm (IKE phase 2).\n    - `ike_integrity` - (Required) The IKE integrity algorithm (IKE phase 2).\n    - `ipsec_encryption` - (Required) The IPSec encryption algorithm (IKE phase 1).\n    - `ipsec_integrity` - (Required) The IPSec integrity algorithm (IKE phase 1).\n    - `pfs_group` - (Required) The Pfs Group used in IKE Phase 2 for new child SA.\n    - `sa_datasize` - (Optional) The IPSec Security Association (also called Quick Mode or Phase 2 SA) data size specified in KB for a policy.\n    - `sa_lifetime` - (Optional) The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime specified in seconds for a policy.\n  - `traffic_selector_policy` - (Optional) a `traffic_selector_policy` block as defined below. Used to configure the traffic selector policy for the Virtual Network Gateway Connection.\n    - `local_address_prefixes` - (Required) The list of local address prefixes.\n    - `remote_address_prefixes` - (Required) The list of remote address prefixes.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "route_table_name",
+    "type": "string",
+    "description": "Name of the Route Table associated with Virtual Network Gateway Subnet.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "express_route_remote_vnet_traffic_enabled",
+    "type": "bool",
+    "description": "Enabled ExpressRoute traffic incoming from other connected VNets",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "hosted_on_behalf_of_public_ip_enabled",
+    "type": "bool",
+    "description": "Whether or not to attach a Public IP Address for the Virtual Network Gateway. ExpressRoute Gateways are implementing HOBO (hosted on behalf of) public IPs. This is a breaking change and requires the public IP to be turned off and not assigned.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "route_table_bgp_route_propagation_enabled",
+    "type": "bool",
+    "description": "Whether or not to enable BGP route propagation on the Route Table.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "virtual_network_id",
+    "type": "string",
+    "description": "The resource id of the Virtual Network to which the Virtual Network Gateway will be attached.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "diagnostic_settings_virtual_network_gateway",
+    "type": "map(object({\n    name                                     = optional(string, null)\n    log_categories                           = optional(set(string), [])\n    log_groups                               = optional(set(string), [\"allLogs\"])\n    metric_categories                        = optional(set(string), [\"AllMetrics\"])\n    log_analytics_destination_type           = optional(string, \"Dedicated\")\n    workspace_resource_id                    = optional(string, null)\n    storage_account_resource_id              = optional(string, null)\n    event_hub_authorization_rule_resource_id = optional(string, null)\n    event_hub_name                           = optional(string, null)\n    marketplace_partner_resource_id          = optional(string, null)\n  }))",
+    "description": "A map of diagnostic settings to create on the gateway. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\n- `log_categories` - (Optional) A set of log categories to send to the log analytics workspace. Defaults to `[]`.\n- `log_groups` - (Optional) A set of log groups to send to the log analytics workspace. Defaults to `[\"allLogs\"]`.\n- `metric_categories` - (Optional) A set of metric categories to send to the log analytics workspace. Defaults to `[\"AllMetrics\"]`.\n- `log_analytics_destination_type` - (Optional) The destination type for the diagnostic setting. Possible values are `Dedicated` and `AzureDiagnostics`. Defaults to `Dedicated`.\n- `workspace_resource_id` - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.\n- `storage_account_resource_id` - (Optional) The resource ID of the storage account to send logs and metrics to.\n- `event_hub_authorization_rule_resource_id` - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.\n- `event_hub_name` - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.\n- `marketplace_partner_resource_id` - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "ip_configurations",
+    "type": "map(object({\n    name                          = optional(string, null)\n    apipa_addresses               = optional(list(string), null)\n    private_ip_address_allocation = optional(string, \"Dynamic\")\n    public_ip = optional(object({\n      creation_enabled        = optional(bool, true)\n      id                      = optional(string, null)\n      name                    = optional(string, null)\n      resource_group_name     = optional(string, null)\n      allocation_method       = optional(string, \"Static\")\n      sku                     = optional(string, \"Standard\")\n      tags                    = optional(map(string), {})\n      zones                   = optional(list(number), [1, 2, 3])\n      edge_zone               = optional(string, null)\n      ddos_protection_mode    = optional(string, \"VirtualNetworkInherited\")\n      ddos_protection_plan_id = optional(string, null)\n      domain_name_label       = optional(string, null)\n      idle_timeout_in_minutes = optional(number, null)\n      ip_tags                 = optional(map(string), {})\n      ip_version              = optional(string, \"IPv4\")\n      public_ip_prefix_id     = optional(string, null)\n      reverse_fqdn            = optional(string, null)\n      sku_tier                = optional(string, \"Regional\")\n    }), {})\n  }))",
+    "description": "Map of IP Configurations to create for the Virtual Network Gateway.\n\n- `name` - (Optional) The name of the IP Configuration.\n- `apipa_addresses` - (Optional) The list of APPIPA addresses.\n- `private_ip_address_allocation` - (Optional) The private IP allocation method. Possible values are Static or Dynamic. Defaults to Dynamic.\n- `public_ip` - (Optional) a `public_ip` block as defined below. Used to configure the Public IP Address for the IP Configuration.\n  - `id` - (Optional) The resource id of an existing public ip address to use for the IP Configuration.\n  - `name` - (Optional) The name of the Public IP Address.\n  - `resource_group_name` - (Optional) The name of the resource group in which to create the Public IP Address.\n  - `allocation_method` - (Optional) The allocation method of the Public IP Address. Possible values are Static or Dynamic. Defaults to Dynamic.\n  - `sku` - (Optional) The SKU of the Public IP Address. Possible values are Basic or Standard. Defaults to Standard.\n  - `tags` - (Optional) A mapping of tags to assign to the resource.\n  - `zones` - (Optional) The list of availability zones for the Public IP Address.\n  - `edge_zone` - (Optional) Specifies the Edge Zone within the Azure Region where this Public IP should exist. Changing this forces a new Public IP to be created.\n  - `ddos_protection_mode` - (Optional) The DDoS protection mode of the Public IP Address. Possible values are Disabled, Enabled or VirtualNetworkInherited. Defaults to VirtualNetworkInherited.\n  - `ddos_protection_plan_id` - (Optional) The ID of the DDoS protection plan for the Public IP Address.\n  - `domain_name_label` - (Optional) The domain name label for the Public IP Address.\n  - `idle_timeout_in_minutes` - (Optional) The idle timeout in minutes for the Public IP Address.\n  - `ip_tags` - (Optional) A mapping of IP tags to assign to the resource.\n  - `ip_version` - (Optional) The IP version of the Public IP Address. Possible values are IPv4 or IPv6. Defaults to IPv4.\n  - `public_ip_prefix_id` - (Optional) The ID of the Public IP Prefix for the Public IP Address.\n  - `reverse_fqdn` - (Optional) The reverse FQDN for the Public IP Address.\n  - `sku_tier` - (Optional) The tier of the Public IP Address. Possible values are Regional or Global. Defaults to Regional.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "sku",
+    "type": "string",
+    "description": "The SKU (size) of the Virtual Network Gateway.",
+    "default": "\"ErGw1AZ\"",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "Tags to apply to the Virtual Network Gateway.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vpn_bgp_enabled",
+    "type": "bool",
+    "description": "Enable BGP for the Virtual Network Gateway.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "vpn_custom_route",
+    "type": "object({\n    address_prefixes = list(string)\n  })",
+    "description": "The reference to the address space resource which represents the custom routes address space specified by the customer for virtual network gateway and VpnClient.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vpn_default_local_network_gateway_id",
+    "type": "string",
+    "description": "The ID of the default local network gateway to use for the Virtual Network Gateway.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "express_route_circuits",
+    "type": "map(object({\n    id = string\n    connection = optional(object({\n      resource_group_name            = optional(string, null)\n      authorization_key              = optional(string, null)\n      express_route_gateway_bypass   = optional(bool, null)\n      private_link_fast_path_enabled = optional(bool, false)\n      name                           = optional(string, null)\n      routing_weight                 = optional(number, null)\n      shared_key                     = optional(string, null)\n      tags                           = optional(map(string), {})\n    }), null)\n    peering = optional(object({\n      peering_type                  = string\n      vlan_id                       = number\n      resource_group_name           = optional(string, null)\n      ipv4_enabled                  = optional(bool, true)\n      peer_asn                      = optional(number, null)\n      primary_peer_address_prefix   = optional(string, null)\n      secondary_peer_address_prefix = optional(string, null)\n      shared_key                    = optional(string, null)\n      route_filter_id               = optional(string, null)\n      microsoft_peering_config = optional(object({\n        advertised_public_prefixes = list(string)\n        advertised_communities     = optional(list(string), null)\n        customer_asn               = optional(number, null)\n        routing_registry_name      = optional(string, null)\n      }), null)\n    }), null)\n  }))",
+    "description": "Map of Virtual Network Gateway Connections and Peering Configurations to create for existing ExpressRoute circuits.\n\n- `id` - (Required) The ID of the ExpressRoute circuit.\n\n- `connection` - (Optional) a `connection` block as defined below. Used to configure the Virtual Network Gateway Connection between the ExpressRoute Circuit and the Virtual Network Gateway.\n  - `resource_group_name` - (Optional) The name of the resource group in which to create the Virtual Network Gateway Connection. Defaults to the resource group of the Virtual Network.\n  - `authorization_key` - (Optional) The authorization key for the ExpressRoute Circuit.\n  - `express_route_gateway_bypass` - (Optional) Whether to bypass the ExpressRoute Gateway for data forwarding.\n  - `private_link_fast_path_enabled` - (Optional) Bypass the Express Route gateway when accessing private-links. When enabled express_route_gateway_bypass must be set to true. Defaults to false.\n  - `name` - (Optional) The name of the Virtual Network Gateway Connection.\n  - `routing_weight` - (Optional) The weight added to routes learned from this Virtual Network Gateway Connection. Defaults to 10.\n  - `shared_key` - (Optional) The shared key for the Virtual Network Gateway Connection.\n  - `tags` - (Optional) A mapping of tags to assign to the resource.\n\n- `peering` - (Optional) a `peering` block as defined below. Used to configure the ExpressRoute Circuit Peering.\n  - `peering_type` - (Required) The type of the peering. Possible values are AzurePrivatePeering, AzurePublicPeering or MicrosoftPeering.\n  - `vlan_id` - (Required) The VLAN ID for the peering.\n  - `resource_group_name` - (Optional) The name of the resource group in which to put the ExpressRoute Circuit Peering. Defaults to the resource group of the Virtual Network Gateway.\n  - `ipv4_enabled` - (Optional) Whether IPv4 is enabled on the peering. Defaults to true.\n  - `peer_asn` - (Optional) The peer ASN.\n  - `primary_peer_address_prefix` - (Optional) The primary address prefix.\n  - `secondary_peer_address_prefix` - (Optional) The secondary address prefix.\n  - `shared_key` - (Optional) The shared key for the peering.\n  - `route_filter_id` - (Optional) The ID of the route filter to apply to the peering.\n  - `microsoft_peering_config` - (Optional) a `microsoft_peering_config` block as defined below. Used to configure the Microsoft Peering.\n    - `advertised_communities` - (Optional) The list of communities to advertise to the Microsoft Peering.\n    - `advertised_public_prefixes` - (Required) The list of public prefixes to advertise to the Microsoft Peering.\n    - `customer_asn` - (Optional) The customer ASN.\n    - `routing_registry_name` - (Optional) The routing registry name.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "virtual_network_gateway_subnet_id",
+    "type": "string",
+    "description": "The resource id of the Virtual Network Gateway Subnet. If not specified, the module will create a new subnet for the Virtual Network Gateway.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vpn_bgp_settings",
+    "type": "object({\n    asn         = optional(number, 65515)\n    peer_weight = optional(number, null)\n  })",
+    "description": "BGP settings for the Virtual Network Gateway.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vpn_ip_sec_replay_protection_enabled",
+    "type": "bool",
+    "description": "Enable IPsec replay protection for the Virtual Network Gateway.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "vpn_type",
+    "type": "string",
+    "description": "The VPN type of the Virtual Network Gateway.",
+    "default": "\"RouteBased\"",
+    "required": false
+  },
+  {
+    "name": "type",
+    "type": "string",
+    "description": "The type of the Virtual Network Gateway, ExpressRoute or Vpn.",
+    "default": "\"ExpressRoute\"",
+    "required": false
+  },
+  {
+    "name": "vpn_active_active_enabled",
+    "type": "bool",
+    "description": "Enable active-active mode for the Virtual Network Gateway.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "vpn_bgp_route_translation_for_nat_enabled",
+    "type": "bool",
+    "description": "Enable BGP route translation for NAT for the Virtual Network Gateway.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "route_table_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a Route Table associated with the Virtual Network Gateway Subnet.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "vpn_dns_forwarding_enabled",
+    "type": "bool",
+    "description": "Enable DNS forwarding for the Virtual Network Gateway.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The id of the resource group in which to create the Virtual Network Gateway and associated resources.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "edge_zone",
+    "type": "string",
+    "description": "Specifies the Edge Zone within the Azure Region where this Virtual Network Gateway should exist. Changing this forces a new Virtual Network Gateway to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "route_table_resource_group_name",
+    "type": "string",
+    "description": "The name of the resource group in which to create the Route Table. If left blank, the resource group of the virtual network will be used.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "route_table_tags",
+    "type": "map(string)",
+    "description": "Tags for the Route Table.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "subnet_address_prefix",
+    "type": "string",
+    "description": "The address prefix for the gateway subnet. Required if `subnet_creation_enabled = true`.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "vpn_point_to_site",
+    "type": "object({\n    address_space         = list(string)\n    aad_tenant            = optional(string, null)\n    aad_audience          = optional(string, null)\n    aad_issuer            = optional(string, null)\n    radius_server_address = optional(string, null)\n    radius_server_secret  = optional(string, null)\n    root_certificates = optional(map(object({\n      name             = string\n      public_cert_data = string\n    })), {})\n    revoked_certificates = optional(map(object({\n      name       = string\n      thumbprint = string\n    })), {})\n    radius_servers = optional(map(object({\n      address = string\n      secret  = string\n      score   = number\n    })), {})\n    vpn_client_protocols = optional(list(string), null)\n    vpn_auth_types       = optional(list(string), null)\n    ipsec_policy = optional(object({\n      dh_group                  = string\n      ike_encryption            = string\n      ike_integrity             = string\n      ipsec_encryption          = string\n      ipsec_integrity           = string\n      pfs_group                 = string\n      sa_data_size_in_kilobytes = optional(number, null)\n      sa_lifetime_in_seconds    = optional(number, null)\n    }), null)\n    virtual_network_gateway_client_connections = optional(map(object({\n      name               = string\n      policy_group_names = list(string)\n      address_prefixes   = list(string)\n    })), {})\n  })",
+    "description": "Point to site configuration for the virtual network gateway.\n\n- `address_space` - (Required) Address space for the virtual network gateway.\n- `aad_tenant` - (Optional) The AAD tenant to use for authentication.\n- `aad_audience` - (Optional) The AAD audience to use for authentication.\n- `aad_issuer` - (Optional) The AAD issuer to use for authentication.\n- `radius_server_address` - (Optional) The address of the radius server.\n- `radius_server_secret` - (Optional) The secret of the radius server.\n- `root_certificate` - (Optional) The root certificate of the virtual network gateway.\n  - `name` - (Required) The name of the root certificate.\n  - `public_cert_data` - (Required) The public certificate data.\n- `revoked_certificate` - (Optional) The revoked certificate of the virtual network gateway.\n  - `name` - (Required) The name of the revoked certificate.\n  - `thumbprint` - (Required) The thumbprint of the revoked certificate.\n- `radius_server` - (Optional) The radius server of the virtual network gateway.\n  - `address` - (Required) The address of the radius server.\n  - `secret` - (Required) The secret of the radius server.\n  - `score` - (Required) The score of the radius server.\n- `ipsec_policy` - (Optional) The IPsec policy of the virtual network gateway.\n  - `dh_group` - (Required) The DH group of the IPsec policy.\n  - `ike_encryption` - (Required) The IKE encryption of the IPsec policy.\n  - `ike_integrity` - (Required) The IKE integrity of the IPsec policy.\n  - `ipsec_encryption` - (Required) The IPsec encryption of the IPsec policy.\n  - `ipsec_integrity` - (Required) The IPsec integrity of the IPsec policy.\n  - `pfs_group` - (Required) The PFS group of the IPsec policy.\n  - `sa_data_size_in_kilobytes` - (Optional) The SA data size in kilobytes of the IPsec policy.\n  - `sa_lifetime_in_seconds` - (Optional) The SA lifetime in seconds of the IPsec policy.\n- `virtual_network_gateway_client_connection` - (Optional) The virtual network gateway client connection of the virtual network gateway.\n  - `name` - (Required) The name of the virtual network gateway client connection.\n  - `policy_group_names` - (Required) The policy group names of the virtual network gateway client connection.\n  - `address_prefixes` - (Required) The address prefixes of the virtual network gateway client connection.\n- `vpn_client_protocols` - (Optional) The VPN client protocols.\n- `vpn_auth_types` - (Optional) The VPN authentication types.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vpn_policy_groups",
+    "type": "map(object({\n    name       = string\n    is_default = optional(bool, null)\n    priority   = optional(number, null)\n    policy_members = map(object({\n      name  = string\n      type  = string\n      value = string\n    }))\n  }))",
+    "description": "The policy groups for the Virtual Network Gateway.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "express_route_virtual_wan_traffic_enabled",
+    "type": "bool",
+    "description": "Enabled ExpressRoute traffic incoming from other connected VWANs",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "subnet_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a subnet for the Virtual Network Gateway.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "vpn_generation",
+    "type": "string",
+    "description": "value for the Generation for the Gateway, Valid values are 'Generation1', 'Generation2'. Options differ depending on SKU.",
+    "default": "null",
+    "required": false
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "private_endpoints",
+    "description": "A map of private endpoints. The map key is the supplied input to var.private_endpoints. The map value is the entire azurerm_private_endpoint resource."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "uri",
+    "description": "The FQDN of the Azure Kusto Cluster."
+  },
+  {
+    "name": "data_ingestion_uri",
+    "description": "The Kusto Cluster URI to be used for data ingestion."
+  },
+  {
+    "name": "id",
+    "description": "The Kusto Cluster ID."
+  },
+  {
+    "name": "identity",
+    "description": "An identity block exports the following:\n\nprincipal_id - The Principal ID associated with this System Assigned Managed Service Identity.\n\ntenant_id - The Tenant ID associated with this System Assigned Managed Service Identity.\n"
+  }
+]

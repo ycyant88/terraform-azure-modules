@@ -1,0 +1,23 @@
+[
+  {
+    "name": "recovery_vault_name",
+    "type": "string",
+    "description": "recovery_vault_name: specify a recovery_vault_name for the Azure Recovery Services Vault. Upper/Lower case letters, numbers and hyphens. number of characters 2-50",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "workload_backup_policy",
+    "type": "object({\n    name          = string\n    workload_type = string\n    settings = object({\n      time_zone           = string\n      compression_enabled = bool\n    })\n\n    backup_frequency = string\n    protection_policy = map(object({\n      policy_type           = string # description = \"(required) Specify policy type. Full, Differential, Logs\"\n      retention_daily_count = number\n      retention_weekly = optional(object({\n        count    = optional(number, null)\n        weekdays = optional(set(string), null)\n      }), null)\n      # retention_daily = optional(number, null) # (Required) The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.\n      backup = optional(object({\n        time                 = optional(string)\n        frequency_in_minutes = optional(number)\n        weekdays             = optional(set(string))\n      }), null)\n\n      retention_monthly = optional(object({\n        count             = optional(number, null)\n        weekdays          = optional(set(string), null)\n        weeks             = optional(set(string), null)\n        monthdays         = optional(set(number), null)\n        include_last_days = optional(bool, false)\n      }), null)\n\n      retention_yearly = optional(object({\n        count             = optional(number, null)\n        months            = optional(set(string), null)\n        weekdays          = optional(set(string), null)\n        weeks             = optional(set(string), null)\n        monthdays         = optional(set(number), null)\n        include_last_days = optional(bool, false)\n      }), null)\n\n    }))\n  })",
+    "description": "(Required)",
+    "default": "null",
+    "required": false
+  }
+]

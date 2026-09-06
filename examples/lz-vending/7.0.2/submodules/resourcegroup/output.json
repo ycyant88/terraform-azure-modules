@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_group_name",
+    "description": "The created resource group name."
+  },
+  {
+    "name": "resource_group_resource_id",
+    "description": "The created resource group resource ID."
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "azurerm_lb_nat_rule",
+    "description": "Outputs each NAT rule in its entirety"
+  },
+  {
+    "name": "azurerm_public_ip",
+    "description": "Outputs each Public IP Address resource in its entirety"
+  },
+  {
+    "name": "name",
+    "description": "Outputs the entire Azure Load Balancer resource"
+  },
+  {
+    "name": "resource",
+    "description": "Outputs the entire Azure Load Balancer resource"
+  },
+  {
+    "name": "resource_id",
+    "description": "Outputs the entire Azure Load Balancer resource"
+  },
+  {
+    "name": "azurerm_lb",
+    "description": "Outputs the entire Azure Load Balancer resource"
+  },
+  {
+    "name": "azurerm_lb_backend_address_pool",
+    "description": "Outputs each backend address pool in its entirety"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource",
+    "description": "The outputs of the DNS record resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the created DNS record."
+  }
+]

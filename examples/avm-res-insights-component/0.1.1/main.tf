@@ -1,0 +1,18 @@
+module "avm-res-insights-component" {
+  source                                = "Azure/avm-res-insights-component/azurerm"
+  version                               = "0.1.1"
+  application_type                      = var.application_type
+  daily_data_cap_in_gb                  = var.daily_data_cap_in_gb
+  daily_data_cap_notifications_disabled = var.daily_data_cap_notifications_disabled
+  disable_ip_masking                    = var.disable_ip_masking
+  enable_telemetry                      = var.enable_telemetry
+  location                              = var.location
+  lock                                  = var.lock
+  managed_identities                    = var.managed_identities
+  name                                  = var.name
+  resource_group_name                   = var.resource_group_name
+  retention_in_days                     = var.retention_in_days
+  sampling_percentage                   = var.sampling_percentage
+  tags                                  = var.tags
+  workspace_id                          = var.workspace_id
+}

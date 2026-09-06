@@ -1,0 +1,38 @@
+[
+  {
+    "name": "aks_id",
+    "description": ""
+  },
+  {
+    "name": "client_key",
+    "description": ""
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": ""
+  },
+  {
+    "name": "host",
+    "description": ""
+  },
+  {
+    "name": "username",
+    "description": ""
+  },
+  {
+    "name": "password",
+    "description": ""
+  },
+  {
+    "name": "node_resource_group",
+    "description": ""
+  },
+  {
+    "name": "client_certificate",
+    "description": ""
+  },
+  {
+    "name": "location",
+    "description": ""
+  }
+]

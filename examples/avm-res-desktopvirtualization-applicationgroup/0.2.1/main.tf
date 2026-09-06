@@ -1,0 +1,20 @@
+module "avm-res-desktopvirtualization-applicationgroup" {
+  source                                                         = "Azure/avm-res-desktopvirtualization-applicationgroup/azurerm"
+  version                                                        = "0.2.1"
+  diagnostic_settings                                            = var.diagnostic_settings
+  enable_telemetry                                               = var.enable_telemetry
+  lock                                                           = var.lock
+  role_assignments                                               = var.role_assignments
+  tracing_tags_enabled                                           = var.tracing_tags_enabled
+  tracing_tags_prefix                                            = var.tracing_tags_prefix
+  virtual_desktop_application_group_default_desktop_display_name = var.virtual_desktop_application_group_default_desktop_display_name
+  virtual_desktop_application_group_description                  = var.virtual_desktop_application_group_description
+  virtual_desktop_application_group_friendly_name                = var.virtual_desktop_application_group_friendly_name
+  virtual_desktop_application_group_host_pool_id                 = var.virtual_desktop_application_group_host_pool_id
+  virtual_desktop_application_group_location                     = var.virtual_desktop_application_group_location
+  virtual_desktop_application_group_name                         = var.virtual_desktop_application_group_name
+  virtual_desktop_application_group_resource_group_name          = var.virtual_desktop_application_group_resource_group_name
+  virtual_desktop_application_group_tags                         = var.virtual_desktop_application_group_tags
+  virtual_desktop_application_group_timeouts                     = var.virtual_desktop_application_group_timeouts
+  virtual_desktop_application_group_type                         = var.virtual_desktop_application_group_type
+}

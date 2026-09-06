@@ -1,0 +1,70 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the resource."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "A map of private endpoints. The map key is the supplied input to var.private_endpoints."
+  },
+  {
+    "name": "resource_uri",
+    "description": "The default hostname of the resource."
+  },
+  {
+    "name": "system_assigned_mi_principal_id",
+    "description": "The system-assigned managed identity principal ID."
+  },
+  {
+    "name": "identity_principal_id",
+    "description": "The system-assigned managed identity principal ID of the resource."
+  },
+  {
+    "name": "os_type",
+    "description": "The operating system type of the resource."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the App Service."
+  },
+  {
+    "name": "active_slot",
+    "description": "The active slot resource ID."
+  },
+  {
+    "name": "custom_domain_verification_id",
+    "description": "The custom domain verification ID for the App Service. Use this value to create\nan `asuid.<custom-hostname>` TXT record in your DNS zone before binding a custom\ndomain via `var.custom_domains`. See the `custom_domains` variable documentation\nfor details on the DNS prerequisites that Azure enforces.\n"
+  },
+  {
+    "name": "deployment_slot_locks",
+    "description": "The locks of the deployment slots."
+  },
+  {
+    "name": "deployment_slots",
+    "description": "The deployment slots."
+  },
+  {
+    "name": "resource_lock",
+    "description": "The locks of the resources."
+  },
+  {
+    "name": "resource_private_endpoints",
+    "description": "A map of private endpoints. The map key is the supplied input to var.private_endpoints. The map value is the entire azapi_resource."
+  },
+  {
+    "name": "system_assigned_mi_principal_id_slots",
+    "description": "Map of system-assigned managed identity principal IDs for deployment slots."
+  },
+  {
+    "name": "kind",
+    "description": "The kind of app service."
+  },
+  {
+    "name": "location",
+    "description": "The location of the resource."
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "request_routing_rules",
+    "description": "Information about request routing rules defined for the Application Gateway, including their names and configurations."
+  },
+  {
+    "name": "resource_id",
+    "description": "Resource ID of Container Group Instance"
+  },
+  {
+    "name": "ssl_certificates",
+    "description": "Information about SSL certificates used by the Application Gateway, including their names and other details."
+  },
+  {
+    "name": "waf_configuration",
+    "description": "Information about the Web Application Firewall (WAF) configuration, if applicable."
+  },
+  {
+    "name": "backend_address_pools",
+    "description": "Information about the backend address pools configured for the Application Gateway, including their names."
+  },
+  {
+    "name": "backend_http_settings",
+    "description": "Information about the backend HTTP settings for the Application Gateway, including settings like port and protocol."
+  },
+  {
+    "name": "frontend_port",
+    "description": "Information about the frontend ports used by the Application Gateway, including their names and port numbers."
+  },
+  {
+    "name": "http_listeners",
+    "description": "Information about the HTTP listeners configured for the Application Gateway, including their names and settings."
+  },
+  {
+    "name": "probes",
+    "description": "Information about health probes configured for the Application Gateway, including their settings."
+  },
+  {
+    "name": "public_ip_id",
+    "description": "The ID of the Azure Public IP address associated with the Application Gateway."
+  },
+  {
+    "name": "tags",
+    "description": "The tags applied to the Application Gateway."
+  },
+  {
+    "name": "application_gateway_id",
+    "description": "The ID of the Azure Application Gateway."
+  },
+  {
+    "name": "application_gateway_name",
+    "description": "The name of the Azure Application Gateway."
+  },
+  {
+    "name": "new_public_ip_address",
+    "description": "The actual public IP address associated with the Public IP resource, if we create a new one."
+  }
+]

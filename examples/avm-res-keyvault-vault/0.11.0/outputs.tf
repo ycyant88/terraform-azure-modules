@@ -1,0 +1,39 @@
+output "keys" {
+  value       = module.avm-res-keyvault-vault.keys
+  description = "A map of key keys to key values. The map key is the key of the var.keys map entry (not\nthe name of the key itself). The key value is not the entire azurerm_key_vault_key\nresource, only the attributes listed below are exposed.\n\nThe key value contains the following attributes, grouped by purpose:\n\nIdentifiers:\n- id: The versioned data plane URI of the key, in the form https://<vault-name>.vault.azure.net/keys/<key-name>/<key-version>. This is the value most Azure services expect for a customer managed key.\n- name: The name of the key.\n- versionless_id: The versionless data plane URI of the key, in the form https://<vault-name>.vault.azure.net/keys/<key-name>. Use only where the consuming API documents that it accepts a versionless URI; supporting rotation does not imply this.\n- resource_id: The versioned ARM resource ID of the key, in the form /subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.KeyVault/vaults/<vault-name>/keys/<key-name>/versions/<key-version>.\n- resource_versionless_id: The versionless ARM resource ID of the key, in the form /subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.KeyVault/vaults/<vault-name>/keys/<key-name>.\n\nEncoded public key, for RSA and for EC curves other than P-256K:\n- public_key_pem: The PEM encoded public key of the key.\n- public_key_openssh: The OpenSSH encoded public key of the key.\n\nRaw RSA public key components, empty for EC keys. These are a pair:\n- n: The RSA modulus of the key.\n- e: The RSA public exponent of the key.\n\nRaw EC public key components, empty for RSA keys. These are a pair:\n- x: The EC X component of the key.\n- y: The EC Y component of the key.\n\nFor example, to pass a key to a service that expects a key vault key URI:\nmodule.key_vault.keys[\"<var.keys map key>\"].id\n"
+}
+
+output "keys_resource_ids" {
+  value       = module.avm-res-keyvault-vault.keys_resource_ids
+  description = "A map of key keys to resource ids and key names. The map key is the key of the var.keys\nmap entry (not the name of the key itself). See the keys output for the exact shape of\neach attribute: id and versionless_id are data plane URIs, resource_id and\nresource_versionless_id are ARM resource IDs.\n"
+}
+
+output "name" {
+  value       = module.avm-res-keyvault-vault.name
+  description = "The name of the key vault."
+}
+
+output "private_endpoints" {
+  value       = module.avm-res-keyvault-vault.private_endpoints
+  description = "A map of private endpoints. The map key is the supplied input to var.private_endpoints. The map value is the entire azurerm_private_endpoint resource."
+}
+
+output "resource_id" {
+  value       = module.avm-res-keyvault-vault.resource_id
+  description = "The Azure resource id of the key vault."
+}
+
+output "secrets" {
+  value       = module.avm-res-keyvault-vault.secrets
+  description = "A map of secret keys to secret values. The map key is the key of the var.secrets map\nentry (not the name of the secret itself). The secret value is not the entire\nazurerm_key_vault_secret resource, only the attributes listed below are exposed.\n\nThe secret value contains the following attributes:\n- id: The versioned data plane URI of the secret, in the form https://<vault-name>.vault.azure.net/secrets/<secret-name>/<secret-version>.\n- name: The name of the secret.\n- versionless_id: The versionless data plane URI of the secret, in the form https://<vault-name>.vault.azure.net/secrets/<secret-name>.\n- resource_id: The versioned ARM resource ID of the secret, in the form /subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.KeyVault/vaults/<vault-name>/secrets/<secret-name>/versions/<secret-version>.\n- resource_versionless_id: The versionless ARM resource ID of the secret, in the form /subscriptions/<subscription-id>/resourceGroups/<resource-group-name>/providers/Microsoft.KeyVault/vaults/<vault-name>/secrets/<secret-name>.\n"
+}
+
+output "secrets_resource_ids" {
+  value       = module.avm-res-keyvault-vault.secrets_resource_ids
+  description = "A map of secret keys to resource ids and secret names. The map key is the key of the\nvar.secrets map entry (not the name of the secret itself). See the secrets output for\nthe exact shape of each attribute: id and versionless_id are data plane URIs,\nresource_id and resource_versionless_id are ARM resource IDs.\n"
+}
+
+output "uri" {
+  value       = module.avm-res-keyvault-vault.uri
+  description = "The URI of the vault for performing operations on keys and secrets"
+}

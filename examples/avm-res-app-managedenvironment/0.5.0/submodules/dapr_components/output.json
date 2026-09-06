@@ -1,0 +1,14 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the created resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the created resource."
+  },
+  {
+    "name": "deployment_errors",
+    "description": "Any errors that occurred during deployment or deployment validation"
+  }
+]

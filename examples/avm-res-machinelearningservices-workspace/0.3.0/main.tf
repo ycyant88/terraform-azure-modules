@@ -1,0 +1,26 @@
+module "avm-res-machinelearningservices-workspace" {
+  source                    = "Azure/avm-res-machinelearningservices-workspace/azurerm"
+  version                   = "0.3.0"
+  ai_studio_hub_id          = var.ai_studio_hub_id
+  aiservices                = var.aiservices
+  application_insights      = var.application_insights
+  container_registry        = var.container_registry
+  create_compute_instance   = var.create_compute_instance
+  customer_managed_key      = var.customer_managed_key
+  enable_telemetry          = var.enable_telemetry
+  hbi_workspace             = var.hbi_workspace
+  is_private                = var.is_private
+  key_vault                 = var.key_vault
+  kind                      = var.kind
+  location                  = var.location
+  lock                      = var.lock
+  name                      = var.name
+  private_endpoints         = var.private_endpoints
+  resource_group_name       = var.resource_group_name
+  role_assignments          = var.role_assignments
+  storage_account           = var.storage_account
+  tags                      = var.tags
+  workspace_description     = var.workspace_description
+  workspace_friendly_name   = var.workspace_friendly_name
+  workspace_managed_network = var.workspace_managed_network
+}

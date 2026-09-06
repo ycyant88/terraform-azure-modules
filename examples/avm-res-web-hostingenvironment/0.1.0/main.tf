@@ -1,0 +1,19 @@
+module "avm-res-web-hostingenvironment" {
+  source                                 = "Azure/avm-res-web-hostingenvironment/azurerm"
+  version                                = "0.1.0"
+  allow_new_private_endpoint_connections = var.allow_new_private_endpoint_connections
+  cluster_setting                        = var.cluster_setting
+  customer_managed_key                   = var.customer_managed_key
+  dedicated_host_count                   = var.dedicated_host_count
+  enable_telemetry                       = var.enable_telemetry
+  internal_load_balancing_mode           = var.internal_load_balancing_mode
+  lock                                   = var.lock
+  managed_identities                     = var.managed_identities
+  name                                   = var.name
+  remote_debugging_enabled               = var.remote_debugging_enabled
+  resource_group_name                    = var.resource_group_name
+  role_assignments                       = var.role_assignments
+  subnet_id                              = var.subnet_id
+  tags                                   = var.tags
+  zone_redundant                         = var.zone_redundant
+}

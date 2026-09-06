@@ -1,0 +1,29 @@
+custom_azure_backup_geo_codes = {}
+
+custom_privatelink_azurestaticapps_partitionids = [1, 2, 3, 4, 5]
+
+custom_settings_by_resource_type = {}
+
+enabled = ""
+
+existing_ddos_protection_plan_resource_id = ""
+
+existing_virtual_wan_resource_group_name = ""
+
+existing_virtual_wan_resource_id = ""
+
+location = "eastus"
+
+resource_group_per_virtual_hub_location = false
+
+resource_prefix = ""
+
+resource_suffix = ""
+
+root_id = ""
+
+settings = {}
+
+subscription_id = ""
+
+tags = {}

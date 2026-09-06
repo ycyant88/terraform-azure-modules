@@ -1,0 +1,22 @@
+module "avm-res-app-containerapp" {
+  source                                = "Azure/avm-res-app-containerapp/azurerm"
+  version                               = "0.3.0"
+  auth_configs                          = var.auth_configs
+  container_app_environment_resource_id = var.container_app_environment_resource_id
+  container_app_timeouts                = var.container_app_timeouts
+  custom_domains                        = var.custom_domains
+  dapr                                  = var.dapr
+  enable_telemetry                      = var.enable_telemetry
+  ingress                               = var.ingress
+  lock                                  = var.lock
+  managed_identities                    = var.managed_identities
+  name                                  = var.name
+  registries                            = var.registries
+  resource_group_name                   = var.resource_group_name
+  revision_mode                         = var.revision_mode
+  role_assignments                      = var.role_assignments
+  secrets                               = var.secrets
+  tags                                  = var.tags
+  template                              = var.template
+  workload_profile_name                 = var.workload_profile_name
+}

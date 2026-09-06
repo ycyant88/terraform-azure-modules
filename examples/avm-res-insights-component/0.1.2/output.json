@@ -1,0 +1,26 @@
+[
+  {
+    "name": "instrumentation_key",
+    "description": "Instrumentation Key of the Application Insights"
+  },
+  {
+    "name": "name",
+    "description": "Name of the Application Insights"
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the Application Insights"
+  },
+  {
+    "name": "app_id",
+    "description": "App ID of the Application Insights"
+  },
+  {
+    "name": "connection_string",
+    "description": "Connection String of the Application Insights"
+  }
+]

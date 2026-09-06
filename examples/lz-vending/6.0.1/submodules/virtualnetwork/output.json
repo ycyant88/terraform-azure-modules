@@ -1,0 +1,6 @@
+[
+  {
+    "name": "virtual_network_resource_ids",
+    "description": "The created virtual network resource IDs, expressed as a map."
+  }
+]

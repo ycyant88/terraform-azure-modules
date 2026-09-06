@@ -1,0 +1,25 @@
+a_records = {}
+
+aaaa_records = {}
+
+cname_records = {}
+
+domain_name = ""
+
+enable_telemetry = true
+
+mx_records = {}
+
+ptr_records = {}
+
+resource_group_name = ""
+
+soa_record = null
+
+srv_records = {}
+
+tags = null
+
+txt_records = {}
+
+virtual_network_links = {}

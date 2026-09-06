@@ -1,0 +1,54 @@
+[
+  {
+    "name": "host",
+    "description": ""
+  },
+  {
+    "name": "username",
+    "description": ""
+  },
+  {
+    "name": "password",
+    "description": ""
+  },
+  {
+    "name": "node_resource_group",
+    "description": ""
+  },
+  {
+    "name": "location",
+    "description": ""
+  },
+  {
+    "name": "kubelet_identity",
+    "description": ""
+  },
+  {
+    "name": "client_key",
+    "description": ""
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": ""
+  },
+  {
+    "name": "kube_config_raw",
+    "description": ""
+  },
+  {
+    "name": "http_application_routing_zone_name",
+    "description": ""
+  },
+  {
+    "name": "system_assigned_identity",
+    "description": ""
+  },
+  {
+    "name": "client_certificate",
+    "description": ""
+  },
+  {
+    "name": "aks_id",
+    "description": ""
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The name of the Resource Group in which the Log Analytics solution will be created",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region in which to create the Virtual Network",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "workspace_resource_id",
+    "type": "string",
+    "description": "The id of the workspace created for Log Analytics",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "workspace_name",
+    "type": "string",
+    "description": "The name of the workspace created for Log Analytics",
+    "default": "",
+    "required": true
+  }
+]

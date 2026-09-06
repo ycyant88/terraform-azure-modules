@@ -1,0 +1,18 @@
+[
+  {
+    "name": "volumes",
+    "description": "The full elastic san volume output"
+  },
+  {
+    "name": "elastic_san",
+    "description": "The full elastic san resource output."
+  },
+  {
+    "name": "resource",
+    "description": "The full elastic san resource output"
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource id of the elastic san volume"
+  }
+]

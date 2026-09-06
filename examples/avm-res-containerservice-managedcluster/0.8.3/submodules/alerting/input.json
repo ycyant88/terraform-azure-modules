@@ -1,0 +1,58 @@
+[
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Timeouts applied to the AzAPI resources in this module.\n\n- `create` - Timeout for create operations.\n- `read` - Timeout for read operations.\n- `update` - Timeout for update operations.\n- `delete` - Timeout for delete operations.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "aks_cluster_id",
+    "type": "string",
+    "description": "The resource ID of the AKS cluster",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "alert_email",
+    "type": "string",
+    "description": "Email address for alert notifications",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource group ID",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    insights_action_groups = optional(list(string), [])\n    insights_metric_alerts = optional(list(string), [])\n  })",
+    "description": "Body-relative paths to ignore for each AzAPI resource, in dot notation. Changes take\neffect only after apply, and ignored configuration is not sent to Azure until the\npath is removed.\n\n- `insights_action_groups` - Paths ignored on the action group.\n- `insights_metric_alerts` - Paths ignored on the metric alerts.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    insights_action_groups = optional(string, \"Microsoft.Insights/actionGroups@2024-10-01-preview\")\n    insights_metric_alerts = optional(string, \"Microsoft.Insights/metricAlerts@2018-03-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by this module.\n\n- `insights_action_groups` - Resource type and API version for the action group.\n- `insights_metric_alerts` - Resource type and API version for the metric alerts.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to the AzAPI resources in this module.\n\n- `error_message_regex` - Regular expressions matching error messages that should be retried.\n- `interval_seconds` - Initial delay between retries, in seconds.\n- `max_interval_seconds` - Maximum delay between retries, in seconds.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Resource ID of the Kubernetes cluster."
+  },
+  {
+    "name": "name",
+    "description": "Name of the Kubernetes cluster."
+  }
+]

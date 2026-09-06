@@ -1,0 +1,134 @@
+[
+  {
+    "name": "http_application_routing_zone_name",
+    "description": "The Zone Name of the HTTP Application Routing"
+  },
+  {
+    "name": "identity_tenant_id",
+    "description": "The Tenant ID associated with this Managed Service Identity"
+  },
+  {
+    "name": "ingress_application_gateway_identity_user_assigned_identity_id",
+    "description": "The ID of the User Assigned Identity used by the Application Gateway"
+  },
+  {
+    "name": "kube_config",
+    "description": "The kube_config block for the Azure Kubernetes Managed Cluster"
+  },
+  {
+    "name": "kubelet_identity_object_id",
+    "description": "The Object ID of the user-defined Managed Identity assigned to the Kubelets"
+  },
+  {
+    "name": "kube_config_raw",
+    "description": "Raw Kubernetes config for the user account"
+  },
+  {
+    "name": "kubelet_identity_user_assigned_identity_id",
+    "description": "The ID of the User Assigned Identity assigned to the Kubelets"
+  },
+  {
+    "name": "network_profile",
+    "description": "The network profile block for the Kubernetes cluster"
+  },
+  {
+    "name": "portal_fqdn",
+    "description": "The FQDN for the Azure Portal resources when private link has been enabled"
+  },
+  {
+    "name": "resource_id",
+    "description": "The Kubernetes Managed Cluster ID."
+  },
+  {
+    "name": "web_app_routing_web_app_routing_identity_user_assigned_identity_id",
+    "description": "The ID of the User Assigned Identity used for Web App Routing"
+  },
+  {
+    "name": "identity_principal_id",
+    "description": "The Principal ID associated with this Managed Service Identity"
+  },
+  {
+    "name": "node_resource_group",
+    "description": "The auto-generated Resource Group containing resources for the Managed Kubernetes Cluster"
+  },
+  {
+    "name": "node_resource_group_id",
+    "description": "The ID of the Resource Group containing resources for the Managed Kubernetes Cluster"
+  },
+  {
+    "name": "private_fqdn",
+    "description": "The FQDN for the Kubernetes Cluster when private link has been enabled"
+  },
+  {
+    "name": "oms_agent_identity_object_id",
+    "description": "The Object ID of the user-defined Managed Identity used by the OMS Agents"
+  },
+  {
+    "name": "fqdn",
+    "description": "The FQDN of the Azure Kubernetes Managed Cluster"
+  },
+  {
+    "name": "key_vault_secrets_provider_secret_identity_client_id",
+    "description": "The Client ID of the user-defined Managed Identity used by the Secret Provider"
+  },
+  {
+    "name": "key_vault_secrets_provider_secret_identity_object_id",
+    "description": "The Object ID of the user-defined Managed Identity used by the Secret Provider"
+  },
+  {
+    "name": "kube_admin_config",
+    "description": "The kube_admin_config block for the Azure Kubernetes Managed Cluster"
+  },
+  {
+    "name": "oms_agent_identity_user_assigned_identity_id",
+    "description": "The ID of the User Assigned Identity used by the OMS Agents"
+  },
+  {
+    "name": "current_kubernetes_version",
+    "description": "The current version running on the Azure Kubernetes Managed Cluster"
+  },
+  {
+    "name": "ingress_application_gateway_identity_client_id",
+    "description": "The Client ID of the user-defined Managed Identity used by the Application Gateway"
+  },
+  {
+    "name": "ingress_application_gateway_identity_object_id",
+    "description": "The Object ID of the user-defined Managed Identity used by the Application Gateway"
+  },
+  {
+    "name": "nat_gateway_profile_effective_outbound_ips",
+    "description": "The effective outbound IPs for the NAT Gateway profile"
+  },
+  {
+    "name": "key_vault_secrets_provider_secret_identity_user_assigned_identity_id",
+    "description": "The ID of the User Assigned Identity used by the Secret Provider"
+  },
+  {
+    "name": "kubelet_identity_client_id",
+    "description": "The Client ID of the user-defined Managed Identity assigned to the Kubelets"
+  },
+  {
+    "name": "load_balancer_profile_effective_outbound_ips",
+    "description": "The effective outbound IPs for the load balancer profile"
+  },
+  {
+    "name": "oms_agent_identity_client_id",
+    "description": "The Client ID of the user-defined Managed Identity used by the OMS Agents"
+  },
+  {
+    "name": "web_app_routing_web_app_routing_identity_object_id",
+    "description": "The Object ID of the user-defined Managed Identity used for Web App Routing"
+  },
+  {
+    "name": "kube_admin_config_raw",
+    "description": "Raw Kubernetes config for the admin account"
+  },
+  {
+    "name": "oidc_issuer_url",
+    "description": "The OIDC issuer URL that is associated with the cluster"
+  },
+  {
+    "name": "web_app_routing_web_app_routing_identity_client_id",
+    "description": "The Client ID of the user-defined Managed Identity used for Web App Routing"
+  }
+]

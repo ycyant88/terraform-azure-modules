@@ -1,0 +1,19 @@
+module "avm-res-azurestackhci-logicalnetwork" {
+  source              = "Azure/avm-res-azurestackhci-logicalnetwork/azurerm"
+  version             = "0.1.0"
+  address_prefix      = var.address_prefix
+  custom_location_id  = var.custom_location_id
+  default_gateway     = var.default_gateway
+  dns_servers         = var.dns_servers
+  enable_telemetry    = var.enable_telemetry
+  ending_address      = var.ending_address
+  location            = var.location
+  lock                = var.lock
+  name                = var.name
+  resource_group_id   = var.resource_group_id
+  resource_group_name = var.resource_group_name
+  role_assignments    = var.role_assignments
+  starting_address    = var.starting_address
+  vlan_id             = var.vlan_id
+  vm_switch_name      = var.vm_switch_name
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "name",
+    "type": "string",
+    "description": "Specifies the name of the PostgreSQL database.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "server_id",
+    "type": "string",
+    "description": "The resource ID of the PostgreSQL Flexible Server that will host the database.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "charset",
+    "type": "string",
+    "description": "The charset for the PostgreSQL database.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "collation",
+    "type": "string",
+    "description": "The collation for the PostgreSQL database.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n  })",
+    "description": "Optional timeout configuration for the PostgreSQL database resource.",
+    "default": "null",
+    "required": false
+  }
+]

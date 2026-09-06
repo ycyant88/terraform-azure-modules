@@ -1,0 +1,27 @@
+module "avm-res-search-searchservice" {
+  source                                   = "Azure/avm-res-search-searchservice/azurerm"
+  version                                  = "0.2.0"
+  allowed_ips                              = var.allowed_ips
+  authentication_failure_mode              = var.authentication_failure_mode
+  customer_managed_key                     = var.customer_managed_key
+  customer_managed_key_enforcement_enabled = var.customer_managed_key_enforcement_enabled
+  diagnostic_settings                      = var.diagnostic_settings
+  enable_telemetry                         = var.enable_telemetry
+  hosting_mode                             = var.hosting_mode
+  local_authentication_enabled             = var.local_authentication_enabled
+  location                                 = var.location
+  lock                                     = var.lock
+  managed_identities                       = var.managed_identities
+  name                                     = var.name
+  network_rule_bypass_option               = var.network_rule_bypass_option
+  partition_count                          = var.partition_count
+  private_endpoints                        = var.private_endpoints
+  private_endpoints_manage_dns_zone_group  = var.private_endpoints_manage_dns_zone_group
+  public_network_access_enabled            = var.public_network_access_enabled
+  replica_count                            = var.replica_count
+  resource_group_name                      = var.resource_group_name
+  role_assignments                         = var.role_assignments
+  semantic_search_sku                      = var.semantic_search_sku
+  sku                                      = var.sku
+  tags                                     = var.tags
+}

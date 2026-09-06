@@ -1,0 +1,46 @@
+[
+  {
+    "name": "location",
+    "description": ""
+  },
+  {
+    "name": "aks_id",
+    "description": ""
+  },
+  {
+    "name": "kube_config_raw",
+    "description": ""
+  },
+  {
+    "name": "client_key",
+    "description": ""
+  },
+  {
+    "name": "client_certificate",
+    "description": ""
+  },
+  {
+    "name": "username",
+    "description": ""
+  },
+  {
+    "name": "password",
+    "description": ""
+  },
+  {
+    "name": "node_resource_group",
+    "description": ""
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": ""
+  },
+  {
+    "name": "host",
+    "description": ""
+  },
+  {
+    "name": "http_application_routing_zone_name",
+    "description": ""
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "app_setting_names",
+    "type": "list(string)",
+    "description": "A list of app setting names that should be sticky (not swapped during slot swaps).",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "connection_string_names",
+    "type": "list(string)",
+    "description": "A list of connection string names that should be sticky (not swapped during slot swaps).",
+    "default": "[]",
+    "required": false
+  }
+]

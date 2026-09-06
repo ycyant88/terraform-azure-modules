@@ -1,0 +1,1150 @@
+[
+  {
+    "name": "rbac_aad_azure_rbac_enabled",
+    "type": "bool",
+    "description": "(Optional) Is Role Based Access Control based on Azure AD enabled?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "Any tags that should be present on the AKS cluster resources",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The existing resource group name to use",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "auto_scaler_profile_enabled",
+    "type": "bool",
+    "description": "Enable configuring the auto scaler profile",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_scan_interval",
+    "type": "string",
+    "description": "How often the AKS Cluster should be re-evaluated for scale up/down. Defaults to `10s`.",
+    "default": "\"10s\"",
+    "required": false
+  },
+  {
+    "name": "kms_enabled",
+    "type": "bool",
+    "description": "(Optional) Enable Azure KeyVault Key Management Service.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "monitor_data_collection_rule_data_sources_syslog_levels",
+    "type": "list(string)",
+    "description": "List of syslog levels",
+    "default": "[\n  \"Debug\",\n  \"Info\",\n  \"Notice\",\n  \"Warning\",\n  \"Error\",\n  \"Critical\",\n  \"Alert\",\n  \"Emergency\"\n]",
+    "required": false
+  },
+  {
+    "name": "private_dns_zone_id",
+    "type": "string",
+    "description": "(Optional) Either the ID of Private DNS Zone which should be delegated to this Cluster, `System` to have AKS manage this or `None`. In case of `None` you will need to bring your own DNS server and set up resolving, otherwise cluster will have issues after provisioning. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_max_node_provisioning_time",
+    "type": "string",
+    "description": "Maximum time the autoscaler waits for a node to be provisioned. Defaults to `15m`.",
+    "default": "\"15m\"",
+    "required": false
+  },
+  {
+    "name": "default_node_pool_fips_enabled",
+    "type": "bool",
+    "description": " (Optional) Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ebpf_data_plane",
+    "type": "string",
+    "description": "(Optional) Specifies the eBPF data plane used for building the Kubernetes network. Possible value is `cilium`. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "image_cleaner_enabled",
+    "type": "bool",
+    "description": "(Optional) Specifies whether Image Cleaner is enabled.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "load_balancer_profile_managed_outbound_ip_count",
+    "type": "number",
+    "description": "(Optional) Count of desired managed outbound IPs for the cluster load balancer. Must be between `1` and `100` inclusive",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "net_profile_outbound_type",
+    "type": "string",
+    "description": "(Optional) The outbound (egress) routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer and userDefinedRouting. Defaults to loadBalancer.",
+    "default": "\"loadBalancer\"",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_scale_down_delay_after_failure",
+    "type": "string",
+    "description": "How long after scale down failure that scale down evaluation resumes. Defaults to `3m`.",
+    "default": "\"3m\"",
+    "required": false
+  },
+  {
+    "name": "create_role_assignment_network_contributor",
+    "type": "bool",
+    "description": "(Deprecated) Create a role assignment for the AKS Service Principal to be a Network Contributor on the subnets used for the AKS Cluster",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "load_balancer_profile_outbound_ip_address_ids",
+    "type": "set(string)",
+    "description": "(Optional) The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "monitor_metrics",
+    "type": "object({\n    annotations_allowed = optional(string)\n    labels_allowed      = optional(string)\n  })",
+    "description": "(Optional) Specifies a Prometheus add-on profile for the Kubernetes Cluster\nobject({\n  annotations_allowed = \"(Optional) Specifies a comma-separated list of Kubernetes annotation keys that will be used in the resource's labels metric.\"\n  labels_allowed      = \"(Optional) Specifies a Comma-separated list of additional Kubernetes label keys that will be used in the resource's labels metric.\"\n})\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "net_profile_service_cidr",
+    "type": "string",
+    "description": "(Optional) The Network Range used by the Kubernetes service. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "only_critical_addons_enabled",
+    "type": "bool",
+    "description": "(Optional) Enabling this option will taint default node pool with `CriticalAddonsOnly=true:NoSchedule` taint. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "public_ssh_key",
+    "type": "string",
+    "description": "A custom ssh key to control access to the AKS cluster. Changing this forces a new resource to be created.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "node_public_ip_enabled",
+    "type": "bool",
+    "description": "(Optional) Should nodes in this Node Pool have a Public IP Address? Defaults to false.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "kms_key_vault_key_id",
+    "type": "string",
+    "description": "(Optional) Identifier of Azure Key Vault key. When Azure Key Vault key management service is enabled, this field is required and must be a valid key identifier.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_daily_quota_gb",
+    "type": "number",
+    "description": "(Optional) The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "net_profile_dns_service_ip",
+    "type": "string",
+    "description": "(Optional) IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "network_plugin",
+    "type": "string",
+    "description": "Network plugin to use for networking.",
+    "default": "\"kubenet\"",
+    "required": false
+  },
+  {
+    "name": "node_resource_group",
+    "type": "string",
+    "description": "The auto-generated Resource Group which contains the resources for this Managed Kubernetes Cluster. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "run_command_enabled",
+    "type": "bool",
+    "description": "(Optional) Whether to enable run command for the cluster or not.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "temporary_name_for_rotation",
+    "type": "string",
+    "description": "(Optional) Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing. the `var.agents_size` is no longer ForceNew and can be resized by specifying `temporary_name_for_rotation`",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_solution",
+    "type": "object({\n    id = string\n  })",
+    "description": "(Optional) Object which contains existing azurerm_log_analytics_solution ID. Providing ID disables creation of azurerm_log_analytics_solution.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "data_collection_settings",
+    "type": "object({\n    data_collection_interval                     = string\n    namespace_filtering_mode_for_data_collection = string\n    namespaces_for_data_collection               = list(string)\n    container_log_v2_enabled                     = bool\n  })",
+    "description": "`data_collection_interval` -  Determines how often the agent collects data. Valid values are 1m - 30m in 1m intervals. Default is 1m.\n`namespace_filtering_mode_for_data_collection` - Can be 'Include', 'Exclude', or 'Off'. Determines how namespaces are filtered for data collection.\n`namespaces_for_data_collection` - List of Kubernetes namespaces for data collection based on the filtering mode.\n`container_log_v2_enabled` - Flag to enable the ContainerLogV2 schema for collecting logs.\nSee more details: https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-data-collection-configure?tabs=cli#configure-dcr-with-azure-portal-1\n",
+    "default": "{\n  \"container_log_v2_enabled\": true,\n  \"data_collection_interval\": \"1m\",\n  \"namespace_filtering_mode_for_data_collection\": \"Off\",\n  \"namespaces_for_data_collection\": [\n    \"kube-system\",\n    \"gatekeeper-system\",\n    \"azure-arc\"\n  ]\n}",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_max_graceful_termination_sec",
+    "type": "string",
+    "description": "Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node. Defaults to `600`.",
+    "default": "\"600\"",
+    "required": false
+  },
+  {
+    "name": "os_disk_size_gb",
+    "type": "number",
+    "description": "Disk size of nodes in GBs.",
+    "default": "50",
+    "required": false
+  },
+  {
+    "name": "workload_identity_enabled",
+    "type": "bool",
+    "description": "Enable or Disable Workload Identity. Defaults to false.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "agents_pool_drain_timeout_in_minutes",
+    "type": "number",
+    "description": "(Optional) The amount of time in minutes to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. Unsetting this after configuring it will force a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_scale_down_utilization_threshold",
+    "type": "string",
+    "description": "Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down. Defaults to `0.5`.",
+    "default": "\"0.5\"",
+    "required": false
+  },
+  {
+    "name": "kubelet_identity",
+    "type": "object({\n    client_id                 = optional(string)\n    object_id                 = optional(string)\n    user_assigned_identity_id = optional(string)\n  })",
+    "description": "- `client_id` - (Optional) The Client ID of the user-defined Managed Identity to be assigned to the Kubelets. If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.\n- `object_id` - (Optional) The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.\n- `user_assigned_identity_id` - (Optional) The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "rbac_aad_admin_group_object_ids",
+    "type": "list(string)",
+    "description": "Object ID of groups with admin access.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "monitor_data_collection_rule_extensions_streams",
+    "type": "list(any)",
+    "description": "An array of container insights table streams. See documentation in DCR for a list of the valid streams and their corresponding table: https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-data-collection-configure?tabs=portal#stream-values-in-dcr",
+    "default": "[\n  \"Microsoft-ContainerLog\",\n  \"Microsoft-ContainerLogV2\",\n  \"Microsoft-KubeEvents\",\n  \"Microsoft-KubePodInventory\",\n  \"Microsoft-KubeNodeInventory\",\n  \"Microsoft-KubePVInventory\",\n  \"Microsoft-KubeServices\",\n  \"Microsoft-KubeMonAgentEvents\",\n  \"Microsoft-InsightsMetrics\",\n  \"Microsoft-ContainerInventory\",\n  \"Microsoft-ContainerNodeInventory\",\n  \"Microsoft-Perf\"\n]",
+    "required": false
+  },
+  {
+    "name": "os_disk_type",
+    "type": "string",
+    "description": "The type of disk which should be used for the Operating System. Possible values are `Ephemeral` and `Managed`. Defaults to `Managed`. Changing this forces a new resource to be created.",
+    "default": "\"Managed\"",
+    "required": false
+  },
+  {
+    "name": "scale_down_mode",
+    "type": "string",
+    "description": "(Optional) Specifies the autoscaling behaviour of the Kubernetes Cluster. If not specified, it defaults to `Delete`. Possible values include `Delete` and `Deallocate`. Changing this forces a new resource to be created.",
+    "default": "\"Delete\"",
+    "required": false
+  },
+  {
+    "name": "snapshot_id",
+    "type": "string",
+    "description": "(Optional) The ID of the Snapshot which should be used to create this default Node Pool. `temporary_name_for_rotation` must be specified when changing this property.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_max_pods",
+    "type": "number",
+    "description": "(Optional) The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "load_balancer_profile_idle_timeout_in_minutes",
+    "type": "number",
+    "description": "(Optional) Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between `4` and `120` inclusive.",
+    "default": "30",
+    "required": false
+  },
+  {
+    "name": "private_cluster_enabled",
+    "type": "bool",
+    "description": "If true cluster API server will be exposed only on internal IP address and available only in cluster vnet.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_scale_down_delay_after_delete",
+    "type": "string",
+    "description": "How long after node deletion that scale down evaluation resumes. Defaults to the value used for `scan_interval`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "load_balancer_profile_enabled",
+    "type": "bool",
+    "description": "(Optional) Enable a load_balancer_profile block. This can only be used when load_balancer_sku is set to `standard`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_allow_resource_only_permissions",
+    "type": "bool",
+    "description": "(Optional) Specifies if the log Analytics Workspace allow users accessing to data associated with resources they have permission to view, without permission to workspace. Defaults to `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "role_based_access_control_enabled",
+    "type": "bool",
+    "description": "Enable Role Based Access Control.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "sku_tier",
+    "type": "string",
+    "description": "The SKU Tier that should be used for this Kubernetes Cluster. Possible values are `Free`, `Standard` and `Premium`",
+    "default": "\"Free\"",
+    "required": false
+  },
+  {
+    "name": "azure_policy_enabled",
+    "type": "bool",
+    "description": "Enable Azure Policy Addon.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "http_proxy_config",
+    "type": "object({\n    http_proxy  = optional(string)\n    https_proxy = optional(string)\n    no_proxy    = optional(list(string))\n    trusted_ca  = optional(string)\n  })",
+    "description": "  optional(object({\n    http_proxy  = (Optional) The proxy address to be used when communicating over HTTP.\n    https_proxy = (Optional) The proxy address to be used when communicating over HTTPS.\n    no_proxy    = (Optional) The list of domains that will not use the proxy for communication. Note: If you specify the `default_node_pool.0.vnet_subnet_id`, be sure to include the Subnet CIDR in the `no_proxy` list. Note: You may wish to use Terraform's `ignore_changes` functionality to ignore the changes to this field.\n    trusted_ca  = (Optional) The base64 encoded alternative CA certificate content in PEM format.\n}))\nOnce you have set only one of `http_proxy` and `https_proxy`, this config would be used for both `http_proxy` and `https_proxy` to avoid a configuration drift.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_identity",
+    "type": "object({\n    identity_ids = optional(set(string))\n    type         = string\n  })",
+    "description": "- `identity_ids` - (Optional) Specifies a list of user managed identity ids to be assigned. Required if `type` is `UserAssigned`.\n- `type` - (Required) Specifies the identity type of the Log Analytics Workspace. Possible values are `SystemAssigned` (where Azure will generate a Service Principal for you) and `UserAssigned` where you can specify the Service Principal IDs in the `identity_ids` field.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "orchestrator_version",
+    "type": "string",
+    "description": "Specify which Kubernetes release to use for the orchestration layer. The default used is the latest Kubernetes version available in the region",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "custom_ca_trust_certificates_base64",
+    "type": "list(string)",
+    "description": "(Optional) A list of up to 10 base64 encoded CA certificates that will be added to the trust store on nodes.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "image_cleaner_interval_hours",
+    "type": "number",
+    "description": "(Optional) Specifies the interval in hours when images should be cleaned up. Defaults to `48`.",
+    "default": "48",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace",
+    "type": "object({\n    id                  = string\n    name                = string\n    location            = optional(string)\n    resource_group_name = optional(string)\n  })",
+    "description": "(Optional) Existing azurerm_log_analytics_workspace to attach azurerm_log_analytics_solution. Providing the config disables creation of azurerm_log_analytics_workspace.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "maintenance_window_auto_upgrade",
+    "type": "object({\n    day_of_month = optional(number)\n    day_of_week  = optional(string)\n    duration     = number\n    frequency    = string\n    interval     = number\n    start_date   = optional(string)\n    start_time   = optional(string)\n    utc_offset   = optional(string)\n    week_index   = optional(string)\n    not_allowed = optional(set(object({\n      end   = string\n      start = string\n    })))\n  })",
+    "description": "- `day_of_month` - (Optional) The day of the month for the maintenance run. Required in combination with RelativeMonthly frequency. Value between 0 and 31 (inclusive).\n- `day_of_week` - (Optional) The day of the week for the maintenance run. Options are `Monday`, `Tuesday`, `Wednesday`, `Thurday`, `Friday`, `Saturday` and `Sunday`. Required in combination with weekly frequency.\n- `duration` - (Required) The duration of the window for maintenance to run in hours.\n- `frequency` - (Required) Frequency of maintenance. Possible options are `Weekly`, `AbsoluteMonthly` and `RelativeMonthly`.\n- `interval` - (Required) The interval for maintenance runs. Depending on the frequency this interval is week or month based.\n- `start_date` - (Optional) The date on which the maintenance window begins to take effect.\n- `start_time` - (Optional) The time for maintenance to begin, based on the timezone determined by `utc_offset`. Format is `HH:mm`.\n- `utc_offset` - (Optional) Used to determine the timezone for cluster maintenance.\n- `week_index` - (Optional) The week in the month used for the maintenance run. Options are `First`, `Second`, `Third`, `Fourth`, and `Last`.\n\n---\n`not_allowed` block supports the following:\n- `end` - (Required) The end of a time span, formatted as an RFC3339 string.\n- `start` - (Required) The start of a time span, formatted as an RFC3339 string.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_profile_file_driver_enabled",
+    "type": "bool",
+    "description": "(Optional) Is the File CSI driver enabled? Defaults to `true`",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "microsoft_defender_enabled",
+    "type": "bool",
+    "description": "(Optional) Is Microsoft Defender on the cluster enabled? Requires `var.log_analytics_workspace_enabled` to be `true` to set this variable to `true`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "aci_connector_linux_subnet_name",
+    "type": "string",
+    "description": "(Optional) aci_connector_linux subnet name",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_proximity_placement_group_id",
+    "type": "string",
+    "description": "(Optional) The ID of the Proximity Placement Group of the default Azure AKS agentpool (nodepool). Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_skip_nodes_with_system_pods",
+    "type": "bool",
+    "description": "If `true` cluster autoscaler will never delete nodes with pods from kube-system (except for DaemonSet or mirror pods). Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "create_role_assignments_for_application_gateway",
+    "type": "bool",
+    "description": "(Optional) Whether to create the corresponding role assignments for application gateway or not. Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "dns_prefix_private_cluster",
+    "type": "string",
+    "description": "(Optional) Specifies the DNS prefix to use with private clusters. Only one of `var.prefix,var.dns_prefix_private_cluster` can be specified. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_profile_snapshot_controller_enabled",
+    "type": "bool",
+    "description": "(Optional) Is the Snapshot Controller enabled? Defaults to `true`",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "disk_encryption_set_id",
+    "type": "string",
+    "description": "(Optional) The ID of the Disk Encryption Set which should be used for the Nodes and Volumes. More information [can be found in the documentation](https://docs.microsoft.com/azure/aks/azure-disk-customer-managed-keys). Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_pool_local_dns_config",
+    "type": "object({\n    mode = string\n    vnet_dns_overrides = optional(map(object({\n      query_logging                   = optional(string)\n      protocol                        = optional(string)\n      forward_destination             = optional(string)\n      forward_policy                  = optional(string)\n      max_concurrent                  = optional(number)\n      cache_duration_in_seconds       = optional(number)\n      serve_stale_duration_in_seconds = optional(number)\n      serve_stale                     = optional(string)\n    })))\n    kube_dns_overrides = optional(map(object({\n      query_logging                   = optional(string)\n      protocol                        = optional(string)\n      forward_destination             = optional(string)\n      forward_policy                  = optional(string)\n      max_concurrent                  = optional(number)\n      cache_duration_in_seconds       = optional(number)\n      serve_stale_duration_in_seconds = optional(number)\n      serve_stale                     = optional(string)\n    })))\n  })",
+    "description": "(Optional) Configuration for LocalDNS feature in AKS cluster for agent pool. This configures DNS settings for pods and nodes.\n\n- `mode` - (Required) Controls LocalDNS enforcement. Possible values are `Required`, `Disabled`, or `Preferred`.\n- `vnet_dns_overrides` - (Optional) A map of DNS override configurations for pods using `dnsPolicy:default` (VnetDNS traffic).\n- `kube_dns_overrides` - (Optional) A map of DNS override configurations for pods using `dnsPolicy:ClusterFirst` (KubeDNS traffic).\n\nBoth `vnet_dns_overrides` and `kube_dns_overrides` are maps whose **key is a CoreDNS server block name** (i.e. a DNS zone name).\nTwo server blocks are defined by default: `\".\"` (root zone — matches all external queries) and `\"cluster.local\"` (internal Kubernetes service discovery).\nYou may also define additional custom server blocks by using any valid DNS zone name as the key (e.g. `\"microsoft.com\"`, `\"privatelink.blob.core.windows.net\"`).\nSee: https://learn.microsoft.com/en-us/azure/aks/localdns-custom?tabs=configure#server-blocks-and-supported-plugins-for-localdns\n\nEach DNS override configuration supports:\n- `query_logging` - (Optional) Logging level. Possible values are `Error` or `Log`.\n- `protocol` - (Optional) DNS protocol preference. Possible values are `PreferUDP` or `ForceTCP`.\n- `forward_destination` - (Optional) Target DNS server. Possible values are `VnetDNS` or `ClusterCoreDNS`.\n- `forward_policy` - (Optional) Upstream selection policy. Possible values are `Random`, `RoundRobin`, or `Sequential`.\n- `max_concurrent` - (Optional) Maximum concurrent queries (integer).\n- `cache_duration_in_seconds` - (Optional) Cache TTL duration (integer).\n- `serve_stale_duration_in_seconds` - (Optional) Stale response duration (integer).\n- `serve_stale` - (Optional) Stale serving policy. Possible values are `Verify`, `Immediate`, or `Disable`.\n\nConstraints:\n- When `protocol` is `ForceTCP`, `serve_stale` cannot be `Verify`\n\nFor more information see: https://learn.microsoft.com/en-us/azure/aks/localdns-custom\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_os_channel_upgrade",
+    "type": "string",
+    "description": " (Optional) The upgrade channel for this Kubernetes Cluster Nodes' OS Image. Possible values are `Unmanaged`, `SecurityPatch`, `NodeImage` and `None`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "load_balancer_sku",
+    "type": "string",
+    "description": "(Optional) Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are `basic` and `standard`. Defaults to `standard`. Changing this forces a new kubernetes cluster to be created.",
+    "default": "\"standard\"",
+    "required": false
+  },
+  {
+    "name": "secret_rotation_enabled",
+    "type": "bool",
+    "description": "Is secret rotation enabled? This variable is only used when `key_vault_secrets_provider_enabled` is `true` and defaults to `false`",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "agents_labels",
+    "type": "map(string)",
+    "description": "(Optional) A map of Kubernetes labels which should be applied to nodes in the Default Node Pool. Changing this forces a new resource to be created.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "attached_acr_id_map",
+    "type": "map(string)",
+    "description": "Azure Container Registry ids that need an authentication mechanism with Azure Kubernetes Service (AKS). Map key must be static string as acr's name, the value is acr's resource id. Changing this forces some new resources to be created.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "cluster_log_analytics_workspace_name",
+    "type": "string",
+    "description": "(Optional) The name of the Analytics workspace",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_pool_node_soak_duration_in_minutes",
+    "type": "number",
+    "description": "(Optional) The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.",
+    "default": "0",
+    "required": false
+  },
+  {
+    "name": "automatic_channel_upgrade",
+    "type": "string",
+    "description": "(Optional) Defines the automatic upgrade channel for the AKS cluster.\nPossible values:\n  * `\"patch\"`: Automatically upgrades to the latest patch version within the specified minor version in `kubernetes_version`. **If using \"patch\", `kubernetes_version` must be set only up to the minor version (e.g., \"1.29\").**\n  * `\"stable\"`, `\"rapid\"`, `\"node-image\"`: Automatically upgrade without requiring `kubernetes_version`. **If using one of these values, both `kubernetes_version` and `orchestrator_version` must be `null`.**\n\nBy default, automatic upgrades are disabled.\nMore information: https://learn.microsoft.com/en-us/azure/aks/auto-upgrade-cluster\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_pool_linux_os_configs",
+    "type": "list(object({\n    sysctl_configs = optional(list(object({\n      fs_aio_max_nr                      = optional(number)\n      fs_file_max                        = optional(number)\n      fs_inotify_max_user_watches        = optional(number)\n      fs_nr_open                         = optional(number)\n      kernel_threads_max                 = optional(number)\n      net_core_netdev_max_backlog        = optional(number)\n      net_core_optmem_max                = optional(number)\n      net_core_rmem_default              = optional(number)\n      net_core_rmem_max                  = optional(number)\n      net_core_somaxconn                 = optional(number)\n      net_core_wmem_default              = optional(number)\n      net_core_wmem_max                  = optional(number)\n      net_ipv4_ip_local_port_range_min   = optional(number)\n      net_ipv4_ip_local_port_range_max   = optional(number)\n      net_ipv4_neigh_default_gc_thresh1  = optional(number)\n      net_ipv4_neigh_default_gc_thresh2  = optional(number)\n      net_ipv4_neigh_default_gc_thresh3  = optional(number)\n      net_ipv4_tcp_fin_timeout           = optional(number)\n      net_ipv4_tcp_keepalive_intvl       = optional(number)\n      net_ipv4_tcp_keepalive_probes      = optional(number)\n      net_ipv4_tcp_keepalive_time        = optional(number)\n      net_ipv4_tcp_max_syn_backlog       = optional(number)\n      net_ipv4_tcp_max_tw_buckets        = optional(number)\n      net_ipv4_tcp_tw_reuse              = optional(bool)\n      net_netfilter_nf_conntrack_buckets = optional(number)\n      net_netfilter_nf_conntrack_max     = optional(number)\n      vm_max_map_count                   = optional(number)\n      vm_swappiness                      = optional(number)\n      vm_vfs_cache_pressure              = optional(number)\n    })), [])\n    transparent_huge_page_enabled = optional(string)\n    transparent_huge_page_defrag  = optional(string)\n    swap_file_size_mb             = optional(number)\n  }))",
+    "description": "list(object({\n  sysctl_configs = optional(list(object({\n    fs_aio_max_nr                      = (Optional) The sysctl setting fs.aio-max-nr. Must be between `65536` and `6553500`. Changing this forces a new resource to be created.\n    fs_file_max                        = (Optional) The sysctl setting fs.file-max. Must be between `8192` and `12000500`. Changing this forces a new resource to be created.\n    fs_inotify_max_user_watches        = (Optional) The sysctl setting fs.inotify.max_user_watches. Must be between `781250` and `2097152`. Changing this forces a new resource to be created.\n    fs_nr_open                         = (Optional) The sysctl setting fs.nr_open. Must be between `8192` and `20000500`. Changing this forces a new resource to be created.\n    kernel_threads_max                 = (Optional) The sysctl setting kernel.threads-max. Must be between `20` and `513785`. Changing this forces a new resource to be created.\n    net_core_netdev_max_backlog        = (Optional) The sysctl setting net.core.netdev_max_backlog. Must be between `1000` and `3240000`. Changing this forces a new resource to be created.\n    net_core_optmem_max                = (Optional) The sysctl setting net.core.optmem_max. Must be between `20480` and `4194304`. Changing this forces a new resource to be created.\n    net_core_rmem_default              = (Optional) The sysctl setting net.core.rmem_default. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n    net_core_rmem_max                  = (Optional) The sysctl setting net.core.rmem_max. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n    net_core_somaxconn                 = (Optional) The sysctl setting net.core.somaxconn. Must be between `4096` and `3240000`. Changing this forces a new resource to be created.\n    net_core_wmem_default              = (Optional) The sysctl setting net.core.wmem_default. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n    net_core_wmem_max                  = (Optional) The sysctl setting net.core.wmem_max. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n    net_ipv4_ip_local_port_range_min   = (Optional) The sysctl setting net.ipv4.ip_local_port_range max value. Must be between `1024` and `60999`. Changing this forces a new resource to be created.\n    net_ipv4_ip_local_port_range_max   = (Optional) The sysctl setting net.ipv4.ip_local_port_range min value. Must be between `1024` and `60999`. Changing this forces a new resource to be created.\n    net_ipv4_neigh_default_gc_thresh1  = (Optional) The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between `128` and `80000`. Changing this forces a new resource to be created.\n    net_ipv4_neigh_default_gc_thresh2  = (Optional) The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between `512` and `90000`. Changing this forces a new resource to be created.\n    net_ipv4_neigh_default_gc_thresh3  = (Optional) The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between `1024` and `100000`. Changing this forces a new resource to be created.\n    net_ipv4_tcp_fin_timeout           = (Optional) The sysctl setting net.ipv4.tcp_fin_timeout. Must be between `5` and `120`. Changing this forces a new resource to be created.\n    net_ipv4_tcp_keepalive_intvl       = (Optional) The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between `10` and `75`. Changing this forces a new resource to be created.\n    net_ipv4_tcp_keepalive_probes      = (Optional) The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between `1` and `15`. Changing this forces a new resource to be created.\n    net_ipv4_tcp_keepalive_time        = (Optional) The sysctl setting net.ipv4.tcp_keepalive_time. Must be between `30` and `432000`. Changing this forces a new resource to be created.\n    net_ipv4_tcp_max_syn_backlog       = (Optional) The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between `128` and `3240000`. Changing this forces a new resource to be created.\n    net_ipv4_tcp_max_tw_buckets        = (Optional) The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between `8000` and `1440000`. Changing this forces a new resource to be created.\n    net_ipv4_tcp_tw_reuse              = (Optional) The sysctl setting net.ipv4.tcp_tw_reuse. Changing this forces a new resource to be created.\n    net_netfilter_nf_conntrack_buckets = (Optional) The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between `65536` and `147456`. Changing this forces a new resource to be created.\n    net_netfilter_nf_conntrack_max     = (Optional) The sysctl setting net.netfilter.nf_conntrack_max. Must be between `131072` and `1048576`. Changing this forces a new resource to be created.\n    vm_max_map_count                   = (Optional) The sysctl setting vm.max_map_count. Must be between `65530` and `262144`. Changing this forces a new resource to be created.\n    vm_swappiness                      = (Optional) The sysctl setting vm.swappiness. Must be between `0` and `100`. Changing this forces a new resource to be created.\n    vm_vfs_cache_pressure              = (Optional) The sysctl setting vm.vfs_cache_pressure. Must be between `0` and `100`. Changing this forces a new resource to be created.\n  })), [])\n  transparent_huge_page_enabled = (Optional) Specifies the Transparent Huge Page enabled configuration. Possible values are `always`, `madvise` and `never`. Changing this forces a new resource to be created.\n  transparent_huge_page_defrag  = (Optional) specifies the defrag configuration for Transparent Huge Page. Possible values are `always`, `defer`, `defer+madvise`, `madvise` and `never`. Changing this forces a new resource to be created.\n  swap_file_size_mb             = (Optional) Specifies the size of the swap file on each node in MB. Changing this forces a new resource to be created.\n}))\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "identity_type",
+    "type": "string",
+    "description": "(Optional) The type of identity used for the managed cluster. Conflicts with `client_id` and `client_secret`. Possible values are `SystemAssigned` and `UserAssigned`. If `UserAssigned` is set, an `identity_ids` must be set as well.",
+    "default": "\"SystemAssigned\"",
+    "required": false
+  },
+  {
+    "name": "log_retention_in_days",
+    "type": "number",
+    "description": "The retention period for the logs in days",
+    "default": "30",
+    "required": false
+  },
+  {
+    "name": "private_cluster_public_fqdn_enabled",
+    "type": "bool",
+    "description": "(Optional) Specifies whether a Public FQDN for this Private Cluster should be added. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "upgrade_override",
+    "type": "object({\n    force_upgrade_enabled = bool\n    effective_until       = optional(string)\n  })",
+    "description": "`force_upgrade_enabled` - (Required) Whether to force upgrade the cluster. Possible values are `true` or `false`.\n`effective_until` - (Optional) Specifies the duration, in RFC 3339 format (e.g., `2025-10-01T13:00:00Z`), the upgrade_override values are effective. This field must be set for the `upgrade_override` values to take effect. The date-time must be within the next 30 days.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_new_pod_scale_up_delay",
+    "type": "string",
+    "description": "For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. Defaults to `10s`.",
+    "default": "\"10s\"",
+    "required": false
+  },
+  {
+    "name": "create_monitor_data_collection_rule",
+    "type": "bool",
+    "description": "Create monitor data collection rule resource for the AKS cluster. Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "load_balancer_profile_outbound_ports_allocated",
+    "type": "number",
+    "description": "(Optional) Number of desired SNAT port for each VM in the clusters load balancer. Must be between `0` and `64000` inclusive. Defaults to `0`",
+    "default": "0",
+    "required": false
+  },
+  {
+    "name": "network_policy",
+    "type": "string",
+    "description": " (Optional) Sets up network policy to be used with Azure CNI. Network policy allows us to control the traffic flow between pods. Currently supported values are calico and azure. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_profile_blob_driver_enabled",
+    "type": "bool",
+    "description": "(Optional) Is the Blob CSI driver enabled? Defaults to `false`",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "agents_count",
+    "type": "number",
+    "description": "The number of Agents that should exist in the Agent Pool. Please set `agents_count` `null` while `auto_scaling_enabled` is `true` to avoid possible `agents_count` changes.",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_scale_down_delay_after_add",
+    "type": "string",
+    "description": "How long after the scale up of AKS nodes the scale down evaluation resumes. Defaults to `10m`.",
+    "default": "\"10m\"",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_data_collection_rule_id",
+    "type": "string",
+    "description": "(Optional) The ID of the Data Collection Rule to use for this workspace.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_internet_query_enabled",
+    "type": "bool",
+    "description": "(Optional) Should the Log Analytics Workspace support querying over the Public Internet? Defaults to `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "web_app_routing",
+    "type": "object({\n    dns_zone_ids             = list(string)\n    default_nginx_controller = optional(string, \"AnnotationControlled\")\n  })",
+    "description": "object({\n  dns_zone_ids = \"(Required) Specifies the list of the DNS Zone IDs in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. If not using Bring-Your-Own DNS zones this property should be set to an empty list.\"\n  default_nginx_controller = \"(Optional) Specifies the ingress type for the default NginxIngressController custom resource. The allowed values are None, Internal, External and AnnotationControlled. It defaults to AnnotationControlled.\"\n})\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_availability_zones",
+    "type": "list(string)",
+    "description": "(Optional) A list of Availability Zones across which the Node Pool should be spread. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_expander",
+    "type": "string",
+    "description": "Expander to use. Possible values are `least-waste`, `priority`, `most-pods` and `random`. Defaults to `random`.",
+    "default": "\"random\"",
+    "required": false
+  },
+  {
+    "name": "msi_auth_for_monitoring_enabled",
+    "type": "bool",
+    "description": "(Optional) Is managed identity authentication for monitoring enabled?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Location of cluster, if not defined it will be read from the resource-group",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "agents_min_count",
+    "type": "number",
+    "description": "Minimum number of nodes in a pool",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_pool_max_surge",
+    "type": "string",
+    "description": "The maximum number or percentage of nodes which will be added to the Default Node Pool size during an upgrade.",
+    "default": "\"10%\"",
+    "required": false
+  },
+  {
+    "name": "api_server_authorized_ip_ranges",
+    "type": "set(string)",
+    "description": "(Optional) The IP ranges to allow for incoming traffic to the server nodes.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_balance_similar_node_groups",
+    "type": "bool",
+    "description": "Detect similar node groups and balance the number of nodes between them. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_scale_down_unneeded",
+    "type": "string",
+    "description": "How long a node should be unneeded before it is eligible for scale down. Defaults to `10m`.",
+    "default": "\"10m\"",
+    "required": false
+  },
+  {
+    "name": "interval_before_cluster_update",
+    "type": "string",
+    "description": "Interval before cluster kubernetes version update, defaults to `30s`. Set this variable to `null` would disable interval before cluster kubernetes version update.",
+    "default": "\"30s\"",
+    "required": false
+  },
+  {
+    "name": "agents_pool_name",
+    "type": "string",
+    "description": "The default Azure AKS agentpool (nodepool) name.",
+    "default": "\"nodepool\"",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_empty_bulk_delete_max",
+    "type": "number",
+    "description": "Maximum number of empty nodes that can be deleted at the same time. Defaults to `10`.",
+    "default": "10",
+    "required": false
+  },
+  {
+    "name": "brown_field_application_gateway_for_ingress",
+    "type": "object({\n    id        = string\n    subnet_id = string\n  })",
+    "description": "[Definition of `brown_field`](https://learn.microsoft.com/en-us/azure/application-gateway/tutorial-ingress-controller-add-on-existing)\n* `id` - (Required) The ID of the Application Gateway that be used as cluster ingress.\n* `subnet_id` - (Required) The ID of the Subnet which the Application Gateway is connected to. Must be set when `create_role_assignments` is `true`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "cluster_name_random_suffix",
+    "type": "bool",
+    "description": "Whether to add a random suffix on Aks cluster's name or not. `azurerm_kubernetes_cluster` resource defined in this module is `create_before_destroy = true` implicity now(described [here](https://github.com/Azure/terraform-azurerm-aks/issues/389)), without this random suffix we'll not be able to recreate this cluster directly due to the naming conflict.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "load_balancer_profile_outbound_ip_prefix_ids",
+    "type": "set(string)",
+    "description": "(Optional) The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "local_account_disabled",
+    "type": "bool",
+    "description": "(Optional) - If `true` local accounts will be disabled. Defaults to `false`. See [the documentation](https://docs.microsoft.com/azure/aks/managed-aad#disable-local-accounts) for more information.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_network_profile",
+    "type": "object({\n    node_public_ip_tags            = optional(map(string))\n    application_security_group_ids = optional(list(string))\n    allowed_host_ports = optional(list(object({\n      port_start = optional(number)\n      port_end   = optional(number)\n      protocol   = optional(string)\n    })))\n  })",
+    "description": " - `node_public_ip_tags`: (Optional) Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.\n - `application_security_group_ids`: (Optional) A list of Application Security Group IDs which should be associated with this Node Pool.\n---\n An `allowed_host_ports` block supports the following:\n - `port_start`: (Optional) Specifies the start of the port range.\n - `port_end`: (Optional) Specifies the end of the port range.\n - `protocol`: (Optional) Specifies the protocol of the port range. Possible values are `TCP` and `UDP`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_pools",
+    "type": "map(object({\n    name                          = string\n    node_count                    = optional(number)\n    tags                          = optional(map(string))\n    vm_size                       = string\n    host_group_id                 = optional(string)\n    capacity_reservation_group_id = optional(string)\n    custom_ca_trust_enabled       = optional(bool)\n    auto_scaling_enabled          = optional(bool)\n    host_encryption_enabled       = optional(bool)\n    node_public_ip_enabled        = optional(bool)\n    eviction_policy               = optional(string)\n    gpu_instance                  = optional(string)\n    gpu_driver                    = optional(string)\n    kubelet_config = optional(object({\n      cpu_manager_policy        = optional(string)\n      cpu_cfs_quota_enabled     = optional(bool)\n      cpu_cfs_quota_period      = optional(string)\n      image_gc_high_threshold   = optional(number)\n      image_gc_low_threshold    = optional(number)\n      topology_manager_policy   = optional(string)\n      allowed_unsafe_sysctls    = optional(set(string))\n      container_log_max_size_mb = optional(number)\n      container_log_max_files   = optional(number)\n      pod_max_pid               = optional(number)\n    }))\n    linux_os_config = optional(object({\n      sysctl_config = optional(object({\n        fs_aio_max_nr                      = optional(number)\n        fs_file_max                        = optional(number)\n        fs_inotify_max_user_watches        = optional(number)\n        fs_nr_open                         = optional(number)\n        kernel_threads_max                 = optional(number)\n        net_core_netdev_max_backlog        = optional(number)\n        net_core_optmem_max                = optional(number)\n        net_core_rmem_default              = optional(number)\n        net_core_rmem_max                  = optional(number)\n        net_core_somaxconn                 = optional(number)\n        net_core_wmem_default              = optional(number)\n        net_core_wmem_max                  = optional(number)\n        net_ipv4_ip_local_port_range_min   = optional(number)\n        net_ipv4_ip_local_port_range_max   = optional(number)\n        net_ipv4_neigh_default_gc_thresh1  = optional(number)\n        net_ipv4_neigh_default_gc_thresh2  = optional(number)\n        net_ipv4_neigh_default_gc_thresh3  = optional(number)\n        net_ipv4_tcp_fin_timeout           = optional(number)\n        net_ipv4_tcp_keepalive_intvl       = optional(number)\n        net_ipv4_tcp_keepalive_probes      = optional(number)\n        net_ipv4_tcp_keepalive_time        = optional(number)\n        net_ipv4_tcp_max_syn_backlog       = optional(number)\n        net_ipv4_tcp_max_tw_buckets        = optional(number)\n        net_ipv4_tcp_tw_reuse              = optional(bool)\n        net_netfilter_nf_conntrack_buckets = optional(number)\n        net_netfilter_nf_conntrack_max     = optional(number)\n        vm_max_map_count                   = optional(number)\n        vm_swappiness                      = optional(number)\n        vm_vfs_cache_pressure              = optional(number)\n      }))\n      transparent_huge_page_enabled = optional(string)\n      transparent_huge_page_defrag  = optional(string)\n      swap_file_size_mb             = optional(number)\n    }))\n    fips_enabled       = optional(bool)\n    kubelet_disk_type  = optional(string)\n    max_count          = optional(number)\n    max_pods           = optional(number)\n    message_of_the_day = optional(string)\n    mode               = optional(string, \"User\")\n    min_count          = optional(number)\n    node_network_profile = optional(object({\n      node_public_ip_tags            = optional(map(string))\n      application_security_group_ids = optional(list(string))\n      allowed_host_ports = optional(list(object({\n        port_start = optional(number)\n        port_end   = optional(number)\n        protocol   = optional(string)\n      })))\n    }))\n    node_labels              = optional(map(string))\n    node_public_ip_prefix_id = optional(string)\n    node_taints              = optional(list(string))\n    orchestrator_version     = optional(string)\n    os_disk_size_gb          = optional(number)\n    os_disk_type             = optional(string, \"Managed\")\n    os_sku                   = optional(string)\n    os_type                  = optional(string, \"Linux\")\n    pod_subnet = optional(object({\n      id = string\n    }), null)\n    priority                     = optional(string, \"Regular\")\n    proximity_placement_group_id = optional(string)\n    spot_max_price               = optional(number)\n    scale_down_mode              = optional(string, \"Delete\")\n    snapshot_id                  = optional(string)\n    ultra_ssd_enabled            = optional(bool)\n    vnet_subnet = optional(object({\n      id = string\n    }), null)\n    upgrade_settings = optional(object({\n      drain_timeout_in_minutes      = number\n      node_soak_duration_in_minutes = number\n      max_surge                     = string\n    }))\n    windows_profile = optional(object({\n      outbound_nat_enabled = optional(bool, true)\n    }))\n    workload_runtime            = optional(string)\n    zones                       = optional(set(string))\n    create_before_destroy       = optional(bool, true)\n    temporary_name_for_rotation = optional(string)\n  }))",
+    "description": "A map of node pools that need to be created and attached on the Kubernetes cluster. The key of the map can be the name of the node pool, and the key must be static string. The value of the map is a `node_pool` block as defined below:\nmap(object({\n  name                          = (Required) The name of the Node Pool which should be created within the Kubernetes Cluster. Changing this forces a new resource to be created. A Windows Node Pool cannot have a `name` longer than 6 characters. A random suffix of 4 characters is always added to the name to avoid clashes during recreates.\n  node_count                    = (Optional) The initial number of nodes which should exist within this Node Pool. Valid values are between `0` and `1000` (inclusive) for user pools and between `1` and `1000` (inclusive) for system pools and must be a value in the range `min_count` - `max_count`.\n  tags                          = (Optional) A mapping of tags to assign to the resource. At this time there's a bug in the AKS API where Tags for a Node Pool are not stored in the correct case - you [may wish to use Terraform's `ignore_changes` functionality to ignore changes to the casing](https://www.terraform.io/language/meta-arguments/lifecycle#ignore_changess) until this is fixed in the AKS API.\n  vm_size                       = (Required) The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this forces a new resource to be created.\n  host_group_id                 = (Optional) The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.\n  capacity_reservation_group_id = (Optional) Specifies the ID of the Capacity Reservation Group where this Node Pool should exist. Changing this forces a new resource to be created.\n  custom_ca_trust_enabled       = (Optional) Specifies whether to trust a Custom CA. This requires that the Preview Feature `Microsoft.ContainerService/CustomCATrustPreview` is enabled and the Resource Provider is re-registered, see [the documentation](https://learn.microsoft.com/en-us/azure/aks/custom-certificate-authority) for more information.\n  auto_scaling_enabled          = (Optional) Whether to enable [auto-scaler](https://docs.microsoft.com/azure/aks/cluster-autoscaler).\n  host_encryption_enabled       = (Optional) Should the nodes in this Node Pool have host encryption enabled? Changing this forces a new resource to be created.\n  node_public_ip_enabled        = (Optional) Should each node have a Public IP Address? Changing this forces a new resource to be created.\n  eviction_policy               = (Optional) The Eviction Policy which should be used for Virtual Machines within the Virtual Machine Scale Set powering this Node Pool. Possible values are `Deallocate` and `Delete`. Changing this forces a new resource to be created. An Eviction Policy can only be configured when `priority` is set to `Spot` and will default to `Delete` unless otherwise specified.\n  gpu_instance                  = (Optional) Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are `MIG1g`, `MIG2g`, `MIG3g`, `MIG4g` and `MIG7g`. Changing this forces a new resource to be created.\n  gpu_driver                    = (Optional) Specifies the GPU Driver configuration to be installed on each GPU node. The allowed values are `Install` and `None`. Changing this forces a new resource to be created.\n  kubelet_config = optional(object({\n    cpu_manager_policy        = (Optional) Specifies the CPU Manager policy to use. Possible values are `none` and `static`, Changing this forces a new resource to be created.\n    cpu_cfs_quota_enabled     = (Optional) Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.\n    cpu_cfs_quota_period      = (Optional) Specifies the CPU CFS quota period value. Changing this forces a new resource to be created.\n    image_gc_high_threshold   = (Optional) Specifies the percent of disk usage above which image garbage collection is always run. Must be between `0` and `100`. Changing this forces a new resource to be created.\n    image_gc_low_threshold    = (Optional) Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between `0` and `100`. Changing this forces a new resource to be created.\n    topology_manager_policy   = (Optional) Specifies the Topology Manager policy to use. Possible values are `none`, `best-effort`, `restricted` or `single-numa-node`. Changing this forces a new resource to be created.\n    allowed_unsafe_sysctls    = (Optional) Specifies the allow list of unsafe sysctls command or patterns (ending in `*`). Changing this forces a new resource to be created.\n    container_log_max_size_mb = (Optional) Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.\n    container_log_max_files   = (Optional) Specifies the maximum number of container log files that can be present for a container. must be at least 2. Changing this forces a new resource to be created.\n    pod_max_pid               = (Optional) Specifies the maximum number of processes per pod. Changing this forces a new resource to be created.\n  }))\n  linux_os_config = optional(object({\n    sysctl_config = optional(object({\n      fs_aio_max_nr                      = (Optional) The sysctl setting fs.aio-max-nr. Must be between `65536` and `6553500`. Changing this forces a new resource to be created.\n      fs_file_max                        = (Optional) The sysctl setting fs.file-max. Must be between `8192` and `12000500`. Changing this forces a new resource to be created.\n      fs_inotify_max_user_watches        = (Optional) The sysctl setting fs.inotify.max_user_watches. Must be between `781250` and `2097152`. Changing this forces a new resource to be created.\n      fs_nr_open                         = (Optional) The sysctl setting fs.nr_open. Must be between `8192` and `20000500`. Changing this forces a new resource to be created.\n      kernel_threads_max                 = (Optional) The sysctl setting kernel.threads-max. Must be between `20` and `513785`. Changing this forces a new resource to be created.\n      net_core_netdev_max_backlog        = (Optional) The sysctl setting net.core.netdev_max_backlog. Must be between `1000` and `3240000`. Changing this forces a new resource to be created.\n      net_core_optmem_max                = (Optional) The sysctl setting net.core.optmem_max. Must be between `20480` and `4194304`. Changing this forces a new resource to be created.\n      net_core_rmem_default              = (Optional) The sysctl setting net.core.rmem_default. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n      net_core_rmem_max                  = (Optional) The sysctl setting net.core.rmem_max. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n      net_core_somaxconn                 = (Optional) The sysctl setting net.core.somaxconn. Must be between `4096` and `3240000`. Changing this forces a new resource to be created.\n      net_core_wmem_default              = (Optional) The sysctl setting net.core.wmem_default. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n      net_core_wmem_max                  = (Optional) The sysctl setting net.core.wmem_max. Must be between `212992` and `134217728`. Changing this forces a new resource to be created.\n      net_ipv4_ip_local_port_range_min   = (Optional) The sysctl setting net.ipv4.ip_local_port_range min value. Must be between `1024` and `60999`. Changing this forces a new resource to be created.\n      net_ipv4_ip_local_port_range_max   = (Optional) The sysctl setting net.ipv4.ip_local_port_range max value. Must be between `1024` and `60999`. Changing this forces a new resource to be created.\n      net_ipv4_neigh_default_gc_thresh1  = (Optional) The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between `128` and `80000`. Changing this forces a new resource to be created.\n      net_ipv4_neigh_default_gc_thresh2  = (Optional) The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between `512` and `90000`. Changing this forces a new resource to be created.\n      net_ipv4_neigh_default_gc_thresh3  = (Optional) The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between `1024` and `100000`. Changing this forces a new resource to be created.\n      net_ipv4_tcp_fin_timeout           = (Optional) The sysctl setting net.ipv4.tcp_fin_timeout. Must be between `5` and `120`. Changing this forces a new resource to be created.\n      net_ipv4_tcp_keepalive_intvl       = (Optional) The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between `10` and `75`. Changing this forces a new resource to be created.\n      net_ipv4_tcp_keepalive_probes      = (Optional) The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between `1` and `15`. Changing this forces a new resource to be created.\n      net_ipv4_tcp_keepalive_time        = (Optional) The sysctl setting net.ipv4.tcp_keepalive_time. Must be between `30` and `432000`. Changing this forces a new resource to be created.\n      net_ipv4_tcp_max_syn_backlog       = (Optional) The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between `128` and `3240000`. Changing this forces a new resource to be created.\n      net_ipv4_tcp_max_tw_buckets        = (Optional) The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between `8000` and `1440000`. Changing this forces a new resource to be created.\n      net_ipv4_tcp_tw_reuse              = (Optional) Is sysctl setting net.ipv4.tcp_tw_reuse enabled? Changing this forces a new resource to be created.\n      net_netfilter_nf_conntrack_buckets = (Optional) The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between `65536` and `147456`. Changing this forces a new resource to be created.\n      net_netfilter_nf_conntrack_max     = (Optional) The sysctl setting net.netfilter.nf_conntrack_max. Must be between `131072` and `1048576`. Changing this forces a new resource to be created.\n      vm_max_map_count                   = (Optional) The sysctl setting vm.max_map_count. Must be between `65530` and `262144`. Changing this forces a new resource to be created.\n      vm_swappiness                      = (Optional) The sysctl setting vm.swappiness. Must be between `0` and `100`. Changing this forces a new resource to be created.\n      vm_vfs_cache_pressure              = (Optional) The sysctl setting vm.vfs_cache_pressure. Must be between `0` and `100`. Changing this forces a new resource to be created.\n    }))\n    transparent_huge_page_enabled = (Optional) Specifies the Transparent Huge Page enabled configuration. Possible values are `always`, `madvise` and `never`. Changing this forces a new resource to be created.\n    transparent_huge_page_defrag  = (Optional) specifies the defrag configuration for Transparent Huge Page. Possible values are `always`, `defer`, `defer+madvise`, `madvise` and `never`. Changing this forces a new resource to be created.\n    swap_file_size_mb             = (Optional) Specifies the size of swap file on each node in MB. Changing this forces a new resource to be created.\n  }))\n  fips_enabled       = (Optional) Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created. FIPS support is in Public Preview - more information and details on how to opt into the Preview can be found in [this article](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#add-a-fips-enabled-node-pool-preview).\n  kubelet_disk_type  = (Optional) The type of disk used by kubelet. Possible values are `OS` and `Temporary`.\n  max_count          = (Optional) The maximum number of nodes which should exist within this Node Pool. Valid values are between `0` and `1000` and must be greater than or equal to `min_count`.\n  max_pods           = (Optional) The minimum number of nodes which should exist within this Node Pool. Valid values are between `0` and `1000` and must be less than or equal to `max_count`.\n  message_of_the_day = (Optional) A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.\n  mode               = (Optional) Should this Node Pool be used for System or User resources? Possible values are `System` and `User`. Defaults to `User`.\n  min_count          = (Optional) The minimum number of nodes which should exist within this Node Pool. Valid values are between `0` and `1000` and must be less than or equal to `max_count`.\n  node_network_profile = optional(object({\n    node_public_ip_tags = (Optional) Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.\n    application_security_group_ids = (Optional) A list of Application Security Group IDs which should be associated with this Node Pool.\n    allowed_host_ports = optional(object({\n      port_start = (Optional) Specifies the start of the port range.\n      port_end = (Optional) Specifies the end of the port range.\n      protocol = (Optional) Specifies the protocol of the port range. Possible values are `TCP` and `UDP`.\n    }))\n  }))\n  node_labels                  = (Optional) A map of Kubernetes labels which should be applied to nodes in this Node Pool.\n  node_public_ip_prefix_id     = (Optional) Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. `node_public_ip_enabled` should be `true`. Changing this forces a new resource to be created.\n  node_taints                  = (Optional) A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g `key=value:NoSchedule`). Changing this forces a new resource to be created.\n  orchestrator_version         = (Optional) Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as `1.22` are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in [the documentation](https://docs.microsoft.com/en-us/azure/aks/supported-kubernetes-versions?tabs=azure-cli#alias-minor-version). This version must be supported by the Kubernetes Cluster - as such the version of Kubernetes used on the Cluster/Control Plane may need to be upgraded first.\n  os_disk_size_gb              = (Optional) The Agent Operating System disk size in GB. Changing this forces a new resource to be created.\n  os_disk_type                 = (Optional) The type of disk which should be used for the Operating System. Possible values are `Ephemeral` and `Managed`. Defaults to `Managed`. Changing this forces a new resource to be created.\n  os_sku                       = (Optional) Specifies the OS SKU used by the agent pool. Possible values include: `Ubuntu`, `CBLMariner`, `Mariner`, `Windows2019`, `Windows2022`. If not specified, the default is `Ubuntu` if OSType=Linux or `Windows2019` if OSType=Windows. And the default Windows OSSKU will be changed to `Windows2022` after Windows2019 is deprecated. Changing this forces a new resource to be created.\n  os_type                      = (Optional) The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are `Linux` and `Windows`. Defaults to `Linux`.\n  pod_subnet                   = optional(object({\n      id                       = The ID of the Subnet where the pods in the Node Pool should exist. Changing this forces a new resource to be created.\n  }))\n  priority                     = (Optional) The Priority for Virtual Machines within the Virtual Machine Scale Set that powers this Node Pool. Possible values are `Regular` and `Spot`. Defaults to `Regular`. Changing this forces a new resource to be created.\n  proximity_placement_group_id = (Optional) The ID of the Proximity Placement Group where the Virtual Machine Scale Set that powers this Node Pool will be placed. Changing this forces a new resource to be created. When setting `priority` to Spot - you must configure an `eviction_policy`, `spot_max_price` and add the applicable `node_labels` and `node_taints` [as per the Azure Documentation](https://docs.microsoft.com/azure/aks/spot-node-pool).\n  spot_max_price               = (Optional) The maximum price you're willing to pay in USD per Virtual Machine. Valid values are `-1` (the current on-demand price for a Virtual Machine) or a positive value with up to five decimal places. Changing this forces a new resource to be created. This field can only be configured when `priority` is set to `Spot`.\n  scale_down_mode              = (Optional) Specifies how the node pool should deal with scaled-down nodes. Allowed values are `Delete` and `Deallocate`. Defaults to `Delete`.\n  snapshot_id                  = (Optional) The ID of the Snapshot which should be used to create this Node Pool. Changing this forces a new resource to be created.\n  ultra_ssd_enabled            = (Optional) Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to `false`. See [the documentation](https://docs.microsoft.com/azure/aks/use-ultra-disks) for more information. Changing this forces a new resource to be created.\n  vnet_subnet                  = optional(object({\n      id                       = The ID of the Subnet where this Node Pool should exist. Changing this forces a new resource to be created. A route table must be configured on this Subnet.\n  }))\n  upgrade_settings = optional(object({\n    drain_timeout_in_minutes      = number\n    node_soak_duration_in_minutes = number\n    max_surge                     = string\n  }))\n  windows_profile = optional(object({\n    outbound_nat_enabled = optional(bool, true)\n  }))\n  workload_runtime = (Optional) Used to specify the workload runtime. Allowed values are `OCIContainer` and `WasmWasi`. WebAssembly System Interface node pools are in Public Preview - more information and details on how to opt into the preview can be found in [this article](https://docs.microsoft.com/azure/aks/use-wasi-node-pools)\n  zones            = (Optional) Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.\n  create_before_destroy = (Optional) Create a new node pool before destroy the old one when Terraform must update an argument that cannot be updated in-place. Set this argument to `true` will add add a random suffix to pool's name to avoid conflict. Default to `true`.\n  temporary_name_for_rotation = (Optional) Specifies the name of the temporary node pool used to cycle the node pool when one of the relevant properties are updated.\n}))\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_max_unready_nodes",
+    "type": "number",
+    "description": "Maximum Number of allowed unready nodes. Defaults to `3`.",
+    "default": "3",
+    "required": false
+  },
+  {
+    "name": "local_dns_config",
+    "type": "map(object({\n    mode = string\n    vnet_dns_overrides = optional(map(object({\n      query_logging                   = optional(string)\n      protocol                        = optional(string)\n      forward_destination             = optional(string)\n      forward_policy                  = optional(string)\n      max_concurrent                  = optional(number)\n      cache_duration_in_seconds       = optional(number)\n      serve_stale_duration_in_seconds = optional(number)\n      serve_stale                     = optional(string)\n    })))\n    kube_dns_overrides = optional(map(object({\n      query_logging                   = optional(string)\n      protocol                        = optional(string)\n      forward_destination             = optional(string)\n      forward_policy                  = optional(string)\n      max_concurrent                  = optional(number)\n      cache_duration_in_seconds       = optional(number)\n      serve_stale_duration_in_seconds = optional(number)\n      serve_stale                     = optional(string)\n    })))\n  }))",
+    "description": "(Optional) A map of LocalDNS configurations keyed by node pool name (must match a key in `var.node_pools`).\nEach entry configures the LocalDNS feature for the corresponding user node pool.\n\n- `mode` - (Required) Controls LocalDNS enforcement. Possible values are `Required`, `Disabled`, or `Preferred`.\n- `vnet_dns_overrides` - (Optional) A map of DNS override configurations for pods using `dnsPolicy:default` (VnetDNS traffic).\n- `kube_dns_overrides` - (Optional) A map of DNS override configurations for pods using `dnsPolicy:ClusterFirst` (KubeDNS traffic).\n\nBoth `vnet_dns_overrides` and `kube_dns_overrides` are maps whose **key is a CoreDNS server block name** (i.e. a DNS zone name).\nTwo server blocks are defined by default: `\".\"` (root zone — matches all external queries) and `\"cluster.local\"` (internal Kubernetes service discovery).\nYou may also define additional custom server blocks by using any valid DNS zone name as the key (e.g. `\"microsoft.com\"`, `\"privatelink.blob.core.windows.net\"`).\nSee: https://learn.microsoft.com/en-us/azure/aks/localdns-custom?tabs=configure#server-blocks-and-supported-plugins-for-localdns\n\nEach DNS override configuration supports:\n- `query_logging` - (Optional) Logging level. Possible values are `Error` or `Log`.\n- `protocol` - (Optional) DNS protocol preference. Possible values are `PreferUDP` or `ForceTCP`.\n- `forward_destination` - (Optional) Target DNS server. Possible values are `VnetDNS` or `ClusterCoreDNS`.\n- `forward_policy` - (Optional) Upstream selection policy. Possible values are `Random`, `RoundRobin`, or `Sequential`.\n- `max_concurrent` - (Optional) Maximum concurrent queries (integer).\n- `cache_duration_in_seconds` - (Optional) Cache TTL duration (integer).\n- `serve_stale_duration_in_seconds` - (Optional) Stale response duration (integer).\n- `serve_stale` - (Optional) Stale serving policy. Possible values are `Verify`, `Immediate`, or `Disable`.\n\nConstraints:\n- When `protocol` is `ForceTCP`, `serve_stale` cannot be `Verify`\n\nFor more information see: https://learn.microsoft.com/en-us/azure/aks/localdns-custom\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_immediate_data_purge_on_30_days_enabled",
+    "type": "bool",
+    "description": "(Optional) Whether to remove the data in the Log Analytics Workspace immediately after 30 days.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_internet_ingestion_enabled",
+    "type": "bool",
+    "description": "(Optional) Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to `true`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "oms_agent_enabled",
+    "type": "bool",
+    "description": "Enable OMS Agent Addon.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "open_service_mesh_enabled",
+    "type": "bool",
+    "description": "Is Open Service Mesh enabled? For more details, please visit [Open Service Mesh for AKS](https://docs.microsoft.com/azure/aks/open-service-mesh-about).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "os_sku",
+    "type": "string",
+    "description": "(Optional) Specifies the OS SKU used by the agent pool. Possible values include: `Ubuntu`, `CBLMariner`, `Mariner`, `Windows2019`, `Windows2022`. If not specified, the default is `Ubuntu` if OSType=Linux or `Windows2019` if OSType=Windows. And the default Windows OSSKU will be changed to `Windows2022` after Windows2019 is deprecated. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "prefix",
+    "type": "string",
+    "description": "(Optional) The prefix for the resources created in the specified Azure Resource Group. Omitting this variable requires both `var.cluster_log_analytics_workspace_name` and `var.cluster_name` have been set. Only one of `var.prefix,var.dns_prefix_private_cluster` can be specified.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "agents_pool_kubelet_configs",
+    "type": "list(object({\n    cpu_manager_policy        = optional(string)\n    cpu_cfs_quota_enabled     = optional(bool, true)\n    cpu_cfs_quota_period      = optional(string)\n    image_gc_high_threshold   = optional(number)\n    image_gc_low_threshold    = optional(number)\n    topology_manager_policy   = optional(string)\n    allowed_unsafe_sysctls    = optional(set(string))\n    container_log_max_size_mb = optional(number)\n    container_log_max_line    = optional(number)\n    pod_max_pid               = optional(number)\n  }))",
+    "description": "  list(object({\n    cpu_manager_policy        = (Optional) Specifies the CPU Manager policy to use. Possible values are `none` and `static`, Changing this forces a new resource to be created.\n    cpu_cfs_quota_enabled     = (Optional) Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.\n    cpu_cfs_quota_period      = (Optional) Specifies the CPU CFS quota period value. Changing this forces a new resource to be created.\n    image_gc_high_threshold   = (Optional) Specifies the percent of disk usage above which image garbage collection is always run. Must be between `0` and `100`. Changing this forces a new resource to be created.\n    image_gc_low_threshold    = (Optional) Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between `0` and `100`. Changing this forces a new resource to be created.\n    topology_manager_policy   = (Optional) Specifies the Topology Manager policy to use. Possible values are `none`, `best-effort`, `restricted` or `single-numa-node`. Changing this forces a new resource to be created.\n    allowed_unsafe_sysctls    = (Optional) Specifies the allow list of unsafe sysctls command or patterns (ending in `*`). Changing this forces a new resource to be created.\n    container_log_max_size_mb = (Optional) Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.\n    container_log_max_line    = (Optional) Specifies the maximum number of container log files that can be present for a container. must be at least 2. Changing this forces a new resource to be created.\n    pod_max_pid               = (Optional) Specifies the maximum number of processes per pod. Changing this forces a new resource to be created.\n}))\n",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "agents_type",
+    "type": "string",
+    "description": "(Optional) The type of Node Pool which should be created. Possible values are AvailabilitySet and VirtualMachineScaleSets. Defaults to VirtualMachineScaleSets.",
+    "default": "\"VirtualMachineScaleSets\"",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_skip_nodes_with_local_storage",
+    "type": "bool",
+    "description": "If `true` cluster autoscaler will never delete nodes with pods with local storage, for example, EmptyDir or HostPath. Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "client_secret",
+    "type": "string",
+    "description": "(Optional) The Client Secret (password) for the Service Principal used for the AKS deployment",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_reservation_capacity_in_gb_per_day",
+    "type": "number",
+    "description": "(Optional) The capacity reservation level in GB for this workspace. Possible values are `100`, `200`, `300`, `400`, `500`, `1000`, `2000` and `5000`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "monitor_data_collection_rule_data_sources_syslog_facilities",
+    "type": "list(string)",
+    "description": "Syslog supported facilities as documented here: https://learn.microsoft.com/en-us/azure/azure-monitor/agents/data-sources-syslog",
+    "default": "[\n  \"auth\",\n  \"authpriv\",\n  \"cron\",\n  \"daemon\",\n  \"mark\",\n  \"kern\",\n  \"local0\",\n  \"local1\",\n  \"local2\",\n  \"local3\",\n  \"local4\",\n  \"local5\",\n  \"local6\",\n  \"local7\",\n  \"lpr\",\n  \"mail\",\n  \"news\",\n  \"syslog\",\n  \"user\",\n  \"uucp\"\n]",
+    "required": false
+  },
+  {
+    "name": "nat_gateway_profile",
+    "type": "object({\n    idle_timeout_in_minutes   = optional(number)\n    managed_outbound_ip_count = optional(number)\n  })",
+    "description": "`nat_gateway_profile` block supports the following:\n- `idle_timeout_in_minutes` - (Optional) Desired outbound flow idle timeout in minutes for the managed nat gateway. Must be between `4` and `120` inclusive. Defaults to `4`.\n- `managed_outbound_ip_count` - (Optional) Count of desired managed outbound IPs for the managed nat gateway. Must be between `1` and `100` inclusive.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "oidc_issuer_enabled",
+    "type": "bool",
+    "description": "Enable or Disable the OIDC issuer URL. Defaults to false.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "cluster_name",
+    "type": "string",
+    "description": "(Optional) The name for the AKS resources created in the specified Azure Resource Group. This variable overwrites the 'prefix' var (The 'prefix' var will still be applied to the dns_prefix if it is set)",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "confidential_computing",
+    "type": "object({\n    sgx_quote_helper_enabled = bool\n  })",
+    "description": "(Optional) Enable Confidential Computing.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaling_enabled",
+    "type": "bool",
+    "description": "Enable node pool autoscaling",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "identity_ids",
+    "type": "list(string)",
+    "description": "(Optional) Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_cmk_for_query_forced",
+    "type": "bool",
+    "description": "(Optional) Is Customer Managed Storage mandatory for query management?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "rbac_aad_tenant_id",
+    "type": "string",
+    "description": "(Optional) The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "secret_rotation_interval",
+    "type": "string",
+    "description": "The interval to poll for secret rotation. This attribute is only set when `secret_rotation` is `true` and defaults to `2m`",
+    "default": "\"2m\"",
+    "required": false
+  },
+  {
+    "name": "storage_profile_disk_driver_enabled",
+    "type": "bool",
+    "description": "(Optional) Is the Disk CSI driver enabled? Defaults to `true`",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "network_contributor_role_assigned_subnet_ids",
+    "type": "map(string)",
+    "description": "Create role assignments for the AKS Service Principal to be a Network Contributor on the subnets used for the AKS Cluster, key should be static string, value should be subnet's id",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "network_plugin_mode",
+    "type": "string",
+    "description": "(Optional) Specifies the network plugin mode used for building the Kubernetes network. Possible value is `overlay`. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_max_unready_percentage",
+    "type": "number",
+    "description": "Maximum percentage of unready nodes the cluster autoscaler will stop if the percentage is exceeded. Defaults to `45`.",
+    "default": "45",
+    "required": false
+  },
+  {
+    "name": "host_encryption_enabled",
+    "type": "bool",
+    "description": "Enable Host Encryption for default node pool. Encryption at host feature must be enabled on the subscription: https://docs.microsoft.com/azure/virtual-machines/linux/disks-enable-host-based-encryption-cli",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "support_plan",
+    "type": "string",
+    "description": "The support plan which should be used for this Kubernetes Cluster. Possible values are `KubernetesOfficial` and `AKSLongTermSupport`.",
+    "default": "\"KubernetesOfficial\"",
+    "required": false
+  },
+  {
+    "name": "workload_autoscaler_profile",
+    "type": "object({\n    keda_enabled                    = optional(bool, false)\n    vertical_pod_autoscaler_enabled = optional(bool, false)\n  })",
+    "description": "`keda_enabled` - (Optional) Specifies whether KEDA Autoscaler can be used for workloads.\n`vertical_pod_autoscaler_enabled` - (Optional) Specifies whether Vertical Pod Autoscaler should be enabled.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "admin_username",
+    "type": "string",
+    "description": "The username of the local administrator to be created on the Kubernetes cluster. Set this variable to `null` to turn off the cluster's `linux_profile`. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_size",
+    "type": "string",
+    "description": "The default virtual machine size for the Kubernetes agents. Changing this without specifying `var.temporary_name_for_rotation` forces a new resource to be created.",
+    "default": "\"Standard_D2s_v3\"",
+    "required": false
+  },
+  {
+    "name": "key_vault_secrets_provider_enabled",
+    "type": "bool",
+    "description": "(Optional) Whether to use the Azure Key Vault Provider for Secrets Store CSI Driver in an AKS cluster. For more details: https://docs.microsoft.com/en-us/azure/aks/csi-secrets-store-driver",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "load_balancer_profile_managed_outbound_ipv6_count",
+    "type": "number",
+    "description": "(Optional) The desired number of IPv6 outbound IPs created and managed by Azure for the cluster load balancer. Must be in the range of `1` to `100` (inclusive). The default value is `0` for single-stack and `1` for dual-stack. Note: managed_outbound_ipv6_count requires dual-stack networking. To enable dual-stack networking the Preview Feature Microsoft.ContainerService/AKS-EnableDualStack needs to be enabled and the Resource Provider re-registered, see the documentation for more information. https://learn.microsoft.com/en-us/azure/aks/configure-kubenet-dual-stack?tabs=azure-cli%2Ckubectl#register-the-aks-enabledualstack-preview-feature",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_enabled",
+    "type": "bool",
+    "description": "Enable the integration of azurerm_log_analytics_workspace and azurerm_log_analytics_solution: https://docs.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-onboard",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_resource_group_name",
+    "type": "string",
+    "description": "(Optional) Resource group name to create azurerm_log_analytics_solution.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "pod_subnet",
+    "type": "object({\n    id = string\n  })",
+    "description": "object({\n  id = The ID of the Subnet where the pods in the default Node Pool should exist. Changing this forces a new resource to be created.\n})\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_profile_enabled",
+    "type": "bool",
+    "description": "Enable storage profile",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "cost_analysis_enabled",
+    "type": "bool",
+    "description": "(Optional) Enable Cost Analysis.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "aci_connector_linux_enabled",
+    "type": "bool",
+    "description": "Enable Virtual Node pool",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "client_id",
+    "type": "string",
+    "description": "(Optional) The Client ID (appId) for the Service Principal used for the AKS deployment",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "green_field_application_gateway_for_ingress",
+    "type": "object({\n    name        = optional(string)\n    subnet_cidr = optional(string)\n    subnet_id   = optional(string)\n  })",
+    "description": "[Definition of `green_field`](https://learn.microsoft.com/en-us/azure/application-gateway/tutorial-ingress-controller-add-on-new)\n* `name` - (Optional) The name of the Application Gateway to be used or created in the Nodepool Resource Group, which in turn will be integrated with the ingress controller of this Kubernetes Cluster.\n* `subnet_cidr` - (Optional) The subnet CIDR to be used to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster.\n* `subnet_id` - (Optional) The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_sku",
+    "type": "string",
+    "description": "The SKU (pricing level) of the Log Analytics workspace. For new subscriptions the SKU should be set to PerGB2018",
+    "default": "\"PerGB2018\"",
+    "required": false
+  },
+  {
+    "name": "net_profile_pod_cidr",
+    "type": "string",
+    "description": " (Optional) The CIDR to use for pod IP addresses. This field can only be set when network_plugin is set to kubenet or network_plugin is set to azure and network_plugin_mode is set to overlay. Changing this forces a new resource to be created.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ultra_ssd_enabled",
+    "type": "bool",
+    "description": "(Optional) Used to specify whether the UltraSSD is enabled in the Default Node Pool. Defaults to false.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "auto_scaler_profile_scale_down_unready",
+    "type": "string",
+    "description": "How long an unready node should be unneeded before it is eligible for scale down. Defaults to `20m`.",
+    "default": "\"20m\"",
+    "required": false
+  },
+  {
+    "name": "kms_key_vault_network_access",
+    "type": "string",
+    "description": "(Optional) Network Access of Azure Key Vault. Possible values are: `Private` and `Public`.",
+    "default": "\"Public\"",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_local_authentication_disabled",
+    "type": "bool",
+    "description": "(Optional) Specifies if the log Analytics workspace should enforce authentication using Azure AD. Defaults to `false`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "service_mesh_profile",
+    "type": "object({\n    mode                             = string\n    revisions                        = list(string)\n    internal_ingress_gateway_enabled = optional(bool, true)\n    external_ingress_gateway_enabled = optional(bool, true)\n  })",
+    "description": "`mode` - (Required) The mode of the service mesh. Possible value is `Istio`.\n`revisions` - (Required) Specify 1 or 2 Istio control plane revisions for managing minor upgrades using the canary upgrade process. For example, create the resource with `revisions` set to `[\"asm-1-20\"]`, or leave it empty (the `revisions` will only be known after apply). To start the canary upgrade, change `revisions` to `[\"asm-1-20\", \"asm-1-21\"]`. To roll back the canary upgrade, revert to `[\"asm-1-20\"]`. To confirm the upgrade, change to `[\"asm-1-21\"]`.\n`internal_ingress_gateway_enabled` - (Optional) Is Istio Internal Ingress Gateway enabled? Defaults to `true`.\n`external_ingress_gateway_enabled` - (Optional) Is Istio External Ingress Gateway enabled? Defaults to `true`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_tags",
+    "type": "map(string)",
+    "description": "(Optional) A mapping of tags to assign to the Node Pool.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "kubernetes_version",
+    "type": "string",
+    "description": "Specify which Kubernetes release to use. The default used is the latest Kubernetes version available in the region",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "maintenance_window",
+    "type": "object({\n    allowed = optional(list(object({\n      day   = string\n      hours = set(number)\n      })), [\n    ]),\n    not_allowed = optional(list(object({\n      end   = string\n      start = string\n    })), []),\n  })",
+    "description": "(Optional) Maintenance configuration of the managed cluster.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "maintenance_window_node_os",
+    "type": "object({\n    day_of_month = optional(number)\n    day_of_week  = optional(string)\n    duration     = number\n    frequency    = string\n    interval     = number\n    start_date   = optional(string)\n    start_time   = optional(string)\n    utc_offset   = optional(string)\n    week_index   = optional(string)\n    not_allowed = optional(set(object({\n      end   = string\n      start = string\n    })))\n  })",
+    "description": "- `day_of_month` -\n- `day_of_week` - (Optional) The day of the week for the maintenance run. Options are `Monday`, `Tuesday`, `Wednesday`, `Thurday`, `Friday`, `Saturday` and `Sunday`. Required in combination with weekly frequency.\n- `duration` - (Required) The duration of the window for maintenance to run in hours.\n- `frequency` - (Required) Frequency of maintenance. Possible options are `Daily`, `Weekly`, `AbsoluteMonthly` and `RelativeMonthly`.\n- `interval` - (Required) The interval for maintenance runs. Depending on the frequency this interval is week or month based.\n- `start_date` - (Optional) The date on which the maintenance window begins to take effect.\n- `start_time` - (Optional) The time for maintenance to begin, based on the timezone determined by `utc_offset`. Format is `HH:mm`.\n- `utc_offset` - (Optional) Used to determine the timezone for cluster maintenance.\n- `week_index` - (Optional) The week in the month used for the maintenance run. Options are `First`, `Second`, `Third`, `Fourth`, and `Last`.\n\n---\n`not_allowed` block supports the following:\n- `end` - (Required) The end of a time span, formatted as an RFC3339 string.\n- `start` - (Required) The start of a time span, formatted as an RFC3339 string.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vnet_subnet",
+    "type": "object({\n    id = string\n  })",
+    "description": "object({\n  id = The ID of a Subnet where the Kubernetes Node Pool should exist. Changing this forces a new resource to be created.\n})\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "agents_max_count",
+    "type": "number",
+    "description": "Maximum number of nodes in a pool",
+    "default": "null",
+    "required": false
+  }
+]

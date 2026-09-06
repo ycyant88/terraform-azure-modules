@@ -1,0 +1,23 @@
+[
+  {
+    "name": "aks_cluster_id",
+    "type": "string",
+    "description": "The resource ID of the AKS cluster",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "alert_email",
+    "type": "string",
+    "description": "Email address for alert notifications",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource group ID",
+    "default": "",
+    "required": true
+  }
+]

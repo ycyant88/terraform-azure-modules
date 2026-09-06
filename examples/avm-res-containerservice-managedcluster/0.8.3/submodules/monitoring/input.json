@@ -1,0 +1,72 @@
+[
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Timeouts applied to the AzAPI resources in this module.\n\n- `create` - Timeout for create operations.\n- `read` - Timeout for read operations.\n- `update` - Timeout for update operations.\n- `delete` - Timeout for delete operations.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "aks_cluster_id",
+    "type": "string",
+    "description": "The resource ID of the AKS cluster",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region where resources will be created",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    alertsmanagement_prometheus_rule_groups    = optional(list(string), [])\n    insights_data_collection_endpoints         = optional(list(string), [])\n    insights_data_collection_rule_associations = optional(list(string), [])\n    insights_data_collection_rules             = optional(list(string), [])\n  })",
+    "description": "Body-relative paths to ignore for each AzAPI resource, in dot notation. Changes take\neffect only after apply, and ignored configuration is not sent to Azure until the\npath is removed.\n\n- `alertsmanagement_prometheus_rule_groups` - Paths ignored on the Prometheus rule groups.\n- `insights_data_collection_endpoints` - Paths ignored on the data collection endpoint.\n- `insights_data_collection_rule_associations` - Paths ignored on the data collection rule associations.\n- `insights_data_collection_rules` - Paths ignored on the data collection rules.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    alertsmanagement_prometheus_rule_groups    = optional(string, \"Microsoft.AlertsManagement/prometheusRuleGroups@2023-03-01\")\n    insights_data_collection_endpoints         = optional(string, \"Microsoft.Insights/dataCollectionEndpoints@2023-03-11\")\n    insights_data_collection_rule_associations = optional(string, \"Microsoft.Insights/dataCollectionRuleAssociations@2023-03-11\")\n    insights_data_collection_rules             = optional(string, \"Microsoft.Insights/dataCollectionRules@2023-03-11\")\n  })",
+    "description": "AzAPI resource types and API versions used by this module.\n\n- `alertsmanagement_prometheus_rule_groups` - Resource type and API version for the Prometheus rule groups.\n- `insights_data_collection_endpoints` - Resource type and API version for the data collection endpoint.\n- `insights_data_collection_rule_associations` - Resource type and API version for the data collection rule associations.\n- `insights_data_collection_rules` - Resource type and API version for the data collection rules.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to the AzAPI resources in this module.\n\n- `error_message_regex` - Regular expressions matching error messages that should be retried.\n- `interval_seconds` - Initial delay between retries, in seconds.\n- `max_interval_seconds` - Maximum delay between retries, in seconds.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "log_analytics_workspace_id",
+    "type": "string",
+    "description": "The resource ID of the Log Analytics workspace",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the parent resource group",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "prometheus_workspace_id",
+    "type": "string",
+    "description": "The resource ID of the Azure Monitor workspace for managed Prometheus",
+    "default": "",
+    "required": true
+  }
+]

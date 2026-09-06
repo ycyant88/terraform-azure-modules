@@ -1,0 +1,22 @@
+[
+  {
+    "name": "resource_object",
+    "description": "Azure VPN Site object"
+  },
+  {
+    "name": "vpn_site_name",
+    "description": "Azure VPN Site names"
+  },
+  {
+    "name": "links",
+    "description": "Azure VPN Site links"
+  },
+  {
+    "name": "resource",
+    "description": "Azure VPN Site resource"
+  },
+  {
+    "name": "resource_id",
+    "description": "Azure VPN Site ID"
+  }
+]

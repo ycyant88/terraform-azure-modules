@@ -1,0 +1,72 @@
+[
+  {
+    "name": "value_version",
+    "type": "number",
+    "description": "Version tracker for value. Must be set when value is provided.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The location of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "certificate_key_vault_properties",
+    "type": "object({\n    identity      = optional(string)\n    key_vault_url = optional(string)\n  })",
+    "description": "Properties for a certificate stored in a Key Vault.\n\n- `identity` - Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.\n- `key_vault_url` - URL pointing to the Azure Key Vault secret that holds the certificate.\n\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module. For more information see https://aka.ms/avm/telemetryinfo.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "password",
+    "type": "string",
+    "description": "Certificate password.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "value",
+    "type": "any",
+    "description": "PFX or PEM blob\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource ID for this resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "password_version",
+    "type": "number",
+    "description": "Version tracker for password. Must be set when password is provided.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.\n",
+    "default": "null",
+    "required": false
+  }
+]

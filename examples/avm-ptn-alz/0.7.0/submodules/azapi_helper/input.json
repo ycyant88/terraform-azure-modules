@@ -1,0 +1,72 @@
+[
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "identity",
+    "type": "object({\n    type         = string\n    identity_ids = optional(set(string), [])\n  })",
+    "description": "  Controls the Managed Identity configuration on this resource. The following properties can be specified:\n\n  - `type` - Either: `SystemAssigned`, `SystemAssigned, UserAssigned`, or `UserAssigned`.\n  - `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Location of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "replace_triggered_by",
+    "type": "any",
+    "description": "Values that trigger a replacement.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "response_export_values",
+    "type": "set(string)",
+    "description": "List of values to export from the response, made available in the output.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = string\n    delete = string\n    update = string\n    read   = string\n  })",
+    "description": "  A map of timeouts to apply to the creation and destruction of the resource.\n",
+    "default": "{\n  \"create\": \"10m\",\n  \"delete\": \"10m\",\n  \"read\": \"10m\",\n  \"update\": \"10m\"\n}",
+    "required": false
+  },
+  {
+    "name": "body",
+    "type": "any",
+    "description": "The body object of the resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent ID of the resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "type",
+    "type": "string",
+    "description": "The type and API version of the resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_missing_property",
+    "type": "bool",
+    "description": "If set to true, the resource will not be replaced if a property is missing.",
+    "default": "false",
+    "required": false
+  }
+]

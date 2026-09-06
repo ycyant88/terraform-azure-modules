@@ -1,0 +1,30 @@
+[
+  {
+    "name": "forwarding_rulesets",
+    "description": "The forwarding rulesets of the DNS resolver."
+  },
+  {
+    "name": "inbound_endpoint_ips",
+    "description": "The IP addresses of the inbound endpoints."
+  },
+  {
+    "name": "inbound_endpoints",
+    "description": "The inbound endpoints of the DNS resolver."
+  },
+  {
+    "name": "name",
+    "description": "The name of the DNS resolver."
+  },
+  {
+    "name": "outbound_endpoints",
+    "description": "The outbound endpoints of the DNS resolver."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the DNS resolver."
+  }
+]

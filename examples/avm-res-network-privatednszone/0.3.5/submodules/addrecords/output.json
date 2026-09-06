@@ -1,0 +1,34 @@
+[
+  {
+    "name": "srv_record_outputs",
+    "description": "The srv record output"
+  },
+  {
+    "name": "txt_record_outputs",
+    "description": "The txt record output"
+  },
+  {
+    "name": "a_record_outputs",
+    "description": "The a record output"
+  },
+  {
+    "name": "aaaa_record_outputs",
+    "description": "The aaaa record output"
+  },
+  {
+    "name": "cname_record_outputs",
+    "description": "The cname record output"
+  },
+  {
+    "name": "mx_record_outputs",
+    "description": "The mx record output"
+  },
+  {
+    "name": "ptr_record_outputs",
+    "description": "The ptr record output"
+  },
+  {
+    "name": "resource_id",
+    "description": "Added to comply with required_output_rmfr7"
+  }
+]

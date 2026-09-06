@@ -1,0 +1,14 @@
+[
+  {
+    "name": "names",
+    "description": "Map from input key to the generated diagnostic setting name."
+  },
+  {
+    "name": "resource_ids",
+    "description": "Map from input key to the resource ID of the diagnostic setting."
+  },
+  {
+    "name": "resources",
+    "description": "Map from input key to the full diagnostic setting azapi_resource."
+  }
+]

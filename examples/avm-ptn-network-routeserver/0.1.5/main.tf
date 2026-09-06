@@ -1,0 +1,19 @@
+module "avm-ptn-network-routeserver" {
+  source                          = "Azure/avm-ptn-network-routeserver/azurerm"
+  version                         = "0.1.5"
+  bgp_connections                 = var.bgp_connections
+  enable_branch_to_branch         = var.enable_branch_to_branch
+  enable_telemetry                = var.enable_telemetry
+  hub_routing_preference          = var.hub_routing_preference
+  location                        = var.location
+  lock                            = var.lock
+  name                            = var.name
+  private_ip_address              = var.private_ip_address
+  private_ip_allocation_method    = var.private_ip_allocation_method
+  resource_group_name             = var.resource_group_name
+  resource_group_resource_id      = var.resource_group_resource_id
+  role_assignments                = var.role_assignments
+  route_server_subnet_resource_id = var.route_server_subnet_resource_id
+  routeserver_public_ip_config    = var.routeserver_public_ip_config
+  tags                            = var.tags
+}

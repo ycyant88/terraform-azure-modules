@@ -1,0 +1,18 @@
+[
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_group_name",
+    "description": "The name of the resource group."
+  },
+  {
+    "name": "resource_id",
+    "description": "This id of the resource."
+  },
+  {
+    "name": "location",
+    "description": "The Azure deployment region."
+  }
+]

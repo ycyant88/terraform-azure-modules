@@ -1,0 +1,14 @@
+[
+  {
+    "name": "key_vault_key_url",
+    "description": "The ID of the disk encryption set."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the disk encryption set."
+  }
+]

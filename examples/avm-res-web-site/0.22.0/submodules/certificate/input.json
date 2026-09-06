@@ -1,0 +1,79 @@
+[
+  {
+    "name": "password",
+    "type": "string",
+    "description": "(Optional) The password protecting the PFX supplied via `pfx_blob`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex = list(string)\n    interval_seconds    = optional(number, 10)\n    max_retries         = optional(number, 3)\n  })",
+    "description": "(Optional) Retry configuration for the underlying azapi resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags applied to the certificate resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region where the certificate resource will be created. Should match the App Service Plan.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "host_names",
+    "type": "list(string)",
+    "description": "(Optional) The host names the certificate applies to. If omitted, Azure derives them from the certificate's subject alternative names.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "key_vault_id",
+    "type": "string",
+    "description": "(Optional) The resource ID of the Key Vault that contains the certificate.\n\nEither both `key_vault_id` and `key_vault_secret_name` must be supplied to\nsource the certificate from Key Vault, or `pfx_blob` (and optionally\n`password`) must be supplied to upload an inline PFX. The two modes are\nmutually exclusive.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "pfx_blob",
+    "type": "string",
+    "description": "(Optional) The base64-encoded contents of the PFX file. Mutually exclusive with `key_vault_id`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the App Service certificate.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the parent resource group.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "server_farm_id",
+    "type": "string",
+    "description": "The resource ID of the App Service Plan that will host sites using this certificate. Required by Azure when sourcing the certificate from Key Vault.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "key_vault_secret_name",
+    "type": "string",
+    "description": "(Optional) The name of the Key Vault secret/certificate that contains the PFX. Required when `key_vault_id` is set.",
+    "default": "null",
+    "required": false
+  }
+]

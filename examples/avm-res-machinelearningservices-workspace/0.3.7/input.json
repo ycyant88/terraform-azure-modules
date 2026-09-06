@@ -1,0 +1,184 @@
+[
+  {
+    "name": "application_insights",
+    "type": "object({\n    resource_id = optional(string, null)\n    create_new  = bool\n    tags        = optional(map(string), null)\n    log_analytics_workspace = optional(object({\n      resource_id = optional(string, null)\n      create_new  = bool\n      tags        = optional(map(string), null)\n      }), {\n      create_new = false\n    })\n  })",
+    "description": "An object describing the Application Insights resource to create or use for monitoring inference endpoints. This includes the following properties:\n- `resource_id` - (Optional) The resource ID of an existing Application Insights resource.\n- `create_new` - A flag indicating if a new resource must be created.\n- `tags` - (Optional) Tags for a new Application Insights resource.\n- `log_analytics_workspace` - An object describing the Log Analytics Workspace for the Application Insights resource\n  - `resource_id` - The resource ID of an existing Log Analytics Workspace.\n  - `create_new` - A flag indicating if a new workspace must be created.\n  - `tags` - (Optional) Tags for the Log Analytics Workspace resource.\n",
+    "default": "{\n  \"create_new\": false\n}",
+    "required": false
+  },
+  {
+    "name": "customer_managed_key",
+    "type": "object({\n    key_vault_resource_id = string\n    key_name              = string\n    key_version           = optional(string, null)\n    user_assigned_identity = optional(object({\n      resource_id = string\n    }), null)\n  })",
+    "description": "A map describing customer-managed keys to associate with the resource. This includes the following properties:\n- `key_vault_resource_id` - The resource ID of the Key Vault where the key is stored.\n- `key_name` - The name of the key.\n- `key_version` - (Optional) The version of the key. If not specified, the latest version is used.\n- `user_assigned_identity` - (Optional) An object representing a user-assigned identity with the following properties:\n  - `resource_id` - The resource ID of the user-assigned identity.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "is_private",
+    "type": "bool",
+    "description": "Specifies if every provisioned resource should be private and inaccessible from the Internet.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "storage_account",
+    "type": "object({\n    resource_id = optional(string, null)\n    create_new  = bool\n    private_endpoints = optional(map(object({\n      name                            = optional(string, null)\n      subnet_resource_id              = optional(string, null)\n      subresource_name                = string\n      private_dns_zone_resource_ids   = optional(set(string), [])\n      private_service_connection_name = optional(string, null)\n      network_interface_name          = optional(string, null)\n      inherit_lock                    = optional(bool, false)\n    })), {})\n    tags = optional(map(string), null)\n  })",
+    "description": "An object describing the Storage Account. This includes the following properties:\n- `resource_id` - The resource ID of an existing Storage Account, set to null if a new Storage Account should be created.\n- `private_endpoints` - A map of private endpoints to create on a newly created Storage Account. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - `name` - (Optional) The name of the private endpoint. One will be generated if not set.\n  - `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\n  - `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n  - `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\n  - `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\n  - `inherit_lock` - (Optional) If set to true, the private endpoint will inherit the lock from the parent resource. Defaults to false.\n- `tags` - (Optional) Tags for the Storage Account resource.\n",
+    "default": "{\n  \"create_new\": true\n}",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "workspace_description",
+    "type": "string",
+    "description": "The description of this workspace.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "create_compute_instance",
+    "type": "bool",
+    "description": "Specifies whether a compute instance should be created for the workspace to provision the managed vnet.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "diagnostic_settings",
+    "type": "map(object({\n    name                                     = optional(string, null)\n    log_categories                           = optional(set(string), [])\n    log_groups                               = optional(set(string), [\"allLogs\"])\n    metric_categories                        = optional(set(string), [\"AllMetrics\"])\n    log_analytics_destination_type           = optional(string, \"Dedicated\")\n    workspace_resource_id                    = optional(string, null)\n    storage_account_resource_id              = optional(string, null)\n    event_hub_authorization_rule_resource_id = optional(string, null)\n    event_hub_name                           = optional(string, null)\n    marketplace_partner_resource_id          = optional(string, null)\n  }))",
+    "description": "  A map of diagnostic settings to create on the Azure Machine Learning Workspace. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  \n  - `name` - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\n  - `log_categories` - (Optional) A set of log categories to send to the log analytics workspace. Defaults to `[]`.\n  - `log_groups` - (Optional) A set of log groups to send to the log analytics workspace. Defaults to `[\"allLogs\"]`.\n  - `metric_categories` - (Optional) A set of metric categories to send to the log analytics workspace. Defaults to `[\"AllMetrics\"]`.\n  - `log_analytics_destination_type` - (Optional) The destination type for the diagnostic setting. Possible values are `Dedicated` and `AzureDiagnostics`. Defaults to `Dedicated`.\n  - `workspace_resource_id` - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.\n  - `storage_account_resource_id` - (Optional) The resource ID of the storage account to send logs and metrics to.\n  - `event_hub_authorization_rule_resource_id` - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.\n  - `event_hub_name` - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.\n  - `marketplace_partner_resource_id` - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "key_vault",
+    "type": "object({\n    resource_id = optional(string, null)\n    create_new  = bool\n    private_endpoints = optional(map(object({\n      name                            = optional(string, null)\n      subnet_resource_id              = optional(string, null)\n      private_dns_zone_resource_ids   = optional(set(string), [])\n      private_service_connection_name = optional(string, null)\n      network_interface_name          = optional(string, null)\n      inherit_lock                    = optional(bool, false)\n    })), {})\n    tags = optional(map(string), null)\n  })",
+    "description": "An object describing the Key Vault to create the private endpoint connection to. This includes the following properties:\n- `resource_id` - The resource ID of an existing Key Vault.\n- `create_new` -  A flag indicating if a new resource must be created.\n- `private_endpoints` - A map of private endpoints to create on a newly created Key Vault. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - `name` - (Optional) The name of the private endpoint. One will be generated if not set.\n  - `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\n  - `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n  - `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\n  - `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\n  - `inherit_lock` - (Optional) If set to true, the private endpoint will inherit the lock from the parent resource. Defaults to false.\n- `tags` - (Optional) Tags for the Key Vault resource.\n",
+    "default": "{\n  \"create_new\": true\n}",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the this resource.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "container_registry",
+    "type": "object({\n    resource_id = optional(string, null)\n    create_new  = bool\n    private_endpoints = optional(map(object({\n      name                            = optional(string, null)\n      subnet_resource_id              = optional(string, null)\n      private_dns_zone_resource_ids   = optional(set(string), [])\n      private_service_connection_name = optional(string, null)\n      network_interface_name          = optional(string, null)\n      inherit_lock                    = optional(bool, false)\n    })), {})\n    tags           = optional(map(string), null)\n    zone_redundant = optional(bool, false)\n  })",
+    "description": "An object describing the Container Registry. This includes the following properties:\n- `resource_id` - The resource ID of an existing Container Registry, set to null if a new Container Registry should be created.\n- `create_new` -  A flag indicating if a new resource must be created.\n- `private_endpoints` - A map of private endpoints to create on a newly created Container Registry. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - `name` - (Optional) The name of the private endpoint. One will be generated if not set.\n  - `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\n  - `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n  - `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\n  - `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\n  - `inherit_lock` - (Optional) If set to true, the private endpoint will inherit the lock from the parent resource. Defaults to false.\n- `tags` - (Optional) Tags for new Container Registry resource.\n- `zone_redundant` - (Optional) A flag indicating whether to enable zone redundancy.\n",
+    "default": "{\n  \"create_new\": false\n}",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n- `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    system_assigned            = optional(bool, false)\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "  Controls the Managed Identity configuration on this resource. The following properties can be specified:\n  \n  - `system_assigned` - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\n  - `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "outbound_rules",
+    "type": "map(object({\n    resource_id         = string\n    sub_resource_target = string\n  }))",
+    "description": "  A map of private endpoints toutbound rules for the managed network.\n\n  - `resource_id` - The resource id for the corresponding private endpoint.\n  - `sub_resource_target` - The sub_resource_target is target for the private endpoint. e.g. account for Openai, searchService for Azure Ai Search\n  \n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - The description of the role assignment.\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - The condition which will be used to scope the role assignment.\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "workspace_managed_network",
+    "type": "object({\n    isolation_mode = string\n    spark_ready    = optional(bool, true)\n  })",
+    "description": "Specifies properties of the workspace's managed virtual network.\n\nPossible values for `isolation_mode` are:\n- 'Disabled': Inbound and outbound traffic is unrestricted _or_ BYO VNet to protect resources.\n- 'AllowInternetOutbound': Allow all internet outbound traffic.\n- 'AllowOnlyApprovedOutbound': Outbound traffic is allowed by specifying service tags.\nWhile is possible to update the workspace to enable network isolation ('AllowInternetOutbound' or 'AllowOnlyApprovedOutbound'), it is not possible to disable it on a workspace with it enabled.\n\n`spark_ready` determines whether spark jobs will be run on the network. This value can be updated in the future.\n",
+    "default": "{\n  \"isolation_mode\": \"Disabled\",\n  \"spark_ready\": true\n}",
+    "required": false
+  },
+  {
+    "name": "aiservices",
+    "type": "object({\n    create_new                = optional(bool, false)\n    analysis_services_sku     = optional(string, \"S0\")\n    name                      = optional(string, null)\n    resource_group_id         = optional(string, null)\n    tags                      = optional(map(string), null)\n    create_service_connection = optional(bool, false)\n  })",
+    "description": "An object describing the AI Services resource to create or reference. This includes the following properties:\n- `create_new`: (Optional) A flag indicating if a new resource must be created. If set to 'false', both `name` and `resource_group_id` must be provided.\n- `analysis_services_sku`: (Optional) When creating a new resource, this specifies the SKU of the Azure Analysis Services server. Possible values are: `D1`, `B1`, `B2`, `S0`, `S1`, `S2`, `S4`, `S8`, `S9`. Availability may be impacted by region; see https://learn.microsoft.com/en-us/azure/analysis-services/analysis-services-overview#availability-by-region\n- `name`: (Optional) If providing an existing resource, the name of the AI Services to reference\n- `resource_group_id`: (Optional) If providing an existing resource, the id of the resource group where the AI Services resource resides\n- `tags`: (Optional) Tags for the AI Services resource.\n- `create_service_connection`: (Optional) Whether or not to create a service connection between the Workspace resource and AI Services resource.\n",
+    "default": "{\n  \"create_new\": false\n}",
+    "required": false
+  },
+  {
+    "name": "hbi_workspace",
+    "type": "bool",
+    "description": "Specifies if the resource is a High Business Impact (HBI) workspace.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "kind",
+    "type": "string",
+    "description": "The kind of the resource. This is used to determine the type of the resource. If not specified, the resource will be created as a standard resource.\nPossible values are:\n- `Default` - The resource will be created as a standard Azure Machine Learning resource.\n- `Hub` - The resource will be created as an AI Hub resource.\n- `Project` - The resource will be created as an AI Studio Project resource.\n",
+    "default": "\"Default\"",
+    "required": false
+  },
+  {
+    "name": "private_endpoints",
+    "type": "map(object({\n    name = optional(string, null)\n    role_assignments = optional(map(object({\n      role_definition_id_or_name             = string\n      principal_id                           = string\n      description                            = optional(string, null)\n      skip_service_principal_aad_check       = optional(bool, false)\n      condition                              = optional(string, null)\n      condition_version                      = optional(string, null)\n      delegated_managed_identity_resource_id = optional(string, null)\n      principal_type                         = optional(string, null)\n    })), {})\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }), null)\n    tags                                    = optional(map(string), null)\n    subnet_resource_id                      = string\n    private_dns_zone_group_name             = optional(string, \"default\")\n    private_dns_zone_resource_ids           = optional(set(string), [])\n    application_security_group_associations = optional(map(string), {})\n    private_service_connection_name         = optional(string, null)\n    network_interface_name                  = optional(string, null)\n    location                                = optional(string, null)\n    resource_group_name                     = optional(string, null)\n    ip_configurations = optional(map(object({\n      name               = string\n      private_ip_address = string\n    })), {})\n  }))",
+    "description": "A map of private endpoints to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - (Optional) The name of the private endpoint. One will be generated if not set.\n- `role_assignments` - (Optional) A map of role assignments to create on the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. See `var.role_assignments` for more information.\n- `lock` - (Optional) The lock level to apply to the private endpoint. Default is `None`. Possible values are `None`, `CanNotDelete`, and `ReadOnly`.\n- `tags` - (Optional) A mapping of tags to assign to the private endpoint.\n- `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\n- `private_dns_zone_group_name` - (Optional) The name of the private DNS zone group. One will be generated if not set.\n- `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n- `application_security_group_resource_ids` - (Optional) A map of resource IDs of application security groups to associate with the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n- `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\n- `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\n- `location` - (Optional) The Azure location where the resources will be deployed. Defaults to the location of the resource group.\n- `resource_group_name` - (Optional) The resource group where the resources will be deployed. Defaults to the resource group of this resource.\n- `ip_configurations` - (Optional) A map of IP configurations to create on the private endpoint. If not specified the platform will create one. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - `name` - The name of the IP configuration.\n  - `private_ip_address` - The private IP address of the IP configuration.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "storage_access_type",
+    "type": "string",
+    "description": "The auth mode used for accessing the system datastores of the workspace - accessKey or identity.",
+    "default": "\"identity\"",
+    "required": false
+  },
+  {
+    "name": "workspace_friendly_name",
+    "type": "string",
+    "description": "The friendly name for this workspace. This value in mutable.",
+    "default": "\"Workspace\"",
+    "required": false
+  },
+  {
+    "name": "ai_studio_hub_id",
+    "type": "string",
+    "description": "The AI Studio Hub ID for which to create a Project",
+    "default": "null",
+    "required": false
+  }
+]

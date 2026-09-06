@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource",
+    "description": "The full resource object."
+  },
+  {
+    "name": "name",
+    "description": "The name of the deploy action."
+  }
+]

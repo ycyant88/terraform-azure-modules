@@ -1,0 +1,70 @@
+[
+  {
+    "name": "kubelet_identity_id",
+    "description": "The identity ID of the kubelet identity."
+  },
+  {
+    "name": "resource_id",
+    "description": "Resource ID of the Kubernetes cluster."
+  },
+  {
+    "name": "web_app_routing_object_id",
+    "description": "The object ID of the web app routing identity"
+  },
+  {
+    "name": "nodepool_resource_ids",
+    "description": "A map of nodepool keys to resource ids."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "aci_connector_object_id",
+    "description": "The object ID of the ACI Connector identity"
+  },
+  {
+    "name": "host",
+    "description": "AKS API host — returns .fqdn when public_fqdn_enabled, otherwise kube_config[0].host"
+  },
+  {
+    "name": "key_vault_secrets_provider_object_id",
+    "description": "The object ID of the key vault secrets provider."
+  },
+  {
+    "name": "oidc_issuer_url",
+    "description": "The OIDC issuer URL of the Kubernetes cluster."
+  },
+  {
+    "name": "web_app_routing_client_id",
+    "description": "The object ID of the web app routing identity"
+  },
+  {
+    "name": "public_fqdn",
+    "description": "Returns .fqdn when both private_cluster_enabled and private_cluster_public_fqdn_enabled are true, otherwise null"
+  },
+  {
+    "name": "cluster_ca_certificate",
+    "description": "The CA certificate of the AKS cluster."
+  },
+  {
+    "name": "ingress_app_object_id",
+    "description": "The object ID of the Ingress Application identity"
+  },
+  {
+    "name": "kube_admin_config",
+    "description": "The kube_admin_config block of the AKS cluster, only available when Local Accounts & Role-Based Access Control (RBAC) with AAD are enabled."
+  },
+  {
+    "name": "kube_config",
+    "description": "The kube_config block of the AKS cluster"
+  },
+  {
+    "name": "name",
+    "description": "Name of the Kubernetes cluster."
+  },
+  {
+    "name": "node_resource_group_id",
+    "description": "The resource group ID of the node resource group."
+  }
+]

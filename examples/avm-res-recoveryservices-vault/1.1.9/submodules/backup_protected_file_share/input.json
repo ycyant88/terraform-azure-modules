@@ -1,0 +1,9 @@
+[
+  {
+    "name": "backup_protected_file_share",
+    "type": "object({\n    source_storage_account_id     = string\n    backup_file_share_policy_name = string\n    source_file_share_name        = string\n    vault_name                    = string\n    vault_resource_group_name     = string\n    sleep_timer                   = optional(string, \"60s\")\n    disable_registration          = optional(bool, false)\n    timeouts = optional(map(object({\n      # The timeouts block allows you to specify a duration for the create, delete, read, and update operations.\n      create = optional(string, \"60m\")\n      delete = optional(string, \"60m\")\n      read   = optional(string, \"60m\")\n      update = optional(string, \"60m\")\n    })))\n\n  })",
+    "description": "values for backup_protected_file_share module",
+    "default": "null",
+    "required": false
+  }
+]

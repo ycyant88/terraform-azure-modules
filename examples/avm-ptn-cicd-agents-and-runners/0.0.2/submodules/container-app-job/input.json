@@ -1,0 +1,212 @@
+[
+  {
+    "name": "placeholder_cron_expression",
+    "type": "string",
+    "description": "The cron expression for the placeholder Container Apps job.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "sensitive_environment_variables",
+    "type": "set(object({\n    name                      = string\n    value                     = string\n    container_app_secret_name = string\n    keda_auth_name            = optional(string)\n  }))",
+    "description": "List of sensitive environment variables to pass to the container.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "user_assigned_managed_identity_id",
+    "type": "string",
+    "description": "The resource Id of the user assigned managed identity.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "container_memory",
+    "type": "string",
+    "description": "Required memory, e.g. '250Mb'",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "job_name",
+    "type": "string",
+    "description": "The name of the Container App job.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "max_execution_count",
+    "type": "number",
+    "description": "The maximum number of executions to spawn per polling interval.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "placeholder_replica_timeout",
+    "type": "number",
+    "description": "The timeout in seconds for the placeholder Container Apps job.",
+    "default": "300",
+    "required": false
+  },
+  {
+    "name": "environment_variables_placeholder",
+    "type": "set(object({\n    name  = string\n    value = string\n  }))",
+    "description": "List of environment variables to pass only to the placeholder container.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "container_cpu",
+    "type": "number",
+    "description": "Required CPU in cores, e.g. 0.5",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "replica_retry_limit",
+    "type": "number",
+    "description": "The number of times to retry the runner Container Apps job.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "replica_timeout",
+    "type": "number",
+    "description": "The timeout in seconds for the runner Container Apps job.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "placeholder_container_name",
+    "type": "string",
+    "description": "The name of the container for the placeholder Container Apps job.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_app_environment_id",
+    "type": "string",
+    "description": "The resource id of the Container App Environment.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "environment_variables",
+    "type": "set(object({\n    name  = string\n    value = string\n  }))",
+    "description": "List of environment variables to pass to the container.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "keda_rule_type",
+    "type": "string",
+    "description": "The type of the KEDA rule.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "postfix",
+    "type": "string",
+    "description": "Postfix used for naming the resources where the name isn't supplied.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "registry_login_server",
+    "type": "string",
+    "description": "The login server of the container registry.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_id",
+    "type": "string",
+    "description": "The id of the resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "min_execution_count",
+    "type": "number",
+    "description": "The minimum number of executions to spawn per polling interval.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "polling_interval_seconds",
+    "type": "number",
+    "description": "How often should the pipeline queue be checked for new events, in seconds.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "placeholder_job_name",
+    "type": "string",
+    "description": "The name of the Container App placeholder job.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "keda_meta_data",
+    "type": "map(string)",
+    "description": "The metadata for the KEDA scaler.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "registry_username",
+    "type": "string",
+    "description": "Name of the container registry.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_image_name",
+    "type": "string",
+    "description": "Fully qualified name of the Docker image the agents should run.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "job_container_name",
+    "type": "string",
+    "description": "The name of the container for the runner Container Apps job.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "placeholder_job_creation_enabled",
+    "type": "bool",
+    "description": "Whether or not to create a placeholder job.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "placeholder_replica_retry_limit",
+    "type": "number",
+    "description": "The number of times to retry the placeholder Container Apps job.",
+    "default": "3",
+    "required": false
+  },
+  {
+    "name": "registry_password",
+    "type": "string",
+    "description": "Password of the container registry.",
+    "default": "null",
+    "required": false
+  }
+]

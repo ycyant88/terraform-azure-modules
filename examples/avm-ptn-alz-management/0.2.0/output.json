@@ -1,0 +1,14 @@
+[
+  {
+    "name": "automation_account",
+    "description": "A curated output of the Azure Automation Account."
+  },
+  {
+    "name": "log_analytics_workspace",
+    "description": "A curated output of the Log Analytics Workspace."
+  },
+  {
+    "name": "resource_group",
+    "description": "A curated output of the Azure Resource Group."
+  }
+]

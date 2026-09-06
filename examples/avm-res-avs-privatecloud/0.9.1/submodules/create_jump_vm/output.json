@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The jump vm resource id output required by the spec."
+  },
+  {
+    "name": "resource",
+    "description": "The jump vm resource output required by the spec."
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "virtual_networks",
+    "description": "A curated output of the virtual networks created by this module."
+  },
+  {
+    "name": "firewall_policies",
+    "description": "A curated output of the firewall policies created by this module."
+  },
+  {
+    "name": "firewalls",
+    "description": "A curated output of the firewalls created by this module."
+  },
+  {
+    "name": "hub_route_tables_firewall",
+    "description": "A curated output of the route tables created by this module."
+  },
+  {
+    "name": "hub_route_tables_user_subnets",
+    "description": "A curated output of the route tables created by this module."
+  },
+  {
+    "name": "name",
+    "description": "The names of the hub virtual networks."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource IDs of the hub virtual networks."
+  }
+]

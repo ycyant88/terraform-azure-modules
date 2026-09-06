@@ -1,0 +1,46 @@
+[
+  {
+    "name": "azurerm_log_analytics_solution",
+    "description": "Returns the configuration data for all Log Analytics solutions created by this module."
+  },
+  {
+    "name": "azurerm_log_analytics_linked_service",
+    "description": "Returns the configuration data for all Log Analytics linked services created by this module."
+  },
+  {
+    "name": "azurerm_policy_set_definition",
+    "description": "Returns the configuration data for all Policy Set Definitions created by this module."
+  },
+  {
+    "name": "azurerm_policy_definition",
+    "description": "Returns the configuration data for all Policy Definitions created by this module."
+  },
+  {
+    "name": "azurerm_policy_assignment",
+    "description": "Returns the configuration data for all Policy Assignments created by this module."
+  },
+  {
+    "name": "azurerm_role_definition",
+    "description": "Returns the configuration data for all Role Definitions created by this module."
+  },
+  {
+    "name": "azurerm_role_assignment",
+    "description": "Returns the configuration data for all Role Assignments created by this module."
+  },
+  {
+    "name": "azurerm_resource_group",
+    "description": "Returns the configuration data for all Resource Groups created by this module."
+  },
+  {
+    "name": "azurerm_automation_account",
+    "description": "Returns the configuration data for all Automation Accounts created by this module."
+  },
+  {
+    "name": "azurerm_management_group",
+    "description": "Returns the configuration data for all Management Groups created by this module."
+  },
+  {
+    "name": "azurerm_log_analytics_workspace",
+    "description": "Returns the configuration data for all Log Analytics workspaces created by this module. Excludes sensitive values."
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "zip_deploy_file",
+    "type": "string",
+    "description": "The URL of the zip file to deploy to the App Service.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "is_slot",
+    "type": "bool",
+    "description": "Whether the parent resource is a deployment slot. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "workspace_id",
+    "description": "The ID of the workspace."
+  },
+  {
+    "name": "application_group_id",
+    "description": "The ID of the application group."
+  },
+  {
+    "name": "private_endpoints_hostpool",
+    "description": "A map of private endpoints. The map key is the supplied input to var.private_endpoints. The map value is the entire azurerm_private_endpoint resource."
+  },
+  {
+    "name": "registrationinfo_token",
+    "description": "The token for the host pool registration."
+  },
+  {
+    "name": "resource",
+    "description": "This output is the full output for the resource to allow flexibility to reference all possible values for the resource. Example usage: module.<modulename>.resource.id"
+  },
+  {
+    "name": "resource_id",
+    "description": "This output is the full output for the resource to allow flexibility to reference all possible values for the resource. Example usage: module.<modulename>.resource.id"
+  },
+  {
+    "name": "scaling_plan_id",
+    "description": "The ID of the scaling plan."
+  },
+  {
+    "name": "virtual_desktop_host_pool_name",
+    "description": "The name of the host pool."
+  },
+  {
+    "name": "workspace_name",
+    "description": "The name of the workspace."
+  },
+  {
+    "name": "hostpool_id",
+    "description": "The ID of the host pool."
+  }
+]

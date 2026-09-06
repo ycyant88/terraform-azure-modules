@@ -1,0 +1,30 @@
+[
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex = list(string)\n    interval_seconds    = optional(number, 10)\n    max_retries         = optional(number, 3)\n  })",
+    "description": "Retry configuration for azapi resources.",
+    "default": "{\n  \"error_message_regex\": [\n    \"Cannot modify this site because another operation is in progress\"\n  ]\n}",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "storage_shares_to_mount",
+    "type": "map(object({\n    access_key   = string\n    account_name = string\n    mount_path   = string\n    name         = string\n    share_name   = string\n    type         = optional(string, \"AzureFiles\")\n  }))",
+    "description": "A map of Storage Account file shares to mount to the App Service.\n\n- `access_key` - (Required) The access key for the Storage Account.\n- `account_name` - (Required) The name of the Storage Account.\n- `mount_path` - (Required) The path to mount the share at within the App Service.\n- `name` - (Required) The name of the storage mount.\n- `share_name` - (Required) The name of the file share.\n- `type` - (Optional) The type of storage. Defaults to `AzureFiles`.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "is_slot",
+    "type": "bool",
+    "description": "Whether the parent resource is a deployment slot. Defaults to `false`.",
+    "default": "false",
+    "required": false
+  }
+]

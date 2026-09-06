@@ -1,0 +1,30 @@
+[
+  {
+    "name": "container_registry",
+    "description": "The ID of the container registry."
+  },
+  {
+    "name": "key_vault",
+    "description": "The ID of the key vault."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "resource",
+    "description": "The machine learning workspace."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the machine learning workspace."
+  },
+  {
+    "name": "storage_account",
+    "description": "The ID of the storage account."
+  },
+  {
+    "name": "application_insights",
+    "description": "The ID of the application insights."
+  }
+]

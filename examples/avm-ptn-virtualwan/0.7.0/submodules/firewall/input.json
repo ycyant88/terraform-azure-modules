@@ -1,0 +1,9 @@
+[
+  {
+    "name": "firewalls",
+    "type": "map(object({\n    virtual_hub_id       = string\n    sku_name             = optional(string, \"AZFW_Hub\")\n    location             = string\n    resource_group_name  = string\n    sku_tier             = string\n    name                 = string\n    zones                = optional(list(number), [1, 2, 3])\n    firewall_policy_id   = optional(string)\n    vhub_public_ip_count = optional(string, null)\n    tags                 = optional(map(string))\n  }))",
+    "description": "\nMap of objects for Azure Firewall resources to deploy into the Virtual WAN Virtual Hubs that have been defined in the variable `virtual_hubs`.\n\nThe key is deliberately arbitrary to avoid issues with known after apply values. The value is an object, of which there can be multiple in the map:\n\n- `virtual_hub_key`: The arbitrary key specified in the map of objects variable called `virtual_hubs` for the object specifying the Virtual Hub you wish to deploy this Azure Firewall into.\n- `sku_name`: The SKU name for the Azure Firewall. Possible values are: `AZFW_VNet`, `AZFW_Hub`. Defaults to `AZFW_Hub`.\n- `sku_tier`: The SKU tier for the Azure Firewall. Possible values are: `Basic`, `Standard`, `Premium`.\n- `name`: The name for the Azure Firewall resource.\n- `zones`: Optional list of zones to deploy the Azure Firewall into. Defaults to `[1, 2, 3]`.\n- `firewall_policy_id`: Optional Azure Firewall Policy Resource ID to associate with the Azure Firewall.\n- `vhub_public_ip_count`: Optional number of public IP addresses to associate with the Azure Firewall.\n- `tags`: Optional tags to apply to the Azure Firewall resource.\n\n> Note: There can be multiple objects in this map, one for each Azure Firewall you wish to deploy into the Virtual WAN Virtual Hubs that have been defined in the variable `virtual_hubs`.\n\n",
+    "default": "{}",
+    "required": false
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "Specifies the ID of the Enterprise-scale root Management Group where Policy Definitions are created by default.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "scope_id",
+    "type": "string",
+    "description": "Specifies the scope to apply the archetype resources against.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "archetype_id",
+    "type": "string",
+    "description": "Specifies the ID of the archetype to apply against the provided scope. Must be a valid archetype ID from either the built-in module library, or as defined by the archetype_library_path variable.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "archetype_parameters",
+    "type": "map(any)",
+    "description": "OPTIONAL: If specified, will use the specified parameters to override archetype defaults.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "archetype_library_path",
+    "type": "string",
+    "description": "OPTIONAL: If specified, sets the path to a custom library folder for archetype artefacts.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "default_location",
+    "type": "string",
+    "description": "OPTIONAL: If specified, will use set the default location used for resource deployments where needed.",
+    "default": "",
+    "required": true
+  }
+]

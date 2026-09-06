@@ -1,0 +1,30 @@
+[
+  {
+    "name": "primary_vnet_resource_group",
+    "type": "string",
+    "description": "Name of the resource group of source vnet",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "secondary_vnet_name",
+    "type": "string",
+    "description": "Name of the destination vnet",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "secondary_vnet_resource_group",
+    "type": "string",
+    "description": "Name of the resource group of destination vnet",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "primary_vnet_name",
+    "type": "string",
+    "description": "Name of the source vnet",
+    "default": "",
+    "required": true
+  }
+]

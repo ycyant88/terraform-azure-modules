@@ -1,0 +1,51 @@
+[
+  {
+    "name": "nfs_azure_file",
+    "type": "object({\n    access_mode = optional(any)\n    server      = optional(string)\n    share_name  = optional(string)\n  })",
+    "description": "NFS Azure file properties\n\n- `access_mode` - Access mode for storage\n- `server` - Server for NFS azure file. Specify the Azure storage account server address.\n- `share_name` - NFS Azure file share name.\n\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent resource ID for this resource.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "account_key",
+    "type": "string",
+    "description": "Storage account key for azure file.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "account_key_version",
+    "type": "number",
+    "description": "Version tracker for account_key. Must be set when account_key is provided.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "azure_file",
+    "type": "object({\n    access_mode = optional(any)\n    account_key = optional(string)\n    account_key_vault_properties = optional(object({\n      identity      = optional(string)\n      key_vault_url = optional(string)\n    }))\n    account_name = optional(string)\n    share_name   = optional(string)\n  })",
+    "description": "Azure file properties\n\n- `access_mode` - Access mode for storage\n- `account_key` - Storage account key for azure file.\n- `account_key_vault_properties` - Storage account key stored as an Azure Key Vault secret.\n  - `identity` - Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.\n  - `key_vault_url` - URL pointing to the Azure Key Vault secret.\n- `account_name` - Storage account name for azure file.\n- `share_name` - Azure file share name.\n\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module. For more information see https://aka.ms/avm/telemetryinfo.\n",
+    "default": "true",
+    "required": false
+  }
+]

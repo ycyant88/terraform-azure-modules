@@ -1,0 +1,6 @@
+[
+  {
+    "name": "network_security_group_resource_id",
+    "description": "The created network security group resource ID."
+  }
+]

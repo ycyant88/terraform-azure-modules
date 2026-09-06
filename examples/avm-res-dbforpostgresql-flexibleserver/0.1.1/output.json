@@ -1,0 +1,18 @@
+[
+  {
+    "name": "name",
+    "description": "The resource ID for the resource."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID for the resource."
+  }
+]

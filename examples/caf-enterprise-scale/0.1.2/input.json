@@ -1,0 +1,93 @@
+[
+  {
+    "name": "default_location",
+    "type": "string",
+    "description": "If specified, will use set the default location used for resource deployments where needed.",
+    "default": "\"eastus\"",
+    "required": false
+  },
+  {
+    "name": "create_duration_delay",
+    "type": "map(string)",
+    "description": "Used to tune terraform apply when faced with errors caused by API caching or eventual consistency. Sets a custom delay period after creation of the specified resource type.",
+    "default": "{\n  \"azurerm_management_group\": \"30s\",\n  \"azurerm_policy_assignment\": \"30s\",\n  \"azurerm_policy_definition\": \"30s\",\n  \"azurerm_policy_set_definition\": \"30s\",\n  \"azurerm_role_assignment\": \"0s\",\n  \"azurerm_role_definition\": \"60s\"\n}",
+    "required": false
+  },
+  {
+    "name": "deploy_core_landing_zones",
+    "type": "bool",
+    "description": "If set to true, will include the core Enterprise-scale Management Group hierarchy.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "archetype_config_overrides",
+    "type": "map(any)",
+    "description": "If specified, will set custom Archetype configurations to the default Enterprise-scale Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "subscription_id_overrides",
+    "type": "map(list(string))",
+    "description": "If specified, will be used to assign subscription_ids to the default Enterprise-scale Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "deploy_demo_landing_zones",
+    "type": "bool",
+    "description": "If set to true, will include the demo \"Landing Zone\" Management Groups.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "custom_landing_zones",
+    "type": "map(\n    object({\n      display_name               = string\n      parent_management_group_id = string\n      subscription_ids           = list(string)\n      archetype_config = object({\n        archetype_id   = string\n        parameters     = any\n        access_control = any\n      })\n    })\n  )",
+    "description": "If specified, will deploy additional Management Groups alongside Enterprise-scale core Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "library_path",
+    "type": "string",
+    "description": "If specified, sets the path to a custom library folder for archetype artefacts.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "destroy_duration_delay",
+    "type": "map(string)",
+    "description": "Used to tune terraform deploy when faced with errors caused by API caching or eventual consistency. Sets a custom delay period after destruction of the specified resource type.",
+    "default": "{\n  \"azurerm_management_group\": \"0s\",\n  \"azurerm_policy_assignment\": \"0s\",\n  \"azurerm_policy_definition\": \"0s\",\n  \"azurerm_policy_set_definition\": \"0s\",\n  \"azurerm_role_assignment\": \"0s\",\n  \"azurerm_role_definition\": \"0s\"\n}",
+    "required": false
+  },
+  {
+    "name": "root_parent_id",
+    "type": "string",
+    "description": "The root_parent_id is used to specify where to set the root for all Landing Zone deployments. Usually the Tenant ID when deploying the core Enterprise-scale Landing Zones.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "If specified, will set a custom Name (ID) value for the Enterprise-scale \"root\" Management Group, and append this to the ID for all core Enterprise-scale Management Groups.",
+    "default": "\"es\"",
+    "required": false
+  },
+  {
+    "name": "root_name",
+    "type": "string",
+    "description": "If specified, will set a custom Display Name value for the Enterprise-scale \"root\" Management Group.",
+    "default": "\"Enterprise-Scale\"",
+    "required": false
+  },
+  {
+    "name": "template_file_variables",
+    "type": "map(any)",
+    "description": "If specified, provides the ability to define custom template variables used when reading in template files from the built-in and custom library_path.",
+    "default": "{}",
+    "required": false
+  }
+]

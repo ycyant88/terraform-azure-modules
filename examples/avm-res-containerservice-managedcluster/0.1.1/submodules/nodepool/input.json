@@ -1,0 +1,303 @@
+[
+  {
+    "name": "node_public_ip_prefix_id",
+    "type": "string",
+    "description": "Optional. The ID of the public IP prefix.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "kubelet_disk_type",
+    "type": "string",
+    "description": "Optional. The disk type for the kubelet.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "kubelet_config",
+    "type": "object({\n    cpu_manager_policy        = string\n    cpu_cfs_quota_enabled     = bool\n    cpu_cfs_quota_period      = string\n    image_gc_high_threshold   = number\n    image_gc_low_threshold    = number\n    topology_manager_policy   = string\n    allowed_unsafe_sysctls    = set(string)\n    container_log_max_size_mb = number\n    container_log_max_line    = number\n    pod_max_pid               = number\n  })",
+    "description": "Optional. The Kubelet config for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "max_count",
+    "type": "number",
+    "description": "Optional. The maximum number of nodes for the nodepool if auto-scaling is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "min_count",
+    "type": "number",
+    "description": "Optional. The minimum number of nodes for the nodepool if auto-scaling is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "scale_down_mode",
+    "type": "string",
+    "description": "Optional. The scale down mode for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "capacity_reservation_group_id",
+    "type": "string",
+    "description": "The ID of the capacity reservation group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "fips_enabled",
+    "type": "bool",
+    "description": "Optional. Whether or not FIPS is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "mode",
+    "type": "string",
+    "description": "Optional. The mode for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "orchestrator_version",
+    "type": "string",
+    "description": "Optional. The Kubernetes version for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "windows_profile",
+    "type": "object({\n    outbound_nat_enabled = bool\n  })",
+    "description": "Optional. The Windows profile for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "cluster_resource_id",
+    "type": "string",
+    "description": "Resource ID of the existing Kubernetes cluster.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "auto_scaling_enabled",
+    "type": "bool",
+    "description": "Optional. Whether or not auto-scaling is enabled.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "host_group_id",
+    "type": "string",
+    "description": "Optional. The ID of the host group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "max_pods",
+    "type": "number",
+    "description": "Optional. The maximum number of pods per node.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "os_disk_type",
+    "type": "string",
+    "description": "Optional. The type of the OS disk for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "upgrade_settings",
+    "type": "object({\n    drain_timeout_in_minutes      = optional(number)\n    node_soak_duration_in_minutes = optional(number)\n    max_surge                     = optional(string)\n  })",
+    "description": "Optional. The upgrade settings for the nodepool.",
+    "default": "{\n  \"max_surge\": \"10%\"\n}",
+    "required": false
+  },
+  {
+    "name": "vnet_subnet_id",
+    "type": "string",
+    "description": "Optional. The ID of the VNet subnet.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_public_ip_enabled",
+    "type": "bool",
+    "description": "Optional. Whether or not public IPs are enabled for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "os_disk_size_gb",
+    "type": "number",
+    "description": "Optional. The size of the OS disk for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "os_type",
+    "type": "string",
+    "description": "Optional. The type of the OS for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "priority",
+    "type": "string",
+    "description": "Optional. The priority for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "snapshot_id",
+    "type": "string",
+    "description": "Optional. The ID of the snapshot.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_network_profile",
+    "type": "object({\n    allowed_host_ports = list(object({\n      port_start = number\n      port_end   = number\n      protocol   = string\n    }))\n    application_security_group_ids = list(string)\n    node_public_ip_tags            = map(string)\n  })",
+    "description": "Optional. The network profile for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_taints",
+    "type": "list(string)",
+    "description": "Optional. The taints for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "network_plugin_mode",
+    "type": "string",
+    "description": "The network plugin mode for the nodepool.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "vm_size",
+    "type": "string",
+    "description": "Required. The size of the VMs for the nodepool.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "linux_os_config",
+    "type": "object({\n    sysctl_config = object({\n      fs_aio_max_nr                      = number\n      fs_file_max                        = number\n      fs_inotify_max_user_watches        = number\n      fs_nr_open                         = number\n      kernel_threads_max                 = number\n      net_core_netdev_max_backlog        = number\n      net_core_optmem_max                = number\n      net_core_rmem_default              = number\n      net_core_rmem_max                  = number\n      net_core_somaxconn                 = number\n      net_core_wmem_default              = number\n      net_core_wmem_max                  = number\n      net_ipv4_ip_local_port_range_min   = number\n      net_ipv4_ip_local_port_range_max   = number\n      net_ipv4_neigh_default_gc_thresh1  = number\n      net_ipv4_neigh_default_gc_thresh2  = number\n      net_ipv4_neigh_default_gc_thresh3  = number\n      net_ipv4_tcp_fin_timeout           = number\n      net_ipv4_tcp_keepalive_intvl       = number\n      net_ipv4_tcp_keepalive_probes      = number\n      net_ipv4_tcp_keepalive_time        = number\n      net_ipv4_tcp_max_syn_backlog       = number\n      net_ipv4_tcp_max_tw_buckets        = number\n      net_ipv4_tcp_tw_reuse              = bool\n      net_netfilter_nf_conntrack_buckets = number\n      net_netfilter_nf_conntrack_max     = number\n      vm_max_map_count                   = number\n      vm_swappiness                      = number\n      vm_vfs_cache_pressure              = number\n    })\n  })",
+    "description": "Optional. The Linux OS config for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_count",
+    "type": "number",
+    "description": "Optional. The number of nodes for the nodepool. Set to 0 if auto-scaling is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "zones",
+    "type": "list(string)",
+    "description": "Optional. The availability zones for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "Required. The name of the Kubernetes nodepool.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "gpu_instance",
+    "type": "string",
+    "description": "Optional. The GPU instance type for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "host_encryption_enabled",
+    "type": "bool",
+    "description": "Optional. Whether or not host encryption is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "pod_subnet_id",
+    "type": "string",
+    "description": "Optional. The ID of the pod subnet.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "spot_max_price",
+    "type": "string",
+    "description": "Optional. The maximum price for spot instances.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ultra_ssd_enabled",
+    "type": "bool",
+    "description": "Optional. Whether or not ultra SSD is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "create_nodepool_before_destroy",
+    "type": "bool",
+    "description": "Whether or not to create node pools before destroying the old ones. This is the opposite of the default behavior. Set this to true if zero downtime is required during nodepool redeployments such as changes to snapshot_id.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "eviction_policy",
+    "type": "string",
+    "description": "Optional. The eviction policy for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "os_sku",
+    "type": "string",
+    "description": "Optional. The SKU of the OS for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "proximity_placement_group_id",
+    "type": "string",
+    "description": "Optional. The ID of the proximity placement group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "node_labels",
+    "type": "map(string)",
+    "description": "Optional. The labels for the nodepool.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "Optional. A mapping of tags to assign to the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "workload_runtime",
+    "type": "string",
+    "description": "Optional. The workload runtime for the nodepool.",
+    "default": "null",
+    "required": false
+  }
+]

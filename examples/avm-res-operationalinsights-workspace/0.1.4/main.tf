@@ -1,0 +1,26 @@
+module "avm-res-operationalinsights-workspace" {
+  source                                                     = "Azure/avm-res-operationalinsights-workspace/azurerm"
+  version                                                    = "0.1.4"
+  diagnostic_settings                                        = var.diagnostic_settings
+  enable_telemetry                                           = var.enable_telemetry
+  location                                                   = var.location
+  lock                                                       = var.lock
+  log_analytics_workspace_allow_resource_only_permissions    = var.log_analytics_workspace_allow_resource_only_permissions
+  log_analytics_workspace_cmk_for_query_forced               = var.log_analytics_workspace_cmk_for_query_forced
+  log_analytics_workspace_daily_quota_gb                     = var.log_analytics_workspace_daily_quota_gb
+  log_analytics_workspace_identity                           = var.log_analytics_workspace_identity
+  log_analytics_workspace_internet_ingestion_enabled         = var.log_analytics_workspace_internet_ingestion_enabled
+  log_analytics_workspace_internet_query_enabled             = var.log_analytics_workspace_internet_query_enabled
+  log_analytics_workspace_local_authentication_disabled      = var.log_analytics_workspace_local_authentication_disabled
+  log_analytics_workspace_reservation_capacity_in_gb_per_day = var.log_analytics_workspace_reservation_capacity_in_gb_per_day
+  log_analytics_workspace_retention_in_days                  = var.log_analytics_workspace_retention_in_days
+  log_analytics_workspace_sku                                = var.log_analytics_workspace_sku
+  log_analytics_workspace_timeouts                           = var.log_analytics_workspace_timeouts
+  managed_identities                                         = var.managed_identities
+  name                                                       = var.name
+  private_endpoints                                          = var.private_endpoints
+  private_endpoints_manage_dns_zone_group                    = var.private_endpoints_manage_dns_zone_group
+  resource_group_name                                        = var.resource_group_name
+  role_assignments                                           = var.role_assignments
+  tags                                                       = var.tags
+}

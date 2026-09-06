@@ -1,0 +1,20 @@
+module "avm-res-machinelearningservices-workspace" {
+  source               = "Azure/avm-res-machinelearningservices-workspace/azurerm"
+  version              = "0.1.0"
+  container_registry   = var.container_registry
+  customer_managed_key = var.customer_managed_key
+  enable_telemetry     = var.enable_telemetry
+  hbi_workspace        = var.hbi_workspace
+  is_private           = var.is_private
+  key_vault            = var.key_vault
+  kind                 = var.kind
+  location             = var.location
+  lock                 = var.lock
+  name                 = var.name
+  private_endpoints    = var.private_endpoints
+  resource_group       = var.resource_group
+  role_assignments     = var.role_assignments
+  storage_account      = var.storage_account
+  tags                 = var.tags
+  vnet                 = var.vnet
+}

@@ -1,0 +1,79 @@
+[
+  {
+    "name": "default_location",
+    "type": "string",
+    "description": "OPTIONAL: If specified, will use set the default location used for resource deployments where needed.",
+    "default": "\"eastus\"",
+    "required": false
+  },
+  {
+    "name": "root_parent_id",
+    "type": "string",
+    "description": "The root_parent_id is used to specify where to set the root for all Landing Zone deployments. Usually the Tenant ID when deploying the core Enterprise-scale Landing Zones.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "OPTIONAL: If specified, will set a custom Name (ID) value for the Enterprise-scale \"root\" Management Group, and append this to the ID for all core Enterprise-scale Management Groups.",
+    "default": "\"es\"",
+    "required": false
+  },
+  {
+    "name": "deploy_core_landing_zones",
+    "type": "bool",
+    "description": "OPTIONAL: If set to true, will include the core Enterprise-scale Management Group hierarchy",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "archetype_config_overrides",
+    "type": "map(any)",
+    "description": "OPTIONAL: If specified, will set custom Archetype configurations to the default Enterprise-scale Management Groups",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "subscription_id_overrides",
+    "type": "map(list(string))",
+    "description": "OPTIONAL: If specified, will be used to assign subscription_ids to the default Enterprise-scale Management Groups",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "custom_landing_zones",
+    "type": "map(\n    object({\n      display_name               = string\n      parent_management_group_id = string\n      subscription_ids           = list(string)\n      archetype_config = object({\n        archetype_id   = string\n        parameters     = any\n        access_control = any\n      })\n    })\n  )",
+    "description": "OPTIONAL: If specified, will deploy additional Management Groups alongside Enterprise-scale core Management Groups",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "library_path",
+    "type": "string",
+    "description": "OPTIONAL: If specified, sets the path to a custom library folder for archetype artefacts.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "root_name",
+    "type": "string",
+    "description": "OPTIONAL: If specified, will set a custom DisplayName value for the Enterprise-scale \"root\" Management Group",
+    "default": "\"Enterprise-Scale\"",
+    "required": false
+  },
+  {
+    "name": "deploy_demo_landing_zones",
+    "type": "bool",
+    "description": "OPTIONAL: If set to true, will include the demo \"Landing Zone\" Management Groups",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "template_file_variables",
+    "type": "map(any)",
+    "description": "OPTIONAL: If specified, provides the ability to define custom template variables used when reading in template files from the library_path",
+    "default": "{}",
+    "required": false
+  }
+]

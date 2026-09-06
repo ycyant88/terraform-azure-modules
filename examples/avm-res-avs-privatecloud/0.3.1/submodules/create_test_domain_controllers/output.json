@@ -1,0 +1,34 @@
+[
+  {
+    "name": "ldap_user",
+    "description": ""
+  },
+  {
+    "name": "ldap_user_password",
+    "description": ""
+  },
+  {
+    "name": "primary_dc_private_ip_address",
+    "description": ""
+  },
+  {
+    "name": "dc_details",
+    "description": ""
+  },
+  {
+    "name": "dc_details_secondary",
+    "description": ""
+  },
+  {
+    "name": "domain_fqdn",
+    "description": ""
+  },
+  {
+    "name": "domain_distinguished_name",
+    "description": ""
+  },
+  {
+    "name": "domain_netbios_name",
+    "description": ""
+  }
+]

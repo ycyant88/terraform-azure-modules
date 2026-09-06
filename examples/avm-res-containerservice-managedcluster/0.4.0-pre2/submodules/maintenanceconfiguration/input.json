@@ -1,0 +1,107 @@
+[
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "Whether telemetry headers should be added.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "not_allowed_end",
+    "type": "string",
+    "description": "End date for a single not-allowed date range (YYYY-MM-DD).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "Resource ID of the parent managed cluster.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "day_of_month",
+    "type": "number",
+    "description": "Day of month (AbsoluteMonthly).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "week_index",
+    "type": "string",
+    "description": "Week index within month (e.g. First, Second, Third, Fourth, Last) for RelativeMonthly.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "frequency",
+    "type": "string",
+    "description": "Maintenance window frequency: Daily, Weekly, AbsoluteMonthly, RelativeMonthly.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "interval",
+    "type": "number",
+    "description": "Interval associated with the frequency (days, weeks or months depending on frequency).",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "day_of_week",
+    "type": "string",
+    "description": "Day of week (Weekly or RelativeMonthly).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable",
+    "type": "bool",
+    "description": "Whether to create the maintenance configuration resource.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "start_time",
+    "type": "string",
+    "description": "Start time (HH:MM).",
+    "default": "\"00:00\"",
+    "required": false
+  },
+  {
+    "name": "duration_hours",
+    "type": "number",
+    "description": "Duration of the maintenance window in hours.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "not_allowed_start",
+    "type": "string",
+    "description": "Start date for a single not-allowed date range (YYYY-MM-DD).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "start_date",
+    "type": "string",
+    "description": "Optional ISO8601 start date (YYYY-MM-DD).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "user_agent_header",
+    "type": "string",
+    "description": "User-Agent header value when telemetry is enabled.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "utc_offset",
+    "type": "string",
+    "description": "UTC offset (+/-HH:MM).",
+    "default": "\"+00:00\"",
+    "required": false
+  }
+]

@@ -1,0 +1,312 @@
+variable "authorization_rules" {
+  description = "  Defaults to {}. Manages a ServiceBus Namespace authorization Rule within a ServiceBus.\n\n  - name   - (Optional) - Defaults to null. Specifies the name of the ServiceBus Namespace Authorization Rule resource. Changing this forces a new resource to be created. If it is null it will use the map key as the name.\n  - send   - (Optional) - Always set to true when manage is true if not it will default to false. Does this Authorization Rule have Listen permissions to the ServiceBus Namespace?\n  - listen - (Optional) - Always set to true when manage is true if not it will default to false. Does this Authorization Rule have Send permissions to the ServiceBus Namespace? \n  - manage - (Optional) - Defaults to false. Does this Authorization Rule have Manage permissions to the ServiceBus Namespace?\n\n  Example Inputs:\n  hcl\n  authorization_rules = {\n    testRule = {\n      send   = true\n      listen = true\n      manage = true\n    }\n  }\n  \n"
+  type = map(object({
+    name   = optional(string, null)
+    send   = optional(bool, false)
+    listen = optional(bool, false)
+    manage = optional(bool, false)
+  }))
+  default = {}
+}
+
+variable "capacity" {
+  description = "  Always set to 0 for Standard and Basic. Defaults to 1 for Premium. Specifies the capacity. \n  When sku is Premium, capacity can be 1, 2, 4, 8 or 16.\n"
+  type        = number
+  default     = null
+}
+
+variable "customer_managed_key" {
+  description = "  Defaults to null. Ignored for Basic and Standard. Defines a customer managed key to use for encryption.\n\n  - key_name               - (Required) - The key name for the customer managed key in the key vault.\n  - key_vault_resource_id  - (Required) - The full Azure Resource ID of the key_vault where the customer managed key will be referenced from.\n  - key_version            - (Optional) - Defaults to null. The version of the key to use if it is null it will use the latest version of the key. It will also auto rotate when the key in the key vault is rotated.\n\n  - user_assigned_identity - (Required) - The user assigned identity to use when access the key vault\n    - resource_id          - (Required) - The full Azure Resource ID of the user assigned identity.\n\n  > Note: Remember to assign permission to the managed identity to access the key vault key. The Key vault used must have enabled soft delete and purge protection. The minimun required permissions is \"Key Vault Crypto Service Encryption User\"\n  > Note: If you require to control \"infrastructure encryption\" use the parameter infrastructure_encryption_enabled in the module configuration.\n\n  Example Inputs:\n  hcl\n  customer_managed_key = {\n    key_name               = \"sample-customer-key\"\n    key_version            = 03c89971825b4a0d84905c3597512260\n    key_vault_resource_id  = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{keyVaultName}\"\n    \n    user_assigned_identity {\n      resource_id = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managedIdentityName}\"\n    }\n  }\n  \n"
+  type = object({
+    key_name              = string
+    key_vault_resource_id = string
+
+    key_version = optional(string, null)
+
+    user_assigned_identity = optional(object({
+      resource_id = string
+    }), null)
+  })
+  default = null
+}
+
+variable "diagnostic_settings" {
+  description = "  Defaults to {}. A map of diagnostic settings to create. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n  - name                                     - (Optional) - The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\n  - log_categories                           - (Optional) - Defaults to []. A set of log categories to export. Possible values are: ApplicationMetricsLogs, RuntimeAuditLogs, VNetAndIPFilteringLogs or OperationalLogs.\n  - log_groups                               - (Optional) - Defaults to [] if log_categories is set, if not it defaults to [\"allLogs\", \"audit\"]. A set of log groups to send to export. Possible values are allLogs and audit.\n  - metric_categories                        - (Optional) - Defaults to [\"AllMetrics\"]. A set of metric categories to export.\n  - log_analytics_destination_type           - (Optional) - Defaults to Dedicated. The destination log analytics workspace table for the diagnostic setting. Possible values are Dedicated and AzureDiagnostics. Defaults to Dedicated.\n  - workspace_resource_id                    - (Optional) - The resource ID of the log analytics workspace to send logs and metrics to.\n  - storage_account_resource_id              - (Optional) - The resource ID of the storage account to send logs and metrics to.\n  - event_hub_authorization_rule_resource_id - (Optional) - The resource ID of the event hub authorization rule to send logs and metrics to.\n  - event_hub_name                           - (Optional) - The name of the event hub. If none is specified, the default event hub will be selected.\n  - marketplace_partner_resource_id          - (Optional) - The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.\n\n  > Note: See more in CLI: az monitor diagnostic-settings categories list --resource {serviceBusNamespaceResourceId}\n\n  Example Inputs:\n  hcl\n  diagnostic_settings = {\n    diagnostic1 = {\n      event_hub_name                           = \"hub-name\"\n      log_analytics_destination_type           = \"Dedicated\"\n      name                                     = \"diagnostics\"\n      event_hub_authorization_rule_resource_id = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{eventHubNamespaceName}/authorizationRules/{authorizationRuleName}\"\n\n      #log_categories = [\"ApplicationMetricsLogs\", \"RuntimeAuditLogs\", \"VNetAndIPFilteringLogs\", \"OperationalLogs\"]\n\n      metric_categories           = [\"AllMetrics\"]\n      log_groups                  = [\"allLogs\", \"audit\"]\n      workspace_resource_id       = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}\"\n      storage_account_resource_id = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}\"\n    }\n  }\n    \n"
+  type = map(object({
+    name                                     = optional(string, null)
+    log_categories                           = optional(set(string), [])
+    log_groups                               = optional(set(string), ["allLogs"])
+    metric_categories                        = optional(set(string), ["AllMetrics"])
+    log_analytics_destination_type           = optional(string, "Dedicated")
+    workspace_resource_id                    = optional(string, null)
+    storage_account_resource_id              = optional(string, null)
+    event_hub_authorization_rule_resource_id = optional(string, null)
+    event_hub_name                           = optional(string, null)
+    marketplace_partner_resource_id          = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "enable_telemetry" {
+  description = "  Defaults to true. This variable controls whether or not telemetry is enabled for the module.\n  For more information see https://aka.ms/avm/telemetryinfo.\n  If it is set to false, then no telemetry will be collected.\n"
+  type        = bool
+  default     = true
+}
+
+variable "infrastructure_encryption_enabled" {
+  description = "Defaults to true. Used to specify whether enable Infrastructure Encryption (Double Encryption). Changing this forces a new resource to be created. Requires customer_managed_key."
+  type        = bool
+  default     = true
+}
+
+variable "local_auth_enabled" {
+  description = "Defaults to true. Whether or not SAS authentication is enabled for the Service Bus namespace."
+  type        = bool
+  default     = true
+}
+
+variable "location" {
+  description = "  Azure region where the resource should be deployed.\n  If null, the location will be inferred from the resource group location.\n  Changing this forces a new resource to be created.\n  \n  Example Inputs: eastus\n  See more in CLI: az account list-locations -o table --query \"[].name\"\n"
+  type        = string
+  default     = ""
+}
+
+variable "lock" {
+  description = "  Defaults to null. Controls the Resource Lock configuration for this resource. \n  If specified, it will be inherited by child resources unless overriden when creating those child resources. \n  The following properties can be specified:\n\n  - kind - (Required) - The type of lock. Possible values are CanNotDelete and ReadOnly.\n  - name - (Optional) - The name of the lock. If not specified, a name will be generated based on the kind value. Changing this forces the creation of a new resource.\n\n  > Note: If you use ReadOnly kind lock, you must configure Terraform to use EntraId authentication, as the access of the namespace keys will be blocked thus terraform won't be to do its job.\n\n  Example Inputs:\n  hcl\n  lock = {\n    kind = \"CanNotDelete\"\n    name = \"This resource cannot be deleted easily\"\n  }\n  \n"
+  type = object({
+    kind = string
+    name = optional(string, null)
+  })
+  default = null
+}
+
+variable "managed_identities" {
+  description = "  Defaults to {}. Controls the Managed Identity configuration on this resource. The following properties can be specified:\n\n  - system_assigned            - (Optional) - Defaults to false. Specifies if the System Assigned Managed Identity should be enabled.\n  - user_assigned_resource_ids - (Optional) - Defaults to []. Specifies a set of User Assigned Managed Identity resource IDs to be assigned to this resource.\n\n  Example Inputs:\n  hcl\n  managed_identities = {\n    system_assigned            = true\n    user_assigned_resource_ids = [\n      \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{managedIdentityName}\"\n    ]\n  }\n  \n"
+  type = object({
+    system_assigned            = optional(bool, false)
+    user_assigned_resource_ids = optional(set(string), [])
+  })
+  default = {}
+}
+
+variable "minimum_tls_version" {
+  description = "Defaults to 1.2. The minimum supported TLS version for this Service Bus Namespace. Valid values are: 1.0, 1.1 and 1.2."
+  type        = string
+  default     = "1.2"
+}
+
+variable "name" {
+  description = "  Specifies the name of the ServiceBus Namespace resource. \n  Changing this forces a new resource to be created. \n  Name must only contain letters, numbers, and hyphens and be between 6 and 50 characteres long. Also, it must not start or end with a hyphen.\n\n  Example Inputs: sb-sharepoint-prod-westus-001\n  See more: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftservicebus\n"
+  type        = string
+  default     = ""
+}
+
+variable "network_rule_config" {
+  description = "  IP rules only for Basic and Standard, virtual network or IP rules for Premium. Defines the network rules configuration for the resource.\n\n  - trusted_services_allowed - (Optional) - Defaults to false. Are Azure Services that are known and trusted for this resource type are allowed to bypass firewall configuration? \n  - cidr_or_ip_rules         - (Optional) - Defaults to []. One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.\n  - default_action           - (Optional) - Defaults to Allow. Specifies the default action for the Network Rule Set when a rule (IP, CIDR or subnet) doesn't match. Possible values are Allow and Deny.\n\n  - network_rules - (Optional) - Defaults to []. Ignored for Basic and Standard.\n    - subnet_id - (Required) - The Subnet ID which should be able to access this ServiceBus Namespace.\n\n  > Note: Remember to enable Microsoft.ServiceBus service endpoint on the subnet.\n\n  Defaults to if no value is specified:\n  hcl\n  {\n    cidr_or_ip_rules         = []\n    network_rules            = []\n    default_action           = \"Allow\"\n    trusted_services_allowed = false\n  }\n  \n\n  Example Inputs:\n  hcl\n  network_rule_config = {\n    trusted_services_allowed = true\n    default_action           = \"Allow\"\n    cidr_or_ip_rules         = [\"79.0.0.0\", \"80.0.0.0/24\"]\n\n    network_rules = [\n      {\n        subnet_id = \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}\"\n      }\n    ]\n  }\n  \n"
+  type = object({
+    trusted_services_allowed = optional(bool, false)
+    cidr_or_ip_rules         = optional(set(string), [])
+    default_action           = optional(string, "Allow")
+
+    network_rules = optional(set(object({
+      subnet_id = string
+    })), [])
+  })
+  default = { "cidr_or_ip_rules" : [], "default_action" : "Allow", "network_rules" : [], "trusted_services_allowed" : false }
+}
+
+variable "premium_messaging_partitions" {
+  description = "  Always set to 0 for Standard and Basic. Defaults to 1 for Premium. Specifies the number of messaging partitions. \n  Possible values when Premium are 1, 2, and 4. Changing this forces a new resource to be created.\n"
+  type        = number
+  default     = null
+}
+
+variable "private_endpoints" {
+  description = "  Default to {}. Ignored for Basic and Standard. A map of private endpoints to create. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n  - subnet_resource_id                      - (Required) - The resource ID of the subnet to deploy the private endpoint in.\n  - name                                    - (Optional) - The name of the private endpoint. One will be generated if not set.\n  - private_dns_zone_group_name             - (Optional) - The name of the private DNS zone group. One will be generated if not set.\n  - private_dns_zone_resource_ids           - (Optional) - A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\n  - application_security_group_associations - (Optional) - A map of resource IDs of application security groups to associate with the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n  - private_service_connection_name         - (Optional) - The name of the private service connection. One will be generated if not set.\n  - network_interface_name                  - (Optional) - The name of the network interface. One will be generated if not set.\n  - location                                - (Optional) - The Azure location where the resources will be deployed. Defaults to the location of the resource group.\n  - resource_group_name                     - (Optional) - The resource group where the resources will be deployed. Defaults to the resource group of the resource.\n\n  - ip_configurations - (Optional) - A map of IP configurations to create on the private endpoint. If not specified the platform will create one. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n    - name               - (Required) - The name of the IP configuration.\n    - private_ip_address - (Required) - The private IP address of the IP configuration.\n\n  - role_assignments - (Optional) - A map of role assignments to create on the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. See var.role_assignments for more information.\n  - lock             - (Optional) - The lock level to apply to the private endpoint. Default is None. Possible values are None, CanNotDelete, and ReadOnly.\n  - tags             - (Optional) - A mapping of tags to assign to the private endpoint.\n"
+  type = map(object({
+    subnet_resource_id = string
+
+    name                                    = optional(string, null)
+    private_dns_zone_group_name             = optional(string, "default")
+    private_dns_zone_resource_ids           = optional(set(string), [])
+    application_security_group_associations = optional(map(string), {})
+    private_service_connection_name         = optional(string, null)
+    network_interface_name                  = optional(string, null)
+    location                                = optional(string, null)
+    resource_group_name                     = optional(string, null)
+
+    ip_configurations = optional(map(object({
+      name               = string
+      private_ip_address = string
+    })), {})
+
+    tags = optional(map(string), null)
+
+    lock = optional(object({
+      kind = string
+      name = optional(string, null)
+    }), null)
+
+    role_assignments = optional(map(object({
+      role_definition_id_or_name = string
+      principal_id               = string
+
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      delegated_managed_identity_resource_id = optional(string, null)
+
+      principal_type    = optional(string, null) # forced to be here by lint, not supported
+      condition         = optional(string, null) # forced to be here by lint, not supported
+      condition_version = optional(string, null) # forced to be here by lint, not supported
+    })), {})
+  }))
+  default = {}
+}
+
+variable "private_endpoints_manage_dns_zone_group" {
+  description = "Default to true. Whether to manage private DNS zone groups with this module. If set to false, you must manage private DNS zone groups externally, e.g. using Azure Policy."
+  type        = bool
+  default     = true
+}
+
+variable "public_network_access_enabled" {
+  description = "Defaults to true. Is public network access enabled for the Service Bus Namespace?"
+  type        = bool
+  default     = true
+}
+
+variable "queues" {
+  description = "  Defaults to {}. A map of queues to create.\n  The name of the queue must be unique among topics and queues within the namespace.\n\n  - name                                    - (Optional) - Defaults to null. Specifies the name of the ServiceBus Queue resource. Changing this forces a new resource to be created. If it is null it will use the map key as the name.\n  - lock_duration                           - (Optional) - Its minimum and default value is PT1M (1 minute). Maximum value is PT5M (5 minutes). The ISO 8601 timespan duration of a peek-lock; that is, the amount of time that the message is locked for other receivers.\n  - max_message_size_in_kilobytes           - (Optional) - Always set to 256 for Standard and Basic by Azure. It's mininum and also defaults is 1024 with maximum value of 102400 for Premium. Integer value which controls the maximum size of a message allowed on the queue.\n  - max_size_in_megabytes                   - (Optional) - Defaults to 1024. Possible values are 1024, 2048, 3072, 4096, 5120, 10240, 20480, 40960 and 81920. Integer value which controls the size of memory allocated for the queue.\n  - requires_duplicate_detection            - (Optional) - Always set to false for Basic by Azure. It Defaults to false for the rest of skus. Boolean flag which controls whether the Queue requires duplicate detection. Changing this forces a new resource to be created.\n  - requires_session                        - (Optional) - Always set to false for Basic by Azure. It Defaults to false for the rest of skus. Boolean flag which controls whether the Queue requires sessions. This will allow ordered handling of unbounded sequences of related messages. With sessions enabled a queue can guarantee first-in-first-out delivery of messages. Changing this forces a new resource to be created.\n  - default_message_ttl                     - (Optional) - Defaults to null. Mininum value of PT5S (5 seconds) and maximum of P10675198D (10675198 days). Set null for never. The ISO 8601 timespan duration of the TTL of messages sent to this queue. This is the default value used when TTL is not set on message itself.\n  - dead_lettering_on_message_expiration    - (Optional) - Defaults to false. Boolean flag which controls whether the Queue has dead letter support when a message expires.\n  - duplicate_detection_history_time_window - (Optional) - Defaults to PT10M (10 minutes). Minimun of PT20S (seconds) and Maximun of P7D (7 days). The ISO 8601 timespan duration during which duplicates can be detected.\n  - max_delivery_count                      - (Optional) - Defaults to 10. Minimum of 1 and Maximun of 2147483647. Integer value which controls when a message is automatically dead lettered.\n  - status                                  - (Optional) - Defaults to Active. The status of the Queue. Possible values are Active, Creating, Deleting, Disabled, ReceiveDisabled, Renaming, SendDisabled, Unknown.\n  - enable_batched_operations               - (Optional) - Defaults to true. Boolean flag which controls whether server-side batched operations are enabled.\n  - auto_delete_on_idle                     - (Optional) - Always set to null when Basic. It Defaults to null for the rest of skus. Minimum of PT5M (5 minutes) and maximum of P10675198D (10675198 days). Set null for never. The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted.\n  - enable_partitioning                     - (Optional) - Defaults to false for Basic and Standard. For Premium if premium_messaging_partitions is greater than 1 it will always be set to true if not it will be set to false. Boolean flag which controls whether to enable the queue to be partitioned across multiple message brokers. Changing this forces a new resource to be created. \n  - enable_express                          - (Optional) - Always set to false for Premium and Basic by Azure. Defaults to false for Standard. Boolean flag which controls whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage. It requires requires_duplicate_detection to be set to false\n  - forward_to                              - (Optional) - Always set to false for Basic by Azure. It Defaults to null for the rest of skus. The name of a Queue or Topic to automatically forward messages to. It cannot be enabled if requires_session is enabled.\n  - forward_dead_lettered_messages_to       - (Optional) - Defaults to null. The name of a Queue or Topic to automatically forward dead lettered messages to\n\n  - authorization_rules - (Optional) - Defaults to {}. \n    - name   - (Optional) - Defaults to null. Specifies the name of the Authorization Rule. Changing this forces a new resource to be created. If it is null it will use the map key as the name.\n    - send   - (Optional) - Always set to true when manage is true if not it will default to false. Does this Authorization Rule have Listen permissions to the ServiceBus Queue?\n    - listen - (Optional) - Always set to true when manage is true if not it will default to false. Does this Authorization Rule have Send permissions to the ServiceBus Queue? \n    - manage - (Optional) - Defaults to false. Does this Authorization Rule have Manage permissions to the ServiceBus Queue?\n  \n  - role_assignments - (Optional) - Defaults to {}. A map of role assignments to create. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n    - role_definition_id_or_name             - (Required) - The ID or name of the role definition to assign to the principal.\n    - principal_id                           - (Required) - It's a GUID - The ID of the principal to assign the role to. \n    - description                            - (Optional) - Defaults to null. The description of the role assignment.\n    - delegated_managed_identity_resource_id - (Optional) - Defaults to null. The delegated Azure Resource Id which contains a Managed Identity. This field is only used in cross tenant scenario. Changing this forces a new resource to be created.\n    - skip_service_principal_aad_check       - (Optional) - Defaults to false. If the principal_id is a newly provisioned Service Principal set this value to true to skip the Azure Active Directory check which may fail due to replication lag. This argument is only valid if the principal_id is a Service Principal identity. \n\n  Example Inputs:\n  hcl\n  queues = {\n    testQueue = {\n      auto_delete_on_idle                     = \"P7D\"\n      dead_lettering_on_message_expiration    = true\n      default_message_ttl                     = \"PT5M\"\n      duplicate_detection_history_time_window = \"PT5M\"\n      enable_batched_operations               = true\n      enable_express                          = true\n      enable_partitioning                     = true\n      lock_duration                           = \"PT5M\"\n      requires_duplicate_detection            = true\n      requires_session                        = false\n      max_delivery_count                      = 10\n      max_message_size_in_kilobytes           = 1024\n      max_size_in_megabytes                   = 1024\n      status                                  = \"Active\"\n      forward_to                              = \"forwardQueue\"\n      forward_dead_lettered_messages_to       = \"forwardQueue\"\n\n      role_assignments = {\n        \"key\" = {\n          skip_service_principal_aad_check = false\n          role_definition_id_or_name       = \"Contributor\"\n          description                      = \"This is a test role assignment\"\n          principal_id                     = \"eb5260bd-41f3-4019-9e03-606a617aec13\"\n        }\n      }\n\n      authorization_rules = {\n        testRule = {\n          send   = true\n          listen = true\n          manage = true\n        }\n      }\n    }\n  }\n  \n"
+  type = map(object({
+    name                                    = optional(string, null)
+    max_delivery_count                      = optional(number, 10)
+    enable_batched_operations               = optional(bool, true)
+    requires_duplicate_detection            = optional(bool, false)
+    requires_session                        = optional(bool, false)
+    dead_lettering_on_message_expiration    = optional(bool, false)
+    enable_partitioning                     = optional(bool, null)
+    enable_express                          = optional(bool, null)
+    max_message_size_in_kilobytes           = optional(number, null)
+    default_message_ttl                     = optional(string, null)
+    forward_to                              = optional(string, null)
+    forward_dead_lettered_messages_to       = optional(string, null)
+    auto_delete_on_idle                     = optional(string, null)
+    max_size_in_megabytes                   = optional(number, 1024)
+    lock_duration                           = optional(string, "PT1M")
+    duplicate_detection_history_time_window = optional(string, "PT10M")
+    status                                  = optional(string, "Active")
+
+    authorization_rules = optional(map(object({
+      name   = optional(string, null)
+      send   = optional(bool, false)
+      listen = optional(bool, false)
+      manage = optional(bool, false)
+    })), {})
+
+    role_assignments = optional(map(object({
+      role_definition_id_or_name = string
+      principal_id               = string
+
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      delegated_managed_identity_resource_id = optional(string, null)
+    })), {})
+  }))
+  default = {}
+}
+
+variable "resource_group_name" {
+  description = "  The name of the resource group in which to create this resource. \n  Changing this forces a new resource to be created.\n  Name must be less than 90 characters long and must only contain underscores, hyphens, periods, parentheses, letters, or digits.\n\n  Example Inputs: rg-sharepoint-prod-westus-001\n  See more: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/resource-name-rules#microsoftresources\n"
+  type        = string
+  default     = ""
+}
+
+variable "role_assignments" {
+  description = "  Defaults to {}. A map of role assignments to create. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n  - role_definition_id_or_name             - (Required) - The ID or name of the role definition to assign to the principal.\n  - principal_id                           - (Required) - It's a GUID - The ID of the principal to assign the role to. \n  - description                            - (Optional) - Defaults to null. The description of the role assignment.\n  - delegated_managed_identity_resource_id - (Optional) - Defaults to null. The delegated Azure Resource Id which contains a Managed Identity. This field is only used in cross tenant scenario. Changing this forces a new resource to be created.\n  - skip_service_principal_aad_check       - (Optional) - Defaults to false. If the principal_id is a newly provisioned Service Principal set this value to true to skip the Azure Active Directory check which may fail due to replication lag. This argument is only valid if the principal_id is a Service Principal identity. \n  \n  - condition                              - (Unsupported)\n  - condition_version                      - (Unsupported)\n\n  > Note: only set skip_service_principal_aad_check to true if you are assigning a role to a service principal.\n\n  Example Inputs:\n  hcl\n  role_assignments = {\n    \"key\" = {\n      skip_service_principal_aad_check = false\n      role_definition_id_or_name       = \"Contributor\"\n      description                      = \"This is a test role assignment\"\n      principal_id                     = \"eb5260bd-41f3-4019-9e03-606a617aec13\"\n    }\n  }\n  \n"
+  type = map(object({
+    role_definition_id_or_name = string
+    principal_id               = string
+
+    description                            = optional(string, null)
+    skip_service_principal_aad_check       = optional(bool, false)
+    delegated_managed_identity_resource_id = optional(string, null)
+
+    principal_type    = optional(string, null) # forced to be here by lint, not supported
+    condition         = optional(string, null) # forced to be here by lint, not supported
+    condition_version = optional(string, null) # forced to be here by lint, not supported
+  }))
+  default = {}
+}
+
+variable "sku" {
+  description = "  Defaults to Premium. Defines which tier to use. Options are Basic, Standard or Premium. \n  Please note that setting this field to Premium will force the creation of a new resource.\n"
+  type        = string
+  default     = "Premium"
+}
+
+variable "tags" {
+  description = "  Defaults to {}. A mapping of tags to assign to the resource. These tags will propagate to any child resource unless overriden when creating the child resource\n\n  Example Inputs:\n  hcl\n  tags = {\n    environment = \"testing\"\n  }\n  \n"
+  type        = map(string)
+  default     = null
+}
+
+variable "timeouts" {
+  description = "- create - (Defaults to 30 minutes) Used when creating the ServiceBus Namespace.\n- delete - (Defaults to 30 minutes) Used when deleting the ServiceBus Namespace.\n- read - (Defaults to 5 minutes) Used when retrieving the ServiceBus Namespace.\n- update - (Defaults to 30 minutes) Used when updating the ServiceBus Namespace.\n"
+  type = object({
+    create = optional(string)
+    delete = optional(string)
+    read   = optional(string)
+    update = optional(string)
+  })
+  default = null
+}
+
+variable "topics" {
+  description = "  Defaults to {}. Ignored for Basic. A map of topics to create.\n  The name of the topic must be unique among topics and queues within the namespace.\n\n  - name                                    - (Optional) - Defaults to null. Specifies the name of the ServiceBus Topic resource. Changing this forces a new resource to be created. If it is null it will use the map key as the name.\n  - max_message_size_in_kilobytes           - (Optional) - Always set to 256 for Standard by Azure. It's mininum and also defaults is 1024 with maximum value of 102400 for Premium. Integer value which controls the maximum size of a message allowed on the Topic.\n  - max_size_in_megabytes                   - (Optional) - Defaults to 1024. Possible values are 1024, 2048, 3072, 4096, 5120, 10240, 20480, 40960 and 81920. Integer value which controls the size of memory allocated for the Topic.\n  - requires_duplicate_detection            - (Optional) - Defaults to false. Boolean flag which controls whether the Topic requires duplicate detection. Changing this forces a new resource to be created.\n  - default_message_ttl                     - (Optional) - Defaults to null. Mininum value of PT5S (5 seconds) and maximum of P10675198D (10675198 days). Set null for never. The ISO 8601 timespan duration of the TTL of messages sent to this topic. This is the default value used when TTL is not set on message itself.\n  - duplicate_detection_history_time_window - (Optional) - Defaults to PT10M (10 minutes). Minimun of PT20S (seconds) and Maximun of P7D (7 days). The ISO 8601 timespan duration during which duplicates can be detected.\n  - status                                  - (Optional) - Defaults to Active. The status of the Topic. Possible values are Active, Creating, Deleting, Disabled, ReceiveDisabled, Renaming, SendDisabled, Unknown.\n  - enable_batched_operations               - (Optional) - Defaults to true. Boolean flag which controls whether server-side batched operations are enabled.\n  - auto_delete_on_idle                     - (Optional) - Defaults to null. Minimum of PT5M (5 minutes) and maximum of P10675198D (10675198 days). Set null for never. The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted.\n  - enable_partitioning                     - (Optional) - Defaults to false for Standard. For Premium if premium_messaging_partitions is greater than 1 it will always be set to true if not it will be set to false. Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created. \n  - enable_express                          - (Optional) - Defaults to false for Standard. Always set to false for Premium. Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.\n  - support_ordering                        - (Optional) - Defaults to false. Boolean flag which controls whether the Topic supports ordering.\n\n  - authorization_rules - (Optional) - Defaults to {}. \n    - name   - (Optional) - Defaults to null. Specifies the name of the ServiceBus Topic Authorization Rule resource. Changing this forces a new resource to be created. If it is null it will use the map key as the name.\n    - send   - (Optional) - Always set to true when manage is true if not it will default to false. Does this Authorization Rule have Listen permissions to the ServiceBus Topic?\n    - listen - (Optional) - Always set to true when manage is true if not it will default to false. Does this Authorization Rule have Send permissions to the ServiceBus Topic? \n    - manage - (Optional) - Defaults to false. Does this Authorization Rule have Manage permissions to the ServiceBus Topic?\n\n  - subscriptions - (Optional) - Defaults to {}.\n    - name                                      - (Optional) - Defaults to null. Specifies the name of the ServiceBus Subscription resource. Changing this forces a new resource to be created. If it is null it will use the map key as the name.\n    - max_delivery_count                        - (Optional) - Defaults to 10. Minimum of 1 and Maximun of 2147483647. Integer value which controls when a message is automatically dead lettered.\n    - dead_lettering_on_filter_evaluation_error - (Optional) - Defaults to true. Boolean flag which controls whether the Subscription has dead letter support on filter evaluation exceptions\n    - dead_lettering_on_message_expiration      - (Optional) - Defaults to false. Boolean flag which controls whether the Subscription has dead letter support when a message expires.\n    - enable_batched_operations                 - (Optional) - Defaults to true. Boolean flag which controls whether the Subscription supports batched operations.\n    - requires_session                          - (Optional) - Defaults to false. Boolean flag which controls whether this Subscription supports the concept of a session. Changing this forces a new resource to be created.\n    - forward_to                                - (Optional) - Defaults to null. The name of a Queue or Topic to automatically forward messages to.\n    - forward_dead_lettered_messages_to         - (Optional) - Defaults to null. The name of a Queue or Topic to automatically forward dead lettered messages to\n    - auto_delete_on_idle                       - (Optional) - Defaults to null. Minimum of PT5M (5 minutes) and maximum of P10675198D (10675198 days). Set null for never. The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted.\n    - default_message_ttl                       - (Optional) - Defaults to null. Mininum value of PT5S (5 seconds) and maximum of P10675198D (10675198 days). Set null for never. The ISO 8601 timespan duration of the TTL of messages sent to this queue. This is the default value used when TTL is not set on message itself.\n    - lock_duration                             - (Optional) - Its minimum and default value is PT1M (1 minute). Maximum value is PT5M (5 minutes). The ISO 8601 timespan duration of a peek-lock; that is, the amount of time that the message is locked for other receivers.\n    - status                                    - (Optional) - Defaults to Active. The status of the Subscription. Possible values are Active, ReceiveDisabled, Disabled.\n  \n  - role_assignments - (Optional) - Defaults to {}. A map of role assignments to create. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n    - role_definition_id_or_name             - (Required) - The ID or name of the role definition to assign to the principal.\n    - principal_id                           - (Required) - It's a GUID - The ID of the principal to assign the role to. \n    - description                            - (Optional) - Defaults to null. The description of the role assignment.\n    - delegated_managed_identity_resource_id - (Optional) - Defaults to null. The delegated Azure Resource Id which contains a Managed Identity. This field is only used in cross tenant scenario. Changing this forces a new resource to be created.\n    - skip_service_principal_aad_check       - (Optional) - Defaults to false. If the principal_id is a newly provisioned Service Principal set this value to true to skip the Azure Active Directory check which may fail due to replication lag. This argument is only valid if the principal_id is a Service Principal identity. \n\n  Example Inputs:\n  hcl\n  topics = {\n    testTopic = {\n      auto_delete_on_idle                     = \"P7D\"\n      default_message_ttl                     = \"PT5M\"\n      duplicate_detection_history_time_window = \"PT5M\"\n      enable_batched_operations               = true\n      enable_express                          = false\n      enable_partitioning                     = true\n      requires_duplicate_detection            = true\n      max_message_size_in_kilobytes           = 1024\n      max_size_in_megabytes                   = 1024\n      status                                  = \"Active\"\n      support_ordering                        = true\n\n      subscriptions = {\n        testSubscription = {\n          dead_lettering_on_filter_evaluation_error = true\n          dead_lettering_on_message_expiration      = true\n          default_message_ttl                       = \"PT5M\"\n          enable_batched_operations                 = true\n          lock_duration                             = \"PT1M\"\n          max_delivery_count                        = 100\n          status                                    = \"Active\"\n          auto_delete_on_idle                       = \"P7D\"\n          requires_session                          = false\n          forward_dead_lettered_messages_to         = \"forwardTopic\"\n          forward_to                                = \"forwardTopic\"\n        }\n      }\n\n      role_assignments = {\n        \"key\" = {\n          skip_service_principal_aad_check = false\n          role_definition_id_or_name       = \"Contributor\"\n          description                      = \"This is a test role assignment\"\n          principal_id                     = \"eb5260bd-41f3-4019-9e03-606a617aec13\"\n        }\n      }\n      \n      authorization_rules = {\n        testRule = {\n          send   = true\n          listen = true\n          manage = true\n        }\n      }\n    }\n  }\n  \n"
+  type = map(object({
+    name                                    = optional(string, null)
+    enable_batched_operations               = optional(bool, true)
+    requires_duplicate_detection            = optional(bool, false)
+    enable_partitioning                     = optional(bool, null)
+    enable_express                          = optional(bool, null)
+    support_ordering                        = optional(bool, false)
+    max_message_size_in_kilobytes           = optional(number, null)
+    default_message_ttl                     = optional(string, null)
+    auto_delete_on_idle                     = optional(string, null)
+    max_size_in_megabytes                   = optional(number, 1024)
+    duplicate_detection_history_time_window = optional(string, "PT10M")
+    status                                  = optional(string, "Active")
+
+    authorization_rules = optional(map(object({
+      name   = optional(string, null)
+      send   = optional(bool, false)
+      listen = optional(bool, false)
+      manage = optional(bool, false)
+    })), {})
+
+    subscriptions = optional(map(object({
+      name                                      = optional(string, null)
+      max_delivery_count                        = optional(number, 10)
+      dead_lettering_on_filter_evaluation_error = optional(bool, true)
+      enable_batched_operations                 = optional(bool, true)
+      dead_lettering_on_message_expiration      = optional(bool, false)
+      requires_session                          = optional(bool, false)
+      forward_to                                = optional(string, null)
+      forward_dead_lettered_messages_to         = optional(string, null)
+      auto_delete_on_idle                       = optional(string, null)
+      default_message_ttl                       = optional(string, null)
+      lock_duration                             = optional(string, "PT1M")
+      status                                    = optional(string, "Active")
+    })), {})
+
+    role_assignments = optional(map(object({
+      role_definition_id_or_name = string
+      principal_id               = string
+
+      description                            = optional(string, null)
+      skip_service_principal_aad_check       = optional(bool, false)
+      delegated_managed_identity_resource_id = optional(string, null)
+    })), {})
+  }))
+  default = {}
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "arc_settings",
+    "description": "Arc settings instance after HCI connected."
+  },
+  {
+    "name": "arcbridge",
+    "description": "Arc resource bridge instance after HCI connected."
+  },
+  {
+    "name": "cluster",
+    "description": "HCI Cluster instance"
+  },
+  {
+    "name": "customlocation",
+    "description": "Custom location instance after HCI connected."
+  },
+  {
+    "name": "keyvault",
+    "description": "Keyvault instance that stores deployment secrets."
+  },
+  {
+    "name": "resource_id",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "user_storages",
+    "description": "User storage instances after HCI connected."
+  },
+  {
+    "name": "v_switch_name",
+    "description": "The name of the virtual switch that is used by the network."
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "actions",
+    "type": "list(string)",
+    "description": "List of actions to attach to the scope map.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "container_registry_name",
+    "type": "string",
+    "description": "The name of the Container Registry.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "description",
+    "type": "string",
+    "description": "The description of the Container Registry.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the scope map.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The name of the resource group in which to create the Container Registry scope and token(if variable registry_tokens is defined).",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "registry_tokens",
+    "type": "map(object({\n    name    = string\n    enabled = optional(bool, true)\n    passwords = optional(object({\n      password1 = object({\n        expiry = optional(string)\n      })\n      password2 = optional(object({\n        expiry = optional(string)\n      }))\n    }))\n  }))",
+    "description": "A map of Azure Container Registry token associated to a scope map. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `name` - Specifies the name of the token.\n- `enabled` - Should the Container Registry token be enabled? Defaults to true.\"\n",
+    "default": "{}",
+    "required": false
+  }
+]

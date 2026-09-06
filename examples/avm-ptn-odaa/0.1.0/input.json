@@ -1,0 +1,58 @@
+[
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "virtual_networks",
+    "type": "map(object({\n    address_space = list(string)\n    name          = string\n    ddos_protection_plan = optional(object({\n      enable = bool\n      id     = string\n    }), null)\n    encryption = optional(object({\n      enforcement = string\n    }), null)\n    flow_timeout_in_minutes = optional(number, null)\n    resource_group_name     = optional(string, null)\n    subnet = optional(set(object({\n      delegate_to_oracle = bool\n      address_prefixes   = list(string)\n      name               = string\n      security_group     = optional(string, null)\n    })), null)\n    diagnostic_settings = optional(map(object({\n      name                                     = optional(string, null)\n      log_categories                           = optional(set(string), [])\n      log_groups                               = optional(set(string), [\"allLogs\"])\n      metric_categories                        = optional(set(string), [\"AllMetrics\"])\n      log_analytics_destination_type           = optional(string, \"Dedicated\")\n      workspace_resource_id                    = optional(string, null)\n      storage_account_resource_id              = optional(string, null)\n      event_hub_authorization_rule_resource_id = optional(string, null)\n      event_hub_name                           = optional(string, null)\n      marketplace_partner_resource_id          = optional(string, null)\n    })), null)\n    role_assignments = optional(map(object({\n      role_definition_id_or_name             = string\n      principal_id                           = string\n      description                            = optional(string, null)\n      skip_service_principal_aad_check       = optional(bool, false)\n      condition                              = optional(string, null)\n      condition_version                      = optional(string, null)\n      delegated_managed_identity_resource_id = optional(string, null)\n      principal_type                         = optional(string, null)\n    })), null)\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }), null)\n  }))",
+    "description": "Virtual Network(s) for hosting Exadata appliances",
+    "default": "{\n  \"primaryvnet\": {\n    \"address_space\": [\n      \"10.0.0.0/16\"\n    ],\n    \"name\": \"vnet-odaa\",\n    \"subnet\": [\n      {\n        \"address_prefixes\": [\n          \"10.0.0.0/24\"\n        ],\n        \"delegate_to_oracle\": true,\n        \"name\": \"client\"\n      },\n      {\n        \"address_prefixes\": [\n          \"10.0.1.0/24\"\n        ],\n        \"delegate_to_oracle\": false,\n        \"name\": \"backup\"\n      }\n    ]\n  }\n}",
+    "required": false
+  },
+  {
+    "name": "cloud_exadata_infrastructure",
+    "type": "map(object({\n    name                                 = string\n    location                             = string\n    zone                                 = string\n    compute_count                        = number\n    display_name                         = string\n    maintenance_window_loadtime_in_weeks = optional(string, 0)\n    maintenance_window_preference        = optional(string, \"NoPreference\")\n    maintenance_window_patching_mode     = optional(string, \"Rolling\")\n    shape                                = optional(string, \"Exadata.X9M\")\n    storage_count                        = number\n    tags                                 = optional(map(string))\n  }))",
+    "description": "  Cloud Exadata Infrastructure resources  \n\n  - `name` - The name of the Cloud Exadata Infrastructure.\n  - `location` - The location of the Cloud Exadata Infrastructure.\n  - `zone` - (Optional) The availability zone of the Cloud Exadata Infrastructure.\n  - `compute_count` - The number of compute nodes in the Cloud Exadata Infrastructure.\n  - `display_name` - The display name of the Cloud Exadata Infrastructure.\n  - `maintenance_window_loadtime_in_weeks` - The maintenance window load time in weeks.\n  - `maintenance_window_preference` - The maintenance window preference.\n  - `maintenance_window_patching_mode` - The maintenance window patching mode.\n  - `shape` - The shape of the Cloud Exadata Infrastructure.\n  - `storage_count` - The number of storage servers in the Cloud Exadata Infrastructure.\n  - `tags` - (Optional) A mapping of tags to assign to the Cloud Exadata Infrastructure.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "cloud_exadata_vm_cluster",
+    "type": "map(object({\n    cluster_name               = string\n    display_name               = string\n    cloud_exadata_infra_name   = string\n    location                   = string\n    data_storage_size_in_tbs   = number\n    dbnode_storage_size_in_gbs = number\n    hostname                   = string\n    cpu_core_count             = number\n    data_storage_percentage    = number\n    memory_size_in_gbs         = number\n\n    ssh_public_keys = list(string)\n    nsg_cidrs = optional(set(object({\n      source = string\n      destination_port_range = optional(object({\n        min = string\n        max = string\n      }), null)\n    })))\n    license_model                = optional(string, \"LicenseIncluded\")\n    vnet_name                    = string\n    client_subnet_name           = string\n    backup_subnet_cidr           = string\n    gi_version                   = optional(string, \"19.0.0.0\")\n    time_zone                    = string\n    is_local_backup_enabled      = optional(bool, true)\n    is_sparse_diskgroup_enabled  = optional(bool, true)\n    is_diagnostic_events_enabled = optional(bool, false)\n    is_health_monitoring_enabled = optional(bool, false)\n    is_incident_logs_enabled     = optional(bool, false)\n    tags                         = optional(map(string))\n  }))",
+    "description": "  Cloud Exadata VM Cluster resources\n\n  - `cluster_name` - The name of the Cloud Exadata VM Cluster.\n  - `display_name` - The display name of the Cloud Exadata VM Cluster.\n  - `data_storage_size_in_tbs` - The data storage size in TBs.\n  - `dbnode_storage_size_in_gbs` - The DB node storage size in GBs.\n  - `time_zone` - The time zone of the Cloud Exadata VM Cluster.\n  - `hostname` - The hostname of the Cloud Exadata VM Cluster.\n  - `domain` - The domain of the Cloud Exadata VM Cluster.\n  - `cpu_core_count` - The CPU core count of the Cloud Exadata VM Cluster.\n  - `ocpu_count` - The OCPU count of the Cloud Exadata VM Cluster.\n  - `data_storage_percentage` - The data storage percentage of the Cloud Exadata VM Cluster.\n  - `is_local_backup_enabled` - The local backup enabled status of the Cloud Exadata VM Cluster.\n  - `cloud_exadata_infra_name` - This is a reference to the Cloud Infrastructure object specified in parameters\n  - `is_sparse_diskgroup_enabled` - The sparse diskgroup enabled status of the Cloud Exadata VM Cluster.\n  - `ssh_public_keys` - The SSH public keys of the Cloud Exadata VM Cluster.\n  - `nsg_cidrs` - (Optional) A set of NSG CIDRs of the Cloud Exadata VM Cluster.\n  - `license_model` - The license model of the Cloud Exadata VM Cluster.\n  - `vnet_name` - This is a reference to the VNET object specified in the Virtual networks parameter\n  - `client_subnet_name` - This is a reference to the Subnet object specified in the Subnet attribute in Vnet parameters\n  - `gi_version` - The GI version of the Cloud Exadata VM Cluster.\n  - `backup_subnet_cidr` - The backup subnet CIDR of the Cloud Exadata VM Cluster.\n  - `is_diagnostic_events_enabled` - (Optional) The diagnostic events enabled status of the Cloud Exadata VM Cluster.\n  - `is_health_monitoring_enabled` - (Optional) The health monitoring enabled status of the Cloud Exadata VM Cluster.\n  - `is_incident_logs_enabled` - (Optional) The incident logs enabled status of the Cloud Exadata VM Cluster.\n\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "odaa_vnet_peerings",
+    "type": "map(object({\n    vnet_source_resource_group      = string\n    vnet_destination_resource_group = string\n    vnet_source_name                = string\n    vnet_destination_name           = string\n    }\n  ))",
+    "description": "List of virtual network peerings to be setup",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "name": "sql_stored_procedures",
+    "description": "The value of the sql stored procedures created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_sql_stored_procedure#attributes-reference"
+  },
+  {
+    "name": "sql_triggers",
+    "description": "The value of the sql triggers created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_sql_trigger#attributes-reference"
+  },
+  {
+    "name": "resource_diagnostic_settings",
+    "description": "The diagnostic settings created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting#attributes-reference"
+  },
+  {
+    "name": "resource_locks",
+    "description": "The management locks created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/management_lock#attributes-reference"
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the cosmos db account created."
+  },
+  {
+    "name": "resource",
+    "description": "The cosmos db account created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_account#attributes-reference"
+  },
+  {
+    "name": "sql_functions",
+    "description": "The value of the sql functions created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_sql_function#attributes-reference"
+  },
+  {
+    "name": "resource_role_assignments",
+    "description": "The role assignments created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment#attributes-reference"
+  },
+  {
+    "name": "resource_private_endpoints",
+    "description": "A map of the private endpoints created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint#attributes-reference"
+  },
+  {
+    "name": "resource_private_endpoints_application_security_group_association",
+    "description": "The private endpoint application security group associations created"
+  },
+  {
+    "name": "name",
+    "description": "The name of the cosmos db account created."
+  },
+  {
+    "name": "sql_databases",
+    "description": "The value of the sql databases created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_sql_database#attributes-reference"
+  },
+  {
+    "name": "sql_containers",
+    "description": "The value of the sql containers created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_sql_container#attributes-reference"
+  },
+  {
+    "name": "sql_dedicated_gateway",
+    "description": "The value of the sql dedicated gateway created. More info: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cosmosdb_sql_dedicated_gateway#attributes-reference"
+  }
+]

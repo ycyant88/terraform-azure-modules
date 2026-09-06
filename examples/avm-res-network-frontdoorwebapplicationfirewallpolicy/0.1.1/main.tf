@@ -1,0 +1,19 @@
+module "avm-res-network-frontdoorwebapplicationfirewallpolicy" {
+  source                            = "Azure/avm-res-network-frontdoorwebapplicationfirewallpolicy/azurerm"
+  version                           = "0.1.1"
+  custom_block_response_body        = var.custom_block_response_body
+  custom_block_response_status_code = var.custom_block_response_status_code
+  custom_rules                      = var.custom_rules
+  enable_telemetry                  = var.enable_telemetry
+  enabled                           = var.enabled
+  lock                              = var.lock
+  managed_rules                     = var.managed_rules
+  mode                              = var.mode
+  name                              = var.name
+  redirect_url                      = var.redirect_url
+  request_body_check_enabled        = var.request_body_check_enabled
+  resource_group_name               = var.resource_group_name
+  role_assignments                  = var.role_assignments
+  sku_name                          = var.sku_name
+  tags                              = var.tags
+}

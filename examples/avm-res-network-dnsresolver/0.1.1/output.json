@@ -1,0 +1,18 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The ID of the DNS resolver."
+  },
+  {
+    "name": "inbound_endpoint_ips",
+    "description": "The IP addresses of the inbound endpoints."
+  },
+  {
+    "name": "name",
+    "description": "The name of the DNS resolver."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  }
+]

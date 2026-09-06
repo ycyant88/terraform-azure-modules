@@ -1,0 +1,65 @@
+[
+  {
+    "name": "base_policy_name",
+    "type": "string",
+    "description": "(Required) The name of the base policy.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "mode",
+    "type": "string",
+    "description": "(Required) RAI policy mode. The enum value mapping is `Default`, `Deferred`, `Blocking`, `Asynchronous_filter`. Use `Asynchronous_filter` for API versions after 2024-10-01.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "(Required) The name of the RAI policy. Changing this forces a new resource to be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "(Required) The resource ID of the parent Cognitive Services / AI Services account that owns this RAI policy.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "custom_block_lists",
+    "type": "list(object({\n    source          = string\n    block_list_name = string\n    blocking        = bool\n  }))",
+    "description": "`custom_block_lists` block supports the following:\n- `source`          - (Required) Content source to apply the Custom Block Lists. Possible values are `Prompt`, `Completion`.\n- `block_list_name` - (Required) Name of ContentFilter.\n- `blocking`        - (Required) If blocking would occur.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "content_filters",
+    "type": "list(object({\n    blocking           = bool\n    enabled            = bool\n    name               = string\n    severity_threshold = string\n    source             = string\n  }))",
+    "description": "`content_filters` block supports the following:\n- `name`               - (Required) Name of ContentFilter.\n- `enabled`            - (Required) If the ContentFilter is enabled.\n- `severity_threshold` - (Required) Level at which content is filtered. Possible values are `Low`, `Medium`, `High`.\n- `blocking`           - (Required) If blocking would occur.\n- `source`             - (Required) Content source to apply the Content Filters. Possible values are `Prompt`, `Completion`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the submodule.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n    multiplier           = optional(number)\n    randomization_factor = optional(number)\n  })",
+    "description": "Retry configuration applied to the `azapi_resource` managed by this submodule. Defaults to `null` (no custom retry).\n\n- `error_message_regex`  - (Optional) A list of regex patterns matching error messages that trigger a retry.\n- `interval_seconds`     - (Optional) Initial interval between retries in seconds.\n- `max_interval_seconds` - (Optional) Maximum interval between retries in seconds.\n- `multiplier`           - (Optional) The multiplier applied to the retry interval after each attempt.\n- `randomization_factor` - (Optional) The randomization factor applied to the retry interval.\n\nSee <https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource#retry> for full semantics.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": "Per-operation timeouts for the RAI policy resource. Defaults to `null` (provider defaults). Each value is a Go duration string (e.g. `30m`, `1h`).\n",
+    "default": "null",
+    "required": false
+  }
+]

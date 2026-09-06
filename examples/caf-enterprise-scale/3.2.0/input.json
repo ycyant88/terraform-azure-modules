@@ -1,0 +1,261 @@
+[
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "If specified, will set a custom Name (ID) value for the Enterprise-scale \"root\" Management Group, and append this to the ID for all core Enterprise-scale Management Groups.",
+    "default": "\"es\"",
+    "required": false
+  },
+  {
+    "name": "deploy_core_landing_zones",
+    "type": "bool",
+    "description": "If set to true, module will deploy the core Enterprise-scale Management Group hierarchy, including \"out of the box\" policies and roles.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "archetype_config_overrides",
+    "type": "any",
+    "description": "If specified, will set custom Archetype configurations for the core ALZ Management Groups. Does not work for management groups specified by the 'custom_landing_zones' input variable.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "custom_landing_zones",
+    "type": "any",
+    "description": "If specified, will deploy additional Management Groups alongside Enterprise-scale core Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "create_duration_delay",
+    "type": "object({\n    azurerm_management_group      = optional(string, \"30s\")\n    azurerm_policy_assignment     = optional(string, \"30s\")\n    azurerm_policy_definition     = optional(string, \"30s\")\n    azurerm_policy_set_definition = optional(string, \"30s\")\n    azurerm_role_assignment       = optional(string, \"0s\")\n    azurerm_role_definition       = optional(string, \"60s\")\n  })",
+    "description": "Used to tune terraform apply when faced with errors caused by API caching or eventual consistency. Sets a custom delay period after creation of the specified resource type.",
+    "default": "{\n  \"azurerm_management_group\": \"30s\",\n  \"azurerm_policy_assignment\": \"30s\",\n  \"azurerm_policy_definition\": \"30s\",\n  \"azurerm_policy_set_definition\": \"30s\",\n  \"azurerm_role_assignment\": \"0s\",\n  \"azurerm_role_definition\": \"60s\"\n}",
+    "required": false
+  },
+  {
+    "name": "deploy_corp_landing_zones",
+    "type": "bool",
+    "description": "If set to true, module will deploy the \"Corp\" Management Group, including \"out of the box\" policies and roles.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "deploy_online_landing_zones",
+    "type": "bool",
+    "description": "If set to true, module will deploy the \"Online\" Management Group, including \"out of the box\" policies and roles.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "deploy_connectivity_resources",
+    "type": "bool",
+    "description": "If set to true, will enable the \"Connectivity\" landing zone settings and add \"Connectivity\" resources into the current Subscription context.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "subscription_id_identity",
+    "type": "string",
+    "description": "If specified, identifies the Platform subscription for \"Identity\" for resource deployment and correct placement in the Management Group hierarchy.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "library_path",
+    "type": "string",
+    "description": "If specified, sets the path to a custom library folder for archetype artefacts.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "disable_base_module_tags",
+    "type": "bool",
+    "description": "If set to true, will remove the base module tags applied to all resources deployed by the module which support tags.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "deploy_demo_landing_zones",
+    "type": "bool",
+    "description": "If set to true, module will deploy the demo \"Landing Zone\" Management Groups (\"Corp\", \"Online\", and \"SAP\") into the core Enterprise-scale Management Group hierarchy.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "policy_non_compliance_message_enforcement_placeholder",
+    "type": "string",
+    "description": "If set overrides the non-compliance message placeholder used in message templates.",
+    "default": "\"{enforcementMode}\"",
+    "required": false
+  },
+  {
+    "name": "policy_non_compliance_message_enforced_replacement",
+    "type": "string",
+    "description": "If set overrides the non-compliance replacement used for enforced policy assignments.",
+    "default": "\"must\"",
+    "required": false
+  },
+  {
+    "name": "root_name",
+    "type": "string",
+    "description": "If specified, will set a custom Display Name value for the Enterprise-scale \"root\" Management Group.",
+    "default": "\"Enterprise-Scale\"",
+    "required": false
+  },
+  {
+    "name": "deploy_sap_landing_zones",
+    "type": "bool",
+    "description": "If set to true, module will deploy the \"SAP\" Management Group, including \"out of the box\" policies and roles.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "subscription_id_overrides",
+    "type": "map(list(string))",
+    "description": "If specified, will be used to assign subscription_ids to the default Enterprise-scale Management Groups.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "default_tags",
+    "type": "map(string)",
+    "description": "If specified, will set the default tags for all resources deployed by this module where supported.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "policy_non_compliance_message_default",
+    "type": "string",
+    "description": "If set overrides the default non-compliance message used for policy assignments.",
+    "default": "\"This resource {enforcementMode} be compliant with the assigned policy.\"",
+    "required": false
+  },
+  {
+    "name": "configure_management_resources",
+    "type": "object({\n    settings = optional(object({\n      log_analytics = optional(object({\n        enabled = optional(bool, true)\n        config = optional(object({\n          retention_in_days                                 = optional(number, 30)\n          enable_monitoring_for_vm                          = optional(bool, true)\n          enable_monitoring_for_vmss                        = optional(bool, true)\n          enable_solution_for_agent_health_assessment       = optional(bool, true)\n          enable_solution_for_anti_malware                  = optional(bool, true)\n          enable_solution_for_change_tracking               = optional(bool, true)\n          enable_solution_for_service_map                   = optional(bool, true)\n          enable_solution_for_sql_assessment                = optional(bool, true)\n          enable_solution_for_sql_vulnerability_assessment  = optional(bool, true)\n          enable_solution_for_sql_advanced_threat_detection = optional(bool, true)\n          enable_solution_for_updates                       = optional(bool, true)\n          enable_solution_for_vm_insights                   = optional(bool, true)\n          enable_sentinel                                   = optional(bool, true)\n        }), {})\n      }), {})\n      security_center = optional(object({\n        enabled = optional(bool, true)\n        config = optional(object({\n          email_security_contact             = optional(string, \"security_contact@replace_me\")\n          enable_defender_for_app_services   = optional(bool, true)\n          enable_defender_for_arm            = optional(bool, true)\n          enable_defender_for_containers     = optional(bool, true)\n          enable_defender_for_dns            = optional(bool, true)\n          enable_defender_for_key_vault      = optional(bool, true)\n          enable_defender_for_oss_databases  = optional(bool, true)\n          enable_defender_for_servers        = optional(bool, true)\n          enable_defender_for_sql_servers    = optional(bool, true)\n          enable_defender_for_sql_server_vms = optional(bool, true)\n          enable_defender_for_storage        = optional(bool, true)\n        }), {})\n      }), {})\n    }), {})\n    location = optional(string, \"\")\n    tags     = optional(any, {})\n    advanced = optional(any, {})\n  })",
+    "description": "If specified, will customize the \"Management\" landing zone settings and resources.",
+    "default": "{\n  \"settings\": {\n    \"log_analytics\": {\n      \"config\": {\n        \"enable_monitoring_for_vm\": true,\n        \"enable_monitoring_for_vmss\": true,\n        \"enable_sentinel\": true,\n        \"enable_solution_for_agent_health_assessment\": true,\n        \"enable_solution_for_anti_malware\": true,\n        \"enable_solution_for_change_tracking\": true,\n        \"enable_solution_for_service_map\": true,\n        \"enable_solution_for_sql_advanced_threat_detection\": true,\n        \"enable_solution_for_sql_assessment\": true,\n        \"enable_solution_for_sql_vulnerability_assessment\": true,\n        \"enable_solution_for_updates\": true,\n        \"enable_solution_for_vm_insights\": true,\n        \"retention_in_days\": 30\n      },\n      \"enabled\": true\n    },\n    \"security_center\": {\n      \"config\": {\n        \"email_security_contact\": \"security_contact@replace_me\",\n        \"enable_defender_for_app_services\": true,\n        \"enable_defender_for_arm\": true,\n        \"enable_defender_for_containers\": true,\n        \"enable_defender_for_dns\": true,\n        \"enable_defender_for_key_vault\": true,\n        \"enable_defender_for_oss_databases\": true,\n        \"enable_defender_for_servers\": true,\n        \"enable_defender_for_sql_server_vms\": true,\n        \"enable_defender_for_sql_servers\": true,\n        \"enable_defender_for_storage\": true\n      },\n      \"enabled\": true\n    }\n  }\n}",
+    "required": false
+  },
+  {
+    "name": "subscription_id_management",
+    "type": "string",
+    "description": "If specified, identifies the Platform subscription for \"Management\" for resource deployment and correct placement in the Management Group hierarchy.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "default_location",
+    "type": "string",
+    "description": "If specified, will set the Azure region in which region bound resources will be deployed. Please see: https://azure.microsoft.com/en-gb/global-infrastructure/geographies/",
+    "default": "\"eastus\"",
+    "required": false
+  },
+  {
+    "name": "strict_subscription_association",
+    "type": "bool",
+    "description": "If set to true, subscriptions associated to management groups will be exclusively set by the module and any added by another process will be removed. If set to false, the module will will only enforce association of the specified subscriptions and those added to management groups by other processes will not be removed.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "policy_non_compliance_message_not_supported_definitions",
+    "type": "list(string)",
+    "description": "If set, overrides the list of built-in policy definition that do not support non-compliance messages.",
+    "default": "[\n  \"/providers/Microsoft.Authorization/policyDefinitions/1c6e92c9-99f0-4e55-9cf2-0c234dc48f99\",\n  \"/providers/Microsoft.Authorization/policyDefinitions/1a5b4dca-0b6f-4cf5-907c-56316bc1bf3d\",\n  \"/providers/Microsoft.Authorization/policyDefinitions/95edb821-ddaf-4404-9732-666045e056b4\"\n]",
+    "required": false
+  },
+  {
+    "name": "policy_non_compliance_message_not_enforced_replacement",
+    "type": "string",
+    "description": "If set overrides the non-compliance replacement used for unenforced policy assignments.",
+    "default": "\"should\"",
+    "required": false
+  },
+  {
+    "name": "root_parent_id",
+    "type": "string",
+    "description": "The root_parent_id is used to specify where to set the root for all Landing Zone deployments. Usually the Tenant ID when deploying the core Enterprise-scale Landing Zones.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "deploy_management_resources",
+    "type": "bool",
+    "description": "If set to true, will enable the \"Management\" landing zone settings and add \"Management\" resources into the current Subscription context.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "configure_connectivity_resources",
+    "type": "object({\n    settings = optional(object({\n      hub_networks = optional(list(\n        object({\n          enabled = optional(bool, true)\n          config = object({\n            address_space                = list(string)\n            location                     = optional(string, \"\")\n            link_to_ddos_protection_plan = optional(bool, false)\n            dns_servers                  = optional(list(string), [])\n            bgp_community                = optional(string, \"\")\n            subnets = optional(list(\n              object({\n                name                      = string\n                address_prefixes          = list(string)\n                network_security_group_id = optional(string, \"\")\n                route_table_id            = optional(string, \"\")\n              })\n            ), [])\n            virtual_network_gateway = optional(object({\n              enabled = optional(bool, false)\n              config = optional(object({\n                address_prefix           = optional(string, \"\")\n                gateway_sku_expressroute = optional(string, \"\")\n                gateway_sku_vpn          = optional(string, \"\")\n                advanced_vpn_settings = optional(object({\n                  enable_bgp                       = optional(bool, null)\n                  active_active                    = optional(bool, null)\n                  private_ip_address_allocation    = optional(string, \"\")\n                  default_local_network_gateway_id = optional(string, \"\")\n                  vpn_client_configuration = optional(list(\n                    object({\n                      address_space = list(string)\n                      aad_tenant    = optional(string, null)\n                      aad_audience  = optional(string, null)\n                      aad_issuer    = optional(string, null)\n                      root_certificate = optional(list(\n                        object({\n                          name             = string\n                          public_cert_data = string\n                        })\n                      ), [])\n                      revoked_certificate = optional(list(\n                        object({\n                          name             = string\n                          public_cert_data = string\n                        })\n                      ), [])\n                      radius_server_address = optional(string, null)\n                      radius_server_secret  = optional(string, null)\n                      vpn_client_protocols  = optional(list(string), null)\n                      vpn_auth_types        = optional(list(string), null)\n                    })\n                  ), [])\n                  bgp_settings = optional(list(\n                    object({\n                      asn         = optional(number, null)\n                      peer_weight = optional(number, null)\n                      peering_addresses = optional(list(\n                        object({\n                          ip_configuration_name = optional(string, null)\n                          apipa_addresses       = optional(list(string), null)\n                        })\n                      ), [])\n                    })\n                  ), [])\n                  custom_route = optional(list(\n                    object({\n                      address_prefixes = optional(list(string), [])\n                    })\n                  ), [])\n                }), {})\n              }), {})\n            }), {})\n            azure_firewall = optional(object({\n              enabled = optional(bool, false)\n              config = optional(object({\n                address_prefix                = optional(string, \"\")\n                enable_dns_proxy              = optional(bool, true)\n                dns_servers                   = optional(list(string), [])\n                sku_tier                      = optional(string, \"Standard\")\n                base_policy_id                = optional(string, \"\")\n                private_ip_ranges             = optional(list(string), [])\n                threat_intelligence_mode      = optional(string, \"Alert\")\n                threat_intelligence_allowlist = optional(list(string), [])\n                availability_zones = optional(object({\n                  zone_1 = optional(bool, true)\n                  zone_2 = optional(bool, true)\n                  zone_3 = optional(bool, true)\n                }), {})\n              }), {})\n            }), {})\n            spoke_virtual_network_resource_ids      = optional(list(string), [])\n            enable_outbound_virtual_network_peering = optional(bool, false)\n            enable_hub_network_mesh_peering         = optional(bool, false)\n          })\n        })\n      ), [])\n      vwan_hub_networks = optional(list(\n        object({\n          enabled = optional(bool, true)\n          config = object({\n            address_prefix = string\n            location       = string\n            sku            = optional(string, \"\")\n            routes = optional(list(\n              object({\n                address_prefixes    = list(string)\n                next_hop_ip_address = string\n              })\n            ), [])\n            expressroute_gateway = optional(object({\n              enabled = optional(bool, false)\n              config = optional(object({\n                scale_unit = optional(number, 1)\n              }), {})\n            }), {})\n            vpn_gateway = optional(object({\n              enabled = optional(bool, false)\n              config = optional(object({\n                bgp_settings = optional(list(\n                  object({\n                    asn         = number\n                    peer_weight = number\n                    instance_0_bgp_peering_address = optional(list(\n                      object({\n                        custom_ips = list(string)\n                      })\n                    ), [])\n                    instance_1_bgp_peering_address = optional(list(\n                      object({\n                        custom_ips = list(string)\n                      })\n                    ), [])\n                  })\n                ), [])\n                routing_preference = optional(string, \"Microsoft Network\")\n                scale_unit         = optional(number, 1)\n              }), {})\n            }), {})\n            azure_firewall = optional(object({\n              enabled = optional(bool, false)\n              config = optional(object({\n                enable_dns_proxy              = optional(bool, true)\n                dns_servers                   = optional(list(string), [])\n                sku_tier                      = optional(string, \"Standard\")\n                base_policy_id                = optional(string, \"\")\n                private_ip_ranges             = optional(list(string), [])\n                threat_intelligence_mode      = optional(string, \"Alert\")\n                threat_intelligence_allowlist = optional(list(string), [])\n                availability_zones = optional(object({\n                  zone_1 = optional(bool, true)\n                  zone_2 = optional(bool, true)\n                  zone_3 = optional(bool, true)\n                }), {})\n              }), {})\n            }), {})\n            spoke_virtual_network_resource_ids        = optional(list(string), [])\n            secure_spoke_virtual_network_resource_ids = optional(list(string), [])\n            enable_virtual_hub_connections            = optional(bool, false)\n          })\n        })\n      ), [])\n      ddos_protection_plan = optional(object({\n        enabled = optional(bool, false)\n        config = optional(object({\n          location = optional(string, \"\")\n        }), {})\n      }), {})\n      dns = optional(object({\n        enabled = optional(bool, true)\n        config = optional(object({\n          location = optional(string, \"\")\n          enable_private_link_by_service = optional(object({\n            azure_api_management                 = optional(bool, true)\n            azure_app_configuration_stores       = optional(bool, true)\n            azure_arc                            = optional(bool, true)\n            azure_automation_dscandhybridworker  = optional(bool, true)\n            azure_automation_webhook             = optional(bool, true)\n            azure_backup                         = optional(bool, true)\n            azure_batch_account                  = optional(bool, true)\n            azure_bot_service_bot                = optional(bool, true)\n            azure_bot_service_token              = optional(bool, true)\n            azure_cache_for_redis                = optional(bool, true)\n            azure_cache_for_redis_enterprise     = optional(bool, true)\n            azure_container_registry             = optional(bool, true)\n            azure_cosmos_db_cassandra            = optional(bool, true)\n            azure_cosmos_db_gremlin              = optional(bool, true)\n            azure_cosmos_db_mongodb              = optional(bool, true)\n            azure_cosmos_db_sql                  = optional(bool, true)\n            azure_cosmos_db_table                = optional(bool, true)\n            azure_data_explorer                  = optional(bool, true)\n            azure_data_factory                   = optional(bool, true)\n            azure_data_factory_portal            = optional(bool, true)\n            azure_data_health_data_services      = optional(bool, true)\n            azure_data_lake_file_system_gen2     = optional(bool, true)\n            azure_database_for_mariadb_server    = optional(bool, true)\n            azure_database_for_mysql_server      = optional(bool, true)\n            azure_database_for_postgresql_server = optional(bool, true)\n            azure_digital_twins                  = optional(bool, true)\n            azure_event_grid_domain              = optional(bool, true)\n            azure_event_grid_topic               = optional(bool, true)\n            azure_event_hubs_namespace           = optional(bool, true)\n            azure_file_sync                      = optional(bool, true)\n            azure_hdinsights                     = optional(bool, true)\n            azure_iot_dps                        = optional(bool, true)\n            azure_iot_hub                        = optional(bool, true)\n            azure_key_vault                      = optional(bool, true)\n            azure_key_vault_managed_hsm          = optional(bool, true)\n            azure_kubernetes_service_management  = optional(bool, true)\n            azure_machine_learning_workspace     = optional(bool, true)\n            azure_managed_disks                  = optional(bool, true)\n            azure_media_services                 = optional(bool, true)\n            azure_migrate                        = optional(bool, true)\n            azure_monitor                        = optional(bool, true)\n            azure_purview_account                = optional(bool, true)\n            azure_purview_studio                 = optional(bool, true)\n            azure_relay_namespace                = optional(bool, true)\n            azure_search_service                 = optional(bool, true)\n            azure_service_bus_namespace          = optional(bool, true)\n            azure_site_recovery                  = optional(bool, true)\n            azure_sql_database_sqlserver         = optional(bool, true)\n            azure_synapse_analytics_dev          = optional(bool, true)\n            azure_synapse_analytics_sql          = optional(bool, true)\n            azure_synapse_studio                 = optional(bool, true)\n            azure_web_apps_sites                 = optional(bool, true)\n            azure_web_apps_static_sites          = optional(bool, true)\n            cognitive_services_account           = optional(bool, true)\n            microsoft_power_bi                   = optional(bool, true)\n            signalr                              = optional(bool, true)\n            signalr_webpubsub                    = optional(bool, true)\n            storage_account_blob                 = optional(bool, true)\n            storage_account_file                 = optional(bool, true)\n            storage_account_queue                = optional(bool, true)\n            storage_account_table                = optional(bool, true)\n            storage_account_web                  = optional(bool, true)\n          }), {})\n          private_link_locations                                 = optional(list(string), [])\n          public_dns_zones                                       = optional(list(string), [])\n          private_dns_zones                                      = optional(list(string), [])\n          enable_private_dns_zone_virtual_network_link_on_hubs   = optional(bool, true)\n          enable_private_dns_zone_virtual_network_link_on_spokes = optional(bool, true)\n          virtual_network_resource_ids_to_link                   = optional(list(string), [])\n        }), {})\n      }), {})\n    }), {})\n    location = optional(string, \"\")\n    tags     = optional(any, {})\n    advanced = optional(any, {})\n  })",
+    "description": "If specified, will customize the \"Connectivity\" landing zone settings and resources.",
+    "default": "{\n  \"settings\": {\n    \"ddos_protection_plan\": {\n      \"config\": {\n        \"location\": \"\"\n      },\n      \"enabled\": false\n    },\n    \"dns\": {\n      \"config\": {\n        \"enable_private_dns_zone_virtual_network_link_on_hubs\": true,\n        \"enable_private_dns_zone_virtual_network_link_on_spokes\": true,\n        \"enable_private_link_by_service\": {\n          \"azure_api_management\": true,\n          \"azure_app_configuration_stores\": true,\n          \"azure_arc\": true,\n          \"azure_automation_dscandhybridworker\": true,\n          \"azure_automation_webhook\": true,\n          \"azure_backup\": true,\n          \"azure_batch_account\": true,\n          \"azure_bot_service_bot\": true,\n          \"azure_bot_service_token\": true,\n          \"azure_cache_for_redis\": true,\n          \"azure_cache_for_redis_enterprise\": true,\n          \"azure_container_registry\": true,\n          \"azure_cosmos_db_cassandra\": true,\n          \"azure_cosmos_db_gremlin\": true,\n          \"azure_cosmos_db_mongodb\": true,\n          \"azure_cosmos_db_sql\": true,\n          \"azure_cosmos_db_table\": true,\n          \"azure_data_explorer\": true,\n          \"azure_data_factory\": true,\n          \"azure_data_factory_portal\": true,\n          \"azure_data_health_data_services\": true,\n          \"azure_data_lake_file_system_gen2\": true,\n          \"azure_database_for_mariadb_server\": true,\n          \"azure_database_for_mysql_server\": true,\n          \"azure_database_for_postgresql_server\": true,\n          \"azure_digital_twins\": true,\n          \"azure_event_grid_domain\": true,\n          \"azure_event_grid_topic\": true,\n          \"azure_event_hubs_namespace\": true,\n          \"azure_file_sync\": true,\n          \"azure_hdinsights\": true,\n          \"azure_iot_dps\": true,\n          \"azure_iot_hub\": true,\n          \"azure_key_vault\": true,\n          \"azure_key_vault_managed_hsm\": true,\n          \"azure_kubernetes_service_management\": true,\n          \"azure_machine_learning_workspace\": true,\n          \"azure_managed_disks\": true,\n          \"azure_media_services\": true,\n          \"azure_migrate\": true,\n          \"azure_monitor\": true,\n          \"azure_purview_account\": true,\n          \"azure_purview_studio\": true,\n          \"azure_relay_namespace\": true,\n          \"azure_search_service\": true,\n          \"azure_service_bus_namespace\": true,\n          \"azure_site_recovery\": true,\n          \"azure_sql_database_sqlserver\": true,\n          \"azure_synapse_analytics_dev\": true,\n          \"azure_synapse_analytics_sql\": true,\n          \"azure_synapse_studio\": true,\n          \"azure_web_apps_sites\": true,\n          \"azure_web_apps_static_sites\": true,\n          \"cognitive_services_account\": true,\n          \"microsoft_power_bi\": true,\n          \"signalr\": true,\n          \"signalr_webpubsub\": true,\n          \"storage_account_blob\": true,\n          \"storage_account_file\": true,\n          \"storage_account_queue\": true,\n          \"storage_account_table\": true,\n          \"storage_account_web\": true\n        },\n        \"location\": \"\",\n        \"private_dns_zones\": [],\n        \"private_link_locations\": [],\n        \"public_dns_zones\": [],\n        \"virtual_network_resource_ids_to_link\": []\n      },\n      \"enabled\": true\n    },\n    \"hub_networks\": [\n      {\n        \"config\": {\n          \"address_space\": [\n            \"10.100.0.0/16\"\n          ],\n          \"azure_firewall\": {\n            \"config\": {\n              \"address_prefix\": \"10.100.0.0/24\",\n              \"availability_zones\": {\n                \"zone_1\": true,\n                \"zone_2\": true,\n                \"zone_3\": true\n              },\n              \"base_policy_id\": \"\",\n              \"dns_servers\": [],\n              \"enable_dns_proxy\": true,\n              \"private_ip_ranges\": [],\n              \"sku_tier\": \"\",\n              \"threat_intelligence_allowlist\": [],\n              \"threat_intelligence_mode\": \"\"\n            },\n            \"enabled\": false\n          },\n          \"bgp_community\": \"\",\n          \"dns_servers\": [],\n          \"enable_hub_network_mesh_peering\": false,\n          \"enable_outbound_virtual_network_peering\": false,\n          \"link_to_ddos_protection_plan\": false,\n          \"location\": \"\",\n          \"spoke_virtual_network_resource_ids\": [],\n          \"subnets\": [],\n          \"virtual_network_gateway\": {\n            \"config\": {\n              \"address_prefix\": \"10.100.1.0/24\",\n              \"advanced_vpn_settings\": {\n                \"active_active\": null,\n                \"bgp_settings\": [],\n                \"custom_route\": [],\n                \"default_local_network_gateway_id\": \"\",\n                \"enable_bgp\": null,\n                \"private_ip_address_allocation\": \"\",\n                \"vpn_client_configuration\": []\n              },\n              \"gateway_sku_expressroute\": \"ErGw2AZ\",\n              \"gateway_sku_vpn\": \"VpnGw3\"\n            },\n            \"enabled\": false\n          }\n        },\n        \"enabled\": true\n      }\n    ],\n    \"vwan_hub_networks\": [\n      {\n        \"config\": {\n          \"address_prefix\": \"10.200.0.0/22\",\n          \"azure_firewall\": {\n            \"config\": {\n              \"availability_zones\": {\n                \"zone_1\": true,\n                \"zone_2\": true,\n                \"zone_3\": true\n              },\n              \"base_policy_id\": \"\",\n              \"dns_servers\": [],\n              \"enable_dns_proxy\": false,\n              \"private_ip_ranges\": [],\n              \"sku_tier\": \"Standard\",\n              \"threat_intelligence_allowlist\": [],\n              \"threat_intelligence_mode\": \"\"\n            },\n            \"enabled\": false\n          },\n          \"enable_virtual_hub_connections\": false,\n          \"expressroute_gateway\": {\n            \"config\": {\n              \"scale_unit\": 1\n            },\n            \"enabled\": false\n          },\n          \"location\": \"\",\n          \"routes\": [],\n          \"secure_spoke_virtual_network_resource_ids\": [],\n          \"sku\": \"\",\n          \"spoke_virtual_network_resource_ids\": [],\n          \"vpn_gateway\": {\n            \"config\": {\n              \"bgp_settings\": [],\n              \"routing_preference\": \"\",\n              \"scale_unit\": 1\n            },\n            \"enabled\": false\n          }\n        },\n        \"enabled\": false\n      }\n    ]\n  }\n}",
+    "required": false
+  },
+  {
+    "name": "template_file_variables",
+    "type": "any",
+    "description": "If specified, provides the ability to define custom template variables used when reading in template files from the built-in and custom library_path.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "custom_policy_roles",
+    "type": "map(list(string))",
+    "description": "If specified, the custom_policy_roles variable overrides which Role Definition ID(s) (value) to assign for Policy Assignments with a Managed Identity, if the assigned \"policyDefinitionId\" (key) is included in this variable.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "policy_non_compliance_message_enabled",
+    "type": "bool",
+    "description": "If set to false, will disable non-compliance messages altogether.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "destroy_duration_delay",
+    "type": "object({\n    azurerm_management_group      = optional(string, \"0s\")\n    azurerm_policy_assignment     = optional(string, \"0s\")\n    azurerm_policy_definition     = optional(string, \"0s\")\n    azurerm_policy_set_definition = optional(string, \"0s\")\n    azurerm_role_assignment       = optional(string, \"0s\")\n    azurerm_role_definition       = optional(string, \"0s\")\n  })",
+    "description": "Used to tune terraform deploy when faced with errors caused by API caching or eventual consistency. Sets a custom delay period after destruction of the specified resource type.",
+    "default": "{\n  \"azurerm_management_group\": \"0s\",\n  \"azurerm_policy_assignment\": \"0s\",\n  \"azurerm_policy_definition\": \"0s\",\n  \"azurerm_policy_set_definition\": \"0s\",\n  \"azurerm_role_assignment\": \"0s\",\n  \"azurerm_role_definition\": \"0s\"\n}",
+    "required": false
+  },
+  {
+    "name": "disable_telemetry",
+    "type": "bool",
+    "description": "If set to true, will disable telemetry for the module. See https://aka.ms/alz-terraform-module-telemetry.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "policy_non_compliance_message_default_enabled",
+    "type": "bool",
+    "description": "If set to true, will enable the use of the default custom non-compliance messages for policy assignments if they are not provided.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "deploy_identity_resources",
+    "type": "bool",
+    "description": "If set to true, will enable the \"Identity\" landing zone settings.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "configure_identity_resources",
+    "type": "object({\n    settings = optional(object({\n      identity = optional(object({\n        enabled = optional(bool, true)\n        config = optional(object({\n          enable_deny_public_ip             = optional(bool, true)\n          enable_deny_rdp_from_internet     = optional(bool, true)\n          enable_deny_subnet_without_nsg    = optional(bool, true)\n          enable_deploy_azure_backup_on_vms = optional(bool, true)\n        }), {})\n      }), {})\n    }), {})\n  })",
+    "description": "If specified, will customize the \"Identity\" landing zone settings.",
+    "default": "{\n  \"settings\": {\n    \"identity\": {\n      \"config\": {\n        \"enable_deny_public_ip\": true,\n        \"enable_deny_rdp_from_internet\": true,\n        \"enable_deny_subnet_without_nsg\": true,\n        \"enable_deploy_azure_backup_on_vms\": true\n      },\n      \"enabled\": true\n    }\n  }\n}",
+    "required": false
+  },
+  {
+    "name": "subscription_id_connectivity",
+    "type": "string",
+    "description": "If specified, identifies the Platform subscription for \"Connectivity\" for resource deployment and correct placement in the Management Group hierarchy.",
+    "default": "\"\"",
+    "required": false
+  }
+]

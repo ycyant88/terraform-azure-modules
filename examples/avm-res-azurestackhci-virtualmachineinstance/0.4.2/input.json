@@ -1,0 +1,268 @@
+[
+  {
+    "name": "dynamic_memory_buffer",
+    "type": "number",
+    "description": "Buffer memory in MB when dynamic memory is enabled",
+    "default": "20",
+    "required": false
+  },
+  {
+    "name": "dynamic_memory_max",
+    "type": "number",
+    "description": "Maximum memory in MB when dynamic memory is enabled",
+    "default": "8192",
+    "required": false
+  },
+  {
+    "name": "no_proxy",
+    "type": "list(string)",
+    "description": "URLs, which can bypass proxy. Typical examples would be [localhost,127.0.0.1,.svc,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,100.0.0.0/8]",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "user_storage_id",
+    "type": "string",
+    "description": "The user storage ID to store images.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "nic_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the nic.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "trusted_ca",
+    "type": "string",
+    "description": "Alternative CA cert to use for connecting to proxy servers.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "v_cpu_count",
+    "type": "number",
+    "description": "Number of vCPUs",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "logical_network_id",
+    "type": "string",
+    "description": "The ID of the logical network to use for the NIC.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "domain_target_ou",
+    "type": "string",
+    "description": "Optional domain organizational unit to join. example: ou=computers,dc=contoso,dc=com - Required if 'domain_to_join' is specified.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "domain_to_join",
+    "type": "string",
+    "description": "Optional Domain name to join - specify to join the VM to domain. example: contoso.com - If left empty, ou, username and password parameters will not be evaluated in the deployment.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    system_assigned            = optional(bool, false)\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "Controls the Managed Identity configuration on this resource. The following properties can be specified:\n\n- `system_assigned` - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\n- `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "custom_location_id",
+    "type": "string",
+    "description": "The custom location ID for the Azure Stack HCI cluster.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "domain_join_password",
+    "type": "string",
+    "description": "Optional Password of User with permissions to join the domain. - Required if 'domain_to_join' is specified.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "http_proxy",
+    "type": "string",
+    "description": "HTTP URL for proxy server. An example URL is:http://proxy.example.com:3128.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "linux_ssh_config",
+    "type": "object({\n    publicKeys = list(object({\n      keyData = string\n      path    = string\n    }))\n  })",
+    "description": "SSH configuration with public keys for linux.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n- `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "data_disk_params",
+    "type": "map(object({\n    name       = string\n    diskSizeGB = number\n    dynamic    = bool\n  }))",
+    "description": "The array description of the dataDisks to attach to the vm. Provide an empty array for no additional disks, or an array following the example below.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "domain_join_extension_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the domain join extension.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "dynamic_memory_min",
+    "type": "number",
+    "description": "Minimum memory in MB when dynamic memory is enabled",
+    "default": "512",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "secure_boot_enabled",
+    "type": "bool",
+    "description": "Enable secure boot",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the arc vm.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "type_handler_version",
+    "type": "string",
+    "description": "The version of the type handler to use.",
+    "default": "\"1.3\"",
+    "required": false
+  },
+  {
+    "name": "admin_username",
+    "type": "string",
+    "description": "Admin username",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "https_proxy",
+    "type": "string",
+    "description": "HTTPS URL for proxy server. The server may still use an HTTP address as shown in this example: http://proxy.example.com:3128.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_ip_address",
+    "type": "string",
+    "description": "The private IP address of the NIC",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "domain_join_user_name",
+    "type": "string",
+    "description": "Optional User Name with permissions to join the domain. example: domain-joiner - Required if 'domain_to_join' is specified.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - The description of the role assignment.\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - The condition which will be used to scope the role assignment.\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "Name of the VM resource",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "auto_upgrade_minor_version",
+    "type": "bool",
+    "description": "Whether to enable auto upgrade minor version",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "dynamic_memory",
+    "type": "bool",
+    "description": "Enable dynamic memory",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "os_type",
+    "type": "string",
+    "description": "The OS type of the VM. Possible values are 'Windows' and 'Linux'.",
+    "default": "\"Windows\"",
+    "required": false
+  },
+  {
+    "name": "windows_ssh_config",
+    "type": "object({\n    publicKeys = list(object({\n      keyData = string\n      path    = string\n    }))\n  })",
+    "description": "SSH configuration with public keys for windows.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "admin_password",
+    "type": "string",
+    "description": "Admin password",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "image_id",
+    "type": "string",
+    "description": "The name of a Marketplace Gallery Image already downloaded to the Azure Stack HCI cluster. For example: winServer2022-01",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "memory_mb",
+    "type": "number",
+    "description": "Memory in MB",
+    "default": "8192",
+    "required": false
+  }
+]

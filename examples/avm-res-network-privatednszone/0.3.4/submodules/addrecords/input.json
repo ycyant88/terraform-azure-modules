@@ -1,0 +1,65 @@
+[
+  {
+    "name": "zone_name",
+    "type": "string",
+    "description": "The name of the private DNS zone.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "mx_records",
+    "type": "map(object({\n    name = optional(string, \"@\")\n    ttl  = number\n    records = map(object({\n      preference = number\n      exchange   = string\n    }))\n    tags = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a MX record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "txt_records",
+    "type": "map(object({\n    name = string\n    ttl  = number\n    records = map(object({\n      value = string\n    }))\n    tags = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a TXT record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group of the private DNS zone.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "a_records",
+    "type": "map(object({\n    name    = string\n    ttl     = number\n    records = list(string)\n    tags    = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a A record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "aaaa_records",
+    "type": "map(object({\n    name    = string\n    ttl     = number\n    records = list(string)\n    tags    = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a AAAA record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "cname_records",
+    "type": "map(object({\n    name   = string\n    ttl    = number\n    record = string\n    tags   = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a CNAME record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "ptr_records",
+    "type": "map(object({\n    name    = string\n    ttl     = number\n    records = list(string)\n    tags    = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a PTR record.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "srv_records",
+    "type": "map(object({\n    name = string\n    ttl  = number\n    records = map(object({\n      priority = number\n      weight   = number\n      port     = number\n      target   = string\n    }))\n    tags = optional(map(string), null)\n  }))",
+    "description": "A map of objects where each object contains information to create a SRV record.",
+    "default": "{}",
+    "required": false
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "internal_inbound_ip_addresses",
+    "description": "The internal inbound IP addresses of the App Service Environment (ASE)."
+  },
+  {
+    "name": "linux_outbound_ip_addresses",
+    "description": "The Linux outbound IP addresses of the App Service Environment (ASE)."
+  },
+  {
+    "name": "remote_debug_enabled",
+    "description": "Whether remote debug is enabled."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the networking configuration."
+  },
+  {
+    "name": "windows_outbound_ip_addresses",
+    "description": "The Windows outbound IP addresses of the App Service Environment (ASE)."
+  },
+  {
+    "name": "allow_new_private_endpoint_connections",
+    "description": "Whether new private endpoint connections are allowed."
+  },
+  {
+    "name": "external_inbound_ip_addresses",
+    "description": "The external inbound IP addresses of the App Service Environment (ASE)."
+  },
+  {
+    "name": "ftp_enabled",
+    "description": "Whether FTP is enabled."
+  }
+]

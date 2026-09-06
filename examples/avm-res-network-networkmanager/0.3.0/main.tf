@@ -1,0 +1,21 @@
+module "avm-res-network-networkmanager" {
+  source                         = "Azure/avm-res-network-networkmanager/azurerm"
+  version                        = "0.3.0"
+  connectivity_configurations    = var.connectivity_configurations
+  description                    = var.description
+  diagnostic_settings            = var.diagnostic_settings
+  enable_telemetry               = var.enable_telemetry
+  location                       = var.location
+  lock                           = var.lock
+  name                           = var.name
+  network_groups                 = var.network_groups
+  network_manager_scope          = var.network_manager_scope
+  network_manager_scope_accesses = var.network_manager_scope_accesses
+  network_manager_timeouts       = var.network_manager_timeouts
+  resource_group_name            = var.resource_group_name
+  role_assignments               = var.role_assignments
+  routing_configurations         = var.routing_configurations
+  scope_connections              = var.scope_connections
+  security_admin_configurations  = var.security_admin_configurations
+  tags                           = var.tags
+}

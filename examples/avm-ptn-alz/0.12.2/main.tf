@@ -1,0 +1,22 @@
+module "avm-ptn-alz" {
+  source                                                        = "Azure/avm-ptn-alz/azurerm"
+  version                                                       = "0.12.2"
+  architecture_name                                             = var.architecture_name
+  delays                                                        = var.delays
+  dependencies                                                  = var.dependencies
+  enable_telemetry                                              = var.enable_telemetry
+  location                                                      = var.location
+  management_group_hierarchy_settings                           = var.management_group_hierarchy_settings
+  management_group_role_assignments                             = var.management_group_role_assignments
+  override_policy_definition_parameter_assign_permissions_set   = var.override_policy_definition_parameter_assign_permissions_set
+  override_policy_definition_parameter_assign_permissions_unset = var.override_policy_definition_parameter_assign_permissions_unset
+  parent_resource_id                                            = var.parent_resource_id
+  partner_id                                                    = var.partner_id
+  policy_assignment_non_compliance_message_settings             = var.policy_assignment_non_compliance_message_settings
+  policy_assignments_to_modify                                  = var.policy_assignments_to_modify
+  policy_default_values                                         = var.policy_default_values
+  retries                                                       = var.retries
+  role_assignment_definition_lookup_enabled                     = var.role_assignment_definition_lookup_enabled
+  subscription_placement                                        = var.subscription_placement
+  timeouts                                                      = var.timeouts
+}

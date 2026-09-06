@@ -1,0 +1,26 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the parent resource."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "A map of private endpoints. The map key is the supplied input to var.private_endpoints. The map value is the entire azurerm_private_endpoint resource."
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource id for the parent resource."
+  },
+  {
+    "name": "system_assigned_mi_principal_id",
+    "description": "The system assigned managed identity principal ID of the parent resource."
+  },
+  {
+    "name": "scope_maps",
+    "description": "A map of scope maps. The map key is the supplied input to var.scope_maps. The map value is the entire scope map module.\nThe scope map module contains the following outputs:\n- `id` - The ID of the Container Registry Scope Map.\n- `registry_tokens` - The registry token object.\n  - `id` - The ID of the Container Registry token.\n  - `registry_token_passwords` - The registry token password object.\n    - `id` - The ID of the Container Registry token password.\n    - `password1` - The first password object of the token.\n    - `password2` - The second password object of the token.\n"
+  }
+]

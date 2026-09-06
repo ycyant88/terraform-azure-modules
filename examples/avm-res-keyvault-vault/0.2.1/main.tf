@@ -1,0 +1,26 @@
+module "avm-res-keyvault-vault" {
+  source                                 = "Azure/avm-res-keyvault-vault/azurerm"
+  version                                = "0.2.1"
+  contacts                               = var.contacts
+  enable_telemetry                       = var.enable_telemetry
+  enabled_for_deployment                 = var.enabled_for_deployment
+  enabled_for_disk_encryption            = var.enabled_for_disk_encryption
+  enabled_for_template_deployment        = var.enabled_for_template_deployment
+  keys                                   = var.keys
+  location                               = var.location
+  lock                                   = var.lock
+  name                                   = var.name
+  network_acls                           = var.network_acls
+  private_endpoints                      = var.private_endpoints
+  public_network_access_enabled          = var.public_network_access_enabled
+  purge_protection_enabled               = var.purge_protection_enabled
+  resource_group_name                    = var.resource_group_name
+  role_assignments                       = var.role_assignments
+  secrets                                = var.secrets
+  secrets_value                          = var.secrets_value
+  sku_name                               = var.sku_name
+  tags                                   = var.tags
+  tenant_id                              = var.tenant_id
+  wait_for_rbac_before_key_operations    = var.wait_for_rbac_before_key_operations
+  wait_for_rbac_before_secret_operations = var.wait_for_rbac_before_secret_operations
+}

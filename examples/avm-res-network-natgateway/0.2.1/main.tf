@@ -1,0 +1,19 @@
+module "avm-res-network-natgateway" {
+  source                  = "Azure/avm-res-network-natgateway/azurerm"
+  version                 = "0.2.1"
+  enable_telemetry        = var.enable_telemetry
+  idle_timeout_in_minutes = var.idle_timeout_in_minutes
+  location                = var.location
+  lock                    = var.lock
+  name                    = var.name
+  public_ip_configuration = var.public_ip_configuration
+  public_ip_prefix_length = var.public_ip_prefix_length
+  public_ips              = var.public_ips
+  resource_group_name     = var.resource_group_name
+  role_assignments        = var.role_assignments
+  sku_name                = var.sku_name
+  subnet_associations     = var.subnet_associations
+  tags                    = var.tags
+  timeouts                = var.timeouts
+  zones                   = var.zones
+}

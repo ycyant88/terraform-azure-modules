@@ -1,0 +1,38 @@
+[
+  {
+    "name": "oidc_issuer_url",
+    "description": "The OIDC issuer URL of the Kubernetes cluster."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "resource_id",
+    "description": "Resource ID of the Kubernetes cluster."
+  },
+  {
+    "name": "key_vault_secrets_provider_object_id",
+    "description": "The object ID of the key vault secrets provider."
+  },
+  {
+    "name": "kube_admin_config",
+    "description": "The kube_admin_config block of the AKS cluster, only available when Local Accounts & Role-Based Access Control (RBAC) with AAD are enabled."
+  },
+  {
+    "name": "kubelet_identity_id",
+    "description": "The identity ID of the kubelet identity."
+  },
+  {
+    "name": "name",
+    "description": "Name of the Kubernetes cluster."
+  },
+  {
+    "name": "node_resource_group_id",
+    "description": "The resource group ID of the node resource group."
+  },
+  {
+    "name": "nodepool_resource_ids",
+    "description": "A map of nodepool keys to resource ids."
+  }
+]

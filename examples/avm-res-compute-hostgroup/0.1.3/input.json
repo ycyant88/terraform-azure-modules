@@ -1,0 +1,65 @@
+[
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The location where the dedicated host group will be created.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where dedicated host group will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "automatic_placement_enabled",
+    "type": "bool",
+    "description": "Whether or not automatic placement is enabled for the host group.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "zone",
+    "type": "string",
+    "description": "The Availability Zone for the Dedicated Host Group.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "dedicated_host_group_name",
+    "type": "string",
+    "description": "The name of the dedicated host.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "platform_fault_domain_count",
+    "type": "number",
+    "description": "The number of fault domains that the host group can span.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dedicated_hosts",
+    "type": "map(object({\n    name                    = string\n    sku_name                = string\n    auto_replace_on_failure = optional(bool, true)\n    platform_fault_domain   = number\n    license_type            = optional(string, \"None\")\n    tags                    = optional(map(string), null)\n  }))",
+    "description": "(Optional) A map of the hosts and their specifications in the Dedicated Host Group",
+    "default": "{}",
+    "required": false
+  }
+]

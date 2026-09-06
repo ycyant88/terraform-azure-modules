@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Resource ID of the ODAA VM Cluster"
+  },
+  {
+    "name": "vm_cluster_ocid",
+    "description": "Value of the OCID of the ODAA VM Cluster"
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  }
+]

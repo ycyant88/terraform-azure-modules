@@ -1,0 +1,50 @@
+[
+  {
+    "name": "umi_principal_ids",
+    "description": "The principal id of the user managed identity, sometimes known as the object id.\nValue will be null if `var.umi_enabled` is false.\n"
+  },
+  {
+    "name": "umi_resource_ids",
+    "description": "The Azure resource id of the user managed identity.\nValue will be null if `var.umi_enabled` is false.\n"
+  },
+  {
+    "name": "umi_tenant_ids",
+    "description": "The tenant id of the user managed identity.\nValue will be null if `var.umi_enabled` is false.\n"
+  },
+  {
+    "name": "virtual_network_resource_group_ids",
+    "description": "A map of resource group ids, keyed by the var.virtual_networks input map. Only populated if the virtualnetwork submodule is enabled."
+  },
+  {
+    "name": "virtual_network_resource_ids",
+    "description": "A map of virtual network resource ids, keyed by the var.virtual_networks input map. Only populated if the virtualnetwork submodule is enabled."
+  },
+  {
+    "name": "budget_resource_id",
+    "description": "The created budget resource IDs, expressed as a map."
+  },
+  {
+    "name": "resource_group_resource_ids",
+    "description": "The created resource group IDs, expressed as a map."
+  },
+  {
+    "name": "subscription_id",
+    "description": "The subscription_id is the Azure subscription id that resources have been deployed into."
+  },
+  {
+    "name": "subscription_resource_id",
+    "description": "The subscription_resource_id is the Azure subscription resource id that resources have been deployed into"
+  },
+  {
+    "name": "umi_client_ids",
+    "description": "The client id of the user managed identity.\nValue will be null if `var.umi_enabled` is false.\n"
+  },
+  {
+    "name": "management_group_subscription_association_id",
+    "description": "The management_group_subscription_association_id output is the ID of the management group subscription association.\nValue will be null if `var.subscription_management_group_association_enabled` is false.\n"
+  },
+  {
+    "name": "route_table_resource_ids",
+    "description": "The created route table resource IDs, expressed as a map."
+  }
+]

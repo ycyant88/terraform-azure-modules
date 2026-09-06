@@ -1,0 +1,14 @@
+[
+  {
+    "name": "name",
+    "description": "Name of the Application Insights"
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the Application Insights"
+  }
+]

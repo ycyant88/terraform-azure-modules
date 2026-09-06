@@ -1,0 +1,674 @@
+[
+  {
+    "name": "witness_storage_key_content_type",
+    "type": "string",
+    "description": "(Optional) Content type of the witness storage key.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "witness_storage_key_expiration_date",
+    "type": "string",
+    "description": "(Optional) Expiration date of the witness storage key.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "compute_qos_policy_overrides",
+    "type": "object({\n    priorityValue8021Action_SMB     = string\n    priorityValue8021Action_Cluster = string\n    bandwidthPercentage_SMB         = string\n  })",
+    "description": "QoS policy overrides for network settings with required properties for compute.",
+    "default": "{\n  \"bandwidthPercentage_SMB\": \"\",\n  \"priorityValue8021Action_Cluster\": \"\",\n  \"priorityValue8021Action_SMB\": \"\"\n}",
+    "required": false
+  },
+  {
+    "name": "keyvault_purge_protection_enabled",
+    "type": "bool",
+    "description": "Indicates whether purge protection is enabled.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "key_vault_resource_group",
+    "type": "string",
+    "description": "The resource group of the key vault.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "subnet_mask",
+    "type": "string",
+    "description": "The subnet mask for the network.",
+    "default": "\"255.255.255.0\"",
+    "required": false
+  },
+  {
+    "name": "allow_nested_items_to_be_public",
+    "type": "bool",
+    "description": "Indicates whether nested items can be public.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "witness_storage_account_resource_group_name",
+    "type": "string",
+    "description": "The resource group of the witness storage account. If not provided, 'resource_group_name' will be used as the storage account's resource group.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "witness_type",
+    "type": "string",
+    "description": "The type of the witness.",
+    "default": "\"Cloud\"",
+    "required": false
+  },
+  {
+    "name": "deployment_user_password",
+    "type": "string",
+    "description": "The password for the domain administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "domain_fqdn",
+    "type": "string",
+    "description": "The domain FQDN.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "default_arb_application_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the default arb application.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "key_vault_location",
+    "type": "string",
+    "description": "The location of the key vault.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "witness_path",
+    "type": "string",
+    "description": "The path to the witness.",
+    "default": "\"Cloud\"",
+    "required": false
+  },
+  {
+    "name": "azure_stack_lcm_user_credential_expiration_date",
+    "type": "string",
+    "description": "(Optional) Expiration date of the azure stack lcm user credential.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "cross_tenant_replication_enabled",
+    "type": "bool",
+    "description": "Indicates whether cross-tenant replication is enabled.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "azure_stack_lcm_user_credential_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the azure stack lcm user credential.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "default_arb_application_content_type",
+    "type": "string",
+    "description": "(Optional) Content type of the default arb application.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "is_exported",
+    "type": "bool",
+    "description": "Indicate whether the resource is exported",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "keyvault_secrets",
+    "type": "list(object({\n    eceSecretName = string\n    secretSuffix  = string\n  }))",
+    "description": "A list of key vault secrets.",
+    "default": "[]",
+    "required": false
+  },
+  {
+    "name": "secrets_location",
+    "type": "string",
+    "description": "Secrets location for the deployment.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "storage_adapter_ip_info",
+    "type": "map(list(object({\n    physicalNode = string\n    ipv4Address  = string\n    subnetMask   = string\n  })))",
+    "description": "The IP information for the storage networks. Key is the storage network name.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the HCI cluster. Must be the same as the name when preparing AD.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "azure_stack_lcm_user_credential_content_type",
+    "type": "string",
+    "description": "(Optional) Content type of the azure stack lcm user credential.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_rdma_enabled",
+    "type": "bool",
+    "description": "Indicates whether RDMA is enabled for storage. Storage RDMA will be enabled if either rdma_enabled or storage_rdma_enabled is set to true.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "eu_location",
+    "type": "bool",
+    "description": "Indicates whether the location is in EU.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "override_adapter_property",
+    "type": "bool",
+    "description": "Indicates whether to override adapter property.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "rdma_jumbo_packet",
+    "type": "string",
+    "description": "The jumbo packet size for RDMA.",
+    "default": "\"9014\"",
+    "required": false
+  },
+  {
+    "name": "resource_group_location",
+    "type": "string",
+    "description": "The location of resource group.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "rp_service_principal_object_id",
+    "type": "string",
+    "description": "The object ID of the HCI resource provider service principal.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "storage_intent_name",
+    "type": "string",
+    "description": "The name of storage intent.",
+    "default": "\"Storage\"",
+    "required": false
+  },
+  {
+    "name": "account_replication_type",
+    "type": "string",
+    "description": "The replication type for the storage account.",
+    "default": "\"ZRS\"",
+    "required": false
+  },
+  {
+    "name": "bitlocker_data_volumes",
+    "type": "bool",
+    "description": "When set to true, BitLocker XTS-AES 256-bit encryption is enabled for all data-at-rest on your Azure Stack HCI cluster shared volumes.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "hvci_protection",
+    "type": "bool",
+    "description": "By default, Hypervisor-protected Code Integrity is enabled on your Azure HCI cluster.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "keyvault_soft_delete_retention_days",
+    "type": "number",
+    "description": "The number of days that items should be retained for soft delete.",
+    "default": "30",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\n\n- `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "side_channel_mitigation_enforced",
+    "type": "bool",
+    "description": "When set to true, all the side channel mitigations are enabled.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "deployment_user",
+    "type": "string",
+    "description": "The username for the domain administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_id",
+    "type": "string",
+    "description": "The resource id of resource group.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "compute_intent_name",
+    "type": "string",
+    "description": "The name of compute intent.",
+    "default": "\"ManagementCompute\"",
+    "required": false
+  },
+  {
+    "name": "compute_override_adapter_property",
+    "type": "bool",
+    "description": "Indicates whether to override adapter property for compute.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "configuration_mode",
+    "type": "string",
+    "description": "The configuration mode for the storage.",
+    "default": "\"Express\"",
+    "required": false
+  },
+  {
+    "name": "default_arb_application_expiration_date",
+    "type": "string",
+    "description": "(Optional) Expiration date of the default arb application.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "wdac_enforced",
+    "type": "bool",
+    "description": "WDAC is enabled by default and limits the applications and the code that you can run on your Azure Stack HCI cluster.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "cluster_name",
+    "type": "string",
+    "description": "The name of the HCI cluster.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "cluster_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the cluster.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the storage.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_traffic_type",
+    "type": "list(string)",
+    "description": "Traffic type of storage.",
+    "default": "[\n  \"Storage\"\n]",
+    "required": false
+  },
+  {
+    "name": "azure_service_endpoint",
+    "type": "string",
+    "description": "The Azure service endpoint.",
+    "default": "\"core.windows.net\"",
+    "required": false
+  },
+  {
+    "name": "compute_rdma_enabled",
+    "type": "bool",
+    "description": "Indicates whether RDMA is enabled for compute.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "create_key_vault",
+    "type": "bool",
+    "description": "Set to true to create the key vault, or false to skip it",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "create_witness_storage_account",
+    "type": "bool",
+    "description": "Set to true to create the witness storage account, or false to skip it",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "local_admin_credential_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the local admin credential.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "naming_prefix",
+    "type": "string",
+    "description": "The naming prefix in HCI deployment settings. Site id will be used if not provided.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "operation_type",
+    "type": "string",
+    "description": "The intended operation for a cluster.",
+    "default": "\"ClusterProvisioning\"",
+    "required": false
+  },
+  {
+    "name": "random_suffix",
+    "type": "bool",
+    "description": "Indicate whether to add random suffix",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "service_principal_id",
+    "type": "string",
+    "description": "The service principal ID for the Azure account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "storage_networks",
+    "type": "list(object({\n    name               = string\n    networkAdapterName = string\n    vlanId             = string\n  }))",
+    "description": "A list of storage networks.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "storage_override_adapter_property",
+    "type": "bool",
+    "description": "Indicates whether to override adapter property for storagte.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "min_tls_version",
+    "type": "string",
+    "description": "The minimum TLS version.",
+    "default": "\"TLS1_2\"",
+    "required": false
+  },
+  {
+    "name": "qos_policy_overrides",
+    "type": "object({\n    priorityValue8021Action_SMB     = string\n    priorityValue8021Action_Cluster = string\n    bandwidthPercentage_SMB         = string\n  })",
+    "description": "QoS policy overrides for network settings with required properties.",
+    "default": "{\n  \"bandwidthPercentage_SMB\": \"\",\n  \"priorityValue8021Action_Cluster\": \"\",\n  \"priorityValue8021Action_SMB\": \"\"\n}",
+    "required": false
+  },
+  {
+    "name": "management_adapters",
+    "type": "list(string)",
+    "description": "A list of management adapters.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "site_id",
+    "type": "string",
+    "description": "A unique identifier for the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dns_servers",
+    "type": "list(string)",
+    "description": "A list of DNS server IP addresses.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ending_address",
+    "type": "string",
+    "description": "The ending IP address of the IP address range.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "keyvault_name",
+    "type": "string",
+    "description": "The name of the key vault.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "servers",
+    "type": "list(object({\n    name        = string\n    ipv4Address = string\n  }))",
+    "description": "A list of servers with their names and IPv4 addresses.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "keyvault_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the keyvault.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "local_admin_credential_expiration_date",
+    "type": "string",
+    "description": "(Optional) Expiration date of the local admin credential.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "adou_path",
+    "type": "string",
+    "description": "The Active Directory OU path.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "default_gateway",
+    "type": "string",
+    "description": "The default gateway for the network.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "drtm_protection",
+    "type": "bool",
+    "description": "By default, Secure Boot is enabled on your Azure HCI cluster. This setting is hardware dependent.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "local_admin_credential_content_type",
+    "type": "string",
+    "description": "(Optional) Content type of the local admin credential.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "rdma_protocol",
+    "type": "string",
+    "description": "The RDMA protocol.",
+    "default": "\"RoCEv2\"",
+    "required": false
+  },
+  {
+    "name": "smb_cluster_encryption",
+    "type": "bool",
+    "description": "When set to true, cluster east-west traffic is encrypted.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "traffic_type",
+    "type": "list(string)",
+    "description": "Traffic type of intent.",
+    "default": "[\n  \"Management\",\n  \"Compute\",\n  \"Storage\"\n]",
+    "required": false
+  },
+  {
+    "name": "local_admin_password",
+    "type": "string",
+    "description": "The password for the local administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "starting_address",
+    "type": "string",
+    "description": "The starting IP address of the IP address range.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\n- `principal_id` - The ID of the principal to assign the role to.\n- `description` - The description of the role assignment.\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- `condition` - The condition which will be used to scope the role assignment.\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\n\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "smb_signing_enforced",
+    "type": "bool",
+    "description": "When set to true, the SMB default instance requires sign in for the client and server services.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "custom_location_name",
+    "type": "string",
+    "description": "The name of the custom location.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "credential_guard_enforced",
+    "type": "bool",
+    "description": "When set to true, Credential Guard is enabled on your Azure HCI cluster.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "service_principal_secret",
+    "type": "string",
+    "description": "The service principal secret for the Azure account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "bitlocker_boot_volume",
+    "type": "bool",
+    "description": "When set to true, BitLocker XTS_AES 256-bit encryption is enabled for all data-at-rest on the OS volume of your Azure Stack HCI cluster. This setting is TPM-hardware dependent.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "storage_qos_policy_overrides",
+    "type": "object({\n    priorityValue8021Action_SMB     = string\n    priorityValue8021Action_Cluster = string\n    bandwidthPercentage_SMB         = string\n  })",
+    "description": "QoS policy overrides for network settings with required properties for storage.",
+    "default": "{\n  \"bandwidthPercentage_SMB\": \"\",\n  \"priorityValue8021Action_Cluster\": \"\",\n  \"priorityValue8021Action_SMB\": \"\"\n}",
+    "required": false
+  },
+  {
+    "name": "witness_storage_account_name",
+    "type": "string",
+    "description": "The name of the witness storage account.",
+    "default": "\"\"",
+    "required": false
+  },
+  {
+    "name": "witness_storage_key_tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the witness storage key.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "local_admin_user",
+    "type": "string",
+    "description": "The username for the local administrator account.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "drift_control_enforced",
+    "type": "bool",
+    "description": "When set to true, the security baseline is re-applied regularly.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "intent_name",
+    "type": "string",
+    "description": "The name of intent.",
+    "default": "\"ManagementComputeStorage\"",
+    "required": false
+  },
+  {
+    "name": "rdma_enabled",
+    "type": "bool",
+    "description": "Enables RDMA when set to true. In a converged network configuration, this will make the network use RDMA. In a dedicated storage network configuration, enabling this will enable RDMA on the storage network.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "use_legacy_key_vault_model",
+    "type": "bool",
+    "description": "Indicates whether to use the legacy key vault model.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "storage_connectivity_switchless",
+    "type": "bool",
+    "description": "Indicates whether storage connectivity is switchless.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "compute_traffic_type",
+    "type": "list(string)",
+    "description": "Traffic type of compute.",
+    "default": "[\n  \"Management\",\n  \"Compute\"\n]",
+    "required": false
+  }
+]

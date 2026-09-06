@@ -1,0 +1,10 @@
+[
+  {
+    "name": "configuration",
+    "description": "Returns the configuration settings for resources to deploy for the connectivity solution."
+  },
+  {
+    "name": "debug",
+    "description": "Returns the debug output for the module."
+  }
+]

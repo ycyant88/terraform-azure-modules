@@ -1,0 +1,100 @@
+[
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Default per-operation timeouts applied to every `azapi` resource managed by the module. Defaults to `null` (provider defaults). Each value is a Go duration string (e.g. `30m`, `1h`).\n\n- `create` - (Optional) Timeout for create operations. Defaults to `null`.\n- `read` - (Optional) Timeout for read operations. Defaults to `null`.\n- `update` - (Optional) Timeout for update operations. Defaults to `null`.\n- `delete` - (Optional) Timeout for delete operations. Defaults to `null`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the dashboard.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The Azure resource ID of the parent resource group, in the form `/subscriptions/{subscription_id}/resourceGroups/{resource_group_name}`.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "template_file_path",
+    "type": "string",
+    "description": "Dashboard template file path. For example, ./templates/defaultDashboard.tpl.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    name  = optional(string, null)\n    kind  = string\n    notes = optional(string, null)\n  })",
+    "description": "Controls the management lock applied to the portal dashboard. Defaults to `null` (no lock).\n\n- `kind` - (Required) The kind of lock to apply. Possible values are `CanNotDelete` and `ReadOnly`.\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated.\n- `notes` - (Optional) Notes about the lock. Maps to `Microsoft.Authorization/locks.properties.notes`.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    name                                   = optional(string, null)\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "A map of role assignments to create on the resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. Defaults to `{}`.\n\n- `name` - (Optional) The name of the role assignment. If not set, a random UUID will be generated. Changing this forces the creation of a new resource.\n- `role_definition_id_or_name` - (Required) The ID or name of the role definition to assign to the principal.\n- `principal_id` - (Required) The ID of the principal to assign the role to.\n- `description` - (Optional) The description of the role assignment. Defaults to `null`.\n- `skip_service_principal_aad_check` - (Optional) Retained for backwards compatibility with the legacy `azurerm` schema. Not honoured under AzAPI: the field is accepted but has no effect on the underlying role assignment. Defaults to `false`.\n- `condition` - (Optional) The condition which will be used to scope the role assignment. Defaults to `null`.\n- `condition_version` - (Optional) The version of the condition syntax. Valid value is `2.0`. Defaults to `null`.\n- `delegated_managed_identity_resource_id` - (Optional) The resource ID of the delegated managed identity. Defaults to `null`.\n- `principal_type` - (Optional) The type of principal. One of `User`, `Group`, `ServicePrincipal`, `ForeignGroup`, `Device`. Defaults to `null`.\n\n> Note: There is no built-in Azure RBAC role specific to portal dashboards. Use the generic `Reader`, `Contributor` or `Owner` roles, or supply a custom role definition resource ID.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "template_file_variables",
+    "type": "map(string)",
+    "description": "List of variables values mapping for variables defined in the dashboard template file.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    portal_dashboard = optional(list(string), [])\n  })",
+    "description": "Paths in each resource's `body` whose changes the `azapi` provider ignores after creation, letting an out-of-band controller own those properties without producing perpetual `terraform plan` drift. Prefer Terraform's `lifecycle.ignore_changes` when the paths are static; use this variable when the paths must be derived from variables or other non-static values.\n\n- `portal_dashboard` - Ignored body paths for the dashboard managed by this module. For example, use `[\"properties.lenses\"]` to let users rearrange dashboard tiles in the Azure portal without Terraform reverting them.\n\nPaths use body-relative dot notation. Individual list indices cannot be targeted; ignore the whole property instead. While a path is ignored, configuration changes at that path are **not** sent to Azure until the path is removed from the list.\n\nSupplying a **non-empty** value requires Terraform 1.11 or later, because `ignore_body_changes` is a write-only argument held in provider-private state; changes take effect only after an `apply`. Leaving the list empty (the default) emits no argument, so the module remains usable on earlier Terraform versions.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    portal_dashboard = optional(string, \"Microsoft.Portal/dashboards@2019-01-01-preview\")\n    lock             = optional(string, \"Microsoft.Authorization/locks@2020-05-01\")\n  })",
+    "description": "Override the AzAPI `<provider>/<resource>@<api-version>` strings used by this module. Each key defaults to a tested value; supply only the keys you want to override. Useful when targeting a sovereign cloud with older API versions, or when opting into a newer preview API.\n\n- `portal_dashboard` - The portal dashboard itself.\n- `lock`             - Management lock applied to the dashboard.\n\n> Note: `portal_dashboard` deliberately defaults to `2019-01-01-preview`, which models `properties.lenses` as a **map** keyed by lens index (`\"lenses\": { \"0\": { ... } }`). API version `2020-09-01-preview` and later model `properties.lenses` as an **array**. If you override this value with a newer API version you must also convert your dashboard template file to the array form, otherwise the deployment will fail.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to every `azapi` resource managed by the module (the dashboard, its lock, and role assignments). Defaults to `null` (no custom retry).\n\n- `error_message_regex`  - (Optional) A list of regex patterns matching error messages that trigger a retry. Defaults to `null`.\n- `interval_seconds`     - (Optional) Initial interval between retries in seconds. Defaults to `null` (provider default).\n- `max_interval_seconds` - (Optional) Maximum interval between retries in seconds. Defaults to `null` (provider default).\n\nSee <https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource#retry> for full semantics.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "role_assignment_definition_lookup_enabled",
+    "type": "bool",
+    "description": "Whether the `Azure/avm-utl-interfaces/azure` module composed by the internal `role_assignments` submodule should resolve role definition names supplied via `role_definition_id_or_name` by querying the Azure Authorization API. Defaults to `true`.\n\nSet to `false` if you only ever supply fully-qualified role definition resource IDs (`/subscriptions/.../providers/Microsoft.Authorization/roleDefinitions/<guid>`) in `role_definition_id_or_name`. Disabling the lookup avoids the API call, which is useful in air-gapped or permission-restricted environments where the calling identity lacks `Microsoft.Authorization/roleDefinitions/read` at the parent scope.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  }
+]

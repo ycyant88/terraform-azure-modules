@@ -1,0 +1,10 @@
+[
+  {
+    "name": "id",
+    "description": "The ID of the Azure Firewall."
+  },
+  {
+    "name": "name",
+    "description": "The name of the Azure Firewall."
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "virtual_networks",
+    "type": "map(object({\n    vnet_id = string\n  metadata = optional(map(string), null) }))",
+    "description": "A map virtual network links to create.\n  - `vnet_id` - (Required) The ID of the virtual network to link to.\n  - `metadata` - (Optional) A map of metadata to associate with the virtual network link.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "dns_forwarding_ruleset_id",
+    "type": "string",
+    "description": "The ID of the DNS forwarding ruleset to link to the virtual networks.",
+    "default": "",
+    "required": true
+  }
+]

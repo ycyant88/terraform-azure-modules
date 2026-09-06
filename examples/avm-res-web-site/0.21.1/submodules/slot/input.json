@@ -1,0 +1,408 @@
+[
+  {
+    "name": "vnet_image_pull_enabled",
+    "type": "bool",
+    "description": "Should image pull traffic use VNet routing? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "auto_generated_domain_name_label_scope",
+    "type": "string",
+    "description": "The scope of the auto-generated domain name label.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "dapr_config",
+    "type": "object({\n    app_id                = optional(string)\n    app_port              = optional(number)\n    enable_api_logging    = optional(bool)\n    enabled               = optional(bool)\n    http_max_request_size = optional(number)\n    http_read_buffer_size = optional(number)\n    log_level             = optional(string)\n  })",
+    "description": "Dapr configuration for the slot.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "client_certificate_enabled",
+    "type": "bool",
+    "description": "Should client certificates be enabled? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "hyper_v",
+    "type": "bool",
+    "description": "Should the slot run in Hyper-V isolation?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "client_certificate_exclusion_paths",
+    "type": "string",
+    "description": "Paths to exclude from client certificate authentication.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "end_to_end_encryption_enabled",
+    "type": "bool",
+    "description": "Should end-to-end encryption be enabled?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_endpoints",
+    "type": "map(object({\n    name = optional(string, null)\n    role_assignments = optional(map(object({\n      role_definition_id_or_name             = string\n      principal_id                           = string\n      description                            = optional(string, null)\n      skip_service_principal_aad_check       = optional(bool, false)\n      condition                              = optional(string, null)\n      condition_version                      = optional(string, null)\n      delegated_managed_identity_resource_id = optional(string, null)\n      principal_type                         = optional(string, null)\n    })), {})\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }), null)\n    tags                                    = optional(map(string), null)\n    subnet_resource_id                      = string\n    private_dns_zone_group_name             = optional(string, \"default\")\n    private_dns_zone_resource_ids           = optional(set(string), [])\n    application_security_group_associations = optional(map(string), {})\n    private_service_connection_name         = optional(string, null)\n    network_interface_name                  = optional(string, null)\n    location                                = optional(string, null)\n    resource_group_name                     = optional(string, null)\n    ip_configurations = optional(map(object({\n      name               = string\n      private_ip_address = string\n      member_name        = optional(string, null)\n    })), {})\n  }))",
+    "description": "Private endpoints for the slot.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_config",
+    "type": "object({\n    cpu    = optional(number)\n    memory = optional(string)\n  })",
+    "description": "Resource config for Container App environment hosted apps.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "webdeploy_publish_basic_authentication_enabled",
+    "type": "bool",
+    "description": "Should WebDeploy basic authentication be enabled? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "ip_mode",
+    "type": "string",
+    "description": "The IP mode. Possible values: `IPv4`, `IPv4AndIPv6`, `IPv6`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_endpoints_manage_dns_zone_group",
+    "type": "bool",
+    "description": "Whether to manage DNS zone groups for private endpoints.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\n    role_definition_id_or_name             = string\n    principal_id                           = string\n    description                            = optional(string, null)\n    skip_service_principal_aad_check       = optional(bool, false)\n    condition                              = optional(string, null)\n    condition_version                      = optional(string, null)\n    delegated_managed_identity_resource_id = optional(string, null)\n    principal_type                         = optional(string, null)\n  }))",
+    "description": "Role assignments for the slot.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "storage_shares_to_mount",
+    "type": "map(object({\n    account_name = string\n    mount_path   = string\n    name         = string\n    share_name   = string\n    type         = optional(string, \"AzureFiles\")\n  }))",
+    "description": "Storage shares to mount on the slot.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "Tags to apply to the slot.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vnet_content_share_enabled",
+    "type": "bool",
+    "description": "Should content share traffic use VNet routing? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "client_affinity_proxy_enabled",
+    "type": "bool",
+    "description": "Should client affinity proxy be enabled?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_size",
+    "type": "number",
+    "description": "The size of the function container in MB.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "dns_configuration",
+    "type": "object({\n    alternate_private_dns_zone_id = optional(string)\n    dns_legacy_sort_order         = optional(bool)\n    dns_suffix                    = optional(string)\n  })",
+    "description": "DNS configuration for the slot.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "function_app_uses_fc1",
+    "type": "bool",
+    "description": "Whether the parent app uses Flex Consumption (FC1) plan.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\n    kind = string\n    name = optional(string, null)\n  })",
+    "description": "The lock to apply to the slot.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_endpoints_inherit_lock",
+    "type": "bool",
+    "description": "Whether private endpoints should inherit the lock from the slot.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "vnet_route_all_traffic",
+    "type": "bool",
+    "description": "Should all outbound traffic use VNet routing? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region for the slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "application_insights_key",
+    "type": "string",
+    "description": "The Application Insights instrumentation key (pre-computed from the parent module).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "scm_site_also_stopped",
+    "type": "bool",
+    "description": "Should the SCM site also be stopped?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_account_required",
+    "type": "bool",
+    "description": "Should a storage account be required?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "storage_shares_access_keys",
+    "type": "map(string)",
+    "description": "A map of access keys for storage shares to mount, keyed by the storage share mount key (sensitive).",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "virtual_network_subnet_id",
+    "type": "string",
+    "description": "The subnet ID for VNet integration.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The name of the deployment slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "client_affinity_enabled",
+    "type": "bool",
+    "description": "Should client affinity be enabled? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "site_config",
+    "type": "object({\n    always_on             = optional(bool, true)\n    api_definition_url    = optional(string)\n    api_management_api_id = optional(string)\n    app_command_line      = optional(string)\n    app_scale_limit       = optional(number)\n    auto_heal_enabled     = optional(bool)\n    auto_heal_rules = optional(object({\n      actions = optional(object({\n        action_type = string\n        custom_action = optional(object({\n          exe        = string\n          parameters = optional(string)\n        }))\n        min_process_execution_time = optional(string, \"00:00:00\")\n      }))\n      triggers = optional(object({\n        private_bytes_in_kb = optional(number)\n        requests = optional(object({\n          count         = number\n          time_interval = string\n        }))\n        slow_requests = optional(object({\n          count         = number\n          time_interval = string\n          time_taken    = string\n          path          = optional(string)\n        }))\n        slow_requests_with_path = optional(list(object({\n          count         = number\n          time_interval = string\n          time_taken    = string\n          path          = optional(string)\n        })), [])\n        status_codes = optional(list(object({\n          count         = number\n          time_interval = string\n          status        = number\n          path          = optional(string)\n          sub_status    = optional(number)\n          win32_status  = optional(number)\n        })), [])\n        status_codes_range = optional(list(object({\n          count         = number\n          time_interval = string\n          status_codes  = string\n          path          = optional(string)\n        })), [])\n      }))\n    }))\n    auto_swap_slot_name                           = optional(string)\n    container_registry_managed_identity_client_id = optional(string)\n    container_registry_use_managed_identity       = optional(bool)\n    cors = optional(object({\n      allowed_origins     = optional(list(string))\n      support_credentials = optional(bool, false)\n    }))\n    default_documents              = optional(list(string))\n    detailed_error_logging_enabled = optional(bool)\n    document_root                  = optional(string)\n    dotnet_framework_version       = optional(string, \"v4.0\")\n    elastic_instance_minimum       = optional(number)\n    elastic_web_app_scale_limit    = optional(number)\n    experiments = optional(object({\n      ramp_up_rules = optional(list(object({\n        action_host_name             = optional(string)\n        change_decision_callback_url = optional(string)\n        change_interval_in_minutes   = optional(number)\n        change_step                  = optional(number)\n        max_reroute_percentage       = optional(number)\n        min_reroute_percentage       = optional(number)\n        name                         = optional(string)\n        reroute_percentage           = optional(number)\n      })), [])\n    }))\n    ftps_state = optional(string, \"FtpsOnly\")\n    handler_mappings = optional(list(object({\n      arguments        = optional(string)\n      extension        = optional(string)\n      script_processor = optional(string)\n    })))\n    health_check_path    = optional(string)\n    http2_enabled        = optional(bool, false)\n    http20_proxy_flag    = optional(number)\n    http_logging_enabled = optional(bool)\n    ip_restriction = optional(list(object({\n      action                    = optional(string, \"Allow\")\n      ip_address                = optional(string)\n      name                      = optional(string)\n      priority                  = optional(number, 65000)\n      service_tag               = optional(string)\n      virtual_network_subnet_id = optional(string)\n      headers = optional(object({\n        x_azure_fdid      = optional(list(string))\n        x_fd_health_probe = optional(list(string))\n        x_forwarded_for   = optional(list(string))\n        x_forwarded_host  = optional(list(string))\n      }))\n    })), [])\n    ip_restriction_default_action = optional(string, \"Allow\")\n    java_container                = optional(string)\n    java_container_version        = optional(string)\n    java_version                  = optional(string)\n    limits = optional(object({\n      max_disk_size_in_mb = optional(number)\n      max_memory_in_mb    = optional(number)\n      max_percentage_cpu  = optional(number)\n    }))\n    linux_fx_version                 = optional(string)\n    load_balancing_mode              = optional(string, \"LeastRequests\")\n    local_mysql_enabled              = optional(bool, false)\n    logs_directory_size_limit        = optional(number)\n    managed_pipeline_mode            = optional(string, \"Integrated\")\n    min_tls_cipher_suite             = optional(string)\n    minimum_tls_version              = optional(string, \"1.3\")\n    node_version                     = optional(string)\n    php_version                      = optional(string)\n    powershell_version               = optional(string)\n    pre_warmed_instance_count        = optional(number)\n    python_version                   = optional(string)\n    remote_debugging_enabled         = optional(bool, false)\n    remote_debugging_version         = optional(string)\n    request_tracing_enabled          = optional(bool)\n    request_tracing_expiration_time  = optional(string)\n    runtime_scale_monitoring_enabled = optional(bool)\n    scm_ip_restriction = optional(list(object({\n      action                    = optional(string, \"Allow\")\n      ip_address                = optional(string)\n      name                      = optional(string)\n      priority                  = optional(number, 65000)\n      service_tag               = optional(string)\n      virtual_network_subnet_id = optional(string)\n      headers = optional(object({\n        x_azure_fdid      = optional(list(string))\n        x_fd_health_probe = optional(list(string))\n        x_forwarded_for   = optional(list(string))\n        x_forwarded_host  = optional(list(string))\n      }))\n    })), [])\n    scm_ip_restriction_default_action      = optional(string, \"Allow\")\n    scm_minimum_tls_version                = optional(string, \"1.2\")\n    scm_type                               = optional(string, \"None\")\n    scm_use_main_ip_restriction            = optional(bool, false)\n    tracing_options                        = optional(string)\n    use_32_bit_worker                      = optional(bool, false)\n    vnet_private_ports_count               = optional(number)\n    vnet_route_all_enabled                 = optional(bool, false)\n    website_time_zone                      = optional(string)\n    websockets_enabled                     = optional(bool, false)\n    windows_fx_version                     = optional(string)\n    worker_count                           = optional(number)\n    application_insights_connection_string = optional(string)\n    application_insights_key               = optional(string)\n    application_stack = optional(object({\n      docker = optional(object({\n        docker_image_name   = optional(string)\n        docker_registry_url = optional(string)\n        docker_image_tag    = optional(string, \"latest\")\n      }))\n      dotnet = optional(object({\n        dotnet_version              = optional(string)\n        current_stack               = optional(string)\n        use_custom_runtime          = optional(bool, false)\n        use_dotnet_isolated_runtime = optional(bool, false)\n      }))\n      java = optional(object({\n        java_version           = optional(string)\n        java_container         = optional(string)\n        java_container_version = optional(string)\n      }))\n      node = optional(object({\n        node_version = optional(string)\n      }))\n      php = optional(object({\n        php_version = optional(string)\n      }))\n      python = optional(object({\n        python_version = optional(string)\n      }))\n      powershell = optional(object({\n        powershell_version = optional(string)\n      }))\n    }))\n    virtual_application = optional(list(object({\n      physical_path   = optional(string, \"site\\\\wwwroot\")\n      preload_enabled = optional(bool, false)\n      virtual_path    = optional(string, \"/\")\n      virtual_directory = optional(list(object({\n        physical_path = optional(string)\n        virtual_path  = optional(string)\n      })), [])\n    })), [])\n  })",
+    "description": "Site configuration for the deployment slot.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "workload_profile_name",
+    "type": "string",
+    "description": "The workload profile name.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "host_names_disabled",
+    "type": "bool",
+    "description": "Should public hostnames be disabled?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "hosting_environment_id",
+    "type": "string",
+    "description": "The resource ID of the App Service Environment.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\n    system_assigned            = optional(bool, false)\n    user_assigned_resource_ids = optional(set(string), [])\n  })",
+    "description": "Controls the Managed Identity configuration on this resource. The following properties can be specified:\n\n- `system_assigned` - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\n- `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "os_type",
+    "type": "string",
+    "description": "The OS type of the app. Must be `Linux` or `Windows`.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "application_insights_connection_string",
+    "type": "string",
+    "description": "The Application Insights connection string (pre-computed from the parent module).",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "connection_strings",
+    "type": "map(object({\n    name  = optional(string)\n    type  = optional(string)\n    value = optional(string)\n  }))",
+    "description": "Connection strings for the slot.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "redundancy_mode",
+    "type": "string",
+    "description": "The site redundancy mode.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vnet_application_traffic_enabled",
+    "type": "bool",
+    "description": "Should application traffic use VNet routing? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "client_certificate_mode",
+    "type": "string",
+    "description": "The client certificate mode. Defaults to `Required`.",
+    "default": "\"Required\"",
+    "required": false
+  },
+  {
+    "name": "app_settings",
+    "type": "map(string)",
+    "description": "App settings for the slot.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "is_function_app",
+    "type": "bool",
+    "description": "Whether the parent app is a function app.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "server_farm_id",
+    "type": "string",
+    "description": "Optional override server farm resource ID for this slot.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "vnet_backup_restore_enabled",
+    "type": "bool",
+    "description": "Should backup/restore traffic use VNet routing? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "service_plan_resource_id",
+    "type": "string",
+    "description": "The default App Service Plan resource ID (used if `server_farm_id` is not set).",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "client_affinity_partitioning_enabled",
+    "type": "bool",
+    "description": "Should client affinity partitioning (CHIPS) be enabled?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Is the slot enabled? Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "https_only",
+    "type": "bool",
+    "description": "Should the slot only be accessible over HTTPS? Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "public_network_access_enabled",
+    "type": "bool",
+    "description": "Should public network access be enabled? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "ssh_enabled",
+    "type": "bool",
+    "description": "Should SSH be enabled?",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "ftp_publish_basic_authentication_enabled",
+    "type": "bool",
+    "description": "Should FTP basic authentication be enabled? Defaults to `false`.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "managed_environment_id",
+    "type": "string",
+    "description": "The Azure Container Apps managed environment ID.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "sensitive_app_settings",
+    "type": "map(string)",
+    "description": "Sensitive app settings to merge (e.g. from the parent module's `slot_sensitive_app_settings` variable).",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "kind",
+    "type": "string",
+    "description": "The ARM kind of the app (e.g. `app`, `app,linux`, `functionapp`, `functionapp,linux`).",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "key_vault_reference_identity",
+    "type": "string",
+    "description": "The identity to use for Key Vault references.",
+    "default": "null",
+    "required": false
+  }
+]

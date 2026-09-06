@@ -1,0 +1,47 @@
+variable "enable_telemetry" {
+  description = "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n"
+  type        = bool
+  default     = true
+}
+
+variable "location" {
+  description = "Required. The Azure region for deployment of the this resource."
+  type        = string
+  default     = ""
+}
+
+variable "lock" {
+  description = "  Controls the Resource Lock configuration for this resource. The following properties can be specified:\n  \n  - kind - (Required) The type of lock. Possible values are \\\"CanNotDelete\\\" and \\\"ReadOnly\\\".\n  - name - (Optional) The name of the lock. If not specified, a name will be generated based on the kind value. Changing this forces the creation of a new resource.\n"
+  type = object({
+    kind = string
+    name = optional(string, null)
+  })
+  default = null
+}
+
+variable "name" {
+  description = "Required. The name of the this resource."
+  type        = string
+  default     = ""
+}
+
+variable "role_assignments" {
+  description = "Optional. A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\n\n- role_definition_id_or_name - (Required) The ID or name of the role definition to assign to the principal.\n- principal_id - (Required) The ID of the principal to assign the role to.\n- description - (Optional) The description of the role assignment.\n- skip_service_principal_aad_check - (Optional) If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\n- condition - (Optional) The condition which will be used to scope the role assignment.\n- condition_version - (Optional) The version of the condition syntax. Valid values are '2.0'.\n- delegated_managed_identity_resource_id - (Optional) The delegated Azure Resource Id which contains a Managed Identity. Changing this forces a new resource to be created. NOTE:\nthis field is only used in cross tenant scenario.\n\n> Note: only set skip_service_principal_aad_check to true if you are assigning a role to a service principal.\n\nExample Input:\nhcl\nrole_assignments = {\n  \"role_assignment1\" = {\n    role_definition_id_or_name = \"Reader\"\n    principal_id = \"4179302c-702e-4de7-a061-beacd0a1be09\"\n    \n  },\n\"role_assignment2\" = {\n  role_definition_id_or_name = \"2a2b9908-6ea1-4ae2-8e65-a410df84e7d1\" // Storage Blob Data Reader Role Guid \n  principal_id = \"4179302c-702e-4de7-a061-beacd0a1be09\"\n  skip_service_principal_aad_check = false\n  condition_version = \"2.0\"\n  condition = <<-EOT\n(\n  (\n    !(ActionMatches{'Microsoft.Authorization/roleAssignments/write'})\n  )\nOR \n  (\n  @Request[Microsoft.Authorization/roleAssignments:RoleDefinitionId]\n  ForAnyOfAnyValues:GuidEquals {4179302c-702e-4de7-a061-beacd0a1be09}\n  )\n)\nAND\n(\n  (\n    !(ActionMatches{'Microsoft.Authorization/roleAssignments/delete'})\n  )\n  OR \n  (\n    @Resource[Microsoft.Authorization/roleAssignments:RoleDefinitionId]\n    ForAnyOfAnyValues:GuidEquals {dc887ae1-fe50-4307-be53-213ff08f3c0b}\n  )\n)\nEOT  \n  }\n}\n\n"
+  type = map(object({
+    role_definition_id_or_name             = string
+    principal_id                           = string
+    description                            = optional(string, null)
+    skip_service_principal_aad_check       = optional(bool, false)
+    condition                              = optional(string, null)
+    condition_version                      = optional(string, null)
+    delegated_managed_identity_resource_id = optional(string, null)
+    principal_type                         = optional(string, null)
+  }))
+  default = {}
+}
+
+variable "tags" {
+  description = "(Optional) Tags of the resource."
+  type        = map(string)
+  default     = null
+}

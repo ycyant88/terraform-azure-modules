@@ -1,0 +1,22 @@
+module "avm-res-desktopvirtualization-workspace" {
+  source                                                  = "Azure/avm-res-desktopvirtualization-workspace/azurerm"
+  version                                                 = "0.1.5"
+  diagnostic_settings                                     = var.diagnostic_settings
+  enable_telemetry                                        = var.enable_telemetry
+  lock                                                    = var.lock
+  private_endpoints                                       = var.private_endpoints
+  resource_group_name                                     = var.resource_group_name
+  role_assignments                                        = var.role_assignments
+  subresource_names                                       = var.subresource_names
+  tags                                                    = var.tags
+  tracing_tags_enabled                                    = var.tracing_tags_enabled
+  tracing_tags_prefix                                     = var.tracing_tags_prefix
+  virtual_desktop_workspace_description                   = var.virtual_desktop_workspace_description
+  virtual_desktop_workspace_friendly_name                 = var.virtual_desktop_workspace_friendly_name
+  virtual_desktop_workspace_location                      = var.virtual_desktop_workspace_location
+  virtual_desktop_workspace_name                          = var.virtual_desktop_workspace_name
+  virtual_desktop_workspace_public_network_access_enabled = var.virtual_desktop_workspace_public_network_access_enabled
+  virtual_desktop_workspace_resource_group_name           = var.virtual_desktop_workspace_resource_group_name
+  virtual_desktop_workspace_tags                          = var.virtual_desktop_workspace_tags
+  virtual_desktop_workspace_timeouts                      = var.virtual_desktop_workspace_timeouts
+}

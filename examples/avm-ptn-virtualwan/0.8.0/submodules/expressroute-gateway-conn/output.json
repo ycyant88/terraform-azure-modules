@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Azure ExpressRoute Connection resource ID"
+  },
+  {
+    "name": "resource",
+    "description": "Azure ExpressRoute Connection resource"
+  }
+]

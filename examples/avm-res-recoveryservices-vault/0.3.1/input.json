@@ -1,0 +1,184 @@
+[
+  {
+    "name": "sku",
+    "type": "string",
+    "description": "(required) Specify SKU for Azure Recovery Service Vaults. Standard, RS0 (default)",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "backup_protected_file_share",
+    "type": "map(object({\r\n    source_storage_account_id     = string\r\n    backup_file_share_policy_name = string\r\n    source_file_share_name        = string\r\n    disable_registration          = optional(bool, false)\r\n    sleep_timer                   = optional(string, \"60s\")\r\n\r\n  }))",
+    "description": "(optional)  Specify Protected File Share variables",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "cross_region_restore_enabled",
+    "type": "bool",
+    "description": "(optional) Specify Cross Region Restore. true, false (default). var.storage_mode_type must GeoRedundant when setting to true",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "immutability",
+    "type": "string",
+    "description": "(optional) Specify Immutability Setting of vault. Locked, Unlocked (default), Disabled",
+    "default": "\"Unlocked\"",
+    "required": false
+  },
+  {
+    "name": "managed_identities",
+    "type": "object({\r\n    system_assigned            = optional(bool, false)\r\n    user_assigned_resource_ids = optional(set(string), [])\r\n  })",
+    "description": "  Controls the Managed Identity configuration on this resource. The following properties can be specified:\r\n  \r\n  - `system_assigned` - (Optional) Specifies if the System Assigned Managed Identity should be enabled.\r\n  - `user_assigned_resource_ids` - (Optional) Specifies a list of User Assigned Managed Identity resource IDs to be assigned to this resource.\r\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "private_endpoints_manage_dns_zone_group",
+    "type": "bool",
+    "description": "Whether to manage private DNS zone groups with this module. If set to false, you must manage private DNS zone groups externally, e.g. using Azure Policy.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "The map of tags to be applied to the resource",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "diagnostic_settings",
+    "type": "map(object({\r\n    name                                     = optional(string, null)\r\n    log_categories                           = optional(set(string), [])\r\n    log_groups                               = optional(set(string), [\"allLogs\"])\r\n    metric_categories                        = optional(set(string), [\"AllMetrics\"])\r\n    log_analytics_destination_type           = optional(string, \"Dedicated\")\r\n    workspace_resource_id                    = optional(string, null)\r\n    storage_account_resource_id              = optional(string, null)\r\n    event_hub_authorization_rule_resource_id = optional(string, null)\r\n    event_hub_name                           = optional(string, null)\r\n    marketplace_partner_resource_id          = optional(string, null)\r\n  }))",
+    "description": "A map of diagnostic settings to create on the Key Vault. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\r\n\r\n- `name` - (Optional) The name of the diagnostic setting. One will be generated if not set, however this will not be unique if you want to create multiple diagnostic setting resources.\r\n- `log_categories` - (Optional) A set of log categories to send to the log analytics workspace. Defaults to `[]`.\r\n- `log_groups` - (Optional) A set of log groups to send to the log analytics workspace. Defaults to `[\"allLogs\"]`.\r\n- `metric_categories` - (Optional) A set of metric categories to send to the log analytics workspace. Defaults to `[\"AllMetrics\"]`.\r\n- `log_analytics_destination_type` - (Optional) The destination type for the diagnostic setting. Possible values are `Dedicated` and `AzureDiagnostics`. Defaults to `Dedicated`.\r\n- `workspace_resource_id` - (Optional) The resource ID of the log analytics workspace to send logs and metrics to.\r\n- `storage_account_resource_id` - (Optional) The resource ID of the storage account to send logs and metrics to.\r\n- `event_hub_authorization_rule_resource_id` - (Optional) The resource ID of the event hub authorization rule to send logs and metrics to.\r\n- `event_hub_name` - (Optional) The name of the event hub. If none is specified, the default event hub will be selected.\r\n- `marketplace_partner_resource_id` - (Optional) The full ARM resource ID of the Marketplace resource to which you would like to send Diagnostic LogsLogs.\r\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "file_share_backup_policy",
+    "type": "map(object({\r\n    name     = string\r\n    timezone = string\r\n\r\n    frequency = string\r\n\r\n    retention_daily = optional(number, null)\r\n\r\n    backup = object({\r\n      time = string\r\n      hourly = optional(object({\r\n        interval        = number\r\n        start_time      = string\r\n        window_duration = number\r\n      }))\r\n    })\r\n\r\n    retention_weekly = optional(object({\r\n      count    = optional(number, 7)\r\n      weekdays = optional(list(string), [])\r\n    }), {})\r\n\r\n    retention_monthly = optional(object({\r\n      count             = optional(number, 0)\r\n      weekdays          = optional(list(string), [])\r\n      weeks             = optional(list(string), [])\r\n      days              = optional(list(number), [])\r\n      include_last_days = optional(bool, false)\r\n    }), {})\r\n\r\n    retention_yearly = optional(object({\r\n      count             = optional(number, 0)\r\n      months            = optional(list(string), [])\r\n      weekdays          = optional(list(string), [])\r\n      weeks             = optional(list(string), [])\r\n      days              = optional(list(number), [])\r\n      include_last_days = optional(bool, false)\r\n    }), {})\r\n  }))",
+    "description": "    A map objects for backup and retation options.\r\n\r\n    - `name` - (Optional) The name of the private endpoint. One will be generated if not set.\r\n    - `role_assignments` - (Optional) A map of role assignments to create on the \r\n\r\n    - `backup` - (required) backup options.\r\n        - `frequency` - (Required) Sets the backup frequency. Possible values are hourly, Daily and Weekly.\r\n        - `time` - (required) Specify time in a 24 hour format HH:MM. \"22:00\"\r\n        - `hour_interval` - (Optional) Interval in hour at which backup is triggered. Possible values are 4, 6, 8 and 12. This is used when frequency is hourly. 6\r\n        - `hour_duration` -  (Optional) Duration of the backup window in hours. Possible values are between 4 and 24 This is used when frequency is hourly. 12\r\n        - `weekdays` -  (Optional) The days of the week to perform backups on. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday. This is used when frequency is Weekly. [\"Tuesday\", \"Saturday\"]\r\n    - `retention_daily` - (Optional)\r\n      - `count` - \r\n    - `retantion_weekly` -\r\n      - `count` -\r\n      - `weekdays` -\r\n    - `retantion_monthly` -\r\n      - `count` -  # (Required) The number of monthly backups to keep. Must be between 1 and 9999\r\n      - `weekdays` - (Optional) The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.\r\n      - `weeks` -  # (Optional) The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.\r\n      - `days` -  # (Optional) The days of the month to retain backups of. Must be between 1 and 31.\r\n      - `include_last_days` -  # (Optional) Including the last day of the month, default to false.\r\n    - `retantion_yearly` -\r\n      - `months` - # (Required) The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.\r\n      - `count` -  # (Required) The number of monthly backups to keep. Must be between 1 and 9999\r\n      - `weekdays` - (Optional) The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.\r\n      - `weeks` -  # (Optional) The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.\r\n      - `days` -  # (Optional) The days of the month to retain backups of. Must be between 1 and 31.\r\n      - `include_last_days` -  # (Optional) Including the last day of the month, default to false.\r\n\r\n    example:\r\n      retentions = {\r\n      rest1 = {\r\n        backup = {\r\n          frequency     = \"hourly\"\r\n          time          = \"22:00\"\r\n          hour_interval = 6\r\n          hour_duration = 12\r\n          # weekdays      = [\"Tuesday\", \"Saturday\"]\r\n        }\r\n        retention_daily = 7\r\n        retention_weekly = {\r\n          count    = 7\r\n          weekdays = [\"Monday\", \"Wednesday\"]\r\n\r\n        }\r\n        retention_monthly = {\r\n          count = 5\r\n          # weekdays =  [\"Tuesday\",\"Saturday\"]\r\n          # weeks = [\"First\",\"Third\"]\r\n          days = [3, 10, 20]\r\n        }\r\n        retention_yearly = {\r\n          count  = 5\r\n          months = []\r\n          # weekdays =  [\"Tuesday\",\"Saturday\"]\r\n          # weeks = [\"First\",\"Third\"]\r\n          days = [3, 10, 20]\r\n        }\r\n\r\n        }\r\n      }\r\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "private_endpoints",
+    "type": "map(object({\r\n    name = optional(string, null)\r\n    role_assignments = optional(map(object({\r\n      role_definition_id_or_name             = string\r\n      principal_id                           = string\r\n      description                            = optional(string, null)\r\n      skip_service_principal_aad_check       = optional(bool, false)\r\n      condition                              = optional(string, null)\r\n      condition_version                      = optional(string, null)\r\n      delegated_managed_identity_resource_id = optional(string, null)\r\n      principal_type                         = optional(string, null)\r\n    })), {}) # see https://azure.github.io/Azure-Verified-Modules/Azure-Verified-Modules/specs/shared/interfaces/#role-assignments\r\n    lock = optional(object({\r\n      kind = string\r\n      name = optional(string, null)\r\n    }), null)                                        # see https://azure.github.io/Azure-Verified-Modules/Azure-Verified-Modules/specs/shared/interfaces/#resource-locks\r\n    tags               = optional(map(string), null) # see https://azure.github.io/Azure-Verified-Modules/Azure-Verified-Modules/specs/shared/interfaces/#tags\r\n    subnet_resource_id = string\r\n    ## You only need to expose the subresource_name if there are multiple underlying services, e.g. storage.\r\n    ## Which has blob, file, etc.\r\n    ## If there is only one then leave this out and hardcode the value in the module.\r\n    subresource_name                        = string\r\n    private_dns_zone_group_name             = optional(string, \"default\")\r\n    private_dns_zone_resource_ids           = optional(set(string), [])\r\n    application_security_group_associations = optional(map(string), {})\r\n    private_service_connection_name         = optional(string, null)\r\n    network_interface_name                  = optional(string, null)\r\n    location                                = optional(string, null)\r\n    resource_group_name                     = optional(string, null)\r\n    ip_configurations = optional(map(object({\r\n      name               = string\r\n      private_ip_address = string\r\n    })), {})\r\n  }))",
+    "description": "A map of private endpoints to create on the Key Vault. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\r\n\r\n- `name` - (Optional) The name of the private endpoint. One will be generated if not set.\r\n- `role_assignments` - (Optional) A map of role assignments to create on the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time. See `var.role_assignments` for more information.\r\n- `lock` - (Optional) The lock level to apply to the private endpoint. Default is `None`. Possible values are `None`, `CanNotDelete`, and `ReadOnly`.\r\n- `tags` - (Optional) A mapping of tags to assign to the private endpoint.\r\n- `subnet_resource_id` - The resource ID of the subnet to deploy the private endpoint in.\r\n- `private_dns_zone_group_name` - (Optional) The name of the private DNS zone group. One will be generated if not set.\r\n- `private_dns_zone_resource_ids` - (Optional) A set of resource IDs of private DNS zones to associate with the private endpoint. If not set, no zone groups will be created and the private endpoint will not be associated with any private DNS zones. DNS records must be managed external to this module.\r\n- `application_security_group_resource_ids` - (Optional) A map of resource IDs of application security groups to associate with the private endpoint. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\r\n- `private_service_connection_name` - (Optional) The name of the private service connection. One will be generated if not set.\r\n- `network_interface_name` - (Optional) The name of the network interface. One will be generated if not set.\r\n- `location` - (Optional) The Azure location where the resources will be deployed. Defaults to the location of the resource group.\r\n- `resource_group_name` - (Optional) The resource group where the resources will be deployed. Defaults to the resource group of the Key Vault.\r\n- `ip_configurations` - (Optional) A map of IP configurations to create on the private endpoint. If not specified the platform will create one. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\r\n  - `name` - The name of the IP configuration.\r\n  - `private_ip_address` - The private IP address of the IP configuration.\r\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "public_network_access_enabled",
+    "type": "bool",
+    "description": "(optional) Specify Public Network Access. true (default), false",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "role_assignments",
+    "type": "map(object({\r\n    role_definition_id_or_name             = string\r\n    principal_id                           = string\r\n    description                            = optional(string, null)\r\n    skip_service_principal_aad_check       = optional(bool, false)\r\n    condition                              = optional(string, null)\r\n    condition_version                      = optional(string, null)\r\n    delegated_managed_identity_resource_id = optional(string, null)\r\n    principal_type                         = optional(string, null)\r\n  }))",
+    "description": "A map of role assignments to create on this resource. The map key is deliberately arbitrary to avoid issues where map keys maybe unknown at plan time.\r\n\r\n- `role_definition_id_or_name` - The ID or name of the role definition to assign to the principal.\r\n- `principal_id` - The ID of the principal to assign the role to.\r\n- `description` - The description of the role assignment.\r\n- `skip_service_principal_aad_check` - If set to true, skips the Azure Active Directory check for the service principal in the tenant. Defaults to false.\r\n- `condition` - The condition which will be used to scope the role assignment.\r\n- `condition_version` - The version of the condition syntax. Valid values are '2.0'.\r\n\r\n> Note: only set `skip_service_principal_aad_check` to true if you are assigning a role to a service principal.\r\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "soft_delete_enabled",
+    "type": "bool",
+    "description": "(optional) Specify Setting for Soft Delete. true (default), false",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "storage_mode_type",
+    "type": "string",
+    "description": "(optional) Specify Storage type of the Recovery Services Vault. GeoRedundant (default), LocallyRedundant, ZoneRedundant",
+    "default": "\"GeoRedundant\"",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.  If null, the location will be inferred from the resource group location.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "alerts_for_all_job_failures_enabled",
+    "type": "bool",
+    "description": "(optional) Specify Setting for Monitoring 'Alerts for All Job Failures'. true (default), false",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "classic_vmware_replication_enabled",
+    "type": "bool",
+    "description": "(option) Specify Setting for Classic VMWare Replication. true, false",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "vm_backup_policy",
+    "type": "map(object({\r\n    name                           = string\r\n    timezone                       = string\r\n    instant_restore_retention_days = optional(number, null)\r\n    instant_restore_resource_group = optional(map(object({\r\n      prefix = optional(string, null)\r\n      suffix = optional(string, null)\r\n    })), {})\r\n    policy_type = string\r\n    frequency   = string\r\n\r\n    retention_daily = optional(number, null)\r\n\r\n    backup = object({\r\n      time          = string\r\n      hour_interval = optional(number, null)\r\n      hour_duration = optional(number, null)\r\n      weekdays      = optional(list(string), [])\r\n    })\r\n\r\n    retention_weekly = optional(object({\r\n      count    = optional(number, 7)\r\n      weekdays = optional(list(string), [])\r\n    }), {})\r\n\r\n    retention_monthly = optional(object({\r\n      count             = optional(number, 0)\r\n      weekdays          = optional(list(string), [])\r\n      weeks             = optional(list(string), [])\r\n      days              = optional(list(number), [])\r\n      include_last_days = optional(bool, false)\r\n    }), {})\r\n\r\n    retention_yearly = optional(object({\r\n      count             = optional(number, 0)\r\n      months            = optional(list(string), [])\r\n      weekdays          = optional(list(string), [])\r\n      weeks             = optional(list(string), [])\r\n      days              = optional(list(number), [])\r\n      include_last_days = optional(bool, false)\r\n    }), {})\r\n  }))",
+    "description": "    A map objects for backup and retation options.\r\n\r\n    - `name` - (Optional) The name of the private endpoint. One will be generated if not set.\r\n    - `role_assignments` - (Optional) A map of role assignments to create on the \r\n\r\n    - `backup` - (required) backup options.\r\n        - `frequency` - (Required) Sets the backup frequency. Possible values are Hourly, Daily and Weekly.\r\n        - `time` - (required) Specify time in a 24 hour format HH:MM. \"22:00\"\r\n        - `hour_interval` - (Optional) Interval in hour at which backup is triggered. Possible values are 4, 6, 8 and 12. This is used when frequency is Hourly. 6\r\n        - `hour_duration` -  (Optional) Duration of the backup window in hours. Possible values are between 4 and 24 This is used when frequency is Hourly. 12\r\n        - `weekdays` -  (Optional) The days of the week to perform backups on. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday. This is used when frequency is Weekly. [\"Tuesday\", \"Saturday\"]\r\n    - `retention_daily` - (Optional)\r\n      - `count` - \r\n    - `retantion_weekly` -\r\n      - `count` -\r\n      - `weekdays` -\r\n    - `retantion_monthly` -\r\n      - `count` -  # (Required) The number of monthly backups to keep. Must be between 1 and 9999\r\n      - `weekdays` - (Optional) The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.\r\n      - `weeks` -  # (Optional) The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.\r\n      - `days` -  # (Optional) The days of the month to retain backups of. Must be between 1 and 31.\r\n      - `include_last_days` -  # (Optional) Including the last day of the month, default to false.\r\n    - `retantion_yearly` -\r\n      - `months` - # (Required) The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.\r\n      - `count` -  # (Required) The number of monthly backups to keep. Must be between 1 and 9999\r\n      - `weekdays` - (Optional) The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.\r\n      - `weeks` -  # (Optional) The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.\r\n      - `days` -  # (Optional) The days of the month to retain backups of. Must be between 1 and 31.\r\n      - `include_last_days` -  # (Optional) Including the last day of the month, default to false.\r\n\r\n    example:\r\n      retentions = {\r\n      rest1 = {\r\n        backup = {\r\n          frequency     = \"Hourly\"\r\n          time          = \"22:00\"\r\n          hour_interval = 6\r\n          hour_duration = 12\r\n          # weekdays      = [\"Tuesday\", \"Saturday\"]\r\n        }\r\n        retention_daily = 7\r\n        retention_weekly = {\r\n          count    = 7\r\n          weekdays = [\"Monday\", \"Wednesday\"]\r\n\r\n        }\r\n        retention_monthly = {\r\n          count = 5\r\n          # weekdays =  [\"Tuesday\",\"Saturday\"]\r\n          # weeks = [\"First\",\"Third\"]\r\n          days = [3, 10, 20]\r\n        }\r\n        retention_yearly = {\r\n          count  = 5\r\n          months = []\r\n          # weekdays =  [\"Tuesday\",\"Saturday\"]\r\n          # weeks = [\"First\",\"Third\"]\r\n          days = [3, 10, 20]\r\n        }\r\n\r\n        }\r\n      }\r\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "workload_backup_policy",
+    "type": "map(object({\r\n    name          = string\r\n    workload_type = string\r\n    settings = object({\r\n      time_zone           = string\r\n      compression_enabled = bool\r\n    })\r\n\r\n    backup_frequency = string\r\n    protection_policy = map(object({\r\n      policy_type           = string # description = \"(required) Specify policy type. Full, Differential, Logs\"\r\n      retention_daily_count = number\r\n      retention_weekly = optional(object({\r\n        count    = optional(number, null)\r\n        weekdays = optional(set(string), null)\r\n      }), null)\r\n      # retention_daily = optional(number, null) # (Required) The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.\r\n      backup = optional(object({\r\n        time                 = optional(string)\r\n        frequency_in_minutes = optional(number)\r\n        weekdays             = optional(set(string))\r\n      }), null)\r\n\r\n      retention_monthly = optional(object({\r\n        count             = optional(number, null)\r\n        weekdays          = optional(set(string), null)\r\n        weeks             = optional(set(string), null)\r\n        monthdays         = optional(set(number), null)\r\n        include_last_days = optional(bool, false)\r\n      }), null)\r\n\r\n      retention_yearly = optional(object({\r\n        count             = optional(number, null)\r\n        months            = optional(set(string), null)\r\n        weekdays          = optional(set(string), null)\r\n        weeks             = optional(set(string), null)\r\n        monthdays         = optional(set(number), null)\r\n        include_last_days = optional(bool, false)\r\n      }), null)\r\n\r\n    }))\r\n  }))",
+    "description": "(Required)",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "Name: specify a name for the Azure Recovery Services Vault. Upper/Lower case letters, numbers and hyphens. number of characters 2-50",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "alerts_for_critical_operation_failures_enabled",
+    "type": "bool",
+    "description": "(optional) Specify Setting for Monitoring 'Alerts for Critical Operation Failures'. true (default), false",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "backup_protected_vm",
+    "type": "map(object({\r\n    source_vm_id          = string\r\n    vm_backup_policy_name = string\r\n    sleep_timer           = optional(string, \"60s\")\r\n  }))",
+    "description": "(optional) Specify Protected VM variables",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "customer_managed_key",
+    "type": "object({\r\n    key_vault_resource_id = string\r\n    key_name              = string\r\n    key_version           = optional(string, null)\r\n    user_assigned_identity = optional(object({\r\n      resource_id = string\r\n    }), null)\r\n  })",
+    "description": "An object type defines a customer managed key to use for encryption.\r\n\r\n- `key_vault_resource_id` - (Required) - The full Azure Resource ID of the key_vault where the customer managed key will be referenced from.\r\n- `key_name` - (Required) - The full Azur Resource ID of the customer managed Key stored in the key vault\r\n- `key_version` - (Optional) - Customer managed key version\r\n- `user_assigned_identity` - (Optional) - The user assigned identity to use when access the encryption key saved in a key vault\r\n\r\n\r\nExample Inputs:\r\n```terraform\r\nkey_vault_resource_id = {\r\n  key_vault_resource_id = \"https://kv-giuh.vault.azure.net/keys/kvk-giuh/0127xxxxx4fdd94cdbd26481a1985\"\r\n  key_name  = \"https://kv-giuh.vault.azure.net/keys/kvk-giuh/0127xxxxx4fdd94cdbd26481a1985\"\r\n  version = null\r\n  user_assigned_identity = {\r\n    resource_id = \"/subscriptions/0000000-0000-0000-0000-000000000000/resourceGroups/rg-test/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uai-name\"\r\n  }\r\n}\r\n```\r\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "lock",
+    "type": "object({\r\n    name = optional(string, null)\r\n    kind = string\r\n  })",
+    "description": "Controls the Resource Lock configuration for this resource. The following properties can be specified:\r\n\r\n- `kind` - (Required) The type of lock. Possible values are `\\\"CanNotDelete\\\"` and `\\\"ReadOnly\\\"`.\r\n- `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\r\n",
+    "default": "null",
+    "required": false
+  }
+]

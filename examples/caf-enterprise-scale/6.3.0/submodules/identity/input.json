@@ -1,0 +1,23 @@
+[
+  {
+    "name": "settings",
+    "type": "object({\n    identity = optional(object({\n      enabled = optional(bool, true)\n      config = optional(object({\n        enable_deny_public_ip             = optional(bool, true)\n        enable_deny_rdp_from_internet     = optional(bool, true)\n        enable_deny_subnet_without_nsg    = optional(bool, true)\n        enable_deploy_azure_backup_on_vms = optional(bool, true)\n      }), {})\n    }), {})\n  })",
+    "description": "Configuration settings for the \"Identity\" landing zone resources.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Controls whether to manage the identity landing zone policies and deploy the identity resources into the current Subscription context.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "root_id",
+    "type": "string",
+    "description": "Specifies the ID of the Enterprise-scale root Management Group, used as a prefix for resources created by this module.",
+    "default": "",
+    "required": true
+  }
+]

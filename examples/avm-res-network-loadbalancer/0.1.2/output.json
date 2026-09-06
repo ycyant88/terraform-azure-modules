@@ -1,0 +1,10 @@
+[
+  {
+    "name": "azurerm_public_ip",
+    "description": "Outputs each Public IP Address resource in it's entirety"
+  },
+  {
+    "name": "azurerm_lb",
+    "description": "Outputs the entire Azure Load Balancer resource"
+  }
+]

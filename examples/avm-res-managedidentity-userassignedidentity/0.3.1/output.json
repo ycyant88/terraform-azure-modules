@@ -1,0 +1,18 @@
+[
+  {
+    "name": "principal_id",
+    "description": "This is the principal id for the user assigned identity."
+  },
+  {
+    "name": "resource",
+    "description": "The object of type User Assigned Identity that was created."
+  },
+  {
+    "name": "resource_id",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_name",
+    "description": "The name of the User Assigned Identity that was created."
+  }
+]

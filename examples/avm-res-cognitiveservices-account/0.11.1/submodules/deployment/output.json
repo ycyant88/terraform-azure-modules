@@ -1,0 +1,14 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the Cognitive Services deployment."
+  },
+  {
+    "name": "resource",
+    "description": "The deployment resource shaped to match the AzureRM cognitive deployment schema."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the Cognitive Services deployment."
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the Azure Bastion resource"
+  },
+  {
+    "name": "resource",
+    "description": "The Azure Bastion resource"
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the Azure Bastion resource"
+  },
+  {
+    "name": "dns_name",
+    "description": "The FQDN of the Azure Bastion resource"
+  }
+]

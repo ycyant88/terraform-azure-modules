@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Resource id of the app service plan"
+  },
+  {
+    "name": "name",
+    "description": "Name of the app service plan"
+  },
+  {
+    "name": "resource",
+    "description": "The full output of the resource."
+  }
+]

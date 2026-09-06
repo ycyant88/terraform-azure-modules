@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource",
+    "description": "The site recovery replicated VM resource"
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the site recovery replicated VM"
+  }
+]

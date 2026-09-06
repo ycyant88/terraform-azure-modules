@@ -1,0 +1,20 @@
+module "avm-res-edge-site" {
+  source               = "Azure/avm-res-edge-site/azurerm"
+  version              = "3.0.0"
+  city                 = var.city
+  country              = var.country
+  customer_managed_key = var.customer_managed_key
+  enable_telemetry     = var.enable_telemetry
+  lock                 = var.lock
+  postal_code          = var.postal_code
+  resource_group_id    = var.resource_group_id
+  role_assignments     = var.role_assignments
+  site_description     = var.site_description
+  site_display_name    = var.site_display_name
+  site_labels          = var.site_labels
+  site_resource_name   = var.site_resource_name
+  state_or_province    = var.state_or_province
+  street_address_1     = var.street_address_1
+  street_address_2     = var.street_address_2
+  tags                 = var.tags
+}

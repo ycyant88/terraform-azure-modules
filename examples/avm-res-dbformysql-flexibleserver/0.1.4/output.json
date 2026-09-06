@@ -1,0 +1,14 @@
+[
+  {
+    "name": "resouce_name",
+    "description": "The name of the rresource"
+  },
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the resoure"
+  }
+]
