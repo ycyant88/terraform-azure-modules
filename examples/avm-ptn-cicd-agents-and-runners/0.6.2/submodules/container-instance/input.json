@@ -1,0 +1,149 @@
+[
+  {
+    "name": "user_assigned_managed_identity_id",
+    "type": "string",
+    "description": "ID of the user-assigned managed identity",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "container_memory",
+    "type": "number",
+    "description": "Memory value for the container",
+    "default": "4",
+    "required": false
+  },
+  {
+    "name": "container_memory_limit",
+    "type": "number",
+    "description": "Memory limit for the container",
+    "default": "4",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": "Per-operation timeouts forwarded to AzAPI resources. When `null`, the provider defaults are used. Values are Go duration strings such as `\"30m\"`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_image",
+    "type": "string",
+    "description": "Image of the container",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "container_registry_login_server",
+    "type": "string",
+    "description": "Login server of the container registry",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "container_registry_password",
+    "type": "string",
+    "description": "Password of the container registry",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string), [\"CannotDeleteResource\", \"ReferencedResourceNotProvisioned\"])\n    interval_seconds     = optional(number, 10)\n    max_interval_seconds = optional(number, 180)\n  })",
+    "description": "Retry configuration for the resource operations.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "use_private_networking",
+    "type": "bool",
+    "description": "Flag to indicate whether to use private networking",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "container_instance_name",
+    "type": "string",
+    "description": "Name of the container instance",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "container_cpu",
+    "type": "number",
+    "description": "CPU value for the container",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "subnet_id",
+    "type": "string",
+    "description": "ID of the subnet",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_name",
+    "type": "string",
+    "description": "Name of the container",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "availability_zones",
+    "type": "list(string)",
+    "description": "List of availability zones",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "container_cpu_limit",
+    "type": "number",
+    "description": "CPU limit for the container",
+    "default": "2",
+    "required": false
+  },
+  {
+    "name": "container_registry_username",
+    "type": "string",
+    "description": "Username of the container registry",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "environment_variables",
+    "type": "map(string)",
+    "description": "Environment variables for the container",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "sensitive_environment_variables",
+    "type": "map(string)",
+    "description": "Secure environment variables for the container",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "Azure region where the resource should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The Azure resource id of the parent resource group in which to create the container instance (e.g. `/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>`).",
+    "default": "",
+    "required": true
+  }
+]
