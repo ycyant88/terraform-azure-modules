@@ -1,0 +1,65 @@
+[
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "backup_name",
+    "type": "string",
+    "description": "The name of the backup. If not set, a default name will be generated.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string), [\"Cannot modify this site because another operation is in progress\"])\n    interval_seconds     = optional(number, 10)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration for the AzAPI resources declared by this module. Defaults to retrying the conflict Azure returns while another operation on the site is in progress.\n\n- `error_message_regex` - (Optional) A list of regular expressions matched against error messages. A match triggers a retry.\n- `interval_seconds` - (Optional) The initial interval in seconds between retries.\n- `max_interval_seconds` - (Optional) The maximum interval in seconds between retries.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "storage_account_url",
+    "type": "string",
+    "description": "The SAS URL to the Storage Account container for backup.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "enabled",
+    "type": "bool",
+    "description": "Is backup enabled? Defaults to `true`.",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    web_sites_config = optional(list(string), [])\n  })",
+    "description": "Body-relative paths whose changes are ignored, keyed by AzAPI resource type. Paths use dot notation, and a change takes effect only after an apply.\n\nThe AzAPI provider exposes `ignore_body_changes` on `azapi_resource` only, and this module manages its resource with a type that does not accept the argument. The variable exists for interface consistency; setting a non-empty value fails the plan with an explicit error rather than being silently ignored.\n- `web_sites_config` - Paths ignored on the backup configuration.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    web_sites_config = optional(string, \"Microsoft.Web/sites/config@2025-03-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by this module.\n\n- `web_sites_config` - Resource type and API version for the backup configuration.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "schedule",
+    "type": "object({\n    frequency_interval       = optional(number)\n    frequency_unit           = optional(string)\n    keep_at_least_one_backup = optional(bool)\n    retention_period_days    = optional(number)\n    start_time               = optional(string)\n  })",
+    "description": "The backup schedule configuration.\n\n- `frequency_interval` - (Optional) How often the backup should be executed.\n- `frequency_unit` - (Optional) The unit of time for the backup frequency. Possible values are `Day` and `Hour`.\n- `keep_at_least_one_backup` - (Optional) Should at least one backup always be kept?\n- `retention_period_days` - (Optional) The number of days to retain backups.\n- `start_time` - (Optional) The start time for the backup schedule.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": "Per-operation timeouts applied to the AzAPI resources declared by this module. Defaults to `null`, which uses the provider defaults. Each value is a Go duration string such as `30m`.\n\n- `create` - (Optional) Timeout for create operations.\n- `delete` - (Optional) Timeout for delete operations.\n- `read` - (Optional) Timeout for read operations.\n- `update` - (Optional) Timeout for update operations.\n",
+    "default": "null",
+    "required": false
+  }
+]

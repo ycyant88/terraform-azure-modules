@@ -1,0 +1,58 @@
+[
+  {
+    "name": "hostname",
+    "type": "string",
+    "description": "The hostname to bind to the site.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The resource ID of the App Service site or slot.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    web_sites_host_name_bindings       = optional(list(string), [])\n    web_sites_slots_host_name_bindings = optional(list(string), [])\n  })",
+    "description": "Body-relative paths whose changes are ignored, keyed by AzAPI resource type. Paths use dot notation, and a change takes effect only after an apply.\n\n- `web_sites_host_name_bindings` - Paths ignored on the hostname binding on a site.\n- `web_sites_slots_host_name_bindings` - Paths ignored on the hostname binding on a slot.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    web_sites_host_name_bindings       = optional(string, \"Microsoft.Web/sites/hostNameBindings@2025-03-01\")\n    web_sites_slots_host_name_bindings = optional(string, \"Microsoft.Web/sites/slots/hostNameBindings@2025-03-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by this module.\n\n- `web_sites_host_name_bindings` - Resource type and API version for the hostname binding on a site.\n- `web_sites_slots_host_name_bindings` - Resource type and API version for the hostname binding on a slot.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string), [\"Cannot modify this site because another operation is in progress\"])\n    interval_seconds     = optional(number, 10)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration for the AzAPI resources declared by this module. Defaults to retrying the conflict Azure returns while another operation on the site is in progress.\n\n- `error_message_regex` - (Optional) A list of regular expressions matched against error messages. A match triggers a retry.\n- `interval_seconds` - (Optional) The initial interval in seconds between retries.\n- `max_interval_seconds` - (Optional) The maximum interval in seconds between retries.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "ssl_state",
+    "type": "string",
+    "description": "The SSL state for the hostname binding. Possible values include `Disabled`, `IpBasedEnabled`, `SniEnabled`.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "thumbprint",
+    "type": "string",
+    "description": "The certificate thumbprint associated with the hostname.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    delete = optional(string)\n    read   = optional(string)\n    update = optional(string)\n  })",
+    "description": "Per-operation timeouts applied to the AzAPI resources declared by this module. Defaults to `null`, which uses the provider defaults. Each value is a Go duration string such as `30m`.\n\n- `create` - (Optional) Timeout for create operations.\n- `delete` - (Optional) Timeout for delete operations.\n- `read` - (Optional) Timeout for read operations.\n- `update` - (Optional) Timeout for update operations.\n",
+    "default": "null",
+    "required": false
+  }
+]

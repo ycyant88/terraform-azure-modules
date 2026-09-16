@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the hostname binding."
+  },
+  {
+    "name": "name",
+    "description": "The hostname binding name."
+  }
+]
