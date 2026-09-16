@@ -25,7 +25,7 @@ jobs:
       - name: Commit updated examples
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email "316484651+ycyant88@users.noreply.github.com"
           git add .
           if git diff --cached --quiet; then
             exit 0
