@@ -1,0 +1,44 @@
+[
+  {
+    "name": "backup_protected_vm",
+    "type": "object({\n    backup_policy_id = string\n    sleep_timer      = optional(string, \"60s\")\n    source_vm_id     = string\n  })",
+    "description": "Configuration for protecting one Azure virtual machine with Azure Backup.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The fully-qualified ARM resource ID of the Azure Backup protection container that will contain the protected virtual machine.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    recoveryservices_vaults_backup_fabrics_protection_containers_protected_items = optional(list(string), [])\n  })",
+    "description": "Body-relative paths ignored on the protected item resource. Paths use dot notation.\nChanges take effect only after apply. Ignored configuration is not sent to Azure until the path is removed.\n\n- `recoveryservices_vaults_backup_fabrics_protection_containers_protected_items` - Paths ignored on the protected virtual machine resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    recoveryservices_vaults_backup_fabrics_protection_containers_protected_items = optional(string, \"Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems@2024-10-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by the protected virtual machine submodule.\n\n- `recoveryservices_vaults_backup_fabrics_protection_containers_protected_items` - Resource type and API version for the protected virtual machine.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to the protected virtual machine AzAPI resource.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Per-operation timeouts applied to the protected virtual machine AzAPI resource.",
+    "default": "null",
+    "required": false
+  }
+]

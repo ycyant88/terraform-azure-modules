@@ -1,0 +1,37 @@
+[
+  {
+    "name": "resource_types",
+    "type": "object({\n    recoveryservices_vaults_backup_fabrics_protection_containers                 = optional(string, \"Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers@2024-10-01\")\n    recoveryservices_vaults_backup_fabrics_protection_containers_protected_items = optional(string, \"Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems@2024-10-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by the protected workload submodule.\n\n- `recoveryservices_vaults_backup_fabrics_protection_containers` - Resource type and API version for workload container registration and inquiry.\n- `recoveryservices_vaults_backup_fabrics_protection_containers_protected_items` - Resource type and API version for protected SQL databases.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to every managed AzAPI resource in the submodule.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Per-operation timeouts applied to every managed AzAPI resource in the submodule.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "backup_protected_workload",
+    "type": "object({\n    vault_id                  = string\n    source_vm_id              = string\n    workload_backup_policy_id = string\n    workload_type             = optional(string, \"SQLDataBase\")\n    inquiry_enabled           = optional(bool, true)\n    sleep_timer               = optional(string, \"60s\")\n    protected_databases = map(object({\n      server_name               = string\n      database_name             = string\n      protected_item_name       = optional(string)\n      workload_backup_policy_id = optional(string)\n    }))\n  })",
+    "description": "Values for the backup_protected_workload module. Registers an Azure virtual machine as a workload (`VMAppContainer`) with the Recovery Services Vault and protects the selected SQL databases hosted on it.\n\n- `vault_id` - (Required) The resource ID of the Recovery Services Vault.\n- `source_vm_id` - (Required) The resource ID of the virtual machine hosting the workload.\n- `workload_backup_policy_id` - (Required) The resource ID of the workload backup policy to associate with the protected databases.\n- `workload_type` - (Optional) The workload type to protect. Only `SQLDataBase` is currently supported.\n- `inquiry_enabled` - (Optional) Whether to trigger a workload discovery (inquiry) on the registered container. Defaults to `true`.\n- `sleep_timer` - (Optional) Duration to sleep after registration/discovery, to allow for Azure propagation. Defaults to `\"60s\"`.\n- `protected_databases` - (Required) A map of databases to protect. The map key is used as the Terraform address of the protected item so that it stays deterministic when databases are added or removed.\n  - `server_name` - (Required) The name of the SQL instance hosting the database, as discovered by Azure Backup (for example `MSSQLSERVER`).\n  - `database_name` - (Required) The name of the database to protect.\n  - `protected_item_name` - (Optional) Overrides the generated protected item name (`<workload_type>;<server_name>;<database_name>`).\n  - `workload_backup_policy_id` - (Optional) Overrides `workload_backup_policy_id` for this database.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    recoveryservices_vaults_backup_fabrics_protection_containers                 = optional(list(string), [])\n    recoveryservices_vaults_backup_fabrics_protection_containers_protected_items = optional(list(string), [])\n  })",
+    "description": "Body-relative paths ignored on each AzAPI resource. Paths use dot notation. Changes take effect only after apply. Ignored configuration is not sent to Azure until the path is removed.\n\n- `recoveryservices_vaults_backup_fabrics_protection_containers` - Paths ignored on workload container registration.\n- `recoveryservices_vaults_backup_fabrics_protection_containers_protected_items` - Paths ignored on protected SQL database resources.\n",
+    "default": "{}",
+    "required": false
+  }
+]
