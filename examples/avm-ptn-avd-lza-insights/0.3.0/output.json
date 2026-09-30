@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource",
+    "description": "The full output for the Monitor Data Collection Rule."
+  },
+  {
+    "name": "resource_id",
+    "description": "The full output for the Monitor Data Collection Rule."
+  }
+]
