@@ -1,0 +1,58 @@
+[
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Default per-operation timeouts applied to every `azapi` resource created by this module. Defaults to `null` (provider defaults). Each value is a Go duration string (e.g. `30m`, `1h`).\n\n- `create` - (Optional) Timeout for create operations.\n- `read`   - (Optional) Timeout for read operations.\n- `update` - (Optional) Timeout for update operations.\n- `delete` - (Optional) Timeout for delete operations.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "workload_backup_policy",
+    "type": "object({\n    name          = string\n    workload_type = string\n    settings = object({\n      time_zone           = string\n      compression_enabled = bool\n    })\n\n    backup_frequency = string\n    protection_policy = map(object({\n      policy_type           = string # description = \"(required) Specify policy type. Full, Differential, Logs\"\n      retention_daily_count = number\n      retention_weekly = optional(object({\n        count    = optional(number, null)\n        weekdays = optional(set(string), null)\n      }), null)\n      # retention_daily = optional(number, null) # (Required) The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.\n      backup = optional(object({\n        time                 = optional(string)\n        frequency_in_minutes = optional(number)\n        weekdays             = optional(set(string))\n      }), null)\n\n      retention_monthly = optional(object({\n        count             = optional(number, null)\n        weekdays          = optional(set(string), null)\n        weeks             = optional(set(string), null)\n        monthdays         = optional(set(number), null)\n        include_last_days = optional(bool, false)\n      }), null)\n\n      retention_yearly = optional(object({\n        count             = optional(number, null)\n        months            = optional(set(string), null)\n        weekdays          = optional(set(string), null)\n        weeks             = optional(set(string), null)\n        monthdays         = optional(set(number), null)\n        include_last_days = optional(bool, false)\n      }), null)\n\n    }))\n  })",
+    "description": "(Required)",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "recovery_vault_name",
+    "type": "string",
+    "description": "recovery_vault_name: specify a recovery_vault_name for the Azure Recovery Services Vault. Upper/Lower case letters, numbers and hyphens. number of characters 2-50",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_group_name",
+    "type": "string",
+    "description": "The resource group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    recoveryservices_vaults_backup_policies = optional(list(string), [])\n  })",
+    "description": "Body-relative paths to ignore for each AzAPI resource managed by this submodule. Paths use dot notation, for example `properties.settings`.\nList indices are not supported; ignore the whole list property instead.\nThis argument is provider-private, so changes take effect only after apply, and ignored configuration is not sent to Azure until the path is removed.\n\n- `recoveryservices_vaults_backup_policies` - Body-relative paths ignored on the `Microsoft.RecoveryServices/vaults/backupPolicies` resource.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    recoveryservices_vaults_backup_policies = optional(string, \"Microsoft.RecoveryServices/vaults/backupPolicies@2024-10-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by this submodule.\n\n- `recoveryservices_vaults_backup_policies` - Resource type and API version for the workload backup policy.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to every `azapi` resource created by this module. Defaults to `null` (no custom retry).\n\n- `error_message_regex`  - (Optional) A list of regex patterns matching error messages that trigger a retry.\n- `interval_seconds`     - (Optional) Initial interval between retries in seconds.\n- `max_interval_seconds` - (Optional) Maximum interval between retries in seconds.\n\nSee <https://registry.terraform.io/providers/Azure/azapi/latest/docs/resources/resource#retry> for full semantics.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) Tags of the resource.",
+    "default": "null",
+    "required": false
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "protection_state",
+    "description": "The protection state returned by Azure Backup."
+  },
+  {
+    "name": "resource",
+    "description": "The protected virtual machine resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the protected virtual machine."
+  }
+]

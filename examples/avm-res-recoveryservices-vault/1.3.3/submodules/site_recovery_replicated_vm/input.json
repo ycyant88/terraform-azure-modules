@@ -1,0 +1,44 @@
+[
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The fully-qualified ARM resource ID of the source Site Recovery protection container.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "site_recovery_replicated_vm",
+    "type": "object({\n    managed_disk = optional(map(object({\n      disk_id                       = string\n      staging_storage_account_id    = string\n      target_disk_encryption_set_id = optional(string)\n      target_disk_type              = optional(string, \"Standard_LRS\")\n      target_replica_disk_type      = optional(string, \"Standard_LRS\")\n      target_resource_group_id      = optional(string)\n    })))\n    multi_vm_group_name                    = optional(string)\n    recovery_replication_policy_id         = string\n    recovery_resource_group_id             = optional(string)\n    recovery_storage_account_id            = optional(string)\n    recovery_target_disk_encryption_set_id = optional(string)\n    source_vm_id                           = string\n    target_network_id                      = optional(string)\n    target_protection_container_id         = string\n    target_recovery_fabric_id              = optional(string)\n    target_resource_group_id               = optional(string)\n    target_resource_id                     = optional(string)\n    target_static_ip                       = optional(string)\n    target_subnet_name                     = optional(string)\n    target_virtual_machine_size            = optional(string)\n    test_network_id                        = optional(string)\n    test_subnet_name                       = optional(string)\n    unmanaged_disk = optional(map(object({\n      disk_uri                   = string\n      staging_storage_account_id = optional(string)\n      target_storage_account_id  = optional(string)\n    })))\n  })",
+    "description": "Configuration for one Azure-to-Azure Site Recovery replicated virtual machine.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    recoveryservices_vaults_replication_fabrics_replication_protection_containers_replication_protected_items = optional(list(string), [])\n  })",
+    "description": "Body-relative paths reserved for the replicated item operations. Paths use dot notation.\nChanges take effect only after apply. Ignored configuration is not sent to Azure until the path is removed.\n\n- `recoveryservices_vaults_replication_fabrics_replication_protection_containers_replication_protected_items` - Reserved for the replicated item. The AzAPI action and update resources currently do not expose `ignore_body_changes`, so non-empty values cannot yet be applied.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    recoveryservices_vaults_replication_fabrics_replication_protection_containers_replication_protected_items = optional(string, \"Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems@2024-04-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by the replicated virtual machine submodule.\n\n- `recoveryservices_vaults_replication_fabrics_replication_protection_containers_replication_protected_items` - Resource type and API version for the replicated item and its actions.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to every managed AzAPI resource in the submodule.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Per-operation timeouts applied to every managed AzAPI resource in the submodule.",
+    "default": "null",
+    "required": false
+  }
+]
