@@ -1,0 +1,26 @@
+[
+  {
+    "name": "logs_ingestion_endpoint",
+    "description": "The endpoint used to ingest logs into the Data Collection Rule."
+  },
+  {
+    "name": "metrics_ingestion_endpoint",
+    "description": "The endpoint used to ingest metrics into the Data Collection Rule."
+  },
+  {
+    "name": "name",
+    "description": "The name of the Monitor Data Collection Rule."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the Monitor Data Collection Rule."
+  },
+  {
+    "name": "rule_immutable_id",
+    "description": "The immutable ID that Azure assigned to the Monitor Data Collection Rule."
+  },
+  {
+    "name": "system_assigned_mi_principal_id",
+    "description": "The principal ID of the system assigned managed identity, if one is enabled."
+  }
+]
