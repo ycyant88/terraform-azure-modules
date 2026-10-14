@@ -1,0 +1,10 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the config resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the config resource."
+  }
+]
