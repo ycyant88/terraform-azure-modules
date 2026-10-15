@@ -1,0 +1,18 @@
+[
+  {
+    "name": "action_group_id",
+    "description": "The resource ID of the action group"
+  },
+  {
+    "name": "cpu_alert_id",
+    "description": "The resource ID of the CPU usage alert"
+  },
+  {
+    "name": "memory_alert_id",
+    "description": "The resource ID of the memory usage alert"
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the action group created by this module"
+  }
+]
