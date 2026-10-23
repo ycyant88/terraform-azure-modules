@@ -1,0 +1,22 @@
+[
+  {
+    "name": "application_security_group_association_ids",
+    "description": "The resource IDs of application security groups attached to the private endpoint."
+  },
+  {
+    "name": "name",
+    "description": "Name of the resource."
+  },
+  {
+    "name": "network_interface_ids",
+    "description": "The resource IDs of the network interfaces created for the private endpoint."
+  },
+  {
+    "name": "private_ip_addresses",
+    "description": "The private IP addresses assigned to the private endpoint."
+  },
+  {
+    "name": "resource_id",
+    "description": "ID of the resource."
+  }
+]

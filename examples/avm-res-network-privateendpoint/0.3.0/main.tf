@@ -1,0 +1,25 @@
+module "avm-res-network-privateendpoint" {
+  source                                     = "Azure/avm-res-network-privateendpoint/azurerm"
+  version                                    = "0.3.0"
+  application_security_group_association_ids = var.application_security_group_association_ids
+  avm_managed_migration_enabled              = var.avm_managed_migration_enabled
+  enable_telemetry                           = var.enable_telemetry
+  ignore_body_changes                        = var.ignore_body_changes
+  ip_configurations                          = var.ip_configurations
+  location                                   = var.location
+  lock                                       = var.lock
+  name                                       = var.name
+  network_interface_name                     = var.network_interface_name
+  parent_id                                  = var.parent_id
+  private_connection_resource_id             = var.private_connection_resource_id
+  private_dns_zone_group_name                = var.private_dns_zone_group_name
+  private_dns_zone_resource_ids              = var.private_dns_zone_resource_ids
+  private_service_connection_name            = var.private_service_connection_name
+  resource_types                             = var.resource_types
+  retry                                      = var.retry
+  role_assignments                           = var.role_assignments
+  subnet_resource_id                         = var.subnet_resource_id
+  subresource_names                          = var.subresource_names
+  tags                                       = var.tags
+  timeouts                                   = var.timeouts
+}

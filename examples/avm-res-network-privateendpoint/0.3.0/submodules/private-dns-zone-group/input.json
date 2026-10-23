@@ -1,0 +1,65 @@
+[
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region for this module's resources or telemetry deployment.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "Fully-qualified ARM resource ID of the parent private endpoint.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "private_dns_zone_resource_ids",
+    "type": "list(string)",
+    "description": "Private DNS zone resource IDs to include in the private DNS zone group.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to the private DNS zone group AzAPI resource. Defaults to provider behavior.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Default per-operation timeouts for the private DNS zone group AzAPI resource. Defaults to provider behavior.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "Name of the private DNS zone group.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    network_private_endpoints_private_dns_zone_groups = optional(list(string), [])\n  })",
+    "description": "Body-relative dot-notation paths ignored by the AzAPI provider. Ignored configuration is not sent to Azure until the path is removed. Changes take effect only after apply.\n\n- `network_private_endpoints_private_dns_zone_groups` - Paths ignored on the private DNS zone group.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    network_private_endpoints_private_dns_zone_groups = optional(string, \"Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2025-07-01\")\n  })",
+    "description": "AzAPI resource types and API versions used by the private DNS zone group submodule.",
+    "default": "{}",
+    "required": false
+  }
+]
