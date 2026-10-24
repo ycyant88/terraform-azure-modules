@@ -1,0 +1,19 @@
+module "avm-res-app-managedenvironment" {
+  source              = "Azure/avm-res-app-managedenvironment/azurerm"
+  version             = "0.6.0"
+  bulk_subscribe      = var.bulk_subscribe
+  dead_letter_topic   = var.dead_letter_topic
+  enable_telemetry    = var.enable_telemetry
+  ignore_body_changes = var.ignore_body_changes
+  location            = var.location
+  metadata            = var.metadata
+  name                = var.name
+  parent_id           = var.parent_id
+  pubsub_name         = var.pubsub_name
+  resource_types      = var.resource_types
+  retry               = var.retry
+  routes              = var.routes
+  scopes              = var.scopes
+  timeouts            = var.timeouts
+  topic               = var.topic
+}
