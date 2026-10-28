@@ -1,0 +1,21 @@
+module "avm-ptn-avd-lza-insights" {
+  source                      = "Azure/avm-ptn-avd-lza-insights/azurerm"
+  version                     = "0.5.0"
+  data_collection_endpoint_id = var.data_collection_endpoint_id
+  data_flows                  = var.data_flows
+  data_sources                = var.data_sources
+  description                 = var.description
+  destinations                = var.destinations
+  enable_telemetry            = var.enable_telemetry
+  ignore_body_changes         = var.ignore_body_changes
+  kind                        = var.kind
+  location                    = var.location
+  managed_identities          = var.managed_identities
+  name                        = var.name
+  parent_id                   = var.parent_id
+  resource_types              = var.resource_types
+  retry                       = var.retry
+  stream_declarations         = var.stream_declarations
+  tags                        = var.tags
+  timeouts                    = var.timeouts
+}

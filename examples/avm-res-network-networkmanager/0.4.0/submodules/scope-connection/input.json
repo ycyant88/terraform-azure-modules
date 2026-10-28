@@ -1,0 +1,51 @@
+[
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region for this module's resources or telemetry deployment.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "  (Required) The name of the Scope Connection. The name must be between 1 and 64 characters, and can contain letters, numbers, underscores, periods, and hyphens. The name must start with a letter or a number, and end with a letter, a number, or an underscore.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "network_manager_id",
+    "type": "string",
+    "description": "  (Required) The ID of the Network Manager to which this Scope Connection belongs.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "resource_id",
+    "type": "string",
+    "description": "  (Required) The ID of the Subscription or Management Group to which the Network Manager will connect.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "tenant_id",
+    "type": "string",
+    "description": "  (Required) The tenant ID of the Subscription or Management Group to which the Network Manager will connect.\n",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "description",
+    "type": "string",
+    "description": "  (Optional) The description of the Scope Connection.\n",
+    "default": "\"\"",
+    "required": false
+  }
+]

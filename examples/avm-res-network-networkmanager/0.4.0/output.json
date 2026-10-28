@@ -1,0 +1,14 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the Network Manager."
+  },
+  {
+    "name": "resource",
+    "description": "The full output for the Network Manager."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the Network Manager."
+  }
+]
