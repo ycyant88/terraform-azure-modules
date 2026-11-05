@@ -1,0 +1,30 @@
+[
+  {
+    "name": "home_directory",
+    "description": "The home directory of the local user."
+  },
+  {
+    "name": "name",
+    "description": "The name of the local user."
+  },
+  {
+    "name": "resource",
+    "description": "The full local user azapi_resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the local user."
+  },
+  {
+    "name": "sid",
+    "description": "The Security Identifier (SID) assigned to the local user."
+  },
+  {
+    "name": "ssh_key_enabled",
+    "description": "Whether SSH key authentication is enabled."
+  },
+  {
+    "name": "ssh_password_enabled",
+    "description": "Whether SSH password authentication is enabled."
+  }
+]

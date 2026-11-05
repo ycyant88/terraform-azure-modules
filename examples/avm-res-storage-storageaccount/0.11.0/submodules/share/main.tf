@@ -1,0 +1,21 @@
+module "avm-res-storage-storageaccount" {
+  source                                    = "Azure/avm-res-storage-storageaccount/azurerm"
+  version                                   = "0.11.0"
+  access_tier                               = var.access_tier
+  enable_telemetry                          = var.enable_telemetry
+  enabled_protocol                          = var.enabled_protocol
+  location                                  = var.location
+  metadata                                  = var.metadata
+  name                                      = var.name
+  provisioned_bandwidth_mibps               = var.provisioned_bandwidth_mibps
+  provisioned_iops                          = var.provisioned_iops
+  quota                                     = var.quota
+  resource_type                             = var.resource_type
+  retry                                     = var.retry
+  role_assignment_definition_lookup_enabled = var.role_assignment_definition_lookup_enabled
+  role_assignments                          = var.role_assignments
+  root_squash                               = var.root_squash
+  signed_identifiers                        = var.signed_identifiers
+  storage_account_id                        = var.storage_account_id
+  timeouts                                  = var.timeouts
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "name",
+    "description": "Name of the private DNS zone group."
+  },
+  {
+    "name": "private_dns_zone_configs",
+    "description": "Private DNS zone configurations and record sets returned for the private endpoint."
+  },
+  {
+    "name": "resource_id",
+    "description": "ID of the private DNS zone group."
+  }
+]
