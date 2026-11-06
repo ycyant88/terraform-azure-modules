@@ -1,0 +1,18 @@
+[
+  {
+    "name": "odaa_infra_resource_ids",
+    "description": "Resource IDs of the ODAA Infrastructure resources created."
+  },
+  {
+    "name": "odaa_vmcluster_resource_ids",
+    "description": "Resource IDs of the ODAA VM Cluster resources created."
+  },
+  {
+    "name": "odaa_vnets_resource_ids",
+    "description": "Resource IDs of the Virtual networks created"
+  },
+  {
+    "name": "resource_id",
+    "description": "Resource ID for tflint compliance"
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region for this module's resources or telemetry deployment.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "primary_vnet_name",
+    "type": "string",
+    "description": "Name of the source vnet",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "primary_vnet_resource_group",
+    "type": "string",
+    "description": "Name of the resource group of source vnet",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "secondary_vnet_name",
+    "type": "string",
+    "description": "Name of the destination vnet",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "secondary_vnet_resource_group",
+    "type": "string",
+    "description": "Name of the resource group of destination vnet",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  }
+]
