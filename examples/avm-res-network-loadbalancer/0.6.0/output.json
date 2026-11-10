@@ -1,0 +1,34 @@
+[
+  {
+    "name": "backend_address_pool_resource_ids",
+    "description": "Backend pool IDs keyed by backend_address_pools input keys. Pass these to the module that owns the NIC."
+  },
+  {
+    "name": "frontend_ip_configuration_resource_ids",
+    "description": "Frontend IDs keyed by frontend_ip_configurations input keys."
+  },
+  {
+    "name": "inbound_nat_rule_resource_ids",
+    "description": "NAT rule IDs keyed by lb_nat_rules input keys (not Azure rule names)."
+  },
+  {
+    "name": "load_balancing_rule_resource_ids",
+    "description": "Load balancing rule IDs keyed by lb_rules input keys."
+  },
+  {
+    "name": "name",
+    "description": "The load balancer name."
+  },
+  {
+    "name": "outbound_rule_resource_ids",
+    "description": "Outbound rule IDs keyed by lb_outbound_rules input keys."
+  },
+  {
+    "name": "probe_resource_ids",
+    "description": "Probe IDs keyed by lb_probes input keys."
+  },
+  {
+    "name": "resource_id",
+    "description": "The load balancer ARM resource ID."
+  }
+]

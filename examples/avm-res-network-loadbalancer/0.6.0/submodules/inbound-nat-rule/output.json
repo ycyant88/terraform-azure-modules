@@ -1,0 +1,6 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The inbound NAT rule resource ID."
+  }
+]

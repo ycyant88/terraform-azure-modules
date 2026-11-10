@@ -1,0 +1,72 @@
+[
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The inbound NAT rule name.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "properties",
+    "type": "object({\n    frontendIPConfiguration = object({ id = string })\n    backendAddressPool      = optional(object({ id = string }))\n    protocol                = optional(string, \"Tcp\")\n    frontendPort            = optional(number)\n    frontendPortRangeStart  = optional(number)\n    frontendPortRangeEnd    = optional(number)\n    backendPort             = number\n    enableFloatingIP        = optional(bool, false)\n    enableTcpReset          = optional(bool, false)\n    idleTimeoutInMinutes    = optional(number, 4)\n  })",
+    "description": "NAT ARM properties: frontendIPConfiguration and optional backendAddressPool ID objects, protocol, frontendPort or frontendPortRangeStart/End, backendPort, enableFloatingIP, enableTcpReset and idleTimeoutInMinutes.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "avm_managed_migration_enabled",
+    "type": "bool",
+    "description": "Import an existing rule at parent_id/inboundNatRules/name without deleting it. Enable only for adoption, never fresh creation; disable after convergence.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    network_load_balancers_inbound_nat_rules = optional(list(string), [])\n  })",
+    "description": "Body-relative dot paths. `network_load_balancers_inbound_nat_rules` contains NAT rule paths to ignore. Ignored configuration is not sent to Azure; changes take effect after apply.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    network_load_balancers_inbound_nat_rules = optional(string, \"Microsoft.Network/loadBalancers/inboundNatRules@2025-01-01\")\n  })",
+    "description": "Resource API versions. `network_load_balancers_inbound_nat_rules` is the NAT rule ARM resource type and API version.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Resource retry controls: error_message_regex, interval_seconds and max_interval_seconds.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Per-operation create, read, update and delete timeouts as Go duration strings.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region for this module's resources or telemetry deployment.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent load balancer resource ID.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  }
+]

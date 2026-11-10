@@ -1,0 +1,86 @@
+[
+  {
+    "name": "parent_id",
+    "type": "string",
+    "description": "The parent load balancer resource ID.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "avm_managed_migration_enabled",
+    "type": "bool",
+    "description": "Import an existing pool at parent_id/backendAddressPools/name without deleting it. Enable only for adoption, never fresh creation; disable after convergence.",
+    "default": "false",
+    "required": false
+  },
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    network_load_balancers_backend_address_pools = optional(list(string), [])\n  })",
+    "description": "Body-relative dot paths. `network_load_balancers_backend_address_pools` contains pool paths to ignore. NIC references are omitted from writes; live membership preservation requires real-Azure verification. Ignored configuration is not sent to Azure; changes take effect after apply.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Resource retry controls: error_message_regex, interval_seconds and max_interval_seconds.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "The Azure region for this module's resources or telemetry deployment.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "name",
+    "type": "string",
+    "description": "The backend address pool name.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "properties",
+    "type": "object({\n    virtualNetwork = optional(object({ id = string }))\n    tunnelInterfaces = optional(list(object({\n      identifier = number\n      port       = number\n      protocol   = string\n      type       = string\n    })), [])\n    loadBalancerBackendAddresses = optional(list(object({\n      name = string\n      properties = object({\n        ipAddress                           = optional(string)\n        virtualNetwork                      = optional(object({ id = string }))\n        loadBalancerFrontendIPConfiguration = optional(object({ id = string }))\n      })\n    })), [])\n  })",
+    "description": "Writable pool ARM properties: virtualNetwork ID object, tunnelInterfaces (identifier/port/protocol/type), and authoritative loadBalancerBackendAddresses. Each member has name and properties containing exactly one of ipAddress (optional virtualNetwork ID object) or loadBalancerFrontendIPConfiguration ID object. Frontend members require Global tier/Frontend mode and no VNet. NIC mode requires an empty input list and omits the server projection; NIC ownership remains external.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "backend_address_type",
+    "type": "string",
+    "description": "NIC (default for omission/null) omits the projection and creates no explicit-member cleanup, leaving memberships to the NIC owner. Opt into IP or Frontend to own an explicit list with fixed-empty destroy cleanup. Keep existing IP pools explicitly IP; clear explicit members before changing to NIC, and detach NICs before changing from NIC.",
+    "default": "\"NIC\"",
+    "required": false
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    network_load_balancers_backend_address_pools = optional(string, \"Microsoft.Network/loadBalancers/backendAddressPools@2025-01-01\")\n  })",
+    "description": "Resource API versions. `network_load_balancers_backend_address_pools` is the backend pool ARM resource type and API version.",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "sku_tier",
+    "type": "string",
+    "description": "Declaration of the externally owned parent LB tier, Regional or Global. The caller must match its actual SKU and use public Standard regional frontend IDs for Global members; this module does not inspect remote parents.",
+    "default": "\"Regional\"",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Per-operation create, read, update and delete timeouts as Go duration strings.",
+    "default": "null",
+    "required": false
+  }
+]
