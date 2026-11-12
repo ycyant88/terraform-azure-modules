@@ -1,0 +1,30 @@
+[
+  {
+    "name": "resource_id",
+    "description": "The ID of the DNS resolver."
+  },
+  {
+    "name": "forwarding_rulesets",
+    "description": "Discrete forwarding ruleset objects, keyed by `\"<outbound endpoint key>-<ruleset name>\"`, rather than complete provider resource objects."
+  },
+  {
+    "name": "inbound_endpoint_ips",
+    "description": "The IP addresses of the inbound endpoints."
+  },
+  {
+    "name": "inbound_endpoints",
+    "description": "Discrete inbound endpoint objects, keyed by endpoint key, with the original ip_configurations list and flattened subnet_id, private_ip_address and private_ip_allocation_method fields."
+  },
+  {
+    "name": "name",
+    "description": "The name of the DNS resolver."
+  },
+  {
+    "name": "outbound_endpoints",
+    "description": "Discrete outbound endpoint objects, keyed by endpoint key, rather than complete provider resource objects."
+  },
+  {
+    "name": "resource",
+    "description": "A discrete DNS resolver object containing id, name, location, resource_group_name, tags, virtual_network_id and exported state fields, rather than the complete provider resource object."
+  }
+]

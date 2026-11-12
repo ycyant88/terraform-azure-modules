@@ -1,0 +1,18 @@
+[
+  {
+    "name": "name",
+    "description": "The name of the ddos protection plan resource."
+  },
+  {
+    "name": "resource",
+    "description": "Compatibility view of the DDoS protection plan with the AzureRM resource's public attributes. Prefer resource_id, name, and virtual_network_ids."
+  },
+  {
+    "name": "resource_id",
+    "description": "The ID of the ddos protection plan resource."
+  },
+  {
+    "name": "virtual_network_ids",
+    "description": "The IDs of virtual networks associated with the DDoS protection plan. Associations are managed on the virtual networks, not by this module."
+  }
+]
