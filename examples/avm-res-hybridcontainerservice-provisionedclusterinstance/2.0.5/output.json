@@ -1,0 +1,14 @@
+[
+  {
+    "name": "aks_cluster",
+    "description": "AKS Arc Cluster instance"
+  },
+  {
+    "name": "resource_id",
+    "description": "AKS Arc Provisioned Cluster instance"
+  },
+  {
+    "name": "rsa_private_key",
+    "description": "The RSA private key"
+  }
+]
