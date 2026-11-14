@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource",
+    "description": "This is the full output for the resource."
+  },
+  {
+    "name": "resource_id",
+    "description": "The `azurerm_kubernetes_cluster`'s resource id."
+  }
+]
