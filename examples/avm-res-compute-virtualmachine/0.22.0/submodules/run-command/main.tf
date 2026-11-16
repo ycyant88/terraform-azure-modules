@@ -1,0 +1,22 @@
+module "avm-res-compute-virtualmachine" {
+  source                       = "Azure/avm-res-compute-virtualmachine/azurerm"
+  version                      = "0.22.0"
+  enable_telemetry             = var.enable_telemetry
+  error_blob_managed_identity  = var.error_blob_managed_identity
+  error_blob_uri               = var.error_blob_uri
+  ignore_body_changes          = var.ignore_body_changes
+  location                     = var.location
+  name                         = var.name
+  output_blob_managed_identity = var.output_blob_managed_identity
+  output_blob_uri              = var.output_blob_uri
+  parameters                   = var.parameters
+  protected_parameters         = var.protected_parameters
+  resource_types               = var.resource_types
+  retry                        = var.retry
+  run_as_password              = var.run_as_password
+  run_as_user                  = var.run_as_user
+  script_source                = var.script_source
+  tags                         = var.tags
+  timeouts                     = var.timeouts
+  virtualmachine_resource_id   = var.virtualmachine_resource_id
+}
