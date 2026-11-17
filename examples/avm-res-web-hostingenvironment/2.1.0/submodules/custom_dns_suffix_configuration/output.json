@@ -1,0 +1,22 @@
+[
+  {
+    "name": "certificate_url",
+    "description": "The URL of the certificate used for the custom DNS suffix."
+  },
+  {
+    "name": "dns_suffix",
+    "description": "The custom DNS suffix applied to the ASE."
+  },
+  {
+    "name": "key_vault_reference_identity",
+    "description": "The identity used for resolving the key vault certificate reference."
+  },
+  {
+    "name": "provisioning_state",
+    "description": "The provisioning state of the custom DNS suffix configuration."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the custom DNS suffix configuration."
+  }
+]

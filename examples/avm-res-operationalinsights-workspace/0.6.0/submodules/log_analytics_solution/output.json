@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource",
+    "description": "The Log Analytics solution, with the attribute names of the `azurerm_log_analytics_solution` resource that earlier versions of this module returned, so that existing references keep working. Prefer `resource_id`."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the Log Analytics solution."
+  }
+]

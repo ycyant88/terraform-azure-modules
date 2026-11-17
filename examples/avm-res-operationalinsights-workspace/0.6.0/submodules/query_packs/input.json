@@ -1,0 +1,72 @@
+[
+  {
+    "name": "ignore_body_changes",
+    "type": "object({\n    authorization_locks                     = optional(list(string), [])\n    operationalinsights_query_packs         = optional(list(string), [])\n    operationalinsights_query_packs_queries = optional(list(string), [])\n  })",
+    "description": "Body-relative dot paths to ignore on the AzAPI resources of this module.\nChanges take effect only after apply.\nIgnored configuration is not sent to Azure until its path is removed.\n\n- `authorization_locks` - Paths ignored on the query pack management locks.\n- `operationalinsights_query_packs` - Paths ignored on the query packs.\n- `operationalinsights_query_packs_queries` - Paths ignored on the queries.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "resource_types",
+    "type": "object({\n    authorization_locks                     = optional(string, \"Microsoft.Authorization/locks@2020-05-01\")\n    operationalinsights_query_packs         = optional(string, \"Microsoft.OperationalInsights/queryPacks@2019-09-01\")\n    operationalinsights_query_packs_queries = optional(string, \"Microsoft.OperationalInsights/queryPacks/queries@2019-09-01\")\n  })",
+    "description": "AzAPI resource types and API versions, in `<provider>/<resource>@<api-version>` form. Each key defaults to a tested value; supply only the keys you want to override.\n\n- `authorization_locks` - The query pack management locks.\n- `operationalinsights_query_packs` - The query packs.\n- `operationalinsights_query_packs_queries` - The queries.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "retry",
+    "type": "object({\n    error_message_regex  = optional(list(string))\n    interval_seconds     = optional(number)\n    max_interval_seconds = optional(number)\n  })",
+    "description": "Retry configuration applied to every AzAPI resource of this module.\nDefaults to null (no custom retry).\n\n- `error_message_regex` - Error-message patterns that trigger a retry.\n- `interval_seconds` - Initial interval between retries in seconds.\n- `max_interval_seconds` - Maximum interval between retries in seconds.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "timeouts",
+    "type": "object({\n    create = optional(string)\n    read   = optional(string)\n    update = optional(string)\n    delete = optional(string)\n  })",
+    "description": "Per-operation timeouts applied to every AzAPI resource of this module.\nDefaults to null (provider defaults). Values are Go duration strings.\n\n- `create` - Create timeout.\n- `read` - Read timeout.\n- `update` - Update timeout.\n- `delete` - Delete timeout.\n",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "resource_group_id",
+    "type": "string",
+    "description": "(Required) The Resource ID of the Resource Group where the resources will be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "enable_telemetry",
+    "type": "bool",
+    "description": "This variable controls whether or not telemetry is enabled for the module.\nFor more information see <https://aka.ms/avm/telemetryinfo>.\nIf it is set to false, then no telemetry will be collected.\n",
+    "default": "true",
+    "required": false
+  },
+  {
+    "name": "monitor_queries",
+    "type": "map(object({\n    name           = optional(string)\n    query_pack_key = string\n    body           = string\n    display_name   = string\n    description    = optional(string)\n    tags           = optional(map(string))\n    related = optional(object({\n      categories     = optional(list(string))\n      resource_types = optional(list(string))\n      solutions      = optional(list(string))\n    }))\n  }))",
+    "description": "(Optional) A map of Queries to create. The key is the name of the Query. The value is an object containing the configuration.\n- `name` - (Optional) The name of the Query. This must be a GUID. If not provided, a UUID will be generated.\n- `query_pack_key` - (Required) The key of the Query Pack to associate this Query with.\n- `body` - (Required) The KQL query body.\n- `display_name` - (Required) The display name of the query.\n- `description` - (Optional) The description of the query.\n- `tags` - (Optional) A map of tags to assign to the query.\n- `related` - (Optional) A map of related items.\n  - `categories` - (Optional) A list of categories for the query. Supported values: `security`, `network`, `management`, `virtualmachines`, `container`, `audit`, `desktopanalytics`, `workloads`, `resources`, `applications`, `monitor`, `databases`, `windowsvirtualdesktop`.\n  - `resource_types` - (Optional) A list of resource types the query applies to. Example: `[\"Microsoft.Compute/virtualMachines\"]`.\n  - `solutions` - (Optional) A list of solutions the query is related to. Example: `[\"LogManagement\"]`.\n",
+    "default": "{}",
+    "required": false
+  },
+  {
+    "name": "tags",
+    "type": "map(string)",
+    "description": "(Optional) A mapping of tags to assign to the resources.",
+    "default": "null",
+    "required": false
+  },
+  {
+    "name": "location",
+    "type": "string",
+    "description": "(Required) The Azure region where the resources should be deployed.",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "monitor_query_packs",
+    "type": "map(object({\n    name = string\n    tags = optional(map(string))\n    lock = optional(object({\n      kind = string\n      name = optional(string, null)\n    }))\n  }))",
+    "description": "(Optional) A map of Query Packs to create. The key is the name of the Query Pack. The value is an object containing the configuration.\n- `name` - (Required) The name of the Query Pack.\n- `tags` - (Optional) A map of tags to assign to the Query Pack.\n- `lock` - (Optional) Controls the Resource Lock configuration for this resource. The following properties can be specified:\n  - `kind` - (Required) The type of lock. Possible values are `CanNotDelete` and `ReadOnly`.\n  - `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.\n",
+    "default": "{}",
+    "required": false
+  }
+]

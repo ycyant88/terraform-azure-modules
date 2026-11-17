@@ -1,0 +1,19 @@
+module "avm-res-network-routetable" {
+  source                        = "Azure/avm-res-network-routetable/azurerm"
+  version                       = "0.7.0"
+  bgp_route_propagation_enabled = var.bgp_route_propagation_enabled
+  enable_telemetry              = var.enable_telemetry
+  ignore_body_changes           = var.ignore_body_changes
+  location                      = var.location
+  lock                          = var.lock
+  name                          = var.name
+  parent_id                     = var.parent_id
+  resource_types                = var.resource_types
+  retry                         = var.retry
+  role_assignments              = var.role_assignments
+  routes                        = var.routes
+  routes_legacy_mode            = var.routes_legacy_mode
+  subnet_resource_ids           = var.subnet_resource_ids
+  tags                          = var.tags
+  timeouts                      = var.timeouts
+}
