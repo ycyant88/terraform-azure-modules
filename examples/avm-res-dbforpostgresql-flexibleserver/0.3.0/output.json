@@ -1,0 +1,26 @@
+[
+  {
+    "name": "database_resource_ids",
+    "description": "A map of database keys to resource ids."
+  },
+  {
+    "name": "fqdn",
+    "description": "The fully qualified domain name of the PostgreSQL Flexible Server."
+  },
+  {
+    "name": "name",
+    "description": "The resource ID for the resource."
+  },
+  {
+    "name": "private_endpoints",
+    "description": "  A map of the private endpoints created.\n"
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID for the resource."
+  },
+  {
+    "name": "database_name",
+    "description": "A map of database keys to database name."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "resource_group_name",
+    "description": "The Resource Group where the Kusto Database exist."
+  },
+  {
+    "name": "resource_id",
+    "description": "The resource ID of the Kusto database."
+  },
+  {
+    "name": "size",
+    "description": "The size of the database in bytes."
+  },
+  {
+    "name": "cluster_name",
+    "description": "The name of the Kusto Cluster"
+  },
+  {
+    "name": "id",
+    "description": "The Kusto Cluster ID."
+  },
+  {
+    "name": "name",
+    "description": "The name of the database."
+  }
+]

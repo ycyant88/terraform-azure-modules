@@ -1,0 +1,63 @@
+administrator_login = null
+
+administrator_login_password = null
+
+administrator_login_password_key_vault_configuration = null
+
+administrator_login_password_wo = null
+
+administrator_login_password_wo_version = null
+
+azuread_administrator = null
+
+connection_policy = null
+
+databases = {}
+
+diagnostic_settings = {}
+
+elastic_pools = {}
+
+enable_telemetry = true
+
+express_vulnerability_assessment_enabled = false
+
+firewall_rules = {}
+
+generate_administrator_login_password = false
+
+ignore_body_changes = {}
+
+location = ""
+
+lock = null
+
+managed_identities = {}
+
+name = null
+
+outbound_network_restriction_enabled = null
+
+primary_user_assigned_identity_id = null
+
+private_endpoints = {}
+
+private_endpoints_manage_dns_zone_group = true
+
+public_network_access_enabled = false
+
+resource_group_name = ""
+
+resource_types = {}
+
+retry = null
+
+role_assignments = {}
+
+server_version = ""
+
+tags = null
+
+timeouts = null
+
+transparent_data_encryption_key_vault_key_id = null

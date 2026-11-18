@@ -1,0 +1,17 @@
+module "avm-res-network-firewallpolicy" {
+  source                                                            = "Azure/avm-res-network-firewallpolicy/azurerm"
+  version                                                           = "0.4.0"
+  enable_telemetry                                                  = var.enable_telemetry
+  firewall_policy_rule_collection_group_application_rule_collection = var.firewall_policy_rule_collection_group_application_rule_collection
+  firewall_policy_rule_collection_group_firewall_policy_id          = var.firewall_policy_rule_collection_group_firewall_policy_id
+  firewall_policy_rule_collection_group_name                        = var.firewall_policy_rule_collection_group_name
+  firewall_policy_rule_collection_group_nat_rule_collection         = var.firewall_policy_rule_collection_group_nat_rule_collection
+  firewall_policy_rule_collection_group_network_rule_collection     = var.firewall_policy_rule_collection_group_network_rule_collection
+  firewall_policy_rule_collection_group_priority                    = var.firewall_policy_rule_collection_group_priority
+  firewall_policy_rule_collection_group_timeouts                    = var.firewall_policy_rule_collection_group_timeouts
+  ignore_body_changes                                               = var.ignore_body_changes
+  location                                                          = var.location
+  resource_types                                                    = var.resource_types
+  retry                                                             = var.retry
+  timeouts                                                          = var.timeouts
+}
