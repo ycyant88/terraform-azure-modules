@@ -1,0 +1,10 @@
+[
+  {
+    "name": "resource_id",
+    "description": "Dummy variable to meet linting requirements"
+  },
+  {
+    "name": "sku",
+    "description": "sku"
+  }
+]

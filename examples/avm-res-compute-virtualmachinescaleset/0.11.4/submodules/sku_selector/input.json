@@ -1,0 +1,16 @@
+[
+  {
+    "name": "deployment_region",
+    "type": "string",
+    "description": "The selected region for deployment",
+    "default": "",
+    "required": true
+  },
+  {
+    "name": "hibernation_supported",
+    "type": "bool",
+    "description": "When true, only return sizes that advertise the `HibernationSupported` capability. Hibernation is limited to a subset of the v5 D and E families, so leave this false unless the example enables hibernation.",
+    "default": "false",
+    "required": false
+  }
+]
